@@ -1,6 +1,6 @@
 var app = angular.module('colons', []);
 
-app.controller('MainCtrl', function($scope) {
+app.controller('MainCtrl', function($scope, Colon) {
   $scope.name = 'World';
   $scope.c1 = new Colon("robert", 3);
   $scope.c2 = new Colon("roberta", 5);
