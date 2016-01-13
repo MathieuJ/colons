@@ -6,7 +6,7 @@ app.controller('MainCtrl', function($scope) {
   $scope.c2 = new Colon("roberta", 5);
 });
 
-app.module('colons').factory('BatimentProto', function() {
+app.factory('BatimentProto', function() {
   var BatimentProto = function(nom, type, materiaux, place, durabilite, etancheite, isolation, confort, beaute, autre) {
     this.nom = nom;
     this.materiaux = materiaux;
