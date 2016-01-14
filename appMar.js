@@ -27,7 +27,17 @@ app
             });
         $urlRouterProvider.otherwise('/start');
     })
-
+.controller('startController', function($scope) {
+    
+    // we will store all of our form data in this object
+    $scope.formData = {};
+    
+    // function to process the form
+    $scope.processForm = function() {
+        alert('awesome!');
+    };
+    
+})
 .controller('MainCtrl', function($scope, Colon) {
         $scope.name = 'World';
         $scope.mariage = new Mariage();
