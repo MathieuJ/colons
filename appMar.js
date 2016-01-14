@@ -27,15 +27,30 @@ app
             });
         $urlRouterProvider.otherwise('/start');
     })
-.controller('startController', function($scope) {
+.controller('startController', function($scope, $location, viewSlideIndex) {
     
     // we will store all of our form data in this object
     $scope.formData = {};
+    
+    $scope.maxViewIndex = viewSlideIndex.maxViewIndex;
     
     // function to process the form
     $scope.processForm = function() {
         alert('awesome!');
     };
+    
+    $scope.slideView = function (index, url) {
+        //
+        // Set the value of the current view index to compare against here:
+        //
+        if (viewSlideIndex.getViewIndex() > index) {
+            $scope.slideDir = 'slide-right';
+        } else {
+            $scope.slideDir = 'slide-left';
+        };
+        viewSlideIndex.setViewIndex(index);
+        $location.url(url);
+    }
     
 })
 .controller('MainCtrl', function($scope, Colon) {
@@ -66,12 +81,16 @@ app
     
     .service('viewSlideIndex', function () {
     var viewIndex;
+    var maxViewIndex;
     return {
         getViewIndex: function () {
             return viewIndex;
         },
         setViewIndex: function (val) {
             viewIndex = val;
+            if (maxViewIndex < viewIndex) {
+                maxViewIndex = viewIndex;
+            }
         }
     }
     ;
