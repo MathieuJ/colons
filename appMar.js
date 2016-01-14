@@ -11,7 +11,7 @@ app
             })
             .state('start.noms', {
                 url: '/noms',
-                templateUrl: 'start-noms.html'
+                templateUrl: 'partials/start-noms.html'
             })
             .state('start.blocs', {
                 url: '/blocs',
