@@ -1,4 +1,4 @@
-var app = angular.module('appMar', ['ui-router'])
+var app = angular.module('appMar', ['ui.router'])
 ;
 
 app
