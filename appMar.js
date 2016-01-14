@@ -25,7 +25,6 @@ app
     this.enterrementMarie1 = false;
     this.enterrementMarie2 = false;
     this.soiree = false;
-    this.marie1 = 
   };
   return Mariage;
 })
