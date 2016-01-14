@@ -62,4 +62,16 @@ app
         };
 
         return Personne;
-    });
+    })
+    
+    .service('viewSlideIndex', function () {
+    var viewIndex;
+    return {
+        getViewIndex: function () {
+            return viewIndex;
+        },
+        setViewIndex: function (val) {
+            viewIndex = val;
+        }
+    }
+    ;
