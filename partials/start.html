@@ -29,7 +29,13 @@
 <script type=text/ng-template id='start-config.html'>
    <h2>Comment voulez-vous organiser cela ? </h2>
    <!-- form-payment.html -->
-   
+   <div class="form-group row">
+       <div class="col-xs-6 col-xs-offset-3">
+           <a ui-sref="start.comptes" class="btn btn-block btn-info">
+           Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+           </a>
+       </div>
+   </div>
 </script>
 <script type=text/ng-template id='start-comptes.html'>
    <h2>Créons un compte pour sauvegarder tout cela. </h2>
@@ -58,7 +64,7 @@
     <button ng-click='slideView(2, "/start/blocs")'>Pg2</button>
     <button ng-click='slideView(3, "/start/config")'>Pg3</button>
     <button ng-click='slideView(4, "/start/comptes")'>Pg4</button>
-    {{maxViewIndex}}
+    mvi {{maxViewIndex}}
             </div>
          </div>
          <!-- use ng-submit to catch the form submission and use our Angular function -->
