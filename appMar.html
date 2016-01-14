@@ -7,11 +7,13 @@
     <script>document.write('<base href="' + document.location + '" />');</script>
     <link rel="stylesheet" href="style.css" />
     <script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.8/angular.js" data-semver="1.4.8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
     <script src="app.js"></script>
   </head>
-
-  <body ng-controller="MainCtrl">
-    
+  
+  
+  <body>
+    <div ui-view></div>  
   </body>
 
 </html>
