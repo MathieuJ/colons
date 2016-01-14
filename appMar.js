@@ -6,9 +6,22 @@ app
   $urlRouterProvider.otherwise("/start");
   $stateProvider
     .state('start', {
-      url: "/start",
-      templateUrl: "partials/start.html"
-    })
+            url: '/start',
+            templateUrl: 'partials/start.html',
+            controller: 'startController'
+        })
+    .state('start.noms', {
+            url: '/noms',
+            templateUrl: 'start-noms'
+        })
+    .state('start.blocs', {
+            url: '/blocs',
+            templateUrl: 'start-blocs'
+        })    
+         .state('start.blocs', {
+            url: '/blocs',
+            templateUrl: 'start-blocs'
+        });
   })
   
 .controller('MainCtrl', function($scope, Colon) {
