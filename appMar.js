@@ -11,19 +11,19 @@ app
             })
             .state('start.noms', {
                 url: '/noms',
-                templateUrl: 'start-noms'
+                templateUrl: 'start-noms.html'
             })
             .state('start.blocs', {
                 url: '/blocs',
-                templateUrl: 'start-blocs'
+                templateUrl: 'start-blocs.html'
             })
             .state('start.config', {
                 url: '/config',
-                templateUrl: 'start-config'
+                templateUrl: 'start-config.html'
             })
             .state('start.comptes', {
                 url: '/comptes',
-                templateUrl: 'start-comptes'
+                templateUrl: 'start-comptes.html'
             });
         $urlRouterProvider.otherwise('/start');
     })
