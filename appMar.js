@@ -1,6 +1,17 @@
-var app = angular.module('appMar', []);
+var app = angular.module('appMar', [])
+;
 
-app.controller('MainCtrl', function($scope, Colon) {
+app
+  .config(function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise("/start");
+  $stateProvider
+    .state('start', {
+      url: "/start",
+      templateUrl: "partials/start.html"
+    })
+  })
+  
+.controller('MainCtrl', function($scope, Colon) {
   $scope.name = 'World';
   $scope.mariage = new Mariage();
   
