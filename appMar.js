@@ -1,4 +1,4 @@
-var app = angular.module('appMar', ['ui.router']);
+var app = angular.module('appMar', [ 'ngAnimate', 'ui.router']);
 
 app
     .config(function($stateProvider, $urlRouterProvider) {
@@ -15,47 +15,33 @@ app
             })
             .state('start.blocs', {
                 url: '/blocs',
-                templateUrl: 'start-blocs.html'
+                templateUrl: 'partials/start-blocs.html'
             })
             .state('start.config', {
                 url: '/config',
-                templateUrl: 'start-config.html'
+                templateUrl: 'partials/start-config.html'
             })
             .state('start.comptes', {
                 url: '/comptes',
-                templateUrl: 'start-comptes.html'
+                templateUrl: 'partials/start-comptes.html'
             });
         $urlRouterProvider.otherwise('/start');
     })
-.controller('startController', function($scope, $location, viewSlideIndex) {
+.controller('startController', function($scope, $location) {
     
     // we will store all of our form data in this object
     $scope.formData = {};
     
-    $scope.maxViewIndex = viewSlideIndex.maxViewIndex;
-    
     // function to process the form
     $scope.processForm = function() {
-        alert('awesome!');
+       // alert('awesome!');
     };
-    
-    $scope.slideView = function (index, url) {
-        //
-        // Set the value of the current view index to compare against here:
-        //
-        if (viewSlideIndex.getViewIndex() > index) {
-            $scope.slideDir = 'slide-right';
-        } else {
-            $scope.slideDir = 'slide-left';
-        };
-        viewSlideIndex.setViewIndex(index);
-        $location.url(url);
-    }
+
     
 })
 .controller('MainCtrl', function($scope, Colon) {
         $scope.name = 'World';
-        $scope.mariage = new Mariage();
+        //$scope.mariage = new Mariage();
 
     })
     .factory('Mariage', function() {
@@ -92,6 +78,6 @@ app
                 maxViewIndex = viewIndex;
             }
         }
-    }
+    };
     })
     ;
