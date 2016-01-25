@@ -61,9 +61,9 @@
     <button ng-click="click()" >Ecrire 1 post de qualité</button>
     <BR/>
     <BR/>
-    <button ng-click="buy('b1')" ng-disabled="prixBatiments.b1 > sous">Ranche 1/sec (coute {{prixBatiments.b1}}, total: {{batiments.b1}}/s)</button>
-    <button ng-click="buy('b2')" ng-disabled="prixBatiments.b2 > sous">Chattard 10/sec (coute {{prixBatiments.b2}}, total: {{10*batiments.b2}}/s)</button>
-    <button ng-click="buy('b3')" ng-disabled="prixBatiments.b3 > sous">Kobold 100/sec (coute {{prixBatiments.b3}}, total: {{100*batiments.b3}}/s)</button>
+    <button class="btn" ng-click="buy('b1')" ng-disabled="prixBatiments.b1 > sous">Ranche 1/sec (coute {{prixBatiments.b1}}, total: {{batiments.b1}}/s)</button>
+    <button class="btn" ng-click="buy('b2')" ng-disabled="prixBatiments.b2 > sous">Chattard 10/sec (coute {{prixBatiments.b2}}, total: {{10*batiments.b2}}/s)</button>
+    <button class="btn" ng-click="buy('b3')" ng-disabled="prixBatiments.b3 > sous">Kobold 100/sec (coute {{prixBatiments.b3}}, total: {{100*batiments.b3}}/s)</button>
     <BR/>
     <BR/>
     Nombre de Ranchebots : {{batiments.b1}}
