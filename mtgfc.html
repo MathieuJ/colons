@@ -1,0 +1,101 @@
+<html>
+ <head>
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.8/angular.js" data-semver="1.4.8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/darkly/bootstrap.min.css">
+    <link rel="stylesheet" href="styleMar.css">
+    
+    <script data-require="jquery" data-semver="2.1.4" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script data-require="bootstrap" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+    <script src="mtgfc.js"></script>
+  </head>
+
+  <body ng-controller="MtgfcCtrl">
+<h1>MtgFranceClicker</h1>
+
+    <h3>Posts de qualité : {{sous}}</h3>
+
+    <button ng-click="click()" >Ecrire 1 post de qualité</button>
+    <BR/>
+    <BR/>
+    <button ng-click="buy('b1')" ng-disabled="prixBatiments.b1 > sous">Ranche 1/sec (coute {{prixBatiments.b1}}, total: {{batiments.b1}}/s)</button>
+    <button ng-click="buy('b2')" ng-disabled="prixBatiments.b2 > sous">Chattard 10/sec (coute {{prixBatiments.b2}}, total: {{10*batiments.b2}}/s)</button>
+    <button ng-click="buy('b3')" ng-disabled="prixBatiments.b3 > sous">Kobold 100/sec (coute {{prixBatiments.b3}}, total: {{100*batiments.b3}}/s)</button>
+    <BR/>
+    <BR/>
+    Nombre de Ranchebots : {{batiments.b1}}
+    <BR/>
+    Nombre de Chattarbots : {{batiments.b2}}
+    <BR/>
+    Nombre de Kobots : {{batiments.b3}}
+
+    <BR/>
+    <BR/>
+    <H3>Extensions à venir</H3>
+    <ul>
+        <li>Pamy : -1post/sec, mais double les posts de Ranche</li>
+        <li>Raphiduck : -1 post/sec, disparait au bout d'un moment puis revient</li>
+        <li>Nokiou : +1 post tous les 2 mois qui compte * 1000</li>
+        <li>Xuel : +1 post / seconde mais qui compte pour 1 de moins</li>
+        <li>Imagination : +1 chameau/sec</li>
+        <li>Shin : t'as raison</li>
+        <li>Noirham : fait autant de clicks qu'un homme</li>
+        <li>Elroy : numberTooLargeException</li>
+        <li>Rikku : +1 post/seconde mais la voisine du dessus trouve que ça fait trop de bruit</li>
+    </ul>
+    <script>
+    function MtgfcCtrl($scope, $interval){
+  var protos = [
+    new BatimentProto("case", "logement", "TTT", 1, 10, 0, 0, 0, 0, ""),
+    new BatimentProto("tente", "logement", "TBP", 1, 10, 0, 0, 0, 0, ""),
+    new BatimentProto("teepee", "logement", "BBPP", 2, 10, 0, 0, 0, 0, ""),
+    new BatimentProto("hutte en bois", "logement", "TTBBB", 3, 10, 0, 0, 0, 0, ""),
+    new BatimentProto("trou dans le sol", "puits", "", 1, 10, 0, 0, 0, 0),
+  ];
+  $scope.c1 = new Colon("robert", 3);
+  $scope.c2 = new Colon("roberta", 5);
+
+  $scope.batiments = {
+    b1 : 0,
+    b2 : 0,
+    b3 : 0
+  };
+  $scope.prixBatiments = {
+    b1 : 10,
+    b2 : 100,
+    b3 : 1000
+  };
+  $scope.sous = 0;
+  $scope.click = function() {
+    $scope.sous++;
+  };
+  var update = function() {
+    $scope.sous += $scope.batiments.b1 + 10 * $scope.batiments.b2 + 100 * $scope.batiments.b3;
+  };
+  $interval(update, 1000);
+
+  $scope.buy = function(bi) {
+    var prix = $scope.prixBatiments[bi];
+    console.log(bi, prix);
+
+    if (prix <= $scope.sous) {
+      $scope.batiments[bi] ++;
+      $scope.prixBatiments[bi] =  $scope.clickerPrice(bi);
+      $scope.sous -= prix;
+    }
+  };
+  $scope.clickerPrice = function(bi){
+    return (10 * Math.pow(1.1,$scope.batiments[bi])).toFixed();
+  };
+};
+    </script>
+    
+  </body>
+
+</html>
