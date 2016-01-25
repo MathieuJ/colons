@@ -14,15 +14,6 @@
     
     <script>
     angular.module('Mtgfc', []).controller('MtgfcCtrl', function($scope, $interval){
-  var protos = [
-    new BatimentProto("case", "logement", "TTT", 1, 10, 0, 0, 0, 0, ""),
-    new BatimentProto("tente", "logement", "TBP", 1, 10, 0, 0, 0, 0, ""),
-    new BatimentProto("teepee", "logement", "BBPP", 2, 10, 0, 0, 0, 0, ""),
-    new BatimentProto("hutte en bois", "logement", "TTBBB", 3, 10, 0, 0, 0, 0, ""),
-    new BatimentProto("trou dans le sol", "puits", "", 1, 10, 0, 0, 0, 0),
-  ];
-  $scope.c1 = new Colon("robert", 3);
-  $scope.c2 = new Colon("roberta", 5);
 
   $scope.batiments = {
     b1 : 0,
