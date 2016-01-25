@@ -15,7 +15,9 @@
     
   </head>
 
-  <body ng-controller="MtgfcCtrl">
+  <body>
+   <div ng-app>
+    <div  ng-controller="MtgfcCtrl">
 <h1>MtgFranceClicker</h1>
 
     <h3>Posts de qualité : {{sous}}</h3>
@@ -48,6 +50,9 @@
         <li>Elroy : numberTooLargeException</li>
         <li>Rikku : +1 post/seconde mais la voisine du dessus trouve que ça fait trop de bruit</li>
     </ul>
+    </div>
+   </div>
+   
     <script>
     function MtgfcCtrl($scope, $interval){
   var protos = [
