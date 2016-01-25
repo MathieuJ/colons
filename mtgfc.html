@@ -12,46 +12,6 @@
     <script data-require="jquery" data-semver="2.1.4" src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script data-require="bootstrap" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     
-  </head>
-
-  <body>
-   <div ng-app="Mtgfc">
-    <div  ng-controller="MtgfcCtrl">
-<h1>MtgFranceClicker</h1>
-
-    <h3>Posts de qualité : {{sous}}</h3>
-
-    <button ng-click="click()" >Ecrire 1 post de qualité</button>
-    <BR/>
-    <BR/>
-    <button ng-click="buy('b1')" ng-disabled="prixBatiments.b1 > sous">Ranche 1/sec (coute {{prixBatiments.b1}}, total: {{batiments.b1}}/s)</button>
-    <button ng-click="buy('b2')" ng-disabled="prixBatiments.b2 > sous">Chattard 10/sec (coute {{prixBatiments.b2}}, total: {{10*batiments.b2}}/s)</button>
-    <button ng-click="buy('b3')" ng-disabled="prixBatiments.b3 > sous">Kobold 100/sec (coute {{prixBatiments.b3}}, total: {{100*batiments.b3}}/s)</button>
-    <BR/>
-    <BR/>
-    Nombre de Ranchebots : {{batiments.b1}}
-    <BR/>
-    Nombre de Chattarbots : {{batiments.b2}}
-    <BR/>
-    Nombre de Kobots : {{batiments.b3}}
-
-    <BR/>
-    <BR/>
-    <H3>Extensions à venir</H3>
-    <ul>
-        <li>Pamy : -1post/sec, mais double les posts de Ranche</li>
-        <li>Raphiduck : -1 post/sec, disparait au bout d'un moment puis revient</li>
-        <li>Nokiou : +1 post tous les 2 mois qui compte * 1000</li>
-        <li>Xuel : +1 post / seconde mais qui compte pour 1 de moins</li>
-        <li>Imagination : +1 chameau/sec</li>
-        <li>Shin : t'as raison</li>
-        <li>Noirham : fait autant de clicks qu'un homme</li>
-        <li>Elroy : numberTooLargeException</li>
-        <li>Rikku : +1 post/seconde mais la voisine du dessus trouve que ça fait trop de bruit</li>
-    </ul>
-    </div>
-   </div>
-   
     <script>
     angular.module('Mtgfc', []).controller('MtgfcCtrl', function($scope, $interval){
   var protos = [
@@ -98,7 +58,46 @@
   };
 });
     </script>
-    
+  </head>
+
+  <body>
+   <div ng-app="Mtgfc">
+    <div  ng-controller="MtgfcCtrl">
+<h1>MtgFranceClicker</h1>
+
+    <h3>Posts de qualité : {{sous}}</h3>
+
+    <button ng-click="click()" >Ecrire 1 post de qualité</button>
+    <BR/>
+    <BR/>
+    <button ng-click="buy('b1')" ng-disabled="prixBatiments.b1 > sous">Ranche 1/sec (coute {{prixBatiments.b1}}, total: {{batiments.b1}}/s)</button>
+    <button ng-click="buy('b2')" ng-disabled="prixBatiments.b2 > sous">Chattard 10/sec (coute {{prixBatiments.b2}}, total: {{10*batiments.b2}}/s)</button>
+    <button ng-click="buy('b3')" ng-disabled="prixBatiments.b3 > sous">Kobold 100/sec (coute {{prixBatiments.b3}}, total: {{100*batiments.b3}}/s)</button>
+    <BR/>
+    <BR/>
+    Nombre de Ranchebots : {{batiments.b1}}
+    <BR/>
+    Nombre de Chattarbots : {{batiments.b2}}
+    <BR/>
+    Nombre de Kobots : {{batiments.b3}}
+
+    <BR/>
+    <BR/>
+    <H3>Extensions à venir</H3>
+    <ul>
+        <li>Pamy : -1post/sec, mais double les posts de Ranche</li>
+        <li>Raphiduck : -1 post/sec, disparait au bout d'un moment puis revient</li>
+        <li>Nokiou : +1 post tous les 2 mois qui compte * 1000</li>
+        <li>Xuel : +1 post / seconde mais qui compte pour 1 de moins</li>
+        <li>Imagination : +1 chameau/sec</li>
+        <li>Shin : t'as raison</li>
+        <li>Noirham : fait autant de clicks qu'un homme</li>
+        <li>Elroy : numberTooLargeException</li>
+        <li>Rikku : +1 post/seconde mais la voisine du dessus trouve que ça fait trop de bruit</li>
+    </ul>
+    </div>
+   </div>
+   
   </body>
 
 </html>
