@@ -8,7 +8,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
     
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/darkly/bootstrap.min.css">
-    <link rel="stylesheet" href="styleMar.css">
     
     <script data-require="jquery" data-semver="2.1.4" src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script data-require="bootstrap" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -16,7 +15,7 @@
   </head>
 
   <body>
-   <div ng-app>
+   <div ng-app="Mtgfc">
     <div  ng-controller="MtgfcCtrl">
 <h1>MtgFranceClicker</h1>
 
@@ -54,7 +53,7 @@
    </div>
    
     <script>
-    function MtgfcCtrl($scope, $interval){
+    angular.module('Mtgfc.controllers', []).controller('MtgfcCtrl', function($scope, $interval){
   var protos = [
     new BatimentProto("case", "logement", "TTT", 1, 10, 0, 0, 0, 0, ""),
     new BatimentProto("tente", "logement", "TBP", 1, 10, 0, 0, 0, 0, ""),
@@ -97,7 +96,7 @@
   $scope.clickerPrice = function(bi){
     return (10 * Math.pow(1.1,$scope.batiments[bi])).toFixed();
   };
-};
+});
     </script>
     
   </body>
