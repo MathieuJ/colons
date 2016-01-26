@@ -20,10 +20,11 @@
     b2 : 0,
     b3 : 0
   };
+  
   $scope.prixBatiments = {
     b1 : 10,
-    b2 : 100,
-    b3 : 1000
+    b2 : 50,
+    b3 : 200
   };
   $scope.sous = 0;
   $scope.click = function() {
@@ -45,7 +46,8 @@
     }
   };
   $scope.clickerPrice = function(bi){
-    return (Math.pow(1.1,$scope.prixBatiments[bi])).toFixed();
+    //return (Math.pow(1.1,$scope.prixBatiments[bi])).toFixed();
+    return (Math.($scope.prixBatiments[bi], 1.1)).toFixed();
   };
 });
     </script>
