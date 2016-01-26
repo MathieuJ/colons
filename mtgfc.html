@@ -45,7 +45,7 @@
     }
   };
   $scope.clickerPrice = function(bi){
-    return ($scope.batiments[bi] * Math.pow(1.1,$scope.batiments[bi])).toFixed();
+    return (Math.pow(1.1,$scope.prixBatiments[bi])).toFixed();
   };
 });
     </script>
