@@ -40,6 +40,7 @@
      * Hide or Show the 'left' sideNav area
      */
     function toggleUsersList() {
+      console.log("ok");
       $mdSidenav('left').toggle();
     }
 
