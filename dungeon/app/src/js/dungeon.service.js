@@ -18,8 +18,9 @@
       'joueur2' : {'nom' : 'joueur2', 'bonus' : 'pdv1', 'or': 0},
       'queue1' : [],
       'queue2' : [],
-      'avancee1' : 10,
-      'avancee2' : 10,
+      'demilongueur' : 6,
+      'avancee1' : 6,
+      'avancee2' : 6,
       'boosts' : [{'nom' : 'pv1'}, {'nom' : 'atk1'}, {'nom' : 'dist1'}],
       'boosts1' : [],
       'boosts2' : []
@@ -32,26 +33,26 @@
       },
       init : function() {
         var i;
-        for (i = 0; i < 20; i++) {
+        for (i = 0; i < Partie.demilongueur * 2; i++) {
           Partie.boosts1.push(undefined);
           Partie.boosts2.push(undefined);
         }
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < Partie.demilongueur; i++) {
           Partie.queue1.push(undefined);
           Partie.queue2.push(undefined);
         }
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < Partie.demilongueur; i++) {
           Partie.queue1.push(new Bot(1, 3));
         }
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < Partie.demilongueur; i++) {
           Partie.queue2.push(new Bot(1, 3));
         }
       },
       combat : function() {
         console.log("combat");
-        for (var i = 1; i < 20; i++) {
+        for (var i = 1; i < Partie.demilongueur * 2; i++) {
           var b1 = Partie.queue1[i];
-          var b2 = Partie.queue2[20-i];
+          var b2 = Partie.queue2[ (Partie.demilongueur * 2) -i];
           if (!!b1 && !!b2) {
             b1.faitDegats(b2.force);
             b2.faitDegats(b1.force);
@@ -60,7 +61,7 @@
       },
       avance : function() {
         console.log("avance");
-        for (var i = 1; i < 20; i++) {
+        for (var i = 1; i < (Partie.demilongueur * 2) ; i++) {
           var b1 = Partie.queue1[i];
           var b2 = Partie.queue2[i];
           if (b1 && b1.endu <= 0) {
