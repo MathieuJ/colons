@@ -27,10 +27,15 @@
     self.joueur1 = self.partie.joueur1;
     self.joueur2 = self.partie.joueur2;
 
-    self.boosts1 = self.partie.joueur1;
+    self.boosts1 = self.partie.boosts1;
     self.boosts2 = self.partie.boosts2;
+
+    self.selectBoostPlace = function(index) {
+      self.boosts2[index] = {'nom' : 'exp'};
+    };
+
     self.avance = function() {
-      self.action = false;
+      self.actionEnabled = false;
 
       DungeonService.combat();
       $timeout(function(){
@@ -38,10 +43,10 @@
         $timeout(function(){
           DungeonService.ameliore();
           $timeout(function(){
-            self.action = true;
+            self.actionEnabled = true;
           }, 500);
         }, 500);
       }, 500);
-    }
+    };
   }
 })();

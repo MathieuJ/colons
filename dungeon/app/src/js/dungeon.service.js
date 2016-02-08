@@ -32,11 +32,13 @@
       },
       init : function() {
         var i;
+        for (i = 0; i < 20; i++) {
+          Partie.boosts1.push(undefined);
+          Partie.boosts2.push(undefined);
+        }
         for (i = 0; i < 10; i++) {
           Partie.queue1.push(undefined);
           Partie.queue2.push(undefined);
-          Partie.boosts1.push(undefined);
-          Partie.boosts2.push(undefined);
         }
         for (i = 0; i < 10; i++) {
           Partie.queue1.push(new Bot(1, 3));
@@ -51,8 +53,8 @@
           var b1 = Partie.queue1[i];
           var b2 = Partie.queue2[20-i];
           if (!!b1 && !!b2) {
-            b1.e -= b2.s;
-            b2.e -= b1.s;
+            b1.faitDegats(b2.force);
+            b2.faitDegats(b1.force);
           }
         }
       },
@@ -61,11 +63,11 @@
         for (var i = 1; i < 20; i++) {
           var b1 = Partie.queue1[i];
           var b2 = Partie.queue2[i];
-          if (b1 && b1.e <= 0) {
+          if (b1 && b1.endu <= 0) {
             Partie.queue1[i] = undefined;
             Partie.joueur2.or++;
           }
-          if (b2 && b2.e <= 0) {
+          if (b2 && b2.endu <= 0) {
             Partie.queue2[i] = undefined;
             Partie.joueur1.or++;
           }
