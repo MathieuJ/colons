@@ -27,11 +27,6 @@ angular
           templateUrl: 'src/pont/pont.html',
           controller: 'PontController',
           controllerAs : 'dc'
-        }).state('tunnel', {
-          url: '/tunnel',
-          templateUrl: 'src/tunnel/tunnels.html',
-          controller: 'TunnelsController',
-          controllerAs : 'dc'
         });
       $urlRouterProvider.otherwise('/start');
 
