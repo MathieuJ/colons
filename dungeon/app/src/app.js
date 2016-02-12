@@ -1,5 +1,5 @@
 angular
-  .module('starterApp', ['ngMaterial', 'users', 'ui.router', 'pont', 'tunnel'])
+  .module('starterApp', ['ngMaterial', 'users', 'ui.router', 'pont', 'tunnels'])
   .config(function($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider){
 
     $mdIconProvider
