@@ -1,5 +1,5 @@
 angular
-  .module('starterApp', ['ngMaterial', 'users', 'ui.router', 'dungeon'])
+  .module('starterApp', ['ngMaterial', 'users', 'ui.router', 'pont', 'tunnel'])
   .config(function($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider){
 
     $mdIconProvider
@@ -22,10 +22,15 @@ angular
           templateUrl: 'src/templates/material.html',
           controller: 'UserController',
           controllerAs : 'ul'
-        }).state('dungeon', {
-          url: '/dungeon',
-          templateUrl: 'src/templates/dungeon.html',
-          controller: 'DungeonController',
+        }).state('pont', {
+          url: '/pont',
+          templateUrl: 'src/pont/pont.html',
+          controller: 'PontController',
+          controllerAs : 'dc'
+        }).state('tunnel', {
+          url: '/tunnel',
+          templateUrl: 'src/tunnel/tunnels.html',
+          controller: 'TunnelsController',
           controllerAs : 'dc'
         });
       $urlRouterProvider.otherwise('/start');
