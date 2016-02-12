@@ -1,0 +1,88 @@
+<style type="text/css">
+    .ligne-case {
+        display:flex;
+        flex-wrap : nowrap;
+        flex-direction:row
+    }
+    .case {
+        margin: 5px 20px 0 0;
+        width:48px;
+        height:48px;
+        border : 1px solid black;
+        display: inline-block;
+    }
+    .bot {
+
+    }
+    .vide {
+        border : 1px dotted #3f633e;
+        background-color: #c2efb9;
+    }
+    .boost {
+        background-color: #faf2cc;
+    }
+    .boostVide {
+        border : 1px dotted #2b486d;
+        background-color: #c5dde6;
+    }
+    button {
+        box-sizing: content-box;
+        padding : 0px;
+    }
+    .boostVide:hover {
+        background-color : #ffb061;
+    }
+</style>
+
+<!-- BOOSTS 1 -->
+<div class="ligne-case">
+    <div ng-repeat="boost in dc.joueur1.boosts track by $index">
+        <boost ng-if="boost" boost="boost"></boost>
+        <button ng-if="!boost" class="case boostVide" ng-click="dc.selectBoostPlace(1, $index)">
+            <BR/>
+            &nbsp;
+        </button>
+    </div>
+</div>
+<!-- CASES 1 -->
+<div class="ligne-case">
+    <div ng-repeat="bot in dc.joueur1.queue track by $index"
+         style="display:inline;">
+        <bot ng-show="bot" bot="bot"></bot>
+        <div ng-if="!bot" class="case vide">
+            <BR/>
+            &nbsp;
+        </div>
+    </div>
+</div>
+<!-- CASES 2 -->
+<div class="ligne-case" style="margin-left:35px;">
+    <div ng-repeat="bot in dc.joueur2.queue.slice().reverse() track by $index ">
+        <bot ng-show="bot" bot="bot"></bot>
+        <div ng-if="!bot" class="case vide">
+            <BR/>
+            &nbsp;
+        </div>
+    </div>
+</div>
+<!-- BOOST 2 -->
+<div class="ligne-case" style="margin-left:35px;">
+    <div ng-repeat="boost in dc.joueur2.boosts.slice().reverse() track by $index ">
+        <div ng-if="boost" class="case boost">
+            BOT
+            <BR/>
+            {{bot.force}}/{{bot.e}}
+        </div>
+        <button ng-if="!boost" class="case boostVide" ng-click="dc.selectBoostPlace(2, 19 - $index)">
+            <BR/>
+            &nbsp;
+        </button>
+    </div>
+</div>
+<button ng-click="dc.avance()" ng-disabled="!dc.actionEnabled">go</button>
+<BR/>
+{{dc.joueur1.nom}} : {{dc.joueur1.or}} $
+<BR/>
+{{dc.joueur2.nom}} : {{dc.joueur2.or}} $
+<BR/>
+{{dc.queue2}}
