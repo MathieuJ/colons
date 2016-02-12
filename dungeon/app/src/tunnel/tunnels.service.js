@@ -15,7 +15,7 @@
   function PartieService(Guy){
     var Partie = {
       'mercenaires' : [],
-      'mercenairesDispos' : [new Guy('Robert')];
+      'mercenairesDispos' : [new Guy('Robert')]
     };
 
     // Promise-based API
