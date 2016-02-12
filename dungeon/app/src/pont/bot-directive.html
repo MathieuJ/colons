@@ -1,4 +1,4 @@
-<div ng-class="{case : true, bot : true, coincoin : true, 'sain' : bot.degats === 0, 'mort' : bot.endu === bot.degats}">
+<div ng-class="{case : true, bot : true, 'blesse' : bot.degats > 0, 'sain' : bot.degats === 0, 'mort' : bot.endu === bot.degats}">
     BOT
     <BR/>
     {{bot.force}}/{{bot.endu - bot.degats}}
