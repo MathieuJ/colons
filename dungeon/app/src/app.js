@@ -1,5 +1,5 @@
 angular
-  .module('starterApp', ['ngMaterial', 'users', 'ui.router', 'pont', 'tunnels'])
+  .module('starterApp', ['ngMaterial', 'users', 'ui.router', 'pont', 'tunnels', 'mariage'])
   .config(function($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider){
 
     $mdIconProvider
@@ -26,6 +26,11 @@ angular
           url: '/pont',
           templateUrl: 'src/pont/pont.html',
           controller: 'PontController',
+          controllerAs : 'dc'
+        }).state('tunnel', {
+          url: '/tunnel',
+          templateUrl: 'src/tunnel/tunnels.html',
+          controller: 'TunnelsController',
           controllerAs : 'dc'
         });
       $urlRouterProvider.otherwise('/start');

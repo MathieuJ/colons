@@ -3,7 +3,7 @@
   angular
     .module('tunnels')
     .controller('TunnelsController', [
-      'PartieService', '$timeout',
+      'partieService', '$timeout',
       TunnelsController
     ]);
 

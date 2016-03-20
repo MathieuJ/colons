@@ -1,0 +1,52 @@
+<div class="main" style="height: 100%" layout="row" ng-cloak >
+
+    <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
+                md-component-id="left"
+                ng-click="ul.toggleList()" aria-label="Show User List"
+                md-is-locked-open="$mdMedia('gt-sm')">
+
+        <md-toolbar class="md-whiteframe-z1">
+            <h3>Users</h3>
+        </md-toolbar>
+
+        <md-list>
+            {{etape}} Etape
+            <md-list-item>
+                <md-button ui-sref="mariage.noms" ng-class="{'selected' : it === ul.selected }">
+                    <md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>
+                    Noms
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button ui-sref="mariage.evenements" ng-class="{'selected' : it === ul.selected }">
+                    <md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>
+                    Evenements
+                </md-button>
+            </md-list-item>
+            <md-list-item>
+                <md-button ui-sref="mariage.config" ng-class="{'selected' : it === ul.selected }">
+                    <md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>
+                    Config
+                </md-button>
+            </md-list-item>
+        </md-list>
+
+    </md-sidenav>
+
+
+    <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
+
+        <md-toolbar layout="row" class="md-whiteframe-z1">
+            <md-button id="main" class="menu" hide-gt-sm ng-click="ul.toggleList()" aria-label="Show User List">
+                <md-icon md-svg-icon="menu" ></md-icon>
+            </md-button>
+            <h3>Angular Material - Starter App</h3>
+        </md-toolbar>
+
+        <md-content flex id="content">
+            <div ui-view></div>
+        </md-content>
+
+    </div>
+
+</div>

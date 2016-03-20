@@ -1,0 +1,27 @@
+
+<form name="nomForm" style="max-width: 864px;" ng-submit="vm.valide()">
+    <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Mariage de </label>
+            <input required name="name1" ng-model="vm.mariage.marie1.nom" />
+            <div class="hint" ng-if="showHints">Tell us what we should call you!</div>
+            <div ng-messages="nomForm.name1.$error">
+                <div ng-message="pattern">Mettez le nom d'un partenaire.</div>
+            </div>
+        </md-input-container>
+        <div flex="5" hide-xs hide-sm>
+            <!-- Spacer //-->
+        </div>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>et de </label>
+            <input required name="name2" ng-model="vm.mariage.marie2.nom" />
+            <div class="hint" ng-if="showHints">Tell us what we should call you!</div>
+            <div ng-messages="nomForm.name2.$error">
+                <div ng-message="pattern">Mettez le nom de l'autre partenaire.</div>
+            </div>
+        </md-input-container>
+    </div>
+    <div layout-gt-sm="row">
+        <md-button class="md-raised btn-block" type="submit">Submit</md-button>
+    </div>
+</form>

@@ -1,0 +1,75 @@
+
+<form name="nomForm" style="max-width: 864px;" ng-submit="vm.valide()">
+    <h1>Félicitations {{vm.mariage.marie1.nom}} et {{vm.mariage.marie2.nom}}</h1>
+    <h2>Que voulez-vous organiser ?</h2>
+
+    <div layout="column" layout-wrap layout-gt-sm="row" >
+
+        <div flex-xs flex="50">
+            <div layout-xs="column" flex-xs="100">
+                <md-checkbox
+                        ng-model="enterrement1"
+                        aria-label="Checkbox 2"
+                        class="md-warn md-align-top-left" flex>
+                    Enterrement de vie de célibataire pour {{vm.mariage.marie1.nom}}<br/>
+                </md-checkbox>
+            </div>
+        </div>
+        <div flex-xs flex="50">
+            <div layout-xs="column" flex-xs="100">
+                <md-checkbox
+                        ng-model="enterrement2"
+                        aria-label="Checkbox 2"
+                        class="md-warn md-align-top-left" flex>
+                    Enterrement de vie de célibataire pour {{vm.mariage.marie2.nom}}<br/>
+                </md-checkbox>
+            </div>
+        </div>
+        <div flex-xs flex="50">
+            <div layout-xs="column" flex-xs="100">
+                <md-checkbox
+                        ng-model="mariage.faireparts"
+                        aria-label="Checkbox 2"
+                        class="md-warn md-align-top-left" flex>
+                    Checkbox 2 (md-warn)  <br/>
+                <span class="ipsum">
+                  Le budget
+                </span>
+
+                </md-checkbox>
+            </div>
+        </div>
+        <div flex-xs flex="50">
+            <div layout-xs="column" flex-xs="100">
+                <md-checkbox
+                        ng-model="mariage.civil"
+                        aria-label="Checkbox 2"
+                        class="md-warn md-align-top-left" flex>
+                    Mariage civil  <br/>
+                <span class="ipsum">
+                  En vertu de l'article 252 du code civil...
+                </span>
+
+                </md-checkbox>
+            </div>
+        </div>
+        <div flex-xs flex="50">
+            <div layout-xs="column" flex-xs="100">
+                <md-checkbox
+                        ng-model="mariage.religieux"
+                        aria-label="Mariage religieux"
+                        class="md-warn md-align-top-left" flex>
+                    Mariage religieux  <br/>
+                <span class="ipsum">
+                    Pas de blagues !
+                </span>
+
+                </md-checkbox>
+            </div>
+        </div>
+    </div>
+
+    <div layout-gt-sm="row">
+        <md-button class="md-raised btn-block" type="submit">Submit</md-button>
+    </div>
+</form>
