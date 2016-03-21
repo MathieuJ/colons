@@ -11,12 +11,24 @@
       SaisieNomsController
     ])
     .controller('SaisieEvenementsController', [
-      'MariageService', '$timeout',
+      'MariageService', '$state',
       SaisieEvenementsController
     ])
     .controller('SaisieConfigController', [
-      '$timeout',
+      'MariageService', '$state',
       SaisieConfigController
+    ])
+    .controller('ResumeController', [
+      'MariageService', '$state',
+      ResumeController
+    ])
+    .controller('BudgetController', [
+      'MariageService', '$state',
+      BudgetController
+    ])
+    .controller('InvitesController', [
+      'MariageService', '$state',
+      InvitesController
     ])
 
 
@@ -47,7 +59,7 @@
       $state.go("^.evenements");
     }
   }
-  function SaisieEvenementsController(MariageService, $timeout) {
+  function SaisieEvenementsController(MariageService, $state) {
     var self = this;
 
     self.mariage = MariageService;
@@ -56,12 +68,28 @@
       $state.go("^.config");
     }
   }
-  function SaisieConfigController(MariageService, $timeout) {
+  function SaisieConfigController(MariageService, $state) {
     var self = this;
 
+    self.mariage = MariageService;
+    
+    self.valide = function() {
+      $state.go("^.resume");
+    }
+  }
+  function ResumeController(MariageService, $state) {
+    var self = this;
 
-    self.marie1 = MariageService.marie1;
-    self.marie2 = MariageService.marie2;
+    self.mariage = MariageService;
+  }
+  function BudgetController(MariageService, $state) {
+    var self = this;
 
+    self.mariage = MariageService;
+  }
+  function InvitesController(MariageService, $state) {
+    var self = this;
+
+    self.mariage = MariageService;
   }
 })();
