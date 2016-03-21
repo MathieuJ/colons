@@ -35,5 +35,23 @@
         templateUrl: 'src/mariage/views/config.html',
         controller: 'SaisieConfigController'
       })
+      .state('mariage.resume', {
+        parent: 'mariage',
+        url: '/resume',
+        templateUrl: 'src/mariage/views/resume.html',
+        controller: 'ResumeController'
+      })
+      .state('mariage.budget', {
+        parent: 'mariage',
+        url: '/budget',
+        templateUrl: 'src/mariage/views/budget.html',
+        controller: 'BudgetController'
+      })
+      .state('mariage.invites', {
+        parent: 'mariage',
+        url: '/invites',
+        templateUrl: 'src/mariage/views/invites.html',
+        controller: 'InvitesController'
+      })
   });
 })();
