@@ -1,0 +1,5 @@
+<div style="max-width: 864px;" ng-submit="vm.valide()">
+    <h3 class="md-headline">Mariage de {{vm.mariage.marie1.nom}} et {{vm.mariage.marie2.nom}}</h3>
+    <h2>Calendrier</h2>
+    
+</div>
