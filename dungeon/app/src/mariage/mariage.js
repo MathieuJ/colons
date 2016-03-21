@@ -33,25 +33,29 @@
         parent: 'mariage',
         url: '/config',
         templateUrl: 'src/mariage/views/config.html',
-        controller: 'SaisieConfigController'
+        controller: 'SaisieConfigController',
+        controllerAs : 'vm'
       })
       .state('mariage.resume', {
         parent: 'mariage',
         url: '/resume',
         templateUrl: 'src/mariage/views/resume.html',
-        controller: 'ResumeController'
+        controller: 'ResumeController',
+        controllerAs : 'vm'
       })
       .state('mariage.budget', {
         parent: 'mariage',
         url: '/budget',
         templateUrl: 'src/mariage/views/budget.html',
-        controller: 'BudgetController'
+        controller: 'BudgetController',
+        controllerAs : 'vm'
       })
       .state('mariage.invites', {
         parent: 'mariage',
         url: '/invites',
         templateUrl: 'src/mariage/views/invites.html',
-        controller: 'InvitesController'
+        controller: 'InvitesController',
+        controllerAs : 'vm'
       })
   });
 })();
