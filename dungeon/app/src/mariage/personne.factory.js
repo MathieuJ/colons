@@ -8,7 +8,7 @@
     var Personne = function(nom, cote, sexe) {
       this.nom = nom;
       this.cote = cote === 1 ? 1 : 2;
-      this.sexe = sexe;
+      this.sexe = sexe === 'M' ? 'M' : 'F';
     };
     Personne.prototype = {
       isCoteMarie : function(cote) {
