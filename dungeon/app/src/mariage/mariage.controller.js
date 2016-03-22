@@ -95,6 +95,7 @@
     self.ajoute = function() {
       var p = new Personne(self.nom, 1, 'M');
       MariageService.addInvite(p);
+      p.nombre = self.nombre;
       console.log(self.mariage);
     }
   }
