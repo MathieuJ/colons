@@ -27,7 +27,7 @@
       BudgetController
     ])
     .controller('InvitesController', [
-      'MariageService', '$state',
+      'MariageService', 'Personne', '$state',
       InvitesController
     ])
 
@@ -51,7 +51,7 @@
   function SaisieNomsController(MariageService, $state) {
     var self = this;
 
-    self.mariage = MariageService;
+    self.mariage = MariageService.get();
 
     console.log("noms", $state);
 
@@ -62,7 +62,7 @@
   function SaisieEvenementsController(MariageService, $state) {
     var self = this;
 
-    self.mariage = MariageService;
+    self.mariage = MariageService.get();
 
     self.valide = function() {
       $state.go("^.config");
@@ -71,7 +71,7 @@
   function SaisieConfigController(MariageService, $state) {
     var self = this;
 
-    self.mariage = MariageService;
+    self.mariage = MariageService.get();
     
     self.valide = function() {
       $state.go("^.resume");
@@ -80,16 +80,20 @@
   function ResumeController(MariageService, $state) {
     var self = this;
 
-    self.mariage = MariageService;
+    self.mariage = MariageService.get();
   }
   function BudgetController(MariageService, $state) {
     var self = this;
 
-    self.mariage = MariageService;
+    self.mariage = MariageService.get();
   }
-  function InvitesController(MariageService, $state) {
+  function InvitesController(MariageService, Personne, $state) {
     var self = this;
 
-    self.mariage = MariageService;
+    self.mariage = MariageService.get();
+    
+    self.ajouteInvite = function() {
+      MariageService.addInvite(new Personne('coco', 1, 'M');
+    }
   }
 })();
