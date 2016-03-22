@@ -92,8 +92,9 @@
 
     self.mariage = MariageService.get();
     
-    self.ajouteInvite = function() {
-      MariageService.addInvite(new Personne('coco', 1, 'M'));
+    self.ajoute = function() {
+      Personne p = new Personne(self.nom, 1, 'M');
+      MariageService.addInvite(p);
     }
   }
 })();
