@@ -93,7 +93,7 @@
     self.mariage = MariageService.get();
     
     self.ajoute = function() {
-      Personne p = new Personne(self.nom, 1, 'M');
+      var p = new Personne(self.nom, 1, 'M');
       MariageService.addInvite(p);
       console.log(self.mariage);
     }
