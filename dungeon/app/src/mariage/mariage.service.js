@@ -6,8 +6,8 @@
 
   function MariageService(Personne){
     var Mariage = {
-      'marie1' : new Personne(),
-      'marie2' : new Personne(),
+      'marie1' : new Personne('Marié', 1, 'M'),
+      'marie2' : new Personne('Mariée', 2, 'M'),
       invites : [],
       eglise : { actif : false },
       mairie : { actif : false },
@@ -19,14 +19,12 @@
     };
 
     // Promise-based API
-    return {
-      init : function() {
-        console.log("init recup de localstorage");
-      },
-      get : function() {
-        return Mariage;
-      }
+    this.init = function() {
+      console.log("init recup de localstorage");
+    };
+      
+    this.addInvite : function(personne) {
+      Mariage.invites.push(personne);
     };
   }
-
 })();
