@@ -7,7 +7,7 @@
   function Personne(){
     var Personne = function(nom, cote, sexe) {
       this.nom = nom;
-      this.cote = cote;
+      this.cote = cote === 1 ? 1 : 2;
       this.sexe = sexe;
     };
     Personne.prototype = {
