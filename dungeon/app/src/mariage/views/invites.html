@@ -1,13 +1,70 @@
-<div style="max-width: 864px;" ng-submit="vm.valide()">
+<div style="max-width: 864px;">
     <h3 class="md-headline">Mariage de {{vm.mariage.marie1.nom}} et {{vm.mariage.marie2.nom}}</h3>
     <h2>Invités</h2>
     
+    <form ng-submit="vm.ajoute()">
+        <div layout-gt-xs="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Nom de l'invité ou du groupe</label>
+                <input ng-model="vm.nom">
+          </md-input-container>
+          
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Nombre</label>
+            <md-select ng-model="vm.nombre">
+              <md-option value="1">
+                Invité
+              </md-option>
+              <md-option value="2">
+                Couple
+              </md-option>
+              <md-option value="3">
+                Groupe de 3
+              </md-option>
+              <md-option value="4">
+                Groupe de 4
+              </md-option>
+              <md-option value="5">
+                Groupe de 5
+              </md-option>
+              <md-option value="6">
+                Groupe de 6
+              </md-option>
+              <md-option value="7">
+                Groupe de 7
+              </md-option>
+              <md-option value="8">
+                Groupe de 8
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>  
+        <div layout-gt-sm="row">
+            <md-button class="md-raised btn-block" type="submit">Submit</md-button>
+        </div>
+    </form>
+    
+    
+    
     <table>
       <thead>
+          <tr>
+              <td>Nom</td>
+              <td>accompagnateur</td>
+              <td>faire-part</td>
+              <td>invité au pot</td>
+              <td>invité à la soirée</td>
+              <td>invité au lendemain</td>
+          </tr>
       </thead>
         <tbody>
             <tr ng-repeat="invite in vm.mariage.invites">
                 <td>{{invite.nom}}</td>
+                <td>{{invite.nombre}}</td>
+                <td>{{invite.fairepart}}</td>
+                <td>{{invite.pot}}</td>
+                <td>{{invite.soiree}}</td>
+                <td>{{invite.lendemain}}</td>
             </tr>
         </tbody>
     </table>
