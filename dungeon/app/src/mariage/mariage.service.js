@@ -23,8 +23,12 @@
       console.log("init recup de localstorage");
     };
       
-    this.addInvite : function(personne) {
+    this.addInvite = function(personne) {
       Mariage.invites.push(personne);
     };
+    
+    this.get = function() {
+      return Mariage;
+    }
   }
 })();
