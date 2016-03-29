@@ -5,7 +5,7 @@
     .service('MariageService', ['Personne', 'localStorageService', MariageService]);
 
   function MariageService(Personne, localStorageService){
-    var Mariage ;
+    var Mariage = null;
 
     // Promise-based API
     this.init = function() {
@@ -32,16 +32,16 @@
     }
     
     this.get = function() {
-      console.log("mariage", Mariage, this.Mariage);
+      console.log("mariage", Mariage);
       if (!!Mariage) {
         console.log("init");
         this.init();
       } else {
         console.log("get");
-        this.Mariage = localStorageService.get('mariage');
+        Mariage = localStorageService.get('mariage');
       }
-      console.log("after : mariage", Mariage, this.Mariage);
-      return this.Mariage;
+      console.log("after : mariage", Mariage, Mariage);
+      return Mariage;
     }
   }
 })();
