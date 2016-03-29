@@ -65,6 +65,7 @@
     self.mariage = MariageService.get();
 
     self.valide = function() {
+      MariageService.save();
       $state.go("^.config");
     }
   }
@@ -74,6 +75,7 @@
     self.mariage = MariageService.get();
     
     self.valide = function() {
+      MariageService.save();
       $state.go("^.resume");
     }
   }
@@ -97,6 +99,7 @@
       MariageService.addInvite(p);
       p.nombre = self.nombre;
       console.log(self.mariage);
+      MariageService.save();
     }
   }
 })();
