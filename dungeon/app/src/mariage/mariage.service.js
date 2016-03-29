@@ -33,7 +33,7 @@
     
     this.get = function() {
       console.log("mariage", Mariage);
-      if (!!Mariage) {
+      if (!Mariage) {
         console.log("init");
         this.init();
       } else {
