@@ -44,7 +44,7 @@
   function MariageController(MariageService) {
     var self = this;
     console.log("mariage base");
-    MariageService.init();
+    MariageService.get();
 
     self.etape = MariageService.etape;
   }
