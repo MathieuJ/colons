@@ -24,15 +24,15 @@
     };
       
     this.addInvite = function(personne) {
-      this.Mariage.invites.push(personne);
+      Mariage.invites.push(personne);
     };
     
     this.save = function() {
-      localStorageService.set('mariage', this.Mariage);
+      localStorageService.set('mariage', Mariage);
     }
     
     this.get = function() {
-      console.log("mariage", Mariage);
+      console.log("mariage v1", Mariage);
       if (!Mariage) {
         console.log("init");
         this.init();
