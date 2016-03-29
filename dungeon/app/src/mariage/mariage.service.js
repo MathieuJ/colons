@@ -24,20 +24,20 @@
     };
       
     this.addInvite = function(personne) {
-      Mariage.invites.push(personne);
+      this.Mariage.invites.push(personne);
     };
     
     this.save = function() {
-      localStorageService.set('mariage', Mariage);
+      localStorageService.set('mariage', this.Mariage);
     }
     
     this.get = function() {
       if (!!Mariage) {
         this.init();
       } else {
-        Mariage = localStorageService.get('mariage');
+        this.Mariage = localStorageService.get('mariage');
       }
-      return Mariage;
+      return this.Mariage;
     }
   }
 })();
