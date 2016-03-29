@@ -28,19 +28,22 @@
     };
     
     this.save = function() {
+      console.log("save", Mariage);
       localStorageService.set('mariage', Mariage);
     }
     
     this.get = function() {
-      console.log("mariage v1", Mariage);
+      console.log("mariage v2");
+      
       if (!Mariage) {
-        console.log("init");
-        this.init();
-      } else {
-        console.log("get");
+        console.log("pas maraige, on charge");
         Mariage = localStorageService.get('mariage');
+        if (!Mariage) {
+          console.log("pas en stock, on init");
+          this.init();  
+        }
       }
-      console.log("after : mariage", Mariage, Mariage);
+      console.log("after : mariage", Mariage);
       return Mariage;
     }
   }
