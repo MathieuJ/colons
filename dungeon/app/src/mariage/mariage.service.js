@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('mariage')
-    .service('MariageService', ['Personne', MariageService]);
+    .service('MariageService', ['Personne', 'localStorageService', MariageService]);
 
-  function MariageService(Personne){
+  function MariageService(Personne, localStorageService){
     var Mariage ;
 
     // Promise-based API
