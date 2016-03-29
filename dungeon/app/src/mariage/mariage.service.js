@@ -32,11 +32,15 @@
     }
     
     this.get = function() {
+      console.log("mariage", Mariage, this.Mariage);
       if (!!Mariage) {
+        console.log("init");
         this.init();
       } else {
+        console.log("get");
         this.Mariage = localStorageService.get('mariage');
       }
+      console.log("after : mariage", Mariage, this.Mariage);
       return this.Mariage;
     }
   }
