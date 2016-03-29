@@ -56,6 +56,7 @@
     console.log("noms", $state);
 
     self.valide = function() {
+      MariageService.save();
       $state.go("^.evenements");
     }
   }
