@@ -52,7 +52,7 @@
                 var cell = get(x,y);
                 if (cell) {
                     cell.type = "eau";
-                    switch (getRandomInt(0, 1)) {
+                    switch (getRandomInt(0, 3)) {
                         case 0:
                             if (x < taille - 1) x += 1;
                             break;
