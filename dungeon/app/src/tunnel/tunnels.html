@@ -1,4 +1,10 @@
 <style type="text/css">
+    font-size : 8px;
+    
+    .map {
+        overflow:hidden;
+    }
+    
     .cell {
         margin: 5px;
         width:30px;
@@ -13,12 +19,13 @@
         background-color : #CCF1FF;
     }
 </style>
-
-<div ng-repeat="ligne in dc.map">
-    <div ng-repeat="cell in ligne" class="cell" ng-class="cell.type">
-        {{cell.x}} - {{cell.y}}
-        <BR/>
-        {{cell.type}}
+<div class="map">
+    <div ng-repeat="ligne in dc.map">
+        <div ng-repeat="cell in ligne" class="cell" ng-class="cell.type">
+            {{cell.x}} - {{cell.y}}
+            <BR/>
+            {{cell.type}}
+        </div>
     </div>
 </div>
 <button ng-click="dc.finTour()" ng-enabled="dc.actionEnabled">Fin de tour</button>
