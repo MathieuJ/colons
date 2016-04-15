@@ -1,8 +1,10 @@
 <style type="text/css">
     
-    
+    .mapcontainer {
+        width:300px;
+        height:300px;
+    }
     .map {
-        overflow:hidden;
         font-size : 8px;
     }
     
@@ -31,12 +33,14 @@
         border-color: blue;
     }
 </style>
+<div class="mapcontainer">
 <div class="map">
     <div ng-repeat="ligne in dc.map">
         <div ng-repeat="cell in ligne" class="cell {{cell.type}}" ng-class="{selected : cell == dc.selectedCell}" ng-click="dc.select(cell.x, cell.y)">
             {{cell.x}} - {{cell.y}}
         </div>
     </div>
+</div>
 </div>
 <button ng-click="dc.finTour()" ng-enabled="dc.actionEnabled">Fin de tour</button>
 {{dc.selectedCell}}
