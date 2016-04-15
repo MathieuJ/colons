@@ -48,24 +48,25 @@
 
         (function() {
             var x = 5; y= 5;
-            
-            for (var i = 0; i < (taille*taille / 4); i++) {
-                var cell = get(x,y);
-                if (cell) {
-                    cell.type = "eau";
-                    switch (getRandomInt(0, 4)) {
-                        case 0:
-                            if (x < taille - 1) x += 1;
-                            break;
-                        case 1:
-                            if (x > 0) x -= 1;
-                            break;
-                        case 2:
-                            if (y < taille - 1) y += 1;
-                            break;
-                        case 3:
-                            if (y > 0) y -= 1;
-                            break;
+            for (var fois = 0; fois < 4; fois++) {
+                for (var i = 0; i < (taille*taille / 4); i++) {
+                    var cell = get(x,y);
+                    if (cell) {
+                        cell.type = "eau";
+                        switch (getRandomInt(0, 4)) {
+                            case 0:
+                                if (x < taille - 1) x += 1;
+                                break;
+                            case 1:
+                                if (x > 0) x -= 1;
+                                break;
+                            case 2:
+                                if (y < taille - 1) y += 1;
+                                break;
+                            case 3:
+                                if (y > 0) y -= 1;
+                                break;
+                        }
                     }
                 }
             }
