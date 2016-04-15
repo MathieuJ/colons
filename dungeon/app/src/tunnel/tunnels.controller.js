@@ -49,7 +49,7 @@
         (function() {
             var x = 5; y= 5;
             for (var fois = 0; fois < 4; fois++) {
-                for (var i = 0; i < (taille*taille / 4); i++) {
+                for (var i = 0; i < (taille*2); i++) {
                     var cell = get(x,y);
                     if (cell) {
                         cell.type = "eau";
