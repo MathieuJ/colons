@@ -99,8 +99,31 @@
                     vm.selectedUnite = unite;
                     //vm.destinations=calculeChemins();
                 }
+                vm.actions = [];
+                if (vm.selectedCell.type === 'terre') {
+                    vm.actions.push({ 'nom' : 'Construit ville', id='bv' });
+                    vm.actions.push({ 'nom' : 'Cultive champ', id='cc' });
+                } else if (vm.selectedCell.type === 'montagne') {
+                    vm.actions.push({ 'nom' : 'Mine montagne', id='mm', desc: '+2 metal/tour' });
+                } else if (vm.selectedCell.type === 'foret') {
+                    vm.actions.push({ 'nom' : 'Abat foret', id='af', desc : 'Rase tout. +10 bois' });
+                    vm.actions.push({ 'nom' : 'Gère hutte', id='gf', desc : 'cree une hutte de forestier. +2 bois/tour'});
+                };
             }
         }
+        vm.action = function(action) {
+            if (action.id === 'bv') {
+                vm.selectedCell.type = "ville";
+            } else if (action.id === 'cc') {
+                vm.selectedCell.type = "champ";
+            } else if (action.id === 'mm') {
+                vm.selectedCell.type = "mine";
+            } else if (action.id === 'af') {
+                vm.selectedCell.type = "terre";
+            }
+        }
+        
+        vm.actions = {};
         
         get(10, 10).joueur = 1;
         get(11, 10).joueur = 1;
