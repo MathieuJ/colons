@@ -101,5 +101,19 @@
                 }
             }
         }
+        
+        get(20, 20).joueur = 1;
+        get(21, 20).joueur = 1;
+        get(22, 20).joueur = 1;
+        
+        get(20, 21).joueur = 1;
+        get(21, 21).joueur = 1;
+        get(22, 21).joueur = 1;
+        get(20, 22).joueur = 1;
+        get(21, 22).joueur = 1;
+        get(22, 22).joueur = 1;
+        get(23, 20).joueur = 2;
+        get(23, 21).joueur = 2;
+        get(23, 22).joueur = 2;
     }
 })();
