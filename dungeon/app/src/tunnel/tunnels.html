@@ -36,11 +36,26 @@
         border-width:3px;
         border-color: blue;
     }
+    .joueur1 {
+        margin:1px;
+        border-width:2px;
+        border-color:green;
+    }
+    .joueur2 {
+        margin:1px;
+        border-width:2px;
+        border-color:red;
+    }
+    .joueur3 {
+        margin:1px;
+        border-width:2px;
+        border-color:yellow;
+    }
 </style>
 <div class="mapcontainer">
 <div class="map">
     <div ng-repeat="ligne in dc.map">
-        <div ng-repeat="cell in ligne" class="cell {{cell.type}}" ng-class="{selected : cell == dc.selectedCell}" ng-click="dc.select(cell.x, cell.y)">
+        <div ng-repeat="cell in ligne" class="cell {{cell.type}} joueur{{cell.joueur}}" ng-class="{selected : cell == dc.selectedCell}" ng-click="dc.select(cell.x, cell.y)">
             {{cell.x}} - {{cell.y}}
         </div>
     </div>
