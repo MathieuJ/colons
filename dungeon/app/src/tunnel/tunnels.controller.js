@@ -102,18 +102,18 @@
             }
         }
         
-        get(20, 20).joueur = 1;
-        get(21, 20).joueur = 1;
-        get(22, 20).joueur = 1;
+        get(10, 10).joueur = 1;
+        get(11, 10).joueur = 1;
+        get(12, 10).joueur = 1;
         
-        get(20, 21).joueur = 1;
-        get(21, 21).joueur = 1;
-        get(22, 21).joueur = 1;
-        get(20, 22).joueur = 1;
-        get(21, 22).joueur = 1;
-        get(22, 22).joueur = 1;
-        get(23, 20).joueur = 2;
-        get(23, 21).joueur = 2;
-        get(23, 22).joueur = 2;
+        get(10, 11).joueur = 1;
+        get(11, 11).joueur = 1;
+        get(12, 11).joueur = 1;
+        get(10, 12).joueur = 1;
+        get(11, 12).joueur = 1;
+        get(12, 12).joueur = 1;
+        get(13, 10).joueur = 2;
+        get(13, 11).joueur = 2;
+        get(13, 12).joueur = 2;
     }
 })();
