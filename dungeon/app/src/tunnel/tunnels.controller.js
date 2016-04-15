@@ -37,7 +37,7 @@
 
         function get(x, y) {
             if (x >= 0 && y >= 0 && x < taille && y < taille) {
-                return vm.map[x][y];
+                return vm.map[y][x];
             }
             return null;
         }
