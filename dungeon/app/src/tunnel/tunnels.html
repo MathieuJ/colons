@@ -54,7 +54,7 @@
 <div class="mapcontainer">
 <div class="map">
     <div ng-repeat="ligne in dc.map">
-        <div ng-repeat="cell in ligne" class="cell {{cell.type}} joueur{{cell.joueur}}" ng-class="{selected : cell == dc.selectedCell, joueur1 : cell.joueur == 1, joueur2 : cell.joueur == 2, joueur3 : cell.joueur == 3}" ng-click="dc.select(cell.x, cell.y)">
+        <div ng-repeat="cell in ligne" class="cell {{cell.type}} joueur{{cell.joueur}}" ng-class="{selected : cell == dc.selectedCell}" ng-click="dc.select(cell.x, cell.y)">
             {{cell.x}} - {{cell.y}}
         </div>
     </div>
