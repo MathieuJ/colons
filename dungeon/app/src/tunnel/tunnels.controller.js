@@ -48,7 +48,7 @@
 
         (function() {
             var x = 5; y= 5;
-            for (var i = 0; i < taille; i++) {
+            for (var i = 0; i < taille*taille; i++) {
                 var cell = get(x,y);
                 if (cell) {
                     cell.type = "eau";
@@ -68,8 +68,13 @@
                     }
                 }
             }
+            for (var i = 0; i < taille * 4; i++) {
+                var cell = get(getRandomInt(0, taille), getRandomInt(0, taille));
+                if (cell.type === 'terre') {
+                    cell.type = 'montagne';
+                }
+            }
         })();
-        
         
         vm.selectedCell;
         vm.selectedUnite;
