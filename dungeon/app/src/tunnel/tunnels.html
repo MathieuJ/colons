@@ -63,4 +63,6 @@
 <div class="controles">
 <button ng-click="dc.finTour()" ng-enabled="dc.actionEnabled">Fin de tour</button>
     {{dc.selectedCell}}
+    <button ng-repeat="action in dc.actions" ng-click="dc.action(action);">{{action.nom}}<BR/>{{action.desc}}</button>
+    
 </div>
