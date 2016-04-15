@@ -15,12 +15,10 @@
 </style>
 
 <div ng-repeat="ligne in dc.map">
-    <div ng-repeat="cell in ligne">
-        <div class="cell" ng-class="cell.type">
-            {{cell.x}} - {{cell.y}}
-            <BR/>
-            {{cell.type}}
-        </div>
+    <div ng-repeat="cell in ligne" class="cell" ng-class="cell.type">
+        {{cell.x}} - {{cell.y}}
+        <BR/>
+        {{cell.type}}
     </div>
 </div>
 <button ng-click="dc.finTour()" ng-enabled="dc.actionEnabled">Fin de tour</button>
