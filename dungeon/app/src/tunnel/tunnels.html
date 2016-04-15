@@ -11,7 +11,9 @@
 <div ng-repeat="ligne in dc.map">
     <div ng-repeat="cell in ligne">
         <div class="cell">
-            {{cell.i}} - {{cell.j}}
+            {{cell.x}} - {{cell.y}}
+            <BR/>
+            {{cell.type}}
         </div>
     </div>
 </div>
