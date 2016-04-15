@@ -1,11 +1,15 @@
 <style type="text/css">
     
     .mapcontainer {
-        width:300px;
-        height:300px;
+        width: 800px;
+        height: 400px;
+        overflow: scroll;
     }
     .map {
         font-size : 8px;
+        width:1200px;
+        overflow: scroll;
+        height: 1200px;
     }
     
     .cell {
@@ -42,5 +46,7 @@
     </div>
 </div>
 </div>
+<div class="controles">
 <button ng-click="dc.finTour()" ng-enabled="dc.actionEnabled">Fin de tour</button>
-{{dc.selectedCell}}
+    {{dc.selectedCell}}
+</div>
