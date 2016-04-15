@@ -6,11 +6,17 @@
         border : 1px solid black;
         display: inline-block;
     }
+    .terre {
+        background-color : #FAE9C0;
+    }
+    .eau {
+        background-color : #CCF1FF;
+    }
 </style>
 
 <div ng-repeat="ligne in dc.map">
     <div ng-repeat="cell in ligne">
-        <div class="cell">
+        <div class="cell" ng-class="cell.type">
             {{cell.x}} - {{cell.y}}
             <BR/>
             {{cell.type}}
