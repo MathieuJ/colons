@@ -48,11 +48,12 @@
 
         (function() {
             var x = 5; y= 5;
-            for (var i = 0; i < taille*taille; i++) {
+            
+            for (var i = 0; i < (taille*taille / 4); i++) {
                 var cell = get(x,y);
                 if (cell) {
                     cell.type = "eau";
-                    switch (getRandomInt(0, 3)) {
+                    switch (getRandomInt(0, 4)) {
                         case 0:
                             if (x < taille - 1) x += 1;
                             break;
@@ -72,6 +73,12 @@
                 var cell = get(getRandomInt(0, taille), getRandomInt(0, taille));
                 if (cell.type === 'terre') {
                     cell.type = 'montagne';
+                }
+            }
+            for (var i = 0; i < taille * 4; i++) {
+                var cell = get(getRandomInt(0, taille), getRandomInt(0, taille));
+                if (cell.type === 'terre') {
+                    cell.type = 'foret';
                 }
             }
         })();
