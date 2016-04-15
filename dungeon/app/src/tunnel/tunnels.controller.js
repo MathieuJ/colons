@@ -46,44 +46,7 @@
             return Math.floor(Math.random() * (max - min)) + min;
         }
 
-        (function() {
-            
-            for (var fois = 0; fois < 8; fois++) {
-                var x = getRandomInt(0, taille+1); y= getRandomInt(0, taille+1);
-                for (var i = 0; i < (taille); i++) {
-                    var cell = get(x,y);
-                    if (cell) {
-                        cell.type = "eau";
-                        switch (getRandomInt(0, 4)) {
-                            case 0:
-                                if (x < taille - 1) x += 1;
-                                break;
-                            case 1:
-                                if (x > 0) x -= 1;
-                                break;
-                            case 2:
-                                if (y < taille - 1) y += 1;
-                                break;
-                            case 3:
-                                if (y > 0) y -= 1;
-                                break;
-                        }
-                    }
-                }
-            }
-            for (var i = 0; i < taille * 4; i++) {
-                var cell = get(getRandomInt(0, taille), getRandomInt(0, taille));
-                if (cell.type === 'terre') {
-                    cell.type = 'montagne';
-                }
-            }
-            for (var i = 0; i < taille * 4; i++) {
-                var cell = get(getRandomInt(0, taille), getRandomInt(0, taille));
-                if (cell.type === 'terre') {
-                    cell.type = 'foret';
-                }
-            }
-        })();
+        
         
         vm.selectedCell;
         vm.selectedUnite;
@@ -125,18 +88,47 @@
         
         vm.actions = {};
         
-        get(10, 10).joueur = 1;
-        get(11, 10).joueur = 1;
-        get(12, 10).joueur = 1;
         
-        get(10, 11).joueur = 1;
-        get(11, 11).joueur = 1;
-        get(12, 11).joueur = 1;
-        get(10, 12).joueur = 1;
-        get(11, 12).joueur = 1;
-        get(12, 12).joueur = 1;
-        get(13, 10).joueur = 2;
-        get(13, 11).joueur = 2;
-        get(13, 12).joueur = 2;
+        (function() {
+            
+            for (var fois = 0; fois < 8; fois++) {
+                var x = getRandomInt(0, taille+1); y= getRandomInt(0, taille+1);
+                for (var i = 0; i < (taille); i++) {
+                    var cell = get(x,y);
+                    if (cell) {
+                        cell.type = "eau";
+                        switch (getRandomInt(0, 4)) {
+                            case 0:
+                                if (x < taille - 1) x += 1;
+                                break;
+                            case 1:
+                                if (x > 0) x -= 1;
+                                break;
+                            case 2:
+                                if (y < taille - 1) y += 1;
+                                break;
+                            case 3:
+                                if (y > 0) y -= 1;
+                                break;
+                        }
+                    }
+                }
+            }
+            for (var i = 0; i < taille * 4; i++) {
+                var cell = get(getRandomInt(0, taille), getRandomInt(0, taille));
+                if (cell.type === 'terre') {
+                    cell.type = 'montagne';
+                }
+            }
+            for (var i = 0; i < taille * 4; i++) {
+                var cell = get(getRandomInt(0, taille), getRandomInt(0, taille));
+                if (cell.type === 'terre') {
+                    cell.type = 'foret';
+                }
+            }
+            
+            //coloniseVille(1, getRandomInt(0, taille), getRandomInt(0, taille))
+        })();
+        
     }
 })();
