@@ -88,6 +88,7 @@
         vm.selectedCell;
         vm.selectedUnite;
         vm.select = function(x, y) {
+            console.log("select", x, y);
             var macell = get(x, y);
             vm.selectedCell = macell;
             if (vm.selectedUnite) {
