@@ -18,10 +18,13 @@
     .eau {
         background-color : #CCF1FF;
     }
+    .montagne {
+        background-color : lightgrey;
+    }
 </style>
 <div class="map">
     <div ng-repeat="ligne in dc.map">
-        <div ng-repeat="cell in ligne" class="cell" ng-class="cell.type">
+        <div ng-repeat="cell in ligne" class="cell" ng-class="cell.type" ng-click="dc.select(cell.x, cell.y)">
             {{cell.x}} - {{cell.y}}
             <BR/>
             {{cell.type}}
