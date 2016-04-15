@@ -49,7 +49,7 @@
         (function() {
             
             for (var fois = 0; fois < 8; fois++) {
-                var x = 5; y= 5;
+                var x = getRandomInt(0, taille+1); y= getRandomInt(0, taille+1);
                 for (var i = 0; i < (taille); i++) {
                     var cell = get(x,y);
                     if (cell) {
