@@ -101,13 +101,13 @@
                 }
                 vm.actions = [];
                 if (vm.selectedCell.type === 'terre') {
-                    vm.actions.push({ 'nom' : 'Construit ville', id='bv' });
-                    vm.actions.push({ 'nom' : 'Cultive champ', id='cc' });
+                    vm.actions.push({ 'nom' : 'Construit ville', id:'bv' });
+                    vm.actions.push({ 'nom' : 'Cultive champ', id:'cc' });
                 } else if (vm.selectedCell.type === 'montagne') {
-                    vm.actions.push({ 'nom' : 'Mine montagne', id='mm', desc: '+2 metal/tour' });
+                    vm.actions.push({ 'nom' : 'Mine montagne', id:'mm', desc: '+2 metal/tour' });
                 } else if (vm.selectedCell.type === 'foret') {
-                    vm.actions.push({ 'nom' : 'Abat foret', id='af', desc : 'Rase tout. +10 bois' });
-                    vm.actions.push({ 'nom' : 'Gère hutte', id='gf', desc : 'cree une hutte de forestier. +2 bois/tour'});
+                    vm.actions.push({ 'nom' : 'Abat foret', id:'af', desc : 'Rase tout. +10 bois' });
+                    vm.actions.push({ 'nom' : 'Gère hutte', id:'gf', desc : 'cree une hutte de forestier. +2 bois/tour'});
                 };
             }
         }
