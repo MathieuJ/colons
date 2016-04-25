@@ -112,6 +112,7 @@
             demarre : function() {
               this.demarree = true;
               this.carte = new Carte(this.taille);
+              this.carte.init();
             },
             getActions() {
                 return this.actions;
@@ -130,7 +131,7 @@
         vm.map = [];
         
         vm.partie = new Partie(vm.joueurs[0], 32);
-        
+        vm.partie.demarre();
         vm.selectedCell;
         vm.selectedUnite;
         vm.select = function(x, y) {
