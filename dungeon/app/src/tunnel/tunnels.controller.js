@@ -2,57 +2,140 @@
 
     angular
         .module('tunnels')
-        .controller('TunnelsController', [
+        .factory('Carte', [Carte])
+        .factory('Joueur', [Joueur])
+        .factory('Partie', ['Carte', Partie])
+      .controller('TunnelsController', [
             '$timeout',
+            'Carte',
+            'Partie',
+            'Joueur',
             TunnelsController
         ]);
-
-    /**
-     * Main Controller for the Angular Material Starter App
-     * @param $scope
-     * @param $mdSidenav
-     * @param avatarsService
-     * @constructor
-     */
-    function TunnelsController($timeout) {
-        var vm = this;
-
-        vm.users = [];
-
-        //PartieService.init();
-
-        vm.map = [];
-        var taille = 32;
-        for (var y = 0; y < taille; y++) {
-            var ligne = [];
-            for (var x = 0; x < taille; x++) {
-                ligne.push({
-                    x: x,
-                    y: y,
-                    type: "terre"
-                });
-            }
-            vm.map.push(ligne);
+    
+    function Joueur(){
+        var Joueur = function(nom, userid) {
+            this.nom = nom;
+            this.userid = userid;
+        };
+        Joueur.prototype = {
         }
-
-        function get(x, y) {
-            if (x >= 0 && y >= 0 && x < taille && y < taille) {
-                return vm.map[y][x];
-            }
-            return null;
-        }
-        
+        return Joueur;
+    };
+    function Carte(){
+        var Carte = function(taille) {
+            this.taille = taille;
+            this.cells = [];
+        };
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min)) + min;
         }
+            
+        Carte.prototype = {
+            get : function(x, y) {
+                if (x >= 0 && y >= 0 && x < taille && y < taille) {
+                    return vm.map[y][x];
+                }
+                return null;
+            },
+            init : function () {
+                for (var y = 0; y < this.taille; y++) {
+                    var ligne = [];
+                    for (var x = 0; x < this.taille; x++) {
+                        ligne.push({
+                            x: x,
+                            y: y,
+                            type: "terre"
+                        });
+                    }
+                    this.cells.push(ligne);
+                }
+                for (var fois = 0; fois < 8; fois++) {
+                    var x = getRandomInt(0, taille+1); y= getRandomInt(0, taille+1);
+                    for (var i = 0; i < (taille); i++) {
+                        var cell = get(x,y);
+                        if (cell) {
+                            cell.type = "eau";
+                            switch (getRandomInt(0, 4)) {
+                                case 0:
+                                    if (x < taille - 1) x += 1;
+                                    break;
+                                case 1:
+                                    if (x > 0) x -= 1;
+                                    break;
+                                case 2:
+                                    if (y < taille - 1) y += 1;
+                                    break;
+                                case 3:
+                                    if (y > 0) y -= 1;
+                                    break;
+                            }
+                        }
+                    }
+                }
+                for (var i = 0; i < taille * 4; i++) {
+                    var cell = get(getRandomInt(0, taille), getRandomInt(0, taille));
+                    if (cell.type === 'terre') {
+                        cell.type = 'montagne';
+                    }
+                }
+                for (var i = 0; i < taille * 4; i++) {
+                    var cell = get(getRandomInt(0, taille), getRandomInt(0, taille));
+                    if (cell.type === 'terre') {
+                        cell.type = 'foret';
+                    }
+                }
+            }
+        }
+        return Carte;
+    }
+
+    function Partie(Carte){
+        var Partie = function(createur, taille) {
+            this.createur = createur.userid;
+            this.demarre = false;
+            this.joueurs = [];
+            this.joueurs.push(createur.userid);
+            this.taille = taille;
+        };
+        var actions = {
+            'cv' : { 'nom' : 'Construit ville', id:'cv' },
+            'cc' : { 'nom' : 'Cultive champ', id:'cc' },
+            'mm' : { 'nom' : 'Mine montagne', id:'mm', desc: '+2 metal/tour' },
+            'af' : { 'nom' : 'Abat foret', id:'af', desc : 'Rase tout. +10 bois' },
+            'gf' : { 'nom' : 'Construit hutte', id:'gf', desc : 'cree une hutte de forestier. +2 bois/tour'}
+        };
+        Partie.prototype = {
+            addJoueur : function(joueur) {
+                this.joueurs.push(joueur.userid);
+            },
+            demarre : function() {
+              this.demarree = true;
+              this.carte = new Carte(this.taille);
+            },
+            getActions() {
+                return this.actions;
+            }
+        };
+        return Partie;
+    }
+  
+    function TunnelsController($timeout, Carte, Partie, Joueur) {
+        var vm = this;
+
+        vm.joueurs = [new Joueur('aaaa', 1)];
 
         
+
+        vm.map = [];
+        
+        vm.partie = new Partie(joueurs[0], 32);
         
         vm.selectedCell;
         vm.selectedUnite;
         vm.select = function(x, y) {
             console.log("select", x, y);
-            var macell = get(x, y);
+            var macell = vm.partie.get(x, y);
             vm.selectedCell = macell;
             if (vm.selectedUnite) {
                 vm.selectedUnite = false;
@@ -64,13 +147,13 @@
                 }
                 vm.actions = [];
                 if (vm.selectedCell.type === 'terre') {
-                    vm.actions.push({ 'nom' : 'Construit ville', id:'bv' });
-                    vm.actions.push({ 'nom' : 'Cultive champ', id:'cc' });
+                    vm.actions.push(vm.partie.getActions().cv);
+                    vm.actions.push(vm.partie.getActions().cc);
                 } else if (vm.selectedCell.type === 'montagne') {
-                    vm.actions.push({ 'nom' : 'Mine montagne', id:'mm', desc: '+2 metal/tour' });
+                    vm.actions.push(vm.partie.getActions().mm);
                 } else if (vm.selectedCell.type === 'foret') {
-                    vm.actions.push({ 'nom' : 'Abat foret', id:'af', desc : 'Rase tout. +10 bois' });
-                    vm.actions.push({ 'nom' : 'Gère hutte', id:'gf', desc : 'cree une hutte de forestier. +2 bois/tour'});
+                    vm.actions.push(vm.partie.getActions().af);
+                    vm.actions.push(vm.partie.getActions().gf);
                 };
             }
         }
@@ -85,50 +168,5 @@
                 vm.selectedCell.type = "terre";
             }
         }
-        
-        vm.actions = {};
-        
-        
-        (function() {
-            
-            for (var fois = 0; fois < 8; fois++) {
-                var x = getRandomInt(0, taille+1); y= getRandomInt(0, taille+1);
-                for (var i = 0; i < (taille); i++) {
-                    var cell = get(x,y);
-                    if (cell) {
-                        cell.type = "eau";
-                        switch (getRandomInt(0, 4)) {
-                            case 0:
-                                if (x < taille - 1) x += 1;
-                                break;
-                            case 1:
-                                if (x > 0) x -= 1;
-                                break;
-                            case 2:
-                                if (y < taille - 1) y += 1;
-                                break;
-                            case 3:
-                                if (y > 0) y -= 1;
-                                break;
-                        }
-                    }
-                }
-            }
-            for (var i = 0; i < taille * 4; i++) {
-                var cell = get(getRandomInt(0, taille), getRandomInt(0, taille));
-                if (cell.type === 'terre') {
-                    cell.type = 'montagne';
-                }
-            }
-            for (var i = 0; i < taille * 4; i++) {
-                var cell = get(getRandomInt(0, taille), getRandomInt(0, taille));
-                if (cell.type === 'terre') {
-                    cell.type = 'foret';
-                }
-            }
-            
-            //coloniseVille(1, getRandomInt(0, taille), getRandomInt(0, taille))
-        })();
-        
     }
 })();
