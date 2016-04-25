@@ -129,7 +129,7 @@
 
         vm.map = [];
         
-        vm.partie = new Partie(joueurs[0], 32);
+        vm.partie = new Partie(vm.joueurs[0], 32);
         
         vm.selectedCell;
         vm.selectedUnite;
