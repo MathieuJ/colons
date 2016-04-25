@@ -76,7 +76,7 @@
 </style>
 <div class="mapcontainer">
 <div class="map">
-    <div ng-repeat="ligne in dc.map">
+    <div ng-repeat="ligne in dc.partie.carte">
         <div ng-repeat="cell in ligne" class="cell {{cell.type}} joueur{{cell.joueur}}" ng-class="{selected : cell == dc.selectedCell}" ng-click="dc.select(cell.x, cell.y)">
             <span ng-show="cell.targetMv" class="targetmv">O</span>
             <span ng-show="cell.targetAtk" class="targetatk">O</span>
@@ -87,7 +87,7 @@
 <div class="controles">
 <button ng-click="dc.finTour()" ng-enabled="dc.actionEnabled">Fin de tour</button>
     {{dc.selectedCell}}
-    <button ng-repeat="action in dc.actions" ng-click="dc.action(action);">{{action.nom}}<BR/>{{action.desc}}</button>
+    <button ng-repeat="action in dc.partie.getActions()" ng-click="dc.action(action);">{{action.nom}}<BR/>{{action.desc}}</button>
     <BR/>
     {{dc.nbEtoiles}} Etoiles (+ {{dc.nbGain}} Etoiles / tour) | Tour {{dc.numTour}}
 </div>
