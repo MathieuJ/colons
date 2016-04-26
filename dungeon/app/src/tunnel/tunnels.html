@@ -76,7 +76,7 @@
 </style>
 <div class="mapcontainer">
 <div class="map">
-    <div ng-repeat="ligne in dc.partie.carte">
+    <div ng-repeat="ligne in dc.partie.carte.cells">
         <div ng-repeat="cell in ligne" class="cell {{cell.type}} joueur{{cell.joueur}}" ng-class="{selected : cell == dc.selectedCell}" ng-click="dc.select(cell.x, cell.y)">
             <span ng-show="cell.targetMv" class="targetmv">O</span>
             <span ng-show="cell.targetAtk" class="targetatk">O</span>
