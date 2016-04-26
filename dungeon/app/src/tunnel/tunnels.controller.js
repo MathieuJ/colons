@@ -25,9 +25,11 @@
         return Joueur;
     };
     function Unite(){
-        var Unite = function(type) {
-            this.type = type;
-            this.pv = type.pv;
+        var Unite = function(cell, joueur, proto) {
+            this.cell = cell;
+            this.joueur = joueur;
+            this.proto = proto;
+            this.pv = proto.pv;
             this.veteran = false;
             this.nbkills = 0;
         };
@@ -161,17 +163,19 @@
             addJoueur : function(joueur) {
                 this.joueurs.push(joueur.userid);
             },
-            addUnite : function(x, y, joueurid) {
-                this.unites.
-            }
+            addUnite : function(cell, type, joueurid) {
+                this.unites.push(new Unite(cell, joueurid, this.unitesDispos[type]));
+            },
             demarre : function() {
                 this.demarree = true;
                 this.carte = new Carte(this.taille);
                 this.carte.init();   
                 var c1 = this.carte.getStartingCell();
                 this.initJoueur(c1, 1);
+                this.addUnite(c1, 1, 'c');
                 var c2 = this.carte.getStartingCell();
                 this.initJoueur(c1, 2);
+                this.addUnite(c1, 2, 's');
                 var c3 = this.carte.getStartingCell();
                 this.initJoueur(c1, 3);
             },
@@ -188,6 +192,8 @@
                 this.setJoueur(x+1, y, joueurid);
                 this.setJoueur(x+1, y-1, joueurid);
                 this.setJoueur(x, y-1, joueurid);
+                
+                this.addUnite(cell)
             },
             appliqueAction : function(action, selectedCell) {
                 if (action.id === 'bv') {
