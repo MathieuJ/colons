@@ -92,19 +92,20 @@
 
     function Partie(Carte){
         var Partie = function(createur, taille) {
-            this.createur = createur.userid;
+            this.createurid = createur.userid;
             this.demarre = false;
             this.joueurs = [];
             this.joueurs.push(createur.userid);
             this.taille = taille;
+            this.actions = {
+                'cv' : { 'nom' : 'Construit ville', id:'cv' },
+                'cc' : { 'nom' : 'Cultive champ', id:'cc' },
+                'mm' : { 'nom' : 'Mine montagne', id:'mm', desc: '+2 metal/tour' },
+                'af' : { 'nom' : 'Abat foret', id:'af', desc : 'Rase tout. +10 bois' },
+                'gf' : { 'nom' : 'Construit hutte', id:'gf', desc : 'cree une hutte de forestier. +2 bois/tour'}
+            };
         };
-        var actions = {
-            'cv' : { 'nom' : 'Construit ville', id:'cv' },
-            'cc' : { 'nom' : 'Cultive champ', id:'cc' },
-            'mm' : { 'nom' : 'Mine montagne', id:'mm', desc: '+2 metal/tour' },
-            'af' : { 'nom' : 'Abat foret', id:'af', desc : 'Rase tout. +10 bois' },
-            'gf' : { 'nom' : 'Construit hutte', id:'gf', desc : 'cree une hutte de forestier. +2 bois/tour'}
-        };
+        
         Partie.prototype = {
             addJoueur : function(joueur) {
                 this.joueurs.push(joueur.userid);
@@ -124,13 +125,12 @@
     function TunnelsController($timeout, Carte, Partie, Joueur) {
         var vm = this;
 
-        vm.joueurs = [new Joueur('aaaa', 1)];
+        vm.joueurs = [new Joueur('aaaa', 1), new Joueur('bbbb', 2)];
 
-        
-
-        vm.map = [];
-        
         vm.partie = new Partie(vm.joueurs[0], 32);
+        console.log(vm.partie.createurid);
+        vm.partie.addJoueur(vm.joueurs[1]);
+        console.log(vm.partie.joueurs);
         vm.partie.demarre();
         vm.selectedCell;
         vm.selectedUnite;
