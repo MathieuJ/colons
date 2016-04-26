@@ -93,7 +93,7 @@
     function Partie(Carte){
         var Partie = function(createur, taille) {
             this.createurid = createur.userid;
-            this.demarre = false;
+            this.demarree = false;
             this.joueurs = [];
             this.joueurs.push(createur.userid);
             this.taille = taille;
