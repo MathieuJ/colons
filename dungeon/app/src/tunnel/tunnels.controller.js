@@ -132,7 +132,7 @@
                 'af' : { 'nom' : 'Abat foret', id:'af', desc : 'Rase tout. +10 bois' },
                 'gf' : { 'nom' : 'Construit hutte', id:'gf', desc : 'cree une hutte de forestier. +2 bois/tour'}
             };
-            this.competences = {
+            this.competences = [
                 { 'id' : 0, req : null, nom : 'chasse', niveau : 1 },  
                 { 'id' : 1, req : null, nom : 'peche', niveau : 1 },  
                 { 'id' : 2, req : null, nom : 'organisation', niveau : 1 },  
@@ -148,7 +148,7 @@
                 { 'id' : 12, req : 3, nom : 'Temple des plaines', niveau : 2 },
                 { 'id' : 13, req : 4, nom : 'temple montagne', niveau : 2 },  
                 { 'id' : 14, req : 4, nom : 'minage', niveau : 2 }
-            };
+            ];
             this.unitesDispos = {
                 's' : { nom : 'soldat', pv : '10', dist : '1', atk : '2', def : '2', mvmt : 1 },
                 'c' : { nom : 'cavalier', pv : '10', dist : '1', atk : '2', def : '1', mvmt : 3 },
