@@ -19,6 +19,7 @@
             this.nom = nom;
             this.userid = userid;
             this.competences = [];
+            this.starsParTour=2;
         };
         Joueur.prototype = {
         }
@@ -57,7 +58,7 @@
                 if (this.get(x, y)) {
                     this.get(x, y).type = type;
                 }
-            },
+            }, 
             setJoueur : function(x, y, joueur) {
                 if (this.get(x, y)) {
                     this.get(x, y).joueur = joueur;
@@ -188,8 +189,11 @@
             getActions : function() {
                 return this.actions;
             },
-            initJoueur : function(cell, joueurid) {
-                cell.joueur = joueurid;
+            initJoueur : function(cell, joueur) {
+                 var joueurid=joueur.id;
+                joueur.villes.push(cell);
+joueur.starsParTour += 1;
+                cell.joueur = joueurid;cell.type='ville'; cell.lvl=1;
                 this.carte.setJoueur(cell.x-1, cell.y-1, joueurid);
                 this.carte.setJoueur(cell.x-1, cell.y, joueurid);
                 this.carte.setJoueur(cell.x-1, cell.y+1, joueurid);
@@ -199,17 +203,23 @@
                 this.carte.setJoueur(cell.x+1, cell.y-1, joueurid);
                 this.carte.setJoueur(cell.x, cell.y-1, joueurid);
                 
+ 
+                
             },
             appliqueAction : function(action, selectedCell) {
                 if (action.id === 'bv') {
                     this.carte.get(selectedCell.x, selectedCell.y).type = "ville";
                 } else if (action.id === 'cc') {
                     this.carte.get(selectedCell.x, selectedCell.y).type = "champ";
+                    
                 } else if (action.id === 'mm') {
                     this.carte.get(selectedCell.x, selectedCell.y).type = "mine";
                 } else if (action.id === 'af') {
                     this.carte.get(selectedCell.x, selectedCell.y).type = "terre";
                 }
+            },
+            finitTour : function() {
+                
             }
         };
         return Partie;
