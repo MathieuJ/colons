@@ -184,16 +184,15 @@
             },
             initJoueur : function(cell, joueurid) {
                 cell.joueur = joueurid;
-                this.setJoueur(cell.x-1, cell.y-1, joueurid);
-                this.setJoueur(cell.x-1, cell.y, joueurid);
-                this.setJoueur(cell.x-1, cell.y+1, joueurid);
-                this.setJoueur(cell.x, cell.y+1, joueurid);
-                this.setJoueur(cell.x+1, cell.y+1, joueurid);
-                this.setJoueur(cell.x+1, cell.y, joueurid);
-                this.setJoueur(cell.x+1, cell.y-1, joueurid);
-                this.setJoueur(cell.x, cell.y-1, joueurid);
+                this.carte.setJoueur(cell.x-1, cell.y-1, joueurid);
+                this.carte.setJoueur(cell.x-1, cell.y, joueurid);
+                this.carte.setJoueur(cell.x-1, cell.y+1, joueurid);
+                this.carte.setJoueur(cell.x, cell.y+1, joueurid);
+                this.carte.setJoueur(cell.x+1, cell.y+1, joueurid);
+                this.carte.setJoueur(cell.x+1, cell.y, joueurid);
+                this.carte.setJoueur(cell.x+1, cell.y-1, joueurid);
+                this.carte.setJoueur(cell.x, cell.y-1, joueurid);
                 
-                this.addUnite(cell)
             },
             appliqueAction : function(action, selectedCell) {
                 if (action.id === 'bv') {
