@@ -58,6 +58,11 @@
                     this.get(x, y).type = type;
                 }
             },
+            setJoueur : function(x, y, joueur) {
+                if (this.get(x, y)) {
+                    this.get(x, y).joueur = joueur;
+                }
+            },
             init : function () {
                 for (var y = 0; y < this.taille; y++) {
                     var ligne = [];
