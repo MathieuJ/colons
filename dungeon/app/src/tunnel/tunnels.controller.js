@@ -111,11 +111,11 @@
                 this.joueurs.push(joueur.userid);
             },
             demarre : function() {
-              this.demarree = true;
-              this.carte = new Carte(this.taille);
-              this.carte.init();
+                this.demarree = true;
+                this.carte = new Carte(this.taille);
+                this.carte.init();    
             },
-            getActions() {
+            getActions : function() {
                 return this.actions;
             }
         };
