@@ -33,7 +33,7 @@
             
         Carte.prototype = {
             get : function(x, y) {
-                if (x >= 0 && y >= 0 && x < taille && y < taille) {
+                if (x >= 0 && y >= 0 && x < this.taille && y < this.taille) {
                     return vm.map[y][x];
                 }
                 return null;
@@ -51,20 +51,20 @@
                     this.cells.push(ligne);
                 }
                 for (var fois = 0; fois < 8; fois++) {
-                    var x = getRandomInt(0, taille+1); y= getRandomInt(0, taille+1);
-                    for (var i = 0; i < (taille); i++) {
+                    var x = getRandomInt(0, this.taille+1); y= getRandomInt(0, this.taille+1);
+                    for (var i = 0; i < this.taille; i++) {
                         var cell = get(x,y);
                         if (cell) {
                             cell.type = "eau";
                             switch (getRandomInt(0, 4)) {
                                 case 0:
-                                    if (x < taille - 1) x += 1;
+                                    if (x < this.taille - 1) x += 1;
                                     break;
                                 case 1:
                                     if (x > 0) x -= 1;
                                     break;
                                 case 2:
-                                    if (y < taille - 1) y += 1;
+                                    if (y < this.taille - 1) y += 1;
                                     break;
                                 case 3:
                                     if (y > 0) y -= 1;
@@ -73,14 +73,14 @@
                         }
                     }
                 }
-                for (var i = 0; i < taille * 4; i++) {
-                    var cell = get(getRandomInt(0, taille), getRandomInt(0, taille));
+                for (var i = 0; i < this.taille * 4; i++) {
+                    var cell = get(getRandomInt(0, this.taille), getRandomInt(0, this.taille));
                     if (cell.type === 'terre') {
                         cell.type = 'montagne';
                     }
                 }
-                for (var i = 0; i < taille * 4; i++) {
-                    var cell = get(getRandomInt(0, taille), getRandomInt(0, taille));
+                for (var i = 0; i < this.taille * 4; i++) {
+                    var cell = get(getRandomInt(0, this.taille), getRandomInt(0, this.taille));
                     if (cell.type === 'terre') {
                         cell.type = 'foret';
                     }
@@ -117,6 +117,17 @@
             },
             getActions : function() {
                 return this.actions;
+            },
+            appliqueAction : function(action, selectedCell) {
+                if (action.id === 'bv') {
+                    this.carte.get(selectedCell.x, selectedCell.y).type = "ville";
+                } else if (action.id === 'cc') {
+                    this.carte.get(selectedCell.x, selectedCell.y).type = "champ";
+                } else if (action.id === 'mm') {
+                    this.carte.get(selectedCell.x, selectedCell.y).type = "mine";
+                } else if (action.id === 'af') {
+                    this.carte.get(selectedCell.x, selectedCell.y).type = "terre";
+                }
             }
         };
         return Partie;
@@ -160,15 +171,7 @@
             }
         }
         vm.action = function(action) {
-            if (action.id === 'bv') {
-                vm.selectedCell.type = "ville";
-            } else if (action.id === 'cc') {
-                vm.selectedCell.type = "champ";
-            } else if (action.id === 'mm') {
-                vm.selectedCell.type = "mine";
-            } else if (action.id === 'af') {
-                vm.selectedCell.type = "terre";
-            }
+            vm.partie.appliqueAction(action, vm.selectedCell);
         }
     }
 })();
