@@ -130,6 +130,7 @@
             this.createurid = createur.userid;
             this.demarree = false;
             this.joueurs = [];
+            this.unites = [];
             this.joueurs.push(createur.userid);
             this.taille = taille;
             this.actions = {
