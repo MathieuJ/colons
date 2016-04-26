@@ -34,7 +34,7 @@
         Carte.prototype = {
             get : function(x, y) {
                 if (x >= 0 && y >= 0 && x < this.taille && y < this.taille) {
-                    return vm.map[y][x];
+                    return this.cells[y][x];
                 }
                 return null;
             },
@@ -53,7 +53,7 @@
                 for (var fois = 0; fois < 8; fois++) {
                     var x = getRandomInt(0, this.taille+1); y= getRandomInt(0, this.taille+1);
                     for (var i = 0; i < this.taille; i++) {
-                        var cell = get(x,y);
+                        var cell = this.get(x,y);
                         if (cell) {
                             cell.type = "eau";
                             switch (getRandomInt(0, 4)) {
@@ -74,13 +74,13 @@
                     }
                 }
                 for (var i = 0; i < this.taille * 4; i++) {
-                    var cell = get(getRandomInt(0, this.taille), getRandomInt(0, this.taille));
+                    var cell = this.get(getRandomInt(0, this.taille), getRandomInt(0, this.taille));
                     if (cell.type === 'terre') {
                         cell.type = 'montagne';
                     }
                 }
                 for (var i = 0; i < this.taille * 4; i++) {
-                    var cell = get(getRandomInt(0, this.taille), getRandomInt(0, this.taille));
+                    var cell = this.get(getRandomInt(0, this.taille), getRandomInt(0, this.taille));
                     if (cell.type === 'terre') {
                         cell.type = 'foret';
                     }
