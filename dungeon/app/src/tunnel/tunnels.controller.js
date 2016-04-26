@@ -148,7 +148,7 @@
         vm.selectedUnite;
         vm.select = function(x, y) {
             console.log("select", x, y);
-            var macell = vm.partie.get(x, y);
+            var macell = vm.partie.carte.get(x, y);
             vm.selectedCell = macell;
             if (vm.selectedUnite) {
                 vm.selectedUnite = false;
