@@ -129,6 +129,7 @@
 
         vm.partie = new Partie(vm.joueurs[0], 32);
         console.log(vm.partie.createurid);
+        console.log(vm.partie);
         vm.partie.addJoueur(vm.joueurs[1]);
         console.log(vm.partie.joueurs);
         vm.partie.demarre();
