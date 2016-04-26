@@ -3,6 +3,7 @@
     angular
         .module('tunnels')
         .factory('Carte', [Carte])
+        .factory('Unite', [Unite])
         .factory('Joueur', [Joueur])
         .factory('Partie', ['Carte', Partie])
       .controller('TunnelsController', [
@@ -17,10 +18,22 @@
         var Joueur = function(nom, userid) {
             this.nom = nom;
             this.userid = userid;
+            this.competences = [];
         };
         Joueur.prototype = {
         }
         return Joueur;
+    };
+    function Unite(){
+        var Unite = function(type) {
+            this.type = type;
+            this.pv = type.pv;
+            this.veteran = false;
+            this.nbkills = 0;
+        };
+        Unite.prototype = {
+        }
+        return Unite;
     };
     function Carte(){
         var Carte = function(taille) {
@@ -37,6 +50,11 @@
                     return this.cells[y][x];
                 }
                 return null;
+            },
+            setType : function(x, y, type) {
+                if (this.get(x, y)) {
+                    this.get(x, y).type = type;
+                }
             },
             init : function () {
                 for (var y = 0; y < this.taille; y++) {
@@ -85,6 +103,16 @@
                         cell.type = 'foret';
                     }
                 }
+            },
+            getStartingCell : function() {
+                var cell = null;
+                while(!cell) {
+                    var x = getRandomInt(1, this.taille); y= getRandomInt(1, this.taille);
+                    var cell = this.get(x,y);
+                    if (cell.type === 'terre' && !cell.joueur) {
+                        return cell;
+                    }
+                }
             }
         }
         return Carte;
@@ -104,19 +132,62 @@
                 'af' : { 'nom' : 'Abat foret', id:'af', desc : 'Rase tout. +10 bois' },
                 'gf' : { 'nom' : 'Construit hutte', id:'gf', desc : 'cree une hutte de forestier. +2 bois/tour'}
             };
+            this.competences = {
+                { 'id' : 0, req : null, nom : 'chasse', niveau : 1 },  
+                { 'id' : 1, req : null, nom : 'peche', niveau : 1 },  
+                { 'id' : 2, req : null, nom : 'organisation', niveau : 1 },  
+                { 'id' : 3, req : null, nom : 'equitation', niveau : 1 },  
+                { 'id' : 4, req : null, nom : 'grimpe', niveau : 1 },  
+                { 'id' : 5, req : 0, nom : 'archerie', niveau : 2 },  
+                { 'id' : 6, req : 0, nom : 'foret', niveau : 2 },  
+                { 'id' : 7, req : 1, nom : 'navigation', niveau : 2 },  
+                { 'id' : 8, req : 1, nom : 'temple de l\'eau', niveau : 2 },  
+                { 'id' : 9, req : 2, nom : 'agriculture', niveau : 2 },  
+                { 'id' : 10, req : 2, nom : 'boucliers', niveau : 2 },  
+                { 'id' : 11, req : 3, nom : 'routes', niveau : 2 },  
+                { 'id' : 12, req : 3, nom : 'Temple des plaines', niveau : 2 },
+                { 'id' : 13, req : 4, nom : 'temple montagne', niveau : 2 },  
+                { 'id' : 14, req : 4, nom : 'minage', niveau : 2 }
+            };
+            this.unitesDispos = {
+                's' : { nom : 'soldat', pv : '10', dist : '1', atk : '2', def : '2', mvmt : 1 },
+                'c' : { nom : 'cavalier', pv : '10', dist : '1', atk : '2', def : '1', mvmt : 3 },
+                'a' : { nom : 'archer', pv : '10', dist : '3', atk : '2', def : '1', mvmt : 2 },
+                'b' : { nom : 'boucliers', pv : '10', dist : '1', atk : '1', def : '3', mvmt : 1 }
+            };
         };
         
         Partie.prototype = {
             addJoueur : function(joueur) {
                 this.joueurs.push(joueur.userid);
             },
+            addUnite : function(x, y, joueurid) {
+                this.unites.
+            }
             demarre : function() {
                 this.demarree = true;
                 this.carte = new Carte(this.taille);
-                this.carte.init();    
+                this.carte.init();   
+                var c1 = this.carte.getStartingCell();
+                this.initJoueur(c1, 1);
+                var c2 = this.carte.getStartingCell();
+                this.initJoueur(c1, 2);
+                var c3 = this.carte.getStartingCell();
+                this.initJoueur(c1, 3);
             },
             getActions : function() {
                 return this.actions;
+            },
+            initJoueur : function(cell, joueurid) {
+                cell.joueur = joueurid;
+                this.setJoueur(x-1, y-1, joueurid);
+                this.setJoueur(x-1, y, joueurid);
+                this.setJoueur(x-1, y+1, joueurid);
+                this.setJoueur(x, y+1, joueurid);
+                this.setJoueur(x+1, y+1, joueurid);
+                this.setJoueur(x+1, y, joueurid);
+                this.setJoueur(x+1, y-1, joueurid);
+                this.setJoueur(x, y-1, joueurid);
             },
             appliqueAction : function(action, selectedCell) {
                 if (action.id === 'bv') {
