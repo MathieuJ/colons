@@ -1,32 +1,19 @@
-(function() {
+(function () {
 
-    angular
-        .module('tunnels')
-        .factory('Carte', [Carte])
-        .factory('Unite', [Unite])
-        .factory('Joueur', [Joueur])
-        .factory('Partie', ['Carte', Partie])
-      .controller('TunnelsController', [
-            '$timeout',
-            'Carte',
-            'Partie',
-            'Joueur',
-            TunnelsController
-        ]);
-    
-    function Joueur(){
-        var Joueur = function(nom, userid) {
+
+    function Joueur() {
+        var _Joueur = function (nom) {
             this.nom = nom;
-            this.userid = userid;
             this.competences = [];
-            this.starsParTour=2;
+            this.starsParTour = 2;
+            this.villes = [];
         };
-        Joueur.prototype = {
-        }
-        return Joueur;
-    };
-    function Unite(){
-        var Unite = function(cell, joueur, proto) {
+        _Joueur.prototype = {};
+        return _Joueur;
+    }
+
+    function Unite() {
+        var _Unite = function (cell, joueur, proto) {
             this.cell = cell;
             this.joueur = joueur;
             this.proto = proto;
@@ -34,37 +21,39 @@
             this.veteran = false;
             this.nbkills = 0;
         };
-        Unite.prototype = {
-        }
-        return Unite;
-    };
-    function Carte(){
-        var Carte = function(taille) {
+        _Unite.prototype = {};
+        return _Unite;
+    }
+
+    function Carte() {
+        var _Carte = function (taille) {
             this.taille = taille;
             this.cells = [];
         };
+
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min)) + min;
         }
-            
-        Carte.prototype = {
-            get : function(x, y) {
+
+        _Carte.prototype = {
+            get: function (x, y) {
                 if (x >= 0 && y >= 0 && x < this.taille && y < this.taille) {
                     return this.cells[y][x];
                 }
                 return null;
             },
-            setType : function(x, y, type) {
+            setType: function (x, y, type) {
                 if (this.get(x, y)) {
                     this.get(x, y).type = type;
                 }
-            }, 
-            setJoueur : function(x, y, joueur) {
+            },
+            setJoueur: function (x, y, joueur) {
                 if (this.get(x, y)) {
                     this.get(x, y).joueur = joueur;
                 }
             },
-            init : function () {
+            init: function () {
+                var cell;
                 for (var y = 0; y < this.taille; y++) {
                     var ligne = [];
                     for (var x = 0; x < this.taille; x++) {
@@ -77,171 +66,184 @@
                     this.cells.push(ligne);
                 }
                 for (var fois = 0; fois < 8; fois++) {
-                    var x = getRandomInt(0, this.taille+1); y= getRandomInt(0, this.taille+1);
+                    var x = getRandomInt(0, this.taille + 1);
+                    y = getRandomInt(0, this.taille + 1);
                     for (var i = 0; i < this.taille; i++) {
-                        var cell = this.get(x,y);
+                        cell = this.get(x, y);
                         if (cell) {
                             cell.type = "eau";
                             switch (getRandomInt(0, 4)) {
                                 case 0:
-                                    if (x < this.taille - 1) x += 1;
+                                    if (x < this.taille - 1) {
+                                        x += 1;
+                                    }
                                     break;
                                 case 1:
-                                    if (x > 0) x -= 1;
+                                    if (x > 0) {
+                                        x -= 1;
+                                    }
                                     break;
                                 case 2:
-                                    if (y < this.taille - 1) y += 1;
+                                    if (y < this.taille - 1) {
+                                        y += 1;
+                                    }
                                     break;
                                 case 3:
-                                    if (y > 0) y -= 1;
+                                    if (y > 0) {
+                                        y -= 1;
+                                    }
                                     break;
                             }
                         }
                     }
                 }
                 for (var i = 0; i < this.taille * 4; i++) {
-                    var cell = this.get(getRandomInt(0, this.taille), getRandomInt(0, this.taille));
+                    cell = this.get(getRandomInt(0, this.taille), getRandomInt(0, this.taille));
                     if (cell.type === 'terre') {
                         cell.type = 'montagne';
                     }
                 }
                 for (var i = 0; i < this.taille * 4; i++) {
-                    var cell = this.get(getRandomInt(0, this.taille), getRandomInt(0, this.taille));
+                    cell = this.get(getRandomInt(0, this.taille), getRandomInt(0, this.taille));
                     if (cell.type === 'terre') {
                         cell.type = 'foret';
                     }
                 }
             },
-            getStartingCell : function() {
+            getStartingCell: function () {
                 var cell = null;
-                while(!cell) {
-                    var x = getRandomInt(1, this.taille); y= getRandomInt(1, this.taille);
-                    var cell = this.get(x,y);
+                while (true) {
+                    var x = getRandomInt(1, this.taille), y = getRandomInt(1, this.taille);
+                    cell = this.get(x, y);
+                    console.log("test ", cell);
                     if (cell.type === 'terre' && !cell.joueur) {
+                        console.log("cell start ", cell);
                         return cell;
                     }
+
                 }
             }
-        }
-        return Carte;
+        };
+        return _Carte;
     }
 
-    function Partie(Carte){
-        var Partie = function(createur, taille) {
-            this.createurid = createur.userid;
+    function Partie(Carte) {
+        var _Partie = function (createur, taille) {
             this.demarree = false;
             this.joueurs = [];
             this.unites = [];
-            this.joueurs.push(createur.userid);
+            this.addJoueur(createur);
             this.taille = taille;
             this.actions = {
-                'cv' : { 'nom' : 'Construit ville', id:'cv' },
-                'cc' : { 'nom' : 'Cultive champ', id:'cc' },
-                'mm' : { 'nom' : 'Mine montagne', id:'mm', desc: '+2 metal/tour' },
-                'af' : { 'nom' : 'Abat foret', id:'af', desc : 'Rase tout. +10 bois' },
-                'gf' : { 'nom' : 'Construit hutte', id:'gf', desc : 'cree une hutte de forestier. +2 bois/tour'}
+                'cv': {'nom': 'Construit ville', id: 'cv'},
+                'cc': {'nom': 'Cultive champ', id: 'cc'},
+                'mm': {'nom': 'Mine montagne', id: 'mm', desc: '+2 metal/tour'},
+                'af': {'nom': 'Abat foret', id: 'af', desc: 'Rase tout. +10 bois'},
+                'gf': {'nom': 'Construit hutte', id: 'gf', desc: 'cree une hutte de forestier. +2 bois/tour'}
             };
             this.competences = [
-                { 'id' : 0, req : null, nom : 'chasse', niveau : 1 },  
-                { 'id' : 1, req : null, nom : 'peche', niveau : 1 },  
-                { 'id' : 2, req : null, nom : 'organisation', niveau : 1 },  
-                { 'id' : 3, req : null, nom : 'equitation', niveau : 1 },  
-                { 'id' : 4, req : null, nom : 'grimpe', niveau : 1 },  
-                { 'id' : 5, req : 0, nom : 'archerie', niveau : 2 },  
-                { 'id' : 6, req : 0, nom : 'foret', niveau : 2 },  
-                { 'id' : 7, req : 1, nom : 'navigation', niveau : 2 },  
-                { 'id' : 8, req : 1, nom : 'temple de l\'eau', niveau : 2 },  
-                { 'id' : 9, req : 2, nom : 'agriculture', niveau : 2 },  
-                { 'id' : 10, req : 2, nom : 'boucliers', niveau : 2 },  
-                { 'id' : 11, req : 3, nom : 'routes', niveau : 2 },  
-                { 'id' : 12, req : 3, nom : 'Temple des plaines', niveau : 2 },
-                { 'id' : 13, req : 4, nom : 'temple montagne', niveau : 2 },  
-                { 'id' : 14, req : 4, nom : 'minage', niveau : 2 }
+                {'id': 0, req: null, nom: 'chasse', niveau: 1},
+                {'id': 1, req: null, nom: 'peche', niveau: 1},
+                {'id': 2, req: null, nom: 'organisation', niveau: 1},
+                {'id': 3, req: null, nom: 'equitation', niveau: 1},
+                {'id': 4, req: null, nom: 'grimpe', niveau: 1},
+                {'id': 5, req: 0, nom: 'archerie', niveau: 2},
+                {'id': 6, req: 0, nom: 'foret', niveau: 2},
+                {'id': 7, req: 1, nom: 'navigation', niveau: 2},
+                {'id': 8, req: 1, nom: 'temple de l\'eau', niveau: 2},
+                {'id': 9, req: 2, nom: 'agriculture', niveau: 2},
+                {'id': 10, req: 2, nom: 'boucliers', niveau: 2},
+                {'id': 11, req: 3, nom: 'routes', niveau: 2},
+                {'id': 12, req: 3, nom: 'Temple des plaines', niveau: 2},
+                {'id': 13, req: 4, nom: 'temple montagne', niveau: 2},
+                {'id': 14, req: 4, nom: 'minage', niveau: 2}
             ];
             this.unitesDispos = {
-                's' : { nom : 'soldat', pv : '10', dist : '1', atk : '2', def : '2', mvmt : 1 },
-                'c' : { nom : 'cavalier', pv : '10', dist : '1', atk : '2', def : '1', mvmt : 3 },
-                'a' : { nom : 'archer', pv : '10', dist : '3', atk : '2', def : '1', mvmt : 2 },
-                'b' : { nom : 'boucliers', pv : '10', dist : '1', atk : '1', def : '3', mvmt : 1 }
+                's': {nom: 'soldat', pv: '10', dist: '1', atk: '2', def: '2', mvmt: 1},
+                'c': {nom: 'cavalier', pv: '10', dist: '1', atk: '2', def: '1', mvmt: 3},
+                'a': {nom: 'archer', pv: '10', dist: '3', atk: '2', def: '1', mvmt: 2},
+                'b': {nom: 'boucliers', pv: '10', dist: '1', atk: '1', def: '3', mvmt: 1}
             };
         };
-        
-        Partie.prototype = {
-            addJoueur : function(joueur) {
-                this.joueurs.push(joueur.userid);
+
+        _Partie.prototype = {
+            addJoueur: function (joueur) {
+                joueur.id = this.joueurs.length;
+                this.joueurs.push(joueur);
             },
-            addUnite : function(cell, type, joueurid) {
+            addUnite: function (cell, type, joueurid) {
                 this.unites.push(new Unite(cell, joueurid, this.unitesDispos[type]));
             },
-            demarre : function() {
+            demarre: function () {
+                if (this.demarree) {
+                    return;
+                }
                 this.demarree = true;
                 this.carte = new Carte(this.taille);
-                this.carte.init();   
-                var c1 = this.carte.getStartingCell();
-                this.initJoueur(c1, 1);
+                this.carte.init();
+                for (var i = 0; i < this.joueurs.length; i++) {
+                    var cellstart = this.carte.getStartingCell();
+                    this.initJoueur(cellstart, this.joueurs[i]);
+                    this.addUnite(cellstart, 1, 'c');
+                }
+                /*var c1 = ;
+                this.initJoueur(c1, this.joueurs[0]);
                 this.addUnite(c1, 1, 'c');
                 var c2 = this.carte.getStartingCell();
-                this.initJoueur(c1, 2);
-                this.addUnite(c1, 2, 's');
+                this.initJoueur(c2, this.joueurs[1]);
+                this.addUnite(c2, 2, 's');
                 var c3 = this.carte.getStartingCell();
-                this.initJoueur(c1, 3);
+                this.initJoueur(c3, this.joueurs[2]);*/
             },
-            getActions : function() {
+            getActions: function () {
                 return this.actions;
             },
-            initJoueur : function(cell, joueur) {
-                 var joueurid=joueur.id;
+            initJoueur: function (cell, joueur) {
                 joueur.villes.push(cell);
-joueur.starsParTour += 1;
-                cell.joueur = joueurid;cell.type='ville'; cell.lvl=1;
-                this.carte.setJoueur(cell.x-1, cell.y-1, joueurid);
-                this.carte.setJoueur(cell.x-1, cell.y, joueurid);
-                this.carte.setJoueur(cell.x-1, cell.y+1, joueurid);
-                this.carte.setJoueur(cell.x, cell.y+1, joueurid);
-                this.carte.setJoueur(cell.x+1, cell.y+1, joueurid);
-                this.carte.setJoueur(cell.x+1, cell.y, joueurid);
-                this.carte.setJoueur(cell.x+1, cell.y-1, joueurid);
-                this.carte.setJoueur(cell.x, cell.y-1, joueurid);
-                
- 
-                
+                joueur.starsParTour += 1;
+                cell.joueur = joueur;
+                cell.type = 'ville';
+                cell.lvl = 1;
+                this.carte.setJoueur(cell.x - 1, cell.y - 1, joueur);
+                this.carte.setJoueur(cell.x - 1, cell.y, joueur);
+                this.carte.setJoueur(cell.x - 1, cell.y + 1, joueur);
+                this.carte.setJoueur(cell.x, cell.y + 1, joueur);
+                this.carte.setJoueur(cell.x + 1, cell.y + 1, joueur);
+                this.carte.setJoueur(cell.x + 1, cell.y, joueur);
+                this.carte.setJoueur(cell.x + 1, cell.y - 1, joueur);
+                this.carte.setJoueur(cell.x, cell.y - 1, joueur);
             },
-            appliqueAction : function(action, selectedCell) {
+            appliqueAction: function (action, selectedCell) {
                 if (action.id === 'bv') {
                     this.carte.get(selectedCell.x, selectedCell.y).type = "ville";
                 } else if (action.id === 'cc') {
                     this.carte.get(selectedCell.x, selectedCell.y).type = "champ";
-                    
+
                 } else if (action.id === 'mm') {
                     this.carte.get(selectedCell.x, selectedCell.y).type = "mine";
                 } else if (action.id === 'af') {
                     this.carte.get(selectedCell.x, selectedCell.y).type = "terre";
                 }
             },
-            finitTour : function() {
-                
+            finitTour: function () {
+
             }
         };
-        return Partie;
+        return _Partie;
     }
-  
+
     function TunnelsController($timeout, Carte, Partie, Joueur) {
         var vm = this;
 
-        vm.joueurs = [new Joueur('aaaa', 1), new Joueur('bbbb', 2)];
-
-        vm.partie = new Partie(vm.joueurs[0], 32);
-        console.log(vm.partie.createurid);
-        console.log(vm.partie);
-        vm.partie.addJoueur(vm.joueurs[1]);
-        console.log(vm.partie.joueurs);
+        vm.partie = new Partie(new Joueur('aaaa'), 32);
+        vm.partie.addJoueur(new Joueur('bbbb'));
+        vm.partie.addJoueur(new Joueur('cccc'));
+        vm.partie.addJoueur(new Joueur('dddd'));
         vm.partie.demarre();
-        vm.selectedCell;
-        vm.selectedUnite;
-        vm.select = function(x, y) {
+        console.log(vm.partie);
+        vm.select = function (x, y) {
             console.log("select", x, y);
-            var macell = vm.partie.carte.get(x, y);
-            vm.selectedCell = macell;
+            vm.selectedCell = vm.partie.carte.get(x, y);
             if (vm.selectedUnite) {
                 vm.selectedUnite = false;
             } else {
@@ -259,11 +261,25 @@ joueur.starsParTour += 1;
                 } else if (vm.selectedCell.type === 'foret') {
                     vm.actions.push(vm.partie.getActions().af);
                     vm.actions.push(vm.partie.getActions().gf);
-                };
+                }
             }
-        }
-        vm.action = function(action) {
+        };
+        vm.action = function (action) {
             vm.partie.appliqueAction(action, vm.selectedCell);
-        }
+        };
     }
+
+    angular
+        .module('tunnels')
+        .factory('Carte', [Carte])
+        .factory('Unite', [Unite])
+        .factory('Joueur', [Joueur])
+        .factory('Partie', ['Carte', Partie])
+        .controller('TunnelsController', [
+            '$timeout',
+            'Carte',
+            'Partie',
+            'Joueur',
+            TunnelsController
+        ]);
 })();
