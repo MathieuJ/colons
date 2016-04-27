@@ -51,22 +51,28 @@
         background-color : #bbD1bb;
     }
     .joueur1 {
-        margin:1px;
-        border-width:2px;
-        border-color:green;
-        color: green;
+        margin:0px;
+        border-width:3px;
+        border-color:lawngreen;
+        color: lawngreen;
     }
     .joueur2 {
-        margin:1px;
-        border-width:2px;
-        border-color:red;
-        color: red;
+        margin:0px;
+        border-width:3px;
+        border-color:orangered;
+        color: orangered;
     }
     .joueur3 {
-        margin:1px;
-        border-width:2px;
+        margin:0px;
+        border-width:3px;
         border-color:yellow;
         color: yellow;
+    }
+    .joueur4 {
+        margin:0px;
+        border-width:3px;
+        border-color:deepskyblue;
+        color: deepskyblue;
     }
     .selected {
         margin:0px;
@@ -77,7 +83,7 @@
 <div class="mapcontainer">
 <div class="map">
     <div ng-repeat="ligne in dc.partie.carte.cells">
-        <div ng-repeat="cell in ligne" class="cell {{cell.type}} joueur{{cell.joueur}}" ng-class="{selected : cell == dc.selectedCell}" ng-click="dc.select(cell.x, cell.y)">
+        <div ng-repeat="cell in ligne" class="cell {{cell.type}} {{cell.joueur ? 'joueur' + (cell.joueur.id + 1) : ''}}" ng-class="{selected : cell == dc.selectedCell}" ng-click="dc.select(cell.x, cell.y)">
             <span ng-show="cell.targetMv" class="targetmv">O</span>
             <span ng-show="cell.targetAtk" class="targetatk">O</span>
         </div>
@@ -86,7 +92,7 @@
 </div>
 <div class="controles">
 <button ng-click="dc.finTour()" ng-enabled="dc.actionEnabled">Fin de tour</button>
-    {{dc.selectedCell}}
+    {{dc.selectedCell.x}} {{dc.selectedCell.y}} {{dc.selectedCell.joueur.id}}
     <button ng-repeat="action in dc.partie.getActions()" ng-click="dc.action(action);">{{action.nom}}<BR/>{{action.desc}}</button>
     <BR/>
     {{dc.nbEtoiles}} Etoiles (+ {{dc.nbGain}} Etoiles / tour) | Tour {{dc.numTour}}
