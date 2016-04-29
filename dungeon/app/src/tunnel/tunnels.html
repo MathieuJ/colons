@@ -18,6 +18,13 @@
         border : 1px solid black;
         display: inline-block;
     }
+    .cell2 {
+        position : absolute;
+        margin: 2px;
+        width:20px;
+        height:20px;
+        border : 1px solid black;
+    }
     .terre {
         background : url("./assets/tileset.png");
         background-position : -32px -467px;
@@ -81,14 +88,22 @@
     }
 </style>
 <div class="mapcontainer">
-<div class="map">
-    <div ng-repeat="ligne in dc.partie.carte.cells">
-        <div ng-repeat="cell in ligne" class="cell {{cell.type}} {{cell.joueur ? 'joueur' + (cell.joueur.id + 1) : ''}}" ng-class="{selected : cell == dc.selectedCell}" ng-click="dc.select(cell.x, cell.y)">
-            <span ng-show="cell.targetMv" class="targetmv">O</span>
-            <span ng-show="cell.targetAtk" class="targetatk">O</span>
+    <!--<div class="map">
+        <div ng-repeat="ligne in dc.partie.carte.cells">
+            <div ng-repeat="cell in ligne" class="cell {{cell.type}} {{cell.joueur ? 'joueur' + (cell.joueur.id + 1) : ''}}" ng-class="{selected : cell == dc.selectedCell}" ng-click="dc.select(cell.x, cell.y)">
+                <span ng-show="cell.targetMv" class="targetmv">O</span>
+                <span ng-show="cell.targetAtk" class="targetatk">O</span>
+            </div>
         </div>
+    </div>-->
+    <div ng-repeat="cell in dc.partie.carte.cells2"
+         class="cell2 {{cell.type}}"
+         style="top : {{cell.y * 20}}px; left : {{cell.x * 20}}px;"
+         ng-class="{selected : cell == dc.selectedCell}" ng-click="dc.select(cell.x, cell.y)">
+        {{cell.numile}}
+
     </div>
-</div>
+
 </div>
 <div class="controles">
 <button ng-click="dc.finTour()" ng-enabled="dc.actionEnabled">Fin de tour</button>
