@@ -1,6 +1,14 @@
 (function () {
 
 
+    var Cell = function (x, y, type) {
+        this.x = x;
+        this.y = y;
+        this.type = type;
+        this.numile = -1;
+    };
+    Cell.prototype = {};
+
     function Joueur() {
         var _Joueur = function (nom) {
             this.nom = nom;
@@ -29,10 +37,108 @@
         var _Carte = function (taille) {
             this.taille = taille;
             this.cells = [];
+            this.cells2 = [];
+            var j = new Joueur("toto");
+            console.log(j);
+
+            for (var i = 0; i < 32 * 32; i++) {
+                this.cells2.push(new Cell(i % taille, Math.floor(i / taille), 'eau'));
+            }
+            console.log(this.cells2);
+            var cells2 = this.cells2;
+            var getCell = function (x, y) {
+                return cells2[(x + taille) % taille + ((y + taille) % taille) * taille];
+            }
+            var iles = [];
+            var departs = [];
+            departs.push(getCell(getRandomInt(-2, 2), getRandomInt(-2, 2)));
+            departs.push(getCell(8 + getRandomInt(-2, 2), 8 + getRandomInt(-2, 2)));
+            departs.push(getCell(16 + getRandomInt(-2, 2), getRandomInt(-2, 2)));
+            departs.push(getCell(24 + getRandomInt(-2, 2), 8 + getRandomInt(-2, 2)));
+            departs.push(getCell(getRandomInt(-2, 2), 16 + getRandomInt(-2, 2)));
+            departs.push(getCell(8 + getRandomInt(-2, 2), 24 + getRandomInt(-2, 2)));
+            departs.push(getCell(16 + getRandomInt(-2, 2), 16 + getRandomInt(-2, 2)));
+            departs.push(getCell(24 + getRandomInt(-2, 2), 24 + getRandomInt(-2, 2)));
+            angular.forEach(departs, function (graine) {
+                graine.type = 'ville';
+                graine.numile = iles.length;
+                getCell(graine.x - 1, graine.y).numile = graine.numile;
+                getCell(graine.x + 1, graine.y).numile = graine.numile;
+                getCell(graine.x, graine.y - 1).numile = graine.numile;
+                getCell(graine.x, graine.y + 1).numile = graine.numile;
+                iles.push([graine]);
+            });
+            console.log(departs);
+            var nbCasesTerre = iles.length;
+            while (nbCasesTerre < 400) {
+                // on choisit une ile au hasard.
+                var ile = iles[getRandomInt(0, iles.length - 1)];
+                // on choisit une case au hasard de l'ile
+                var cell = ile[getRandomInt(0, ile.length - 1)];
+                // on tente de pousser la terre n'imp :
+                var nouvCell;
+                switch (getRandomInt(0, 3)) {
+                    case 0 :
+                        nouvCell = getCell(cell.x - 1, cell.y);
+                        break;
+                    case 1 :
+                        nouvCell = getCell(cell.x + 1, cell.y);
+                        break;
+                    case 2 :
+                        nouvCell = getCell(cell.x, cell.y - 1);
+                        break;
+                    case 3 :
+                        nouvCell = getCell(cell.x, cell.y + 1);
+                        break;
+                }
+                if (nouvCell.type === 'eau' && (nouvCell.numile === cell.numile)) {
+                    nouvCell.type = 'terre';
+                    ile.push(nouvCell);
+                    nbCasesTerre++;
+                    if (getCell(nouvCell.x - 1, nouvCell.y).numile === -1) {
+                        getCell(nouvCell.x - 1, nouvCell.y).numile = cell.numile;
+                    }
+                    if (getCell(nouvCell.x - 1, nouvCell.y - 1).numile === -1) {
+                        getCell(nouvCell.x - 1, nouvCell.y - 1).numile = cell.numile;
+                    }
+                    if (getCell(nouvCell.x, nouvCell.y - 1).numile === -1) {
+                        getCell(nouvCell.x, nouvCell.y - 1).numile = cell.numile;
+                    }
+                    if (getCell(nouvCell.x - 1, nouvCell.y + 1).numile === -1) {
+                        getCell(nouvCell.x - 1, nouvCell.y + 1).numile = cell.numile;
+                    }
+                    if (getCell(nouvCell.x - 2, nouvCell.y).numile === -1) {
+                        getCell(nouvCell.x - 2, nouvCell.y).numile = cell.numile;
+                    }
+                    if (getCell(nouvCell.x + 1, nouvCell.y).numile === -1) {
+                        getCell(nouvCell.x + 1, nouvCell.y).numile = cell.numile;
+                    }
+                    if (getCell(nouvCell.x + 1, nouvCell.y - 1).numile === -1) {
+                        getCell(nouvCell.x + 1, nouvCell.y - 1).numile = cell.numile;
+                    }
+                    if (getCell(nouvCell.x + 1, nouvCell.y + 1).numile === -1) {
+                        getCell(nouvCell.x + 1, nouvCell.y + 1).numile = cell.numile;
+                    }
+                    if (getCell(nouvCell.x + 2, nouvCell.y).numile === -1) {
+                        getCell(nouvCell.x + 2, nouvCell.y).numile = cell.numile;
+                    }
+                    if (getCell(nouvCell.x, nouvCell.y - 2).numile === -1) {
+                        getCell(nouvCell.x, nouvCell.y - 2).numile = cell.numile;
+                    }
+                    if (getCell(nouvCell.x, nouvCell.y + 1).numile === -1) {
+                        getCell(nouvCell.x, nouvCell.y + 1).numile = cell.numile;
+                    }
+                    if (getCell(nouvCell.x, nouvCell.y + 2).numile === -1) {
+                        getCell(nouvCell.x, nouvCell.y + 2).numile = cell.numile;
+                    }
+                }
+            }
+
         };
 
+
         function getRandomInt(min, max) {
-            return Math.floor(Math.random() * (max - min)) + min;
+            return Math.floor(Math.random() * (max + 1 - min)) + min;
         }
 
         _Carte.prototype = {
@@ -66,13 +172,13 @@
                     this.cells.push(ligne);
                 }
                 for (var fois = 0; fois < 8; fois++) {
-                    var x = getRandomInt(0, this.taille + 1);
-                    y = getRandomInt(0, this.taille + 1);
+                    var x = getRandomInt(0, this.taille);
+                    y = getRandomInt(0, this.taille);
                     for (var i = 0; i < this.taille; i++) {
                         cell = this.get(x, y);
                         if (cell) {
                             cell.type = "eau";
-                            switch (getRandomInt(0, 4)) {
+                            switch (getRandomInt(0, 3)) {
                                 case 0:
                                     if (x < this.taille - 1) {
                                         x += 1;
@@ -98,13 +204,13 @@
                     }
                 }
                 for (var i = 0; i < this.taille * 4; i++) {
-                    cell = this.get(getRandomInt(0, this.taille), getRandomInt(0, this.taille));
+                    cell = this.get(getRandomInt(0, this.taille - 1), getRandomInt(0, this.taille - 1));
                     if (cell.type === 'terre') {
                         cell.type = 'montagne';
                     }
                 }
                 for (var i = 0; i < this.taille * 4; i++) {
-                    cell = this.get(getRandomInt(0, this.taille), getRandomInt(0, this.taille));
+                    cell = this.get(getRandomInt(0, this.taille - 1), getRandomInt(0, this.taille - 1));
                     if (cell.type === 'terre') {
                         cell.type = 'foret';
                     }
@@ -113,7 +219,7 @@
             getStartingCell: function () {
                 var cell = null;
                 while (true) {
-                    var x = getRandomInt(1, this.taille), y = getRandomInt(1, this.taille);
+                    var x = getRandomInt(1, this.taille - 1), y = getRandomInt(1, this.taille - 1);
                     cell = this.get(x, y);
                     console.log("test ", cell);
                     if (cell.type === 'terre' && !cell.joueur) {
@@ -159,10 +265,10 @@
                 {'id': 14, req: 4, nom: 'minage', niveau: 2}
             ];
             this.unitesDispos = {
-                's': {nom: 'soldat', pv: '10', dist: '1', atk: '2', def: '2', mvmt: 1},
-                'c': {nom: 'cavalier', pv: '10', dist: '1', atk: '2', def: '1', mvmt: 3},
-                'a': {nom: 'archer', pv: '10', dist: '3', atk: '2', def: '1', mvmt: 2},
-                'b': {nom: 'boucliers', pv: '10', dist: '1', atk: '1', def: '3', mvmt: 1}
+                's': {nom: 'soldat', pv: '10', range: '1', atk: '2', def: '2', mvmt: 1},
+                'c': {nom: 'cavalier', pv: '10', range: '1', atk: '2', def: '1', mvmt: 3},
+                'a': {nom: 'archer', pv: '10', range: '3', atk: '2', def: '1', mvmt: 2},
+                'b': {nom: 'boucliers', pv: '10', range: '1', atk: '1', def: '3', mvmt: 1}
             };
         };
 
@@ -187,13 +293,13 @@
                     this.addUnite(cellstart, 1, 'c');
                 }
                 /*var c1 = ;
-                this.initJoueur(c1, this.joueurs[0]);
-                this.addUnite(c1, 1, 'c');
-                var c2 = this.carte.getStartingCell();
-                this.initJoueur(c2, this.joueurs[1]);
-                this.addUnite(c2, 2, 's');
-                var c3 = this.carte.getStartingCell();
-                this.initJoueur(c3, this.joueurs[2]);*/
+                 this.initJoueur(c1, this.joueurs[0]);
+                 this.addUnite(c1, 1, 'c');
+                 var c2 = this.carte.getStartingCell();
+                 this.initJoueur(c2, this.joueurs[1]);
+                 this.addUnite(c2, 2, 's');
+                 var c3 = this.carte.getStartingCell();
+                 this.initJoueur(c3, this.joueurs[2]);*/
             },
             getActions: function () {
                 return this.actions;
