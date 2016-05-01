@@ -1,0 +1,29 @@
+<ion-view title="{{vm.jeu.nom}}">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <ion-content overflow-scroll="true" padding="true" class="has-header">
+            <h1>{{vm.jeu.nomTrouve ? vm.jeu.nomTrouve : vm.jeu.nom}} <span ng-show="vm.jeu.jeutype === 'Extension'" style="color : grey; font-size : smaller;">(extension)</span></h1>
+            <div style=" border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);">
+                <i class="icon ion-image" ng-show="!vm.jeu.image"
+                   style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+                <img style="width:50%;"  ng-src="http:{{vm.jeu.image}}" />
+            </div>
+            <p>Designer : {{vm.jeu.designer}}</p>
+            {{vm.jeu.nombreJoueursMin}} - {{vm.jeu.nombreJoueursMax}} joueurs | à partir de {{vm.jeu.minAge}} ans
+            <BR/>
+            {{vm.jeu.tempsJeuMin}} - {{vm.jeu.tempsJeuMax}} mins
+            <BR/>
+            <div class="button-bar">
+                <!--<button class="button button-block button-positive" ng-click="vm.desire()">
+                    <i class="icon ion-trash-a"></i> Je voudrais l'avoir !
+                </button>-->
+                <button class="button button-block button-balanced" ng-click="vm.ajoute()" ng-hide="vm.amoi">
+                    <i class="icon ion-trash-a"></i> Je l'ai !
+                </button>
+
+                <button class="button button-block button-balanced" ng-click="vm.souhaite()">
+                    <i class="icon ion-trash-a"></i> Je le voudrais !
+                </button>
+            </div>
+        </ion-content>
+    </ion-content>
+</ion-view>

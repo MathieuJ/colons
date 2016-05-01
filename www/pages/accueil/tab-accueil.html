@@ -1,0 +1,28 @@
+<ion-view view-title="Accueil">
+    <ion-content class="padding">
+        <h2>Bienvenue, {{vm.identity.login}}</h2>
+
+        <a ui-sref="tab.recherche" class="button button-stable button-block button-small">Chercher des jeux sur BGG</a>
+
+        <a href="#/page1/jeux" class="button button-stable button-block " ng-show="vm.mesJeux.length > 1">
+            Mes {{vm.mesJeux.length}} jeux</a>
+        <a ui-sref="tab.mesjeux" class="button button-stable button-block " ng-show="vm.mesJeux.length === 1">
+            Mon jeu</a>
+        <a ui-sref="tab.recherche" class="button button-stable button-block " ng-show="vm.mesJeux.length === 0">
+            Ajouter des jeux</a>
+
+        <button class="button button-stable button-block ">2 Prêts</button>
+
+        <a ui-sref="tab.mesamis" class="button button-stable button-block " ng-show="vm.mesAmis.length > 1">
+            Mes {{vm.mesAmis.length}} amis</a>
+        <a ui-sref="tab.mesamis" class="button button-stable button-block " ng-show="vm.mesAmis.length === 1">
+            Mon ami</a>
+        <a ui-sref="tab.mesamis" class="button button-stable button-block " ng-show="vm.mesAmis.length === 0">
+            Ajouter des amis</a>
+
+        <a href="#/page1/parties" class="button button-stable button-block ">12 Parties</a>
+
+        <a href="#/page1/parties" ng-click="vm.logout()" class="button button-stable button-block ">Logout</a>
+
+    </ion-content>
+</ion-view>

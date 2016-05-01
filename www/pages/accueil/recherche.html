@@ -1,0 +1,35 @@
+<ion-view title="Recherche">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <form class="list">
+
+            <div class="spacer" style="width: 283px; height: 24px;"></div>
+
+            <div class="item item-input-inset">
+                <label class="item-input-wrapper">
+                    <input type="text" ng-model="vm.requete" placeholder="Nom du jeu">
+                </label>
+                <button class="button" ng-click="vm.recherche()">
+                    <i class="icon ion-search placeholder-icon"></i>
+                </button>
+            </div>
+            <ion-toggle toggle-class="toggle-positive" name="jeux" ng-model="ext">Extensions</ion-toggle>
+        </form>
+
+
+            <div class="card" ng-show="{{vm.message}}">
+                <div class="item item-text-wrap">
+                    {{vm.message}}
+                </div>
+            </div>
+            {{vm.errorMsg}}
+            <ion-spinner ng-show="vm.attente"></ion-spinner>
+
+            <ion-list ng-repeat="jeu in vm.jeux | filter : (!ext || '') && { jeutype : 'Boardgame'} ">
+                <ion-item class="item-thumbnail-left" on-tap="vm.selectJeu(jeu)">
+                    <img ng-src="http:{{jeu.thumbnail}}">
+                    <h2>{{jeu.nomTrouve ? jeu.nomTrouve : jeu.nom}}</h2>
+                    {{jeu.nbJoueursMin}} - {{jeu.nbJoueursMax}} joueurs | à partir de {{jeu.minAge}} ans
+                </ion-item>
+            </ion-list>
+    </ion-content>
+</ion-view>

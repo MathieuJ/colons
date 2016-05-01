@@ -1,0 +1,5 @@
+<ion-item class="item-thumbnail-left" ng-click="click(jeu)">
+    <img ng-src="http:{{jeu.jeu.thumbnail}}">
+    <h2>{{jeu.jeu.nom}} <span ng-show="jeu.jeutype === 'Extension'" style="color : grey; font-size : smaller;">(extension)</span></h2>
+    {{jeu.jeu.nbJoueursMin}} - {{jeu.jeu.nbJoueursMax}} joueurs | à partir de {{jeu.jeu.minAge}} ans
+</ion-item>

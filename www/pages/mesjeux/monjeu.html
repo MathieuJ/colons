@@ -1,0 +1,35 @@
+<ion-view title="Mon Jeu">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <h1>{{vm.jeu.nomJeu}}</h1>
+        <div style=" border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; background-color: rgb(255, 255, 255);">
+            <i class="icon ion-image" ng-show="!vm.jeu.jeu.image"
+               style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+            <img style="width:50%;"  ng-src="http:{{vm.jeu.jeu.image}}" />
+        </div>
+
+        <div class="button-bar">
+            <button class="button button-assertive" ng-click="vm.supprimeJeu()">
+                <i class="icon ion-trash-a"></i> Je ne l'ai plus
+            </button>
+            <button class="button button-calm" ng-show="!emprunteurNom && !emprunteur" ng-click="vm.showPopupEmprunt()">
+                <i class="icon ion-chevron-right"></i> Je le prête
+            </button>
+            <button class="button button-calm" ng-show="vm.rendJeu()">
+                <i class="icon ion-chevron-right"></i> Me rendre le jeu
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="item item-divider">
+                Informations
+            </div>
+            <div class="item item-text-wrap">
+                {{vm.jeu}}
+            </div>
+            <div class="item item-divider">
+
+            </div>
+        </div>
+    </ion-content>
+
+</ion-view>
