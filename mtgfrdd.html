@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
     <script src="http://underscorejs.org/underscore-min.js"></script>
 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/bootstrap.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
 
     <script data-require="jquery" data-semver="2.1.4" src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script data-require="bootstrap" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -44,7 +44,15 @@
         var Cout = function(valeur) {
             this.valeurs = _.countBy(valeur.split(""));
         };
-        Cout.prototype.soustraction = function(cout) {
+        Cout.prototype.contient = function(cout) {
+            var res = true;
+            var self = this;
+            _.each(cout.valeurs, function(v, k) {
+                if (!self.valeurs[k] || self.valeurs[k] < v) {
+                    res = false;
+                }
+            });
+            return res;
         };
         Cout.prototype.ajout = function(valeur) {
             var self = this;
@@ -83,19 +91,19 @@
                 new PMission("ramasser des cailloux", "", "RC"),
                 new PMission("creuser une mine", "Creuse une mine", "CM"),
                 new PMission("travailler dans la mine", "extraire des minéraux", "TM"),
-                new PMission("construire un bâtiment", "Contruire un des bâtiments", "CBat"),
+                new PMission("travailler sur un chantier", "Travailler sur la contruction d'un bâtiment", "TC"),
                 new PMission("chasser", "miam", "CH"),
                 new PMission("cueillette", "miam", "CU"),
                 new PMission("explorer", "miam", "EX")
             ];
             this.protoBatiments = [
-                new PBatiment("scierie en bois", "Cree du bois", 10, "BBBBB"),
-                new PBatiment("scierie en pierre", "Cree du bois", 20, "PPP"),
-                new PBatiment("carrière", "Cree du bois", 20, "PPP"),
-                new PBatiment("taille de pierre", "Cree du bois", 20, "BBBFFF"),
-                new PBatiment("mine", "Extrait des mineraux", 20, "BBB"),
-                new PBatiment("cabane", "Pour dormir", 10, "BBB"),
-                new PBatiment("maison", "Pour dormir", 20, "BBBBBPPPP")
+                new PBatiment("scierie en bois", "Cree du bois", 10, new Cout("BBBBB")),
+                new PBatiment("scierie en pierre", "Cree du bois", 20, new Cout("PPP")),
+                new PBatiment("carrière", "Cree du bois", 20, new Cout("PPP")),
+                new PBatiment("taille de pierre", "Cree du bois", 20, new Cout("BBBFFF")),
+                new PBatiment("mine", "Extrait des mineraux", 20, new Cout("BBB")),
+                new PBatiment("cabane", "Pour dormir", 10, new Cout("BBB")),
+                new PBatiment("maison", "Pour dormir", 20, new Cout("BBBBBPPPP"))
             ];
             this.colonsStock = [
                 new Colon("Ranche", 1370, 20, 20, 1, 1, 1, 1),
@@ -118,16 +126,25 @@
             });
             this.batiments = [];
             this.jour = 1;
+
+            this.chantiersPossibles = [];
+            this.chantiersImpossibles = [];
+            _.each(this.protoBatiments, function(pb) {
+                if (self.reserve.contient(pb.cout)) {
+                    self.chantiersPossibles.push(pb);
+                } else {
+                    self.chantiersImpossibles.push(pb);
+                }
+            });
         };
 
         Partie.prototype.finitTour = function() {
             var self = this;
-
         };
 
         var c = new Cout("BBDDD");
         c.ajout("DDE");
-        console.log(c);
+        console.log(c, c.contient(new Cout("DE")), c.contient(new Cout("DEF")));
 
         angular.module('Mtgfrdd', []).controller('MtgfrddCtrl', function($scope, $interval){
             //$interval(update, 1000);
@@ -162,7 +179,7 @@
                         colon.mort = true;
                     }
                 });
-                _.each(self.batiments, function(batiment) {
+                _.each(partie.batiments, function(batiment) {
                     if (!batiment.ruines) {
                         batiment.durabilite--;
                         if (batiment.durabilite === 0) {
@@ -170,6 +187,18 @@
                         }
                     }
                 });
+
+                partie.chantiersPossibles = [];
+                partie.chantiersImpossibles = [];
+                _.each(partie.protoBatiments, function(pb) {
+                    console.log(pb, partie.reserve, partie.reserve.contient(pb.cout));
+                    if (partie.reserve.contient(pb.cout)) {
+                        partie.chantiersPossibles.push(pb);
+                    } else {
+                        partie.chantiersImpossibles.push(pb);
+                    }
+                });
+
                 partie.jour++;
                 if (partie.jour === 30) {
                     partie.jour = 1;
@@ -184,15 +213,12 @@
 
 <body>
 <div ng-app="Mtgfrdd">
-    <div  ng-controller="MtgfrddCtrl">
+    <div  ng-controller="MtgfrddCtrl" class="container">
         <h1>MtgFrDankDungeon 1.1</h1>
 
-        <h3>Règles</h3>
-        Les bâtiments se dégradent : 1/2 chances de perdre 1 pt de durabilité.
-        <BR/>
         <h3>{{partie.jour}} de l'année {{partie.annee}}</h3>
 
-        <table>
+        <table class="table">
             <tr>
                 <td>Reserve</td>
                 <td>Colons</td>
@@ -215,6 +241,21 @@
                     <div ng-repeat="batiment in partie.batiments" ng-click="partie.selectedBatiment = batiment; partie.selectedColon = null;">
                         {{batiment.nom}}
                     </div>
+                    <h4>Chantiers</h4>
+                    <div ng-repeat="chantier in partie.chantiers">
+
+                    </div>
+                    <h4>Commencer un chantier</h4>
+                    <div ng-repeat="chantierPossible in partie.chantiersPossibles">
+                        {{chantierPossible.nom}}
+                    </div>
+
+                    <h4>Bâtiments pas constructibles</h4>
+                    <div ng-repeat="chantier in partie.chantiersImpossibles">
+                        {{chantier.nom}}
+                        <BR/>
+                        {{chantier.cout.affichage()}}
+                    </div>
                 </td>
                 <td>
                     <div style="width : 50%" ng-show="partie.selectedColon">
@@ -223,7 +264,7 @@
                         <BR/>
                         Mission : <select class="form-control" ng-model="partie.selectedColon.mission" ng-options="mission as mission.nom for mission in partie.protoMissions"></select>
                         <BR/>
-                        <select ng-show="partie.selectedColon.mission.code === 'CBat'" class="form-control" ng-model="partie.selectedColon.missionBatiment" ng-options="protoBatiment as protoBatiment.nom for protoBatiment in partie.protoBatiments"></select>
+                        <select ng-show="partie.selectedColon.mission.code === 'TC'" class="form-control" ng-model="partie.selectedColon.missionChantier" ng-options="protoBatiment as protoBatiment.nom for protoBatiment in partie.protoBatiments"></select>
                     </div>
                 </td>
             </tr>
@@ -236,6 +277,12 @@
             {{ligne}}
             <BR/>
         </span>
+
+        <h3>Règles</h3>
+        Les bâtiments se dégradent : 1/2 chances de perdre 1 pt de durabilité.
+        <BR/>
+        Un colon perd 3+ santé par jour, en récupère sur glande / repos / bouffe
+        <BR/>
     </div>
 </div>
 
