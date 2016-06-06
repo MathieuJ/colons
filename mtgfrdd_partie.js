@@ -125,10 +125,10 @@ Partie.prototype.handleColon = function(colon) {
             self.reserve.ajout("ffff");
             break;
         case "Trav" :
-            var batiment = partie.zones[colon.mission.sousType.x, colon.mission.sousType.y].batiment;
+            var batiment = self.zones[colon.mission.sousType.x, colon.mission.sousType.y].batiment;
             resultat.push(colon.nom + " travaille sur batiment " + batiment);
         case "Chan" :
-            var chantier = partie.zones[colon.mission.sousType.x, colon.mission.sousType.y].chantier;
+            var chantier = self.zones[colon.mission.sousType.x, colon.mission.sousType.y].chantier;
             resultat.push(colon.nom + " travaille sur chantier " + chantier);
         break;
         case "Rien" :
