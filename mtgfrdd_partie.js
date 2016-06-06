@@ -79,16 +79,15 @@ Partie.prototype.getSubMissions = function(colon, mission) {
             "Nour" : "Récolter de la nourriture"
         }
     } else if (mission === 'Expl') {
-
+        
     } else if (mission === 'Chan') {
         _.each(self.chantiers, function(chantier) {
-            submissions[chantier.proto.nom] = chantier;
+            submissions[{x : chantier.x, y : chantier.y }] = chantier;
         });
     } else if (mission === 'Trav') {
         _.each(self.batiments, function(batiment) {
-            submissions[batiment.nom] = batiment;
-        })
-
+            submissions[{x : batiment.x, y : batiment.y }] = batiment;
+        });
     }
     //console.log(submissions);
     return submissions;
@@ -105,29 +104,38 @@ Partie.prototype.handleColon = function(colon) {
     }
     colon.sante -= 3;
     console.log(colon.mission);
-    switch(colon.mission.code) {
-        case "RecBois" :
-            resultat.push(colon.nom + " recolte 1 bois;");
-            self.reserve.ajout("B");
+    switch(colon.mission.type) {
+        case "Reco" :
+            switch(colon.mission.sousType) {
+                case "Bois" :
+                    resultat.push(colon.nom + " recolte 1 bois;");
+                    self.reserve.ajout("B");
+                    break;
+                case "Bois" :
+                    resultat.push(colon.nom + " recolte 1 pierre;");
+                    self.reserve.ajout("P");
+                break;
+                case "Argi" :
+                    resultat.push(colon.nom + " recolte 1 argile;");
+                    self.reserve.ajout("A");
+                break;
+            }
         break;
-        case "RecPier" :
-            resultat.push(colon.nom + " recolte 1 pierre;");
-            self.reserve.ajout("P");
-        break;
-        case "RecArg" :
-            resultat.push(colon.nom + " recolte 1 pierre;");
-            self.reserve.ajout("P");
-        break;
-        case "CH" : resultat.push(colon.nom + " chasse les lapins;");
+        case "Ch" : resultat.push(colon.nom + " chasse les lapins;");
             self.reserve.ajout("ffff");
             break;
+        case "Trav" :
+            var batiment = partie.zones[colon.mission.sousType.x, colon.mission.sousType.y].batiment;
+            resultat.push(colon.nom + " travaille sur batiment " + batiment);
+        case "Chan" :
+            var chantier = partie.zones[colon.mission.sousType.x, colon.mission.sousType.y].chantier;
+            resultat.push(colon.nom + " travaille sur chantier " + chantier);
+        break;
         case "Rien" :
+        default : 
             resultat.push(colon.nom + " se repose. +1 Santé");
             colon.sante ++;
             break;
-        case "Trav" :
-            var bat = colon.mission.batiment;
-        break;
     }
 
     if (colon.maison) {
