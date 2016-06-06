@@ -1,0 +1,41 @@
+.colon {
+    border : 1px solid black;
+     margin : 2px;
+    width:100%;
+}
+.colon:hover {
+    background : #AFA;
+}
+
+.selected-colon {
+    border : 3px solid green;
+    margin: 2px 2px 2px 2px;
+    background : #CFC;
+}
+
+.zones {
+    overflow : scroll;
+    position : fixed;
+}
+
+.zone {
+    height : 50px;
+    width: 50px;
+    text-align:center;
+    font-size:8px;
+    border : 1px solid grey;
+}
+.zone:hover {
+    border : 1px solid blue;
+}
+.zone.cache {
+    background-color : grey;
+}
+.zone.selected {
+    border : 1px solid red;
+}
+
+.panel {
+    border : 3px solid grey;
+    background-color : #EFA;
+}
