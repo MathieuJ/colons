@@ -6,8 +6,8 @@ angular.module('Mtgfrdd', []).controller('MtgfrddCtrl', function($scope, $interv
 
     $scope.partie = partie;
 
-    //$scope.tab = 'choix';
-    $scope.tab = 'carte';
+    $scope.tab = 'choix';
+    //$scope.tab = 'carte';
 
     $scope.valider = function() {
         $scope.resultat = partie.termineTour();
