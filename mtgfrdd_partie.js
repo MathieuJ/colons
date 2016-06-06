@@ -95,6 +95,7 @@ Partie.prototype.getSubMissions = function(colon, mission) {
 
 
 Partie.prototype.handleColon = function(colon) {
+    var self = this;
     var resultat = [];
     if (colon.mort) {
         return;
