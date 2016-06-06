@@ -43,7 +43,7 @@ Partie.prototype.getMissions = function(colon) {
     return missions;
 };
 Partie.prototype.getChantiersPossibles = function(zone) {
-    if (zone.explore && !zone.chantier && !zone.batiment) {
+    if (zone && zone.explore && !zone.chantier && !zone.batiment) {
         return _.rest(this.protoBatiments);
     } else {
         return [];
@@ -180,7 +180,7 @@ Partie.prototype.initZones = function() {
     }
     var depart = this.getZone(8, 8);
     depart.explore = true;
-    depart.batiment="depart";
+    depart.batiment= { proto : this.protoBatiments[0] };
     this.getZone(7,8).explore = true;
     this.getZone(9,8).explore = true;
     this.getZone(8,7).explore = true;
