@@ -17,14 +17,15 @@ var Partie = function() {
         new PBatiment("maison", "Pour dormir", 20, new Cout("BBBBBPPPP"), 10)
     ];
     this.colonsStock = [
-        new Colon("Ranche", 1365, 20, 20, 1, 1, 1, 1),
-        new Colon("Xuelynom", 1375, 20, 20, 1, 1, 1, 1),
-        new Colon("Kobold", 1370, 20, 20, 2, 1, 1, 1),
-        new Colon("Imagination", 1380, 20, 20, 1, 1, 1, 1),
-        new Colon("Mattevski", 1375, 20, 20, 1, 1, 1, 1),
-        new Colon("Smc", 1370, 20, 20, 1, 1, 1, 1),
-        new Colon("Tigrou", 1370, 20, 20, 1, 1, 1, 1),
-        new Colon("Snoxx", 1370, 20, 20, 1, 1, 1, 1)
+        new Colon("Ranche", 1365, 20, 20, 1, 1, 1, 1, ["rancunier"]),
+        new Colon("Xuelynom", 1375, 20, 20, 1, 1, 1, 1, ["procrastinateur"]),
+        new Colon("Kobold", 1370, 20, 20, 2, 1, 1, 1, ["économe"]),
+        new Colon("Imagination", 1380, 20, 20, 1, 1, 1, 1, ["sociable"]),
+        new Colon("Mattevski", 1375, 20, 20, 1, 1, 1, 1, ["sociable"]),
+        new Colon("Smc", 1372, 20, 20, 1, 1, 1, 1, ["ingénieux"]),
+        new Colon("Tigrou", 1374, 20, 20, 1, 1, 1, 1, []),
+        new Colon("Guile", 1372, 20, 20, 1, 1, 1, 1, ["cuisinier"]),
+        new Colon("Snoxx", 1367, 20, 20, 1, 1, 1, 1, ["dandy"])
     ];
 };
 Partie.prototype.getMissions = function(colon) {
