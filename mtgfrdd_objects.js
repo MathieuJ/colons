@@ -1,4 +1,4 @@
-var Colon = function(nom, dateNaissance, sante, santeMax, str, int, cour, soc, agi) {
+var Colon = function(nom, dateNaissance, sante, santeMax, str, int, cour, soc, agi, traits) {
     this.nom = nom;
     this.dateNaissance = dateNaissance;
     this.str = str;
@@ -8,6 +8,7 @@ var Colon = function(nom, dateNaissance, sante, santeMax, str, int, cour, soc, a
     this.agi = agi;
     this.sante = sante;
     this.santeMax = santeMax;
+    this.traits = traits;
 };
 
 var PBatiment = function(nom, desc, longevite, cout, tempsConstruction) {
