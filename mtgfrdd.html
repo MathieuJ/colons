@@ -128,7 +128,11 @@
                                 <div class="zone"
                                      ng-class="{'cache': !zone.explore, 'selected' : gui.selectedZone === zone }"
                                      ng-click="selectZone(zone)">
-                                    <span ng-show="zone.explore">{{zone.cout.affichage()}}</span>
+                                    <span ng-show="zone.explore && !zone.chantier && !zone.batiment">{{zone.cout.affichage()}}</span>
+                                    <span ng-show="zone.explore && zone.chantier">
+                                        Chantier <BR/>{{zone.chantier.proto.nom}}</span>
+                                    <span ng-show="zone.explore && zone.batiment">
+                                        Batiment <BR/>{{zone.batiment.proto.nom}}</span>
                                     <span ng-hide="zone.explore" class="cache">?</span>
                                 </div>
                             </td>
