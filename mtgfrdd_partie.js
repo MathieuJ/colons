@@ -207,7 +207,9 @@ Partie.prototype.termineTour = function() {
     var self = this;
     var resultat = ["Fin du jour " + self.jour + " de l'année " + self.annee];
     _.each(self.colons, function(colon) {
-        resultat.concat(self.handleColon(colon));
+        var res = self.handleColon(colon);
+        console.log(res);
+        resultat.push(res);
     });
     _.each(self.batiments, function(batiment) {
         if (!batiment.ruines) {
