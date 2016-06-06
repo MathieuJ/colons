@@ -77,8 +77,18 @@
                          ng-class="{ 'selected-colon' : colon === gui.selectedColon }">
                         {{colon.nom}}
                         <BR/>
-                        {{colon.mission}}
-                        <BR/>
+                        <span ng-show="colon.mission && colon.mission.type === 'Chan'">
+                            Travaille sur un chantier : {{colon.mission.sousType}}
+                            <BR/>
+                        </span>
+                        <span ng-show="colon.mission && colon.mission.type === 'Reco'">
+                            Récolte : {{colon.mission.sousType}}
+                            <BR/>
+                        </span>
+                        <span ng-show="colon.mission && colon.mission.type !== 'Chan' && colon.mission.type !== 'Reco'">
+                            Occupation : {{colon.mission.sousType}}
+                            <BR/>
+                        </span>
                         Santé : {{colon.sante}}
                     </div>
                 </td>
@@ -86,6 +96,8 @@
                     <div ng-show="gui.selectedColon">
                         <h4>Colon {{gui.selectedColon.nom}}</h4>
                         Age : {{partie.annee - gui.selectedColon.dateNaissance}} ans | Santé : {{gui.selectedColon.sante}}
+                        <BR/>
+                        Traits : {{gui.selectedColon.traits}}
                         <BR/>
                         <button ng-show="gui.selectedMission"
                                 ng-click="gui.selectedMission = null; gui.selectedSubMission = null;">
@@ -167,9 +179,29 @@
 
         <div ng-show="tab==='regles'">
             <h3>Règles</h3>
-            Les bâtiments se dégradent : 1/2 chances de perdre 1 pt de durabilité.
+            Démarrez des chantiers, assignez des gens dessus pour les transformer en bâtiments, puis assignez des gens sur les bâtiments.
+            <BR/>
+            Sinon envoyez des gens récolter des ressources,
+            <BR/>
+            explorer les environs pour savoir où sont les coins riches en ressources
+            <BR/>
+            ou glander pour augmenter leur satisfaction et leur faire découvrir des traits positifs (cuisinier, géologue, conteur, herboriste etc).
+            <BR/>
+            <BR/>
+            Les bâtiments se dégradent chaque tour: 1/2 chances de perdre 1 pt de durabilité.
+            <BR/>
             <BR/>
             Un colon perd 3+ santé par jour, en récupère sur glande / repos / bouffe
+            <BR/>
+            Un colon a un niveau de satisfaction qui le rend plus efficace au fur et à mesure de la progression :
+            <BR> 1 quand il débarque.
+            <BR/>
+            2 quand il a un toit et n'a pas faim
+            <BR/>
+            3 quand il a de la nourriture variée et des meubles et occupations
+            <BR/>
+            etc. Un colon qui descend de niveau renaclera à obéir aux ordres.
+            <BR/>
             <BR/>
             Les colons ont plusieurs caractéristiques :
             <BR/>
