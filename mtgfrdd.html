@@ -3,16 +3,19 @@
     <meta charset="utf-8" />
     <title>AngularJS Plunker</title>
     <script>document.write('<base href="' + document.location + '" />');</script>
-    <script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.8/angular.js" data-semver="1.4.8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-    <script src="http://underscorejs.org/underscore-min.js"></script>
+    <script data-require="angular.js@1.4.x" src="lib/angular.js" data-semver="1.4.8"></script>
+    <script src="lib/angular-ui-router.js"></script>
+    <script src="lib/angular-animate.min.js"></script>
+    <script src="lib/underscore-min.js"></script>
 
-    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
 
-    <script data-require="jquery" data-semver="2.1.4" src="https://code.jquery.com/jquery-2.1.4.js"></script>
-    <script data-require="bootstrap" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script data-require="jquery" data-semver="2.1.4" src="lib/jquery-2.1.4.js"></script>
+    <script data-require="bootstrap" data-semver="3.3.6" src="lib/bootstrap.min.js"></script>
+    <script data-require="lib" src="mtgfrdd_objects.js"></script>
+    <script data-require="lib" src="mtgfrdd_partie.js"></script>
     <script data-require="lib" src="mtgfrdd.js"></script>
+    <link rel="stylesheet" href="mtgfrdd.css">
 </head>
 
 <body>
@@ -20,9 +23,23 @@
     <div  ng-controller="MtgfrddCtrl" class="container">
         <h1>MtgFrDankDungeon 1.1</h1>
 
-        <h3>{{partie.jour}} de l'année {{partie.annee}}</h3>
+        <button class="btn" ng-class="{ 'btn-primary' : tab === 'choix'}" ng-click="tab = 'choix'" >Colons</button>
+        <button class="btn" ng-class="{ 'btn-primary' : tab === 'carte'}" ng-click="tab = 'carte'" >Carte</button>
+        <button class="btn" ng-class="{ 'btn-primary' : tab === 'resume'}" ng-click="tab = 'resume'" >Infos</button>
+        <button class="btn" ng-class="{ 'btn-primary' : tab === 'regles'}" ng-click="tab = 'regles'" >Règles</button>
 
-        <table class="table">
+        <div ng-show="tab === 'resume'">
+            <h3>{{partie.jour}} de l'année {{partie.annee}}</h3>
+            <BR/>
+            <h4>Journée précédente</h4>
+            <span ng-repeat="ligne in resultat">
+                {{ligne}}
+                <BR/>
+            </span>
+        </div>
+
+        <div  ng-show="tab === 'choix'">
+        <table class="table" ng-show="tab === 'choix'">
             <tr>
                 <td>Reserve</td>
                 <td>Batiments</td>
@@ -32,7 +49,7 @@
             <tr>
                 <td><span ng-repeat="(f, v) in partie.reserve.affichage()">{{v}}<BR/></span></td>
                 <td>
-                    <div ng-repeat="batiment in partie.batiments" ng-click="partie.selectedBatiment = batiment; partie.selectedColon = null;">
+                    <div ng-repeat="batiment in partie.batiments" ng-click="gui.selectedBatiment = batiment; gui.selectedColon = null;">
                         {{batiment.nom}}
                     </div>
                     <h4>Chantiers</h4>
@@ -40,13 +57,6 @@
                         construction : {{chantier.proto.nom}}
                         <BR/>
                         Reste à faire : {{chantier.reste}}
-                    </div>
-                    <h4>Commencer un chantier</h4>
-                    <div ng-repeat="chantierPossible in partie.chantiersPossibles">
-                        {{chantierPossible.nom}}
-                        <BR/>
-                        {{chantierPossible.cout.affichage()}}
-                        <button ng-click="partie.commencerChantier(chantierPossible)">Go</button>
                     </div>
 
                     <h4>Bâtiments pas constructibles</h4>
@@ -57,45 +67,131 @@
                     </div>
                 </td>
                 <td>
-                    <div ng-repeat="colon in partie.colons">
-                        <button  ng-click="partie.selectedColon = colon; partie.selectedBatiment = null;">{{colon.nom}}</button>
+                    <div ng-repeat="colon in partie.colons"
+                         class="colon"
+                         ng-click="selectColon(colon);"
+                         ng-class="{ 'selected-colon' : colon === gui.selectedColon }">
+                        {{colon.nom}}
                         <BR/>
-                        {{colon.mission.nom}}
+                        {{colon.mission}}
                         <BR/>
                         Santé : {{colon.sante}}
                     </div>
                 </td>
                 <td>
-                    <div ng-show="partie.selectedColon">
-                        <h4>Colon {{partie.selectedColon.nom}}</h4>
-                        Age : {{partie.annee - partie.selectedColon.dateNaissance}} ans | Santé : {{partie.selectedColon.sante}}
+                    <div ng-show="gui.selectedColon">
+                        <h4>Colon {{gui.selectedColon.nom}}</h4>
+                        Age : {{partie.annee - gui.selectedColon.dateNaissance}} ans | Santé : {{gui.selectedColon.sante}}
                         <BR/>
-                        Mission : <select class="form-control"
-                                          ng-model="partie.selectedColon.mission"
-                                          ng-options="mission as mission.nom for mission in partie.protoMissions"></select>
+                        <button ng-show="gui.selectedMission"
+                                ng-click="gui.selectedMission = null; gui.selectedSubMission = null;">
+                            {{gui.selectedMission}}
+                        </button>
+                        <div ng-hide="gui.selectedMission"
+                                ng-repeat="(cle, mission) in partie.getMissions(gui.selectedColon)">
+                            <button ng-click="gui.selectedMission = cle">{{mission.nom}}</button>
+                        </div>
                         <BR/>
-                        <select ng-show="partie.selectedColon.mission.code === 'TC'"
-                                class="form-control"
-                                ng-model="partie.selectedColon.missionChantier"
-                                ng-options="chantier as chantier.proto.nom for chantier in partie.chantiers"></select>
+                        <BR/>
+                        <button ng-click="gui.selectedSubMission = null;" ng-show="gui.selectedSubMission">
+                            {{gui.selectedSubMission}}
+                        </button>
+                        <div ng-hide="gui.selectedSubMission"
+                             ng-repeat="(cle, subMission) in partie.getSubMissions(gui.selectedColon, gui.selectedMission)">
+                            <button ng-click="gui.selectedSubMission = cle">{{subMission}}</button>
+                        </div>
+                        <BR/>
+                        <BR/>
+                        <button ng-click="validerMission()" ng-show="gui.selectedMission && (gui.selectedSubMission  || gui.selectedMission.type=='Rien')">
+                            Valider
+                        </button>
+
                     </div>
                 </td>
             </tr>
         </table>
 
         <button class="btn btn-primary" ng-click="valider()" >Valider</button>
-        <BR/>
-        <h4>Journée précédente</h4>
-        <span ng-repeat="ligne in resultat">
-            {{ligne}}
-            <BR/>
-        </span>
+        </div>
 
-        <h3>Règles</h3>
-        Les bâtiments se dégradent : 1/2 chances de perdre 1 pt de durabilité.
-        <BR/>
-        Un colon perd 3+ santé par jour, en récupère sur glande / repos / bouffe
-        <BR/>
+        <div  ng-show="tab === 'carte'">
+            <h3>Carte</h3>
+            <div class="row">
+                <div class="col-md-8">
+                    <table class="zones">
+                        <tr ng-repeat="ligne in partie.zones">
+                            <td ng-repeat="zone in ligne">
+                                <div class="zone"
+                                     ng-class="{'cache': !zone.explore, 'selected' : gui.selectedZone === zone }"
+                                     ng-click="selectZone(zone)">
+                                    <span ng-show="zone.explore">{{zone.cout.affichage()}}</span>
+                                    <span ng-hide="zone.explore" class="cache">?</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <div ng-show="gui.selectedZone && gui.selectedZone.explore && !gui.selectedZone.chantier"
+                        class="panel">
+                        <h4>Commencer un chantier</h4>
+                        <div ng-repeat="chantierPossible in partie.getChantiersPossibles(gui.selectedZone)">
+                            {{chantierPossible.nom}}
+                            <BR/>
+                            {{chantierPossible.cout.affichage()}}
+                            <button ng-click="commencerChantier(chantierPossible)">Go</button>
+                        </div>
+                    </div>
+                    <div ng-show="gui.selectedZone && gui.selectedZone.chantier"
+                         class="panel">
+                        <h4>Chantier</h4>
+                        {{gui.selectedZone.chantier}}
+                    </div>
+                    <div ng-show="gui.selectedZone && gui.selectedZone.batiment"
+                         class="panel">
+                        <h4>Batiment</h4>
+                        {{gui.selectedZone.batiment}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="tab==='regles'">
+            <h3>Règles</h3>
+            Les bâtiments se dégradent : 1/2 chances de perdre 1 pt de durabilité.
+            <BR/>
+            Un colon perd 3+ santé par jour, en récupère sur glande / repos / bouffe
+            <BR/>
+            Les colons ont plusieurs caractéristiques :
+            <BR/>
+            Force
+            <BR/>Muscle  porter des lourdes charges
+            <BR/>boulot : peut en faire plus
+            <BR/>combat : porte armes et armures plus grosses
+            <BR/>crise : moins sensible à la fatigue
+            <BR/>
+            <BR/>Endurance : Marcher longtemps, travailler longtemps sur un problème
+            <BR/>boulot : peut faire plus logntepms et sait optimiser les processus
+            <BR/>combat : peut durer plus longtemps
+            <BR/>crise : moins affecté
+            <BR/>
+            <BR/>Intelligence : Trouver des patterns et des solutions compliquées rapidement
+            <BR/>Cerveau
+            <BR/>boulot : peut faire des boulot nécessitant intelligence
+            <BR/>combat : peut analyser pour gérer mieux
+            <BR/>crise : peut trouver issue
+            <BR/>
+            <BR/>Agilité : agilité manuelle, dextérité
+            <BR/>boulot : peut faire des boulots minutieux
+            <BR/>combat : peut éviter les coups
+            <BR/>crise : peut s'en tirer par une pirouette
+            <BR/>
+            <BR/>social : contact facile avec les gens
+            <BR/>boulot : diminue l'aspect négatif, rend ludique
+            <BR/>combat : défuse les situations ou peut faire tilter
+            <BR/>crise : défuse la situation, gère stress post crise
+        </div>
     </div>
 </div>
 
