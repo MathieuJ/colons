@@ -24,7 +24,18 @@ var Partie = function() {
         new Colon("Mattevski", 1375, 20, 20, 1, 1, 1, 1, ["sociable"]),
         new Colon("Smc", 1372, 20, 20, 1, 1, 1, 1, ["ingénieux"]),
         new Colon("Tigrou", 1374, 20, 20, 1, 1, 1, 1, []),
+        new Colon("Etienne", 1374, 20, 20, 1, 1, 1, 1, ["syndicaliste"]),
         new Colon("Guile", 1372, 20, 20, 1, 1, 1, 1, ["cuisinier"]),
+        new Colon("LightingBolt", 1388, 20, 20, 1, 1, 1, 1, ["colérique"]),
+        new Colon("Nokiou", 1362, 20, 20, 1, 1, 1, 1, ["conteur"]),
+        new Colon("Merk", 1372, 20, 20, 1, 1, 1, 1, ["colérique", "syndicaliste"]),
+        new Colon("Arteis", 1372, 20, 20, 1, 1, 1, 1, ["joueur"]),
+        new Colon("Wilfried", 1372, 20, 20, 1, 1, 1, 1, ["joueur"]),
+        new Colon("Rikku", 1372, 20, 20, 1, 1, 1, 1, ["acteur"]),
+        new Colon("Arteis", 1372, 20, 20, 1, 1, 1, 1, ["acteur", "sociable"]),
+        new Colon("Mr Grand", 1372, 20, 20, 1, 1, 1, 1, ["conteur"]),
+        new Colon("Kevind", 1372, 20, 20, 1, 1, 1, 1, ["psychorigide"]),
+        new Colon("Ngold", 1372, 20, 20, 1, 1, 1, 1, ["ingénieux", "économe"]),
         new Colon("Snoxx", 1367, 20, 20, 1, 1, 1, 1, ["dandy"])
     ];
 };
