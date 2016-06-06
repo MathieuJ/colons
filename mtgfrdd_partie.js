@@ -38,8 +38,12 @@ Partie.prototype.getMissions = function(colon) {
     if (self.getAge(colon) >= 10) {
         missions["Reco"] = self.protoMissions["Reco"];
         missions["Expl"] = self.protoMissions["Expl"];
-        missions["Chan"] = self.protoMissions["Chan"];
-        missions["Trav"] = self.protoMissions["Trav"];
+        if (self.chantiers.length > 0) {
+            missions["Chan"] = self.protoMissions["Chan"];
+        }
+        if (self.batiments.length > 0) {
+            missions["Trav"] = self.protoMissions["Trav"];
+        }
     }
     return missions;
 };
