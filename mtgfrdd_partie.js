@@ -6,16 +6,16 @@ var Partie = function() {
         "Chan" : new PMission("travailler sur un chantier", "Travailler sur la contruction d'un bâtiment"),
         "Trav" : new PMission("travailler dans un bâtiment", "Travailler dans un bâtiment")
     };
-    this.protoBatiments = [
-        new PBatiment("zone de départ", "Zone de débarquement/embarquement", 0, new Cout(""), 0),
-        new PBatiment("scierie en bois", "Cree du bois", 10, new Cout("BBBBB"), 20),
-        new PBatiment("scierie en pierre", "Cree du bois", 20, new Cout("PPP"), 20),
-        new PBatiment("carrière", "Cree du bois", 20, new Cout("PPP"), 3),
-        new PBatiment("taille de pierre", "Cree du bois", 20, new Cout("BBBFFF"), 20),
-        new PBatiment("mine", "Extrait des mineraux", 20, new Cout("BBB"), 3),
-        new PBatiment("cabane", "Pour dormir", 10, new Cout("BBB"), 5),
-        new PBatiment("maison", "Pour dormir", 20, new Cout("BBBBBPPPP"), 10)
-    ];
+    this.protoBatiments = {
+        "ZD": new PBatiment("zone de départ", "Cell de débarquement/embarquement", 0, new Cout(""), 0),
+        "SC": new PBatiment("scierie en bois", "Cree du bois", 10, new Cout("BBBBB"), 20),
+        "SP": new PBatiment("scierie en pierre", "Cree du bois", 20, new Cout("PPP"), 20),
+        "CA": new PBatiment("carrière", "Cree du bois", 20, new Cout("PPP"), 3),
+        "TP": new PBatiment("taille de pierre", "Cree du bois", 20, new Cout("BBBFFF"), 20),
+        "MI": new PBatiment("mine", "Extrait des mineraux", 20, new Cout("BBB"), 3),
+        "CB": new PBatiment("cabane", "Pour dormir", 10, new Cout("BBB"), 5),
+        "MA": new PBatiment("maison", "Pour dormir", 20, new Cout("BBBBBPPPP"), 10)
+    };
     this.colonsStock = [
         new Colon("Ranche", 1365, 20, 20, 1, 1, 1, 1, ["rancunier"]),
         new Colon("Xuelynom", 1375, 20, 20, 1, 1, 1, 1, ["procrastinateur"]),
@@ -58,8 +58,8 @@ Partie.prototype.getMissions = function(colon) {
     }
     return missions;
 };
-Partie.prototype.getChantiersPossibles = function(zone) {
-    if (zone && zone.explore && !zone.chantier && !zone.batiment) {
+Partie.prototype.getChantiersPossibles = function(cell) {
+    if (cell && cell.explore && !cell.chantier && !cell.batiment) {
         return _.rest(this.protoBatiments);
     } else {
         return [];
@@ -79,7 +79,7 @@ Partie.prototype.getSubMissions = function(colon, mission) {
             "Nour" : "Récolter de la nourriture"
         }
     } else if (mission === 'Expl') {
-        
+
     } else if (mission === 'Chan') {
         _.each(self.chantiers, function(chantier) {
             submissions[{x : chantier.x, y : chantier.y }] = chantier;
@@ -108,17 +108,21 @@ Partie.prototype.handleColon = function(colon) {
     switch(colon.mission.type) {
         case "Reco" :
             switch(colon.mission.sousType) {
+                case "Tout" :
+                    resultat.push(colon.nom + " récolte 1 bois 1 argile 1 pierre");
+                    self.reserve.ajout("BPA");
+                break;
                 case "Bois" :
-                    resultat.push(colon.nom + " recolte 1 bois;");
-                    self.reserve.ajout("B");
+                    resultat.push(colon.nom + " recolte 3 bois;");
+                    self.reserve.ajout("BB");
                     break;
                 case "Bois" :
-                    resultat.push(colon.nom + " recolte 1 pierre;");
-                    self.reserve.ajout("P");
+                    resultat.push(colon.nom + " recolte 3 pierre;");
+                    self.reserve.ajout("PP");
                 break;
                 case "Argi" :
-                    resultat.push(colon.nom + " recolte 1 argile;");
-                    self.reserve.ajout("A");
+                    resultat.push(colon.nom + " recolte 3 argile;");
+                    self.reserve.ajout("AA");
                 break;
             }
         break;
@@ -126,14 +130,14 @@ Partie.prototype.handleColon = function(colon) {
             self.reserve.ajout("ffff");
             break;
         case "Trav" :
-            var batiment = self.zones[colon.mission.sousType.x, colon.mission.sousType.y].batiment;
+            var batiment = self.map[colon.mission.sousType.x, colon.mission.sousType.y].batiment;
             resultat.push(colon.nom + " travaille sur batiment " + batiment);
         case "Chan" :
-            var chantier = self.zones[colon.mission.sousType.x, colon.mission.sousType.y].chantier;
+            var chantier = self.map[colon.mission.sousType.x, colon.mission.sousType.y].chantier;
             resultat.push(colon.nom + " travaille sur chantier " + chantier);
         break;
         case "Rien" :
-        default : 
+        default :
             resultat.push(colon.nom + " se repose. +1 Santé");
             colon.sante ++;
             break;
@@ -165,52 +169,88 @@ Partie.prototype.demarre = function() {
 
     this.chantiersPossibles = [];
     this.chantiersImpossibles = [];
-    _.each(this.protoBatiments, function(pb) {
+    _.map(this.protoBatiments, function(pb, key) {
         if (self.reserve.contient(pb.cout)) {
             self.chantiersPossibles.push(pb);
         } else {
             self.chantiersImpossibles.push(pb);
         }
     });
-    this.initZones();
+    this.initMap();
 };
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
-Partie.prototype.getZone = function(x, y) {
-    return this.zones[y][x];
+Partie.prototype.getCell= function(c, r){
+    return this.map[(r + this.taille) % this.taille][(c + this.taille) % this.taille];
 }
 
-Partie.prototype.initZones = function() {
+Partie.prototype.initMap = function() {
     this.taille = 15;
-    this.zones = [];
+    this.map = [];
+    var self = this;
     for (var i = 0; i < this.taille; i++) {
         var ligne = [];
-        this.zones.push(ligne);
+        this.map.push(ligne);
         for (var j = 0; j < this.taille; j++) {
-            ligne.push(new Zone(i, j));
+            var c = new Cell(i, j);
+            ligne.push(c);
+            var n = getRandomInt(0, 100);
+            if (n < 45) {
+                c.type = 'eau';
+//            } else if (n < 65) {
+//                c.type = 'foret';
+//            } else if (n < 80) {
+//                c.type = 'montagne';
+            } else {
+                c.type = 'terre';
+            }
         }
     }
     // bois sur la moitié de la map
-    for (var i = 0; i < this.taille * this.taille / 2; i++) {
-        this.getZone(getRandomInt(0, this.taille), getRandomInt(0, this.taille)).add("AAABBBB");
+/*    for (var i = 0; i < this.taille * this.taille / 2; i++) {
+        this.getCell(getRandomInt(0, this.taille), getRandomInt(0, this.taille)).add("AAABBBB");
     }
     // baies sur le tiers
     for (var i = 0; i < this.taille * this.taille / 3; i++) {
-        this.getZone(getRandomInt(0, this.taille - 1), getRandomInt(0, this.taille - 1)).add("ffff");
+        this.getCell(getRandomInt(0, this.taille - 1), getRandomInt(0, this.taille - 1)).add("ffff");
     }
     // pierres sur le quart
     for (var i = 0; i < this.taille * this.taille / 2; i++) {
-        this.getZone(getRandomInt(0, this.taille - 1), getRandomInt(0, this.taille - 1)).add("PPPPP");
+        this.getCell(getRandomInt(0, this.taille - 1), getRandomInt(0, this.taille - 1)).add("PPPPP");
+    }*/
+    var depart = this.getCell(8, 8);
+    depart.type = 'terre';
+    depart.batiment= { proto : "ZD" };
+    _.each([-1, 0, 1], function(i) {
+        _.each([-1, 0, 1], function(j) {
+            self.getCell(8 + i,8 + j).explore = true;
+        });
+    });
+    for (var r = 0; r < self.taille; r++) {
+        for (var c = 0; c < self.taille; c++) {
+            var cell = self.map[r][c];
+            var cellC = self.getCell(c, r).type === 'terre' ? 1 : 0;
+            var cellNO = self.getCell(c-1, r-1).type === 'terre' ? 1 : 0;
+            var cellN = self.getCell(c, r-1).type === 'terre' ? 1 : 0;
+            var cellO = self.getCell(c-1, r).type === 'terre' ? 1 : 0;
+            cell.textCoord = [
+                getTileCoord(cellNO, cellN, cellC, cellO),
+                getTileCoord(cellN, cellN, cellC, cellC),
+                getTileCoord(cellO, cellC, cellC, cellO),
+                getTileCoord(cellC, cellC, cellC, cellC)
+            ];
+        }
     }
-    var depart = this.getZone(8, 8);
-    depart.explore = true;
-    depart.batiment= { proto : this.protoBatiments[0] };
-    this.getZone(7,8).explore = true;
-    this.getZone(9,8).explore = true;
-    this.getZone(8,7).explore = true;
-    this.getZone(8,9).explore = true;
-
+    var canvas = document.getElementById('mycanvas');
+    this.ctx = canvas.getContext('2d');
+    this.tileSprite = 16;
+    this.tileSize = 16;       // The size of a tile (32×32)
+    this.tilesetImage = new Image();
+    this.tilesetImage.src = 'assets/tileset_divers.png';
+    this.cellWidth = 4;
+    this.cellHeight = 3;
+    this.tilesetImage.onload = this.dessineMap;
 }
 Partie.prototype.termineTour = function() {
     var self = this;
@@ -249,10 +289,114 @@ Partie.prototype.termineTour = function() {
     return resultat;
 };
 
-Partie.prototype.commencerChantier = function(zone, protobatiment) {
+Partie.prototype.commencerChantier = function(cell, protobatiment) {
     var self = this;
     self.reserve.soustrait(protobatiment.cout);
-    var chantier = { x : zone.x, y : zone.y, proto : protobatiment, reste : protobatiment.tempsConstruction };
-    zone.chantier = chantier;
+    var chantier = { x : cell.x, y : cell.y, proto : protobatiment, reste : protobatiment.tempsConstruction };
+    cell.chantier = chantier;
     self.chantiers.push( chantier );
+};
+
+function getTileCoord(a1, a2, a3, a4) {
+    var baseX = 22;
+    var baseY = 28;
+    var nb = a1 + a2*2 + a3 * 4 + a4 * 8;
+    switch(nb) {
+        case 0 : return [baseX + 1, baseY + 1];
+        case 1 : return [baseX + 4, baseY + 1];
+        case 2 : return [baseX + 3, baseY + 1];
+        case 3 : return [baseX + 1, baseY + 0];
+        case 4 : return [baseX + 3, baseY + 0];
+        case 5 : return [baseX + 3, baseY + 2];
+        case 6 : return [baseX + 2, baseY + 1];
+        case 7 : return [baseX + 2, baseY + 0];
+        case 8 : return [baseX + 4, baseY + 0];
+        case 9 : return [baseX + 0, baseY + 1];
+        case 10 : return [baseX + 4, baseY + 2];
+        case 11 : return [baseX + 0, baseY + 0];
+        case 12 : return [baseX + 1, baseY + 2];
+        case 13 : return [baseX + 0, baseY + 2];
+        case 14 : return [baseX + 2, baseY + 2];
+        case 15 : return [16, 29];
+    }
+}
+
+
+Partie.prototype.drawTile = function(u, v, x, y) {
+    this.ctx.drawImage(this.tilesetImage,
+        (u * this.tileSprite), (v * this.tileSprite),
+        this.tileSprite, this.tileSprite,
+        this.tileSize * x,
+        this.tileSize * y,
+        this.tileSize, this.tileSize);
+}
+
+Partie.prototype.dessineMap = function() {
+    var self = this;
+    console.log("dessine map", self.taille);
+       for (var r = 0; r < self.taille; r++) {
+          for (var c = 0; c < self.taille; c++) {
+            console.log("boucle sur ", c, r);
+                 var cell = self.map[ r ][ c ];
+
+             var tileCol = 23; //(tile % imageNumTiles) | 0;
+             var tileRow = 32 ; //(tile / imageNumTiles) | 0; // Bitwise OR operation
+             // centre de la cellule
+             switch (cell.type) {
+                case 'montagne': tileCol = 23 ; tileRow = 35; break;
+                case 'eau' : tilecol = 23; tileRow = 29; break;
+                case 'foret' : tileCol = 20; tileRow = 29; break;
+                case 'terre' : tileCol = 16; tileRow = 41; break;
+                default : tileCol = 23; tileRow = 32; break;
+             }
+
+            // tuile NO
+            self.drawTile(16, 29,
+                 c * (self.cellWidth + 1),
+                 r * (self.cellHeight + 1));
+            self.drawTile(cell.textCoord[0][0], cell.textCoord[0][1],
+                c * (self.cellWidth + 1),
+                r * (self.cellHeight + 1));
+            // frontiere N
+            for (var i = 0; i < self.cellWidth; i++) {
+                self.drawTile(16, 29,
+                     c * (self.cellWidth + 1) + 1 + i,
+                     r * (self.cellHeight + 1));
+                self.drawTile(cell.textCoord[1][0], cell.textCoord[1][1],
+                    c * (self.cellWidth + 1) + 1 + i,
+                    r * (self.cellHeight + 1));
+            }
+            // frontiere 0
+            for (var j = 0; j < self.cellHeight; j++) {
+            self.drawTile(16, 29,
+                c * (self.cellWidth + 1),
+                r * (self.cellHeight + 1) + 1 + j);
+            self.drawTile(cell.textCoord[2][0], cell.textCoord[2][1],
+                c * (self.cellWidth + 1),
+                r * (self.cellHeight + 1) + 1 + j);
+            }
+
+            for (var i = 0; i < self.cellWidth; i++) {
+                for (var j = 0; j < self.cellHeight; j++) {
+                    self.drawTile(16, 29,
+                        c * (self.cellWidth + 1) + 1 + i,
+                        r * (self.cellHeight + 1) + 1 + j);
+                    self.drawTile(cell.textCoord[3][0], cell.textCoord[3][1],
+                         c * (self.cellWidth + 1) + 1 + i,
+                         r * (self.cellHeight + 1) + 1 + j);
+                }
+            }
+            if (cell.batiment && cell.batiment.proto === 'ZD') {
+                self.drawTile(54, 0, c * (self.cellWidth + 1) + 1, r * (self.cellHeight + 1) + 1);
+                self.drawTile(55, 0, c * (self.cellWidth + 1) + 2, r * (self.cellHeight + 1) + 1);
+                self.drawTile(56, 0, c * (self.cellWidth + 1) + 3, r * (self.cellHeight + 1) + 1);
+                self.drawTile(54, 1, c * (self.cellWidth + 1) + 1, r * (self.cellHeight + 1) + 2);
+                self.drawTile(55, 1, c * (self.cellWidth + 1) + 2, r * (self.cellHeight + 1) + 2);
+                self.drawTile(56, 1, c * (self.cellWidth + 1) + 3, r * (self.cellHeight + 1) + 2);
+                self.drawTile(54, 2, c * (self.cellWidth + 1) + 1, r * (self.cellHeight + 1) + 3);
+                self.drawTile(55, 2, c * (self.cellWidth + 1) + 2, r * (self.cellHeight + 1) + 3);
+                self.drawTile(56, 2, c * (self.cellWidth + 1) + 3, r * (self.cellHeight + 1) + 3);
+            }
+          }
+    }
 };
