@@ -193,7 +193,7 @@ Partie.prototype.initMap = function() {
         var ligne = [];
         this.map.push(ligne);
         for (var j = 0; j < this.taille; j++) {
-            var c = new Cell(i, j);
+            var c = { i : i, j: j} ; //new Cell(i, j);
             ligne.push(c);
             var n = getRandomInt(0, 100);
             if (n < 45) {
