@@ -242,7 +242,7 @@ Partie.prototype.initMap = function() {
             ];
         }
     }
-    var canvas = document.getElementById('mycanvas')[0];
+    /*var canvas = document.getElementById('mycanvas');
     this.ctx = canvas.getContext('2d');
     this.tileSprite = 16;
     this.tileSize = 16;       // The size of a tile (32×32)
@@ -250,7 +250,7 @@ Partie.prototype.initMap = function() {
     this.tilesetImage.src = 'tileset_divers.png';
     this.cellWidth = 4;
     this.cellHeight = 3;
-    this.tilesetImage.onload = this.dessineMap;
+    this.tilesetImage.onload = this.dessineMap;*/
 }
 Partie.prototype.termineTour = function() {
     var self = this;
