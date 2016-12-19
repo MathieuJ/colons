@@ -242,7 +242,7 @@ Partie.prototype.initMap = function() {
             ];
         }
     }
-    var canvas = document.getElementById('mycanvas');
+    var canvas = document.getElementById('mycanvas')[0];
     this.ctx = canvas.getContext('2d');
     this.tileSprite = 16;
     this.tileSize = 16;       // The size of a tile (32×32)
