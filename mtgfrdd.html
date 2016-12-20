@@ -135,23 +135,26 @@
             
             <div id="mycanvas">
             </div>
+            {{partie}}
             <div class="row">
                 <div class="col-md-8">
                     <table class="zones">
-                        <tr ng-repeat="ligne in partie.zones">
-                            <td ng-repeat="zone in ligne">
-                                <div class="zone"
-                                     ng-class="{'cache': !zone.explore, 'selected' : gui.selectedZone === zone }"
-                                     ng-click="selectZone(zone)">
-                                    <span ng-show="zone.explore && !zone.chantier && !zone.batiment">{{zone.cout.affichage()}}</span>
-                                    <span ng-show="zone.explore && zone.chantier">
-                                        Chantier <BR/>{{zone.chantier.proto.nom}}</span>
-                                    <span ng-show="zone.explore && zone.batiment">
-                                        Batiment <BR/>{{zone.batiment.proto.nom}}</span>
-                                    <span ng-hide="zone.explore" class="cache">?</span>
-                                </div>
-                            </td>
-                        </tr>
+                        <tbody>
+                            <tr ng-repeat="ligne in partie.zones">
+                                <td ng-repeat="zone in ligne">
+                                    <div class="zone"
+                                         ng-class="{'cache': !zone.explore, 'selected' : gui.selectedZone === zone }"
+                                         ng-click="selectZone(zone)">
+                                        <span ng-show="zone.explore && !zone.chantier && !zone.batiment">{{zone.cout.affichage()}}</span>
+                                        <span ng-show="zone.explore && zone.chantier">
+                                            Chantier <BR/>{{zone.chantier.proto.nom}}</span>
+                                        <span ng-show="zone.explore && zone.batiment">
+                                            Batiment <BR/>{{zone.batiment.proto.nom}}</span>
+                                        <span ng-hide="zone.explore" class="cache">?</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div class="col-md-4">
