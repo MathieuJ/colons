@@ -13,7 +13,7 @@
     var app = angular.module('codenames', []);
 
 app.controller('CodenamesCtrl', function($scope) {
-  $scope.name = 'World';
+  $scope.name = 'Espions';
   
   var tableau = [];
   for (var i = 0; i < 9; i++) {
@@ -67,11 +67,11 @@ app.controller('CodenamesCtrl', function($scope) {
 
 
   <body ng-controller="CodenamesCtrl">
-    <p>Hello {{name}}!</p>
+    <p>Salut les {{name}}!</p>
     <HR/>
-    <button ng-click="affiche = !affiche">afficher la grille</button>
+    <button ng-click="affiche = !affiche">afficher ou cacher la grille des maîtres espions</button>
     <table ng-show="affiche">
-      <tbody>
+      <tbody style="border : 1px solid black; padding : 10px; font-size:16px">
         <tr ng-repeat="ligne in tableau track by $index">
           <td ng-repeat="case in ligne track by $index">
             {{case}}
