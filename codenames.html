@@ -52,7 +52,8 @@ app.controller('CodenamesCtrl', function($scope) {
   
   mots = mots.split(' - ');
  
-  $scope.tableauMots = decoupe(_.first(shuffle(mots), 25), 5); 
+  $scope.sousgroupe = _.first(shuffle(mots), 25);
+  $scope.tableauMots = decoupe(sousgroupe, 5); 
 });
     
     
@@ -68,19 +69,28 @@ app.controller('CodenamesCtrl', function($scope) {
     <BR/>
     {{mots}}
     <BR/>
-    {{tableau}}
+    {{tableauMots}}
+    {{sousgroupe}}
     <HR/>
-    <div ng-repeat="ligne in tableau track by $index">
-      <span ng-repeat="case in ligne track by $index">
-        {{case}} 
-      </span>
-    </div>
+    <table>
+      <tbody>
+        <tr ng-repeat="ligne in tableau track by $index">
+          <td ng-repeat="case in ligne track by $index">
+            {{case}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <HR/>
-    <div ng-repeat="ligne in tableauMots track by $index">
-      <span ng-repeat="case in ligne track by $index">
-        {{case}} 
-      </span>
-    </div>
+    <table>
+      <tbody>
+        <tr ng-repeat="ligne in tableauMots track by $index">
+          <td ng-repeat="case in ligne track by $index">
+            {{case}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 
 </html>
