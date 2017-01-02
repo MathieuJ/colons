@@ -40,7 +40,7 @@ app.controller('CodenamesCtrl', function($scope) {
   shuffle(tableau);
   
   $scope.tableau = _.chain(tableau).groupBy(function(element, index){
-      return Math.floor(index/n);
+      return Math.floor(index/5);
     }).toArray()
   .value();
   
