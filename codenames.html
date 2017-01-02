@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html ng-app="colons">
+<html ng-app="codenames">
 
   <head>
     <meta charset="utf-8" />
     <title>AngularJS Plunker</title>
     <script>document.write('<base href="' + document.location + '" />');</script>
-    <link rel="stylesheet" href="style.css" />
+    
     <script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.8/angular.js" data-semver="1.4.8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script>
@@ -67,6 +67,12 @@ app.controller('CodenamesCtrl', function($scope, Colon) {
     {{mots}}
     <BR/>
     {{tableau}}
+    <BR/>
+    <div ng-repeat="ligne in tableau">
+      <span ng-repeat="case in ligne">
+        {{case}} 
+      </span>
+    </div>
   </body>
 
 </html>
