@@ -117,9 +117,10 @@ app.controller('CodenamesCtrl', function($scope) {
       <tbody>
         <tr ng-repeat="ligne in tableauMots track by $index">
           <td ng-click="modifyStyle(cell)"
+              ng-class="cell.style"
               style="border : 1px solid black; text-align:center; padding : 10px; font-size:22px" 
               ng-repeat="cell in ligne track by $index">
-            {{cell.mot}} {{cell.style}}
+            {{cell.mot}}
           </td>
         </tr>
       </tbody>
