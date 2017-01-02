@@ -80,10 +80,10 @@ app.controller('CodenamesCtrl', function($scope) {
       </tbody>
     </table>
     <HR/>
-    <table style="border : 1px solid black; padding : 10px; font-size:16px">
+    <table>
       <tbody>
         <tr ng-repeat="ligne in tableauMots track by $index">
-          <td ng-repeat="case in ligne track by $index">
+          <td style="border : 1px solid black; padding : 10px; font-size:16px" ng-repeat="case in ligne track by $index">
             {{case}}
           </td>
         </tr>
