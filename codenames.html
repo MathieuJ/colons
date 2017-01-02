@@ -53,7 +53,7 @@ app.controller('CodenamesCtrl', function($scope) {
   mots = mots.split(' - ');
  
   $scope.sousgroupe = _.first(shuffle(mots), 25);
-  $scope.tableauMots = decoupe(sousgroupe, 5); 
+  $scope.tableauMots = decoupe($scope.sousgroupe, 5); 
 });
     
     
