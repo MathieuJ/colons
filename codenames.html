@@ -59,7 +59,7 @@ app.controller('CodenamesCtrl', function($scope) {
   shuffle(mots);
   
   $scope.sousgroupe = _.first(mots, 25);
-  $scope.sousgroupe = _.map(mots, function(m) { return { mot : m, style : "rien" }; });
+  $scope.sousgroupe = _.map($scope.sousgroupe, function(m) { return { mot : m, style : "rien" }; });
   $scope.tableauMots = decoupe($scope.sousgroupe, 5); 
   $scope.modifyStyle = function(cell) {
     switch (cell.style) {
@@ -106,8 +106,8 @@ app.controller('CodenamesCtrl', function($scope) {
     <table ng-show="affiche">
       <tbody style="border : 1px solid black; padding : 10px; font-size:16px">
         <tr ng-repeat="ligne in tableau track by $index">
-          <td ng-repeat="case in ligne track by $index">
-            {{case}}
+          <td ng-repeat="cell in ligne track by $index">
+            {{cell}}
           </td>
         </tr>
       </tbody>
@@ -116,10 +116,10 @@ app.controller('CodenamesCtrl', function($scope) {
     <table style="border-collapse: collapse">
       <tbody>
         <tr ng-repeat="ligne in tableauMots track by $index">
-          <td ng-style="case.style" 
-              ng-click="modifyStyle(case)"
-              style="border : 1px solid black; text-align:center; padding : 10px; font-size:22px" ng-repeat="case in ligne track by $index">
-            {{case.mot}}
+          <td ng-style="cell.style" 
+              ng-click="modifyStyle(cell)"
+              style="border : 1px solid black; text-align:center; padding : 10px; font-size:22px" ng-repeat="cell in ligne track by $index">
+            {{cell.mot}}
           </td>
         </tr>
       </tbody>
