@@ -70,14 +70,14 @@ app.controller('CodenamesCtrl', function($scope) {
     <BR/>
     {{tableau}}
     <HR/>
-    <div ng-repeat="ligne in tableau">
-      <span ng-repeat="case in ligne">
+    <div ng-repeat="ligne in tableau track by $index">
+      <span ng-repeat="case in ligne track by $index">
         {{case}} 
       </span>
     </div>
     <HR/>
-    <div ng-repeat="ligne in tableauMots">
-      <span ng-repeat="case in ligne">
+    <div ng-repeat="ligne in tableauMots track by $index">
+      <span ng-repeat="case in ligne track by $index">
         {{case}} 
       </span>
     </div>
