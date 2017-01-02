@@ -39,10 +39,12 @@ app.controller('CodenamesCtrl', function($scope) {
   
   shuffle(tableau);
   
-  function decoupe(tab, n) = _.chain(tab).groupBy(function(element, index){
+  function decoupe(tab, n){ 
+    return _.chain(tab).groupBy(function(element, index){
       return Math.floor(index/n);
     }).toArray()
-  .value()
+    .value();
+  }
   
   $scope.tableau = decoupe(tableau, 5);
   
