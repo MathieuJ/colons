@@ -59,7 +59,7 @@ app.controller('CodenamesCtrl', function($scope) {
   shuffle(mots);
   
   $scope.sousgroupe = _.first(mots, 25);
-  $scope.sousgroupe = _.map(mots, function(m) { return { mot : m, style : "rien"; }; });
+  $scope.sousgroupe = _.map(mots, function(m) { return { mot : m, style : "rien" }; });
   $scope.tableauMots = decoupe($scope.sousgroupe, 5); 
   $scope.modifyStyle = function(cell) {
     switch (cell.style) {
