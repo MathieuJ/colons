@@ -94,6 +94,27 @@ app.controller('CodenamesCtrl', function($scope) {
         color : white;
         background-color : black;
       }
+      .tableauMaitre {
+         border-collapse: collapse;
+      }
+      .tableauMaitre td {
+        width : 20px;
+        height: 20px;
+      }
+      .caseRouge {
+                background-color: red;
+
+      }
+      .caseBleu {
+        background-color: blue;
+      
+      }
+      .caseMarron {
+        
+      }
+      .caseNoir {
+        background-color: black;
+      }
     </style>
   </head>
 
@@ -103,11 +124,12 @@ app.controller('CodenamesCtrl', function($scope) {
     <p>Salut les {{name}}!</p>
     <HR/>
     <button ng-click="affiche = !affiche">afficher ou cacher la grille des maîtres espions</button>
-    <table ng-show="affiche">
+    <table ng-show="affiche" class="tableauMaitre">
       <tbody style="border : 1px solid black; padding : 10px; font-size:16px">
         <tr ng-repeat="ligne in tableau track by $index">
-          <td ng-repeat="cell in ligne track by $index">
-            {{cell}}
+          <td ng-repeat="cell in ligne track by $index"
+              ng-class="{'bleu' : cell === 'B', 'rouge' : cell === 'R', 'noir' : cell === 'X'}"
+              >
           </td>
         </tr>
       </tbody>
