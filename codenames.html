@@ -21,7 +21,10 @@ app.controller('CodenamesCtrl', function($scope) {
   
   $scope.seed = "ma graine " + Math.floor(Math.random() * 1000);
   $scope.generate = function() {
-    Math.random = myRandom($scope.seed);
+    Math.random = myRandom(inthash($scope.seed));
+    console.log(Math.random());
+    console.log(Math.random());
+    console.log(Math.random());
     build(); 
   }
   
@@ -56,6 +59,15 @@ app.controller('CodenamesCtrl', function($scope) {
       $scope.sousgroupe = _.map($scope.sousgroupe, function(m) { return { mot : m, style : "rien" }; });
       $scope.tableauMots = decoupe($scope.sousgroupe, 5); 
     }
+  
+  function inthash(str) {
+    var hash = 5381;
+    for (i = 0; i < str.length; i++) {
+        char = str.charCodeAt(i);
+        hash = ((hash << 5) + hash) + char; /* hash * 33 + c */
+    }
+    return hash;
+  }
   
   function decoupe(tab, n){ 
     return _.chain(tab).groupBy(function(element, index){
