@@ -24,6 +24,8 @@ app.controller('CodenamesCtrl', function($scope) {
     build(); 
   }
   
+  $scope.generate();
+  
  function myRandom(seed) {
      return function() {
        seed = Math.sin(seed) * 10000; return seed - Math.floor(seed); 
