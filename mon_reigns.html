@@ -74,6 +74,7 @@ app.controller('ReignsCtrl', function($scope, $location) {
       case 6 : break;
    }
    $scope.joueur.age += 3;
+    $scope.choix = undefined;
   }
   
 });
@@ -84,6 +85,7 @@ app.controller('ReignsCtrl', function($scope, $location) {
     
     <style type="text/css">
       .choix {
+        margin : 10px;
         background-color : grey;
         padding : 10px;
         border : 1px solid black;
@@ -113,14 +115,16 @@ app.controller('ReignsCtrl', function($scope, $location) {
             
     </div>
     
-      Occupation pour les 3 années à venir : 
+      Choisissez une occupation pour les 3 années à venir : 
       <BR/>
-      <div ng-repeat="possibilite in infos[joueur.age].activites" class="choix" ng-class="{selected : choix == possibilite.id}">
-        <h2>{{possibilite.label}}</h2>
+      <div ng-repeat="possibilite in infos[joueur.age].activites" class="choix" 
+           ng-class="{selected : choix == possibilite.id}"
+           ng-click="choix = possibilite.id">
+        <h3>{{possibilite.label}}</h3>
         <p>{{possibilite.description}}</p>
       </div>
 
-    <button ng-click="continuer()">Continuer</button>
+    <button ng-click="continuer()" ng-disabled="!choix">Continuer</button>
     <BR/>
           
   </body>
