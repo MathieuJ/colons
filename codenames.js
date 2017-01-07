@@ -26,13 +26,13 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         console.log("graine espion : ");
         $scope.graineEspion = Math.random();
         console.log($scope.graineEspion);
-        $scope.generateRandomFonction(graineEspion);
+        $scope.generateRandomFonction($scope.graineEspion);
         console.log("essais de random : ", Math.random(), Math.random(), Math.random());
     }
     
     $scope.generateEspion = function() {
         console.log($scope.graineEspion);
-        $scope.generateRandomFonction(graineEspion);
+        $scope.generateRandomFonction($scope.graineEspion);
         console.log("essais de random : ", Math.random(), Math.random(), Math.random());
     }
 
