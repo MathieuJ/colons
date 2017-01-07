@@ -65,7 +65,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 style: "rien"
             };
         });
-        return decoupe($scope.sousgroupe, 5);
+        return decoupe(sousgroupe, 5);
     }
     
     function getIndices() {
