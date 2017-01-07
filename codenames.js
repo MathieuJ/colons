@@ -29,6 +29,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         console.log("essais de random : ", Math.random(), Math.random(), Math.random());
         $scope.tableauMots = getMots();
         $scope.demarree = true;
+        console.log("resultat : ", $scope.tableauIndices, $scope.tableauMots);
     }
     
     $scope.generateEspion = function() {
@@ -37,6 +38,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         console.log("essais de random : ", Math.random(), Math.random(), Math.random());
         $scope.tableauMots = getMots();
         $scope.demarree = true;
+        console.log("resultat : ", $scope.tableauMots);
     }
 
     function getMots(dico) {
