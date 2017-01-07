@@ -34,13 +34,13 @@
             <button ng-click="generateMaitre()">Générer les tableaux</button>
         </div>
         <div ng-show="demarree">
-            Code à donner aux espions pour qu'ils génèrent leur grille : {{graineEspion}}
+            Code à donner aux espions pour qu'ils génèrent leur grille : <p style="color : red;">{{graineEspion}}</p>
             <BR/>
             Voici la grille que vous devez faire deviner
             <BR/>	
             <table class="tableauIndices">
               <tbody style="border : 1px solid black; padding : 10px; font-size:16px">
-                <tr ng-repeat="ligne in tableau track by $index">
+                <tr ng-repeat="ligne in tableauIndices track by $index">
                   <td ng-repeat="cell in ligne track by $index"
                       ng-class="{'bleu' : cell === 'B', 'rouge' : cell === 'R', 'noir' : cell === 'X'}"
                       >
