@@ -44,10 +44,10 @@
         color : white;
         background-color : black;
       }
-      .tableauMaitre {
+      .tableauIndices {
          border-collapse: collapse;
       }
-      .tableauMaitre td {
+      .tableauIndices td {
         width : 20px;
         height: 20px;
         border : 1px solid black;
