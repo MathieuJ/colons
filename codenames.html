@@ -20,7 +20,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
   
   $scope.seed = "ma graine " + Math.floor(Math.random() * 1000);
   $scope.generate = function() {
-    Math.random = myRandom(inthash($scope.seed));
+    Math.random = myRandom();
     console.log(Math.random());
     console.log(Math.random());
     console.log(Math.random());
@@ -33,6 +33,20 @@ app.controller('CodenamesCtrl', function($scope, $location) {
      return function() {
        seed = Math.sin(seed) * 10000; return seed - Math.floor(seed); 
      }
+  }
+  
+  function getGraineEspion(graineMaitre) {
+    return inthash($scope.seed);
+  }
+  
+  $scope.generateMaitre = function() {
+    $scope.graineEspion = getGraineEspion($scope.graineMaitre);
+    build();
+    $scope.demarre = true;
+  }
+  
+  $scope.setRole = function(role) {
+    $scope.role = role; 
   }
   
   function build() {
@@ -162,13 +176,31 @@ app.controller('CodenamesCtrl', function($scope, $location) {
 
 
   <body ng-controller="CodenamesCtrl">
+    
+    <div ng-hide="role">
+      <h1>Salut les espions ! </h1>
+      Êtes-vous un maître espion ou un espion lambda ?
+      <BR/>
+      <button type="button" ng-click="setRole('M')">Maître espion !</button>
+      <button type="button" ng-click="setRole('E')">Espion lambda mais plutôt classe, comme Joséphine Baker ou Albert Londres quand même !</button>
+    </div>
+    
+    <div ng-show="role == 'M' && !demarree">
+      <h1>Bonjour, Maître espion !</h1>
+      Entrez le nom de code de votre nouvelle partie, ou le nom de code que vous a fourni l'autre Maître espion ayant créé la partie.
+      <BR/>
+      <input ng-model="graineMaitre"/> <button ng-click="generateMaitre()">Générer les tableaux</button>
+    </div>
+    
+    <a href="http://iello.fr/regles/Codenames_regles.pdf">Règles officielles</a>
+
+    
     <p>Salut les {{name}}!</p>
     <BR/>
-    Règles : http://iello.fr/regles/Codenames_regles.pdf
     <HR/>
     Vous pouvez entrer une chaine de caractère qui créera une partie (utile pour partager sur plusieurs écrans)
     <BR/>
-    Seed : <input ng-model="seed"/> <button ng-click="generate()">Générer les tableaux</button>
+    Seed : 
     <br/>
     <input type="radio" ng-model="dico" value="1">Dico basique 
     <input type="radio" ng-model="dico" value="2">Dico spécial
