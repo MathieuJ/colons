@@ -16,7 +16,6 @@
 
 
   <body ng-controller="CodenamesCtrl">
-    
     <div ng-hide="role">
       <h1>Salut les espions ! </h1>
       Êtes-vous un maître espion ou un espion lambda ?
@@ -27,69 +26,57 @@
     </div>
     
     <div ng-show="role == 'M'">
-      <div ng-hide="demarree">
-	<h1>Bonjour, Maître espion !</h1>
-      	Entrez le nom de code de votre nouvelle partie, ou le nom de code que vous a fourni l'autre Maître espion ayant créé la partie.
-	<BR/>	
-	<input class="myInput" ng-model="graineMaitre"/> 
-	<button ng-click="generateMaitre()">Générer les tableaux</button>
-      </div>
-      <div ng-show="demarree">
-	<h1>Bonjour, Maître espion !</h1>
-      	Voici la grille que vous devez faire deviner
-	<BR/>	
-        <table ng-show="affiche" class="tableauMaitre">
-	      <tbody style="border : 1px solid black; padding : 10px; font-size:16px">
-		<tr ng-repeat="ligne in tableau track by $index">
-		  <td ng-repeat="cell in ligne track by $index"
-		      ng-class="{'bleu' : cell === 'B', 'rouge' : cell === 'R', 'noir' : cell === 'X'}"
-		      >
-		  </td>
-		</tr>
-	      </tbody>
-    	</table>	
-      </div>
+        <h1>Bonjour, Maître espion !</h1>
+        <div ng-hide="demarree">
+            Entrez le nom de code de votre nouvelle partie, ou le nom de code que vous a fourni l'autre Maître espion ayant créé la partie.
+            <BR/>	
+            <input class="myInput" ng-model="graineMaitre"/> 
+            <button ng-click="generateMaitre()">Générer les tableaux</button>
+        </div>
+        <div ng-show="demarree">
+            Voici la grille que vous devez faire deviner
+            <BR/>	
+            <table ng-show="affiche" class="tableauMaitre">
+              <tbody style="border : 1px solid black; padding : 10px; font-size:16px">
+                <tr ng-repeat="ligne in tableau track by $index">
+                  <td ng-repeat="cell in ligne track by $index"
+                      ng-class="{'bleu' : cell === 'B', 'rouge' : cell === 'R', 'noir' : cell === 'X'}"
+                      >
+                  </td>
+                </tr>
+              </tbody>
+            </table>	
+        </div>
     </div>
     
-    <div ng-show="role == 'M' && !demarree">
-      <h1>Bonjour, Espion !</h1>
-      Entrez le nom de code de votre nouvelle partie, ou le nom de code que vous a fourni l'autre Maître espion ayant créé la partie.
-      <BR/>
-      <input ng-model="graineMaitre"/> <button ng-click="generateMaitre()">Générer les tableaux</button>
+    <div ng-show="role == 'E'">
+    	<div ng-hide="demarree">
+            <h1>Bonjour, Espion !</h1>
+            Entrez le code que le maître espion vous a fourni.
+            <BR/>
+            <input ng-model="graineEspion"/> 
+            <button ng-click="generateEspion()">Générer les tableaux</button>
+    	</div>
+	    <div ng-show="demarree">
+            <table style="border-collapse: collapse">
+              <tbody>
+                <tr ng-repeat="ligne in tableauMots track by $index">
+                  <td ng-click="modifyStyle(cell)"
+                      ng-class="cell.style"
+                      style="border : 1px solid black; text-align:center; padding : 10px; font-size:22px" 
+                      ng-repeat="cell in ligne track by $index">
+                    {{cell.mot}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            (Cliquez sur les cases pour les faire changer de couleur)
+        </div>
     </div>
     
     <a href="http://iello.fr/regles/Codenames_regles.pdf">Règles officielles</a>
 
-    
-    <p>Salut les {{name}}!</p>
-    <BR/>
-    <HR/>
-    Vous pouvez entrer une chaine de caractère qui créera une partie (utile pour partager sur plusieurs écrans)
-    <BR/>
-    Seed : 
-    <br/>
-    <input type="radio" ng-model="dico" value="1">Dico basique 
-    <input type="radio" ng-model="dico" value="2">Dico spécial
-    <hr/>
-    <button ng-click="affiche = !affiche">afficher ou cacher la grille des maîtres espions</button>
-    
-    <HR/>
-    <table style="border-collapse: collapse">
-      <tbody>
-        <tr ng-repeat="ligne in tableauMots track by $index">
-          <td ng-click="modifyStyle(cell)"
-              ng-class="cell.style"
-              style="border : 1px solid black; text-align:center; padding : 10px; font-size:22px" 
-              ng-repeat="cell in ligne track by $index">
-            {{cell.mot}}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    
-    (Cliquez sur les cases pour les faire changer de couleur)
-    
-    
   </body>
 
 </html>
