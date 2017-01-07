@@ -21,7 +21,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
     $scope.generateMaitre = function() {
         console.log($scope.graineMaitre, inthash($scope.graineMaitre));
         $scope.generateRandomFonction(inthash($scope.graineMaitre));
-        console.log("graine espion : ");
+        console.log("graine espion2 : ");
         $scope.graineEspion = Math.floor(Math.random() * 100000);
         console.log($scope.graineEspion);
         $scope.generateRandomFonction($scope.graineEspion);
