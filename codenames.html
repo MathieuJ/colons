@@ -20,14 +20,12 @@ app.controller('CodenamesCtrl', function($scope, $location) {
   
   $scope.seed = "ma graine " + Math.floor(Math.random() * 1000);
   $scope.generate = function() {
-    Math.random = myRandom();
+    Math.random = myRandom($scope.seed);
     console.log(Math.random());
     console.log(Math.random());
     console.log(Math.random());
-    build(); 
   }
   
-  $scope.generate();
   
  function myRandom(seed) {
      return function() {
@@ -43,6 +41,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
     $scope.graineEspion = getGraineEspion($scope.graineMaitre);
     build();
     $scope.demarre = true;
+    $scope.generate();
   }
   
   $scope.setRole = function(role) {
@@ -183,6 +182,15 @@ app.controller('CodenamesCtrl', function($scope, $location) {
       <BR/>
       <button type="button" ng-click="setRole('M')">Maître espion !</button>
       <button type="button" ng-click="setRole('E')">Espion lambda mais plutôt classe, comme Joséphine Baker ou Albert Londres quand même !</button>
+    </div>
+    
+    <div ng-show="role == 'M'">
+      <div ng-show="demarree">
+      <h1>Bonjour, Maître espion !</h1>
+      Entrez le nom de code de votre nouvelle partie, ou le nom de code que vous a fourni l'autre Maître espion ayant créé la partie.
+      <BR/>
+      <input ng-model="graineMaitre"/> <button ng-click="generateMaitre()">Générer les tableaux</button>
+                                                                          </div>
     </div>
     
     <div ng-show="role == 'M' && !demarree">
