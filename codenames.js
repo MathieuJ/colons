@@ -28,6 +28,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         $scope.generateRandomFonction($scope.graineEspion);
         console.log("essais de random : ", Math.random(), Math.random(), Math.random());
         $scope.tableauMots = getMots();
+        $scope.demarree = true;
     }
     
     $scope.generateEspion = function() {
@@ -35,6 +36,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         $scope.generateRandomFonction(+$scope.graineEspion);
         console.log("essais de random : ", Math.random(), Math.random(), Math.random());
         $scope.tableauMots = getMots();
+        $scope.demarree = true;
     }
 
     function getMots(dico) {
