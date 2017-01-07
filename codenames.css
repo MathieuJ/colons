@@ -44,6 +44,9 @@
         color : white;
         background-color : black;
       }
+      .checked {
+      	border : 5px solid black;
+	}
       .tableauIndices {
          border-collapse: collapse;
       }
