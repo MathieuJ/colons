@@ -8,7 +8,7 @@
     
     <script data-require="angular.js@1.4.x" src="https://code.angularjs.org/1.4.8/angular.js" data-semver="1.4.8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    
+    <link rel="stylesheet" type="text/css" href="codenames.css">
       
     <script>
     
@@ -124,106 +124,6 @@ app.controller('CodenamesCtrl', function($scope, $location) {
     
     </script>
     
-    <style type="text/css">
-      .myInput {
-  display: inline-block;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  padding: 10px 20px;
-  border: 1px solid #b7b7b7;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  font: normal 22px/normal "Trebuchet MS", Helvetica, sans-serif;
-  color: rgba(0,0,0,1);
-  -o-text-overflow: clip;
-  text-overflow: clip;
-  background: rgba(186,255,193,1);
-  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
-  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
-  text-shadow: 1px 1px 0 rgba(255,255,255,0.66) ;
-  -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
-  -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
-  -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
-  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
-}
-      
-      .myButton {
-	-moz-box-shadow:inset 1px 1px 2px 1px #9acc85;
-	-webkit-box-shadow:inset 1px 1px 2px 1px #9acc85;
-	box-shadow:inset 1px 1px 2px 1px #9acc85;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #74ad5a), color-stop(1, #68a54b));
-	background:-moz-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
-	background:-webkit-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
-	background:-o-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
-	background:-ms-linear-gradient(top, #74ad5a 5%, #68a54b 100%);
-	background:linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#74ad5a', endColorstr='#68a54b',GradientType=0);
-	background-color:#74ad5a;
-	border:1px solid #3b6e22;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Trebuchet MS;
-	font-size:22px;
-	font-weight:bold;
-	padding:12px 18px;
-	text-decoration:none;
-	text-shadow:3px 3px 6px #2e3804;
-}
-.myButton:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #68a54b), color-stop(1, #74ad5a));
-	background:-moz-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
-	background:-webkit-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
-	background:-o-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
-	background:-ms-linear-gradient(top, #68a54b 5%, #74ad5a 100%);
-	background:linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#68a54b', endColorstr='#74ad5a',GradientType=0);
-	background-color:#68a54b;
-}
-.myButton:active {
-	position:relative;
-	top:1px;
-}
-      .rouge {
-        color : white;
-        background-color : red;
-      }
-      .bleu {
-        color : white;
-        background-color : blue;
-      }
-      .marron {
-        color : white;
-        background-color : grey;
-      }
-      .noir {
-        color : white;
-        background-color : black;
-      }
-      .tableauMaitre {
-         border-collapse: collapse;
-      }
-      .tableauMaitre td {
-        width : 20px;
-        height: 20px;
-        border : 1px solid black;
-        padding : 2px;
-      }
-      .caseRouge {
-        background-color: red;
-      }
-      .caseBleu {
-        background-color: blue;
-      
-      }
-      .caseMarron {
-        
-      }
-      .caseNoir {
-        background-color: black;
-      }
-    </style>
   </head>
 
 
@@ -240,16 +140,32 @@ app.controller('CodenamesCtrl', function($scope, $location) {
     </div>
     
     <div ng-show="role == 'M'">
+      <div ng-hide="demarree">
+	<h1>Bonjour, Maître espion !</h1>
+      	Entrez le nom de code de votre nouvelle partie, ou le nom de code que vous a fourni l'autre Maître espion ayant créé la partie.
+	<BR/>	
+	<input class="myInput" ng-model="graineMaitre"/> 
+	<button ng-click="generateMaitre()">Générer les tableaux</button>
+      </div>
       <div ng-show="demarree">
-      <h1>Bonjour, Maître espion !</h1>
-      Entrez le nom de code de votre nouvelle partie, ou le nom de code que vous a fourni l'autre Maître espion ayant créé la partie.
-      <BR/>
-      <input ng-model="graineMaitre"/> <button ng-click="generateMaitre()">Générer les tableaux</button>
-                                                                          </div>
+	<h1>Bonjour, Maître espion !</h1>
+      	Voici la grille que vous devez faire deviner
+	<BR/>	
+        <table ng-show="affiche" class="tableauMaitre">
+	      <tbody style="border : 1px solid black; padding : 10px; font-size:16px">
+		<tr ng-repeat="ligne in tableau track by $index">
+		  <td ng-repeat="cell in ligne track by $index"
+		      ng-class="{'bleu' : cell === 'B', 'rouge' : cell === 'R', 'noir' : cell === 'X'}"
+		      >
+		  </td>
+		</tr>
+	      </tbody>
+    	</table>	
+      </div>
     </div>
     
     <div ng-show="role == 'M' && !demarree">
-      <h1>Bonjour, Maître espion !</h1>
+      <h1>Bonjour, Espion !</h1>
       Entrez le nom de code de votre nouvelle partie, ou le nom de code que vous a fourni l'autre Maître espion ayant créé la partie.
       <BR/>
       <input ng-model="graineMaitre"/> <button ng-click="generateMaitre()">Générer les tableaux</button>
@@ -269,16 +185,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
     <input type="radio" ng-model="dico" value="2">Dico spécial
     <hr/>
     <button ng-click="affiche = !affiche">afficher ou cacher la grille des maîtres espions</button>
-    <table ng-show="affiche" class="tableauMaitre">
-      <tbody style="border : 1px solid black; padding : 10px; font-size:16px">
-        <tr ng-repeat="ligne in tableau track by $index">
-          <td ng-repeat="cell in ligne track by $index"
-              ng-class="{'bleu' : cell === 'B', 'rouge' : cell === 'R', 'noir' : cell === 'X'}"
-              >
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    
     <HR/>
     <table style="border-collapse: collapse">
       <tbody>
