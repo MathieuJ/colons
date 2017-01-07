@@ -6,8 +6,6 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         $scope.seed = "ma graine " + Math.floor(Math.random() * 1000);
     }
 
-    
-    
     $scope.dico = 1;
     $scope.generateRandomFonction = function(seed) {
         Math.random = function() {
@@ -32,7 +30,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
     
     $scope.generateEspion = function() {
         console.log($scope.graineEspion);
-        $scope.generateRandomFonction($scope.graineEspion);
+        $scope.generateRandomFonction(+$scope.graineEspion);
         console.log("essais de random : ", Math.random(), Math.random(), Math.random());
     }
 
