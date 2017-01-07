@@ -1,0 +1,43 @@
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+      .rouge {
+        color : white;
+        background-color : red;
+      }
+      .bleu {
+        color : white;
+        background-color : blue;
+      }
+      .marron {
+        color : white;
+        background-color : grey;
+      }
+      .noir {
+        color : white;
+        background-color : black;
+      }
+      .tableauMaitre {
+         border-collapse: collapse;
+      }
+      .tableauMaitre td {
+        width : 20px;
+        height: 20px;
+        border : 1px solid black;
+        padding : 2px;
+      }
+      .caseRouge {
+        background-color: red;
+      }
+      .caseBleu {
+        background-color: blue;
+      
+      }
+      .caseMarron {
+        
+      }
+      .caseNoir {
+        background-color: black;
+      }
