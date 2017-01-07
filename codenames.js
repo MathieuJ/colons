@@ -30,6 +30,16 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         $scope.tableauMots = getMots();
         $scope.demarree = true;
         console.log("resultat : ", $scope.tableauIndices, $scope.tableauMots);
+        for (var i = 0; i < 5; i++) {
+            for (var j = 0; j < 5; j++) {
+                switch ($scope.tableauIndices[i][j]) {
+                    case 'R' : $scope.tableauMots[i][j].style = 'rouge'; break;
+                    case 'B' : $scope.tableauMots[i][j].style = 'bleu'; break;
+                    case ' ' : $scope.tableauMots[i][j].style = 'marron'; break;
+                    case 'X' : $scope.tableauMots[i][j].style = 'noir'; break;
+               }
+            }
+        }
     }
     
     $scope.generateEspion = function() {
@@ -112,22 +122,26 @@ app.controller('CodenamesCtrl', function($scope, $location) {
     }
 
     $scope.modifyStyle = function(cell) {
-        switch (cell.style) {
-            case 'rien':
-                cell.style = 'rouge';
-                break;
-            case 'rouge':
-                cell.style = 'bleu';
-                break;
-            case 'bleu':
-                cell.style = 'marron';
-                break;
-            case 'marron':
-                cell.style = 'noir';
-                break;
-            default:
-                cell.style = 'rien';
-                break;
+        if ($scope.role == 'M') {
+            cell.checked = !cell.checked;
+        } else {
+            switch (cell.style) {
+                case 'rien':
+                    cell.style = 'rouge';
+                    break;
+                case 'rouge':
+                    cell.style = 'bleu';
+                    break;
+                case 'bleu':
+                    cell.style = 'marron';
+                    break;
+                case 'marron':
+                    cell.style = 'noir';
+                    break;
+                default:
+                    cell.style = 'rien';
+                    break;
+            }
         }
     }
 });
