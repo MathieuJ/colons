@@ -67,12 +67,22 @@ app.controller('ReignsCtrl', function($scope, $location) {
         },
   }
   
+  $scope.resultats = [];
+  
   $scope.continuer = function() {
     switch ($scope.joueur.age) {
       case 0: break;
       case 3 : break;
       case 6 : break;
    }
+    _.each($scope.occupations, function(id) {
+      switch(id) { 
+        case 1 : resultat.push("Vous dormez comme un bébé"); break;
+        case 2 : resultat.push("Vous appréciez la nature. +1 nature. +1 système immunitaire"); break;
+        case 3 : resultat.push("Vous apprenez à bien dessiner. +1 travail fin. + 1 studiosité."); break;
+        case 4 : resultat.push("Vous baragouinez avec les marchands. +1 marchandage. + 1 charisme."); break;
+      }
+    });
    $scope.joueur.age += 3;
     $scope.choix = undefined;
   }
@@ -101,6 +111,8 @@ app.controller('ReignsCtrl', function($scope, $location) {
 
 
   <body ng-controller="ReignsCtrl">
+    <p ng-repeat="resultat in resultats">{{resultat}}</p>
+    
       <p>{{infos[joueur.age].msg}}</p>
 
     <div ng-show="joueur.age == 0">
