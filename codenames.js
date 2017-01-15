@@ -5,7 +5,16 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         $scope.role = role;
         $scope.seed = "ma graine " + Math.floor(Math.random() * 1000);
     }
-
+    
+    $scope.reset = function() {
+        $scope.role = undefined;
+        $scope.seed = "ma graine " + Math.floor(Math.random() * 1000);
+        $scope.tableauIndices = [];
+        $scope.tableauMots = [];
+        $scope.
+    }
+       
+    
     $scope.dico = 1;
     $scope.generateRandomFonction = function(seed) {
         Math.random = function() {
