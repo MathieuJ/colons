@@ -31,6 +31,10 @@
             Entrez le nom de code de votre nouvelle partie, ou le nom de code que vous a fourni l'autre Maître espion ayant créé la partie.
             <BR/>	
             <input class="myInput" ng-model="graineMaitre"/> 
+            <BR/>
+            <input type="radio" ng-model="dico" value="1">Dico basique 
+            <input type="radio" ng-model="dico" value="2">Dico spécial
+            <BR/>
             <button ng-click="generateMaitre()">Générer les tableaux</button>
         </div>
         <div ng-show="demarree">
@@ -70,6 +74,10 @@
             Entrez le code que le maître espion vous a fourni.
             <BR/>
             <input ng-model="graineEspion"/> 
+            <BR/>
+            <input type="radio" ng-model="dico" value="1">Dico basique 
+            <input type="radio" ng-model="dico" value="2">Dico spécial
+            <BR/>
             <button ng-click="generateEspion()">Générer les tableaux</button>
     	</div>
     	<div ng-show="demarree">
@@ -91,6 +99,9 @@
     </div>
     
     <a href="http://iello.fr/regles/Codenames_regles.pdf">Règles officielles</a>
+    
+    <BR/>
+    <button ng-click="reset()">Recommencer</button>
 
   </body>
 
