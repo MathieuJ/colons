@@ -11,7 +11,6 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         $scope.seed = "ma graine " + Math.floor(Math.random() * 1000);
         $scope.tableauIndices = [];
         $scope.tableauMots = [];
-        $scope.
     }
        
     
