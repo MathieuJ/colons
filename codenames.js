@@ -17,10 +17,24 @@ app.controller('CodenamesCtrl', function($scope, $location) {
     
     $scope.dico = 1;
     $scope.generateRandomFonction = function(seed) {
-        Math.random = function() {
+        /*Math.random = function() {
             seed = Math.sin(seed) * 10000;
             return seed - Math.floor(seed);
-        };
+        };*/
+        
+        var m_w  = 987654321 + seed;
+        var m_z  = 98123456789 - seed;
+        var mask = 0xffffffff;
+
+        Math.random = function() {
+          m_z = (36969 * (m_z & 65535) + (m_z >> 16)) & mask;
+          m_w = (18000 * (m_w & 65535) + (m_w >> 16)) & mask;
+
+          var result = ((m_z << 16) + m_w) & mask;
+          result /= 4294967296;
+
+          return result + 0.5;
+        }
     }
 
     function getGraineEspion(graineMaitre) {
