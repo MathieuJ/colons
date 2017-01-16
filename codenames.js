@@ -76,7 +76,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
 
     function getMots(dico) {
         var mots;
-        if (dico == 'B') {
+        if (dico == 2) {
             mots = "javascript - javaEE - beans - spring - docker - container - servlet - refacto - test - unitaire - tdd - clavier - écran - bug - régression - " +
                 "touche - python - php - cms - struts - développeur - chef de projet - product owner - scrum master - agile - post-it - lunettes - portable - scala - classe - pattern - unix - windows - apple - macbook - mobile - interface - " +
                 "css - html - site - backoffice - front - fullstack - xebia - cap gemini - ippon - octo - rooftop - babyfoot - paris - bordeaux - lyon - richmond - intelliJ - eclipse - atom - notepad - tomcat - jetty - membre - champ - fatigue - rtt - prime - cooptation - unité centrale - prise - " +
