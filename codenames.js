@@ -7,6 +7,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
     }
     
     $scope.reset = function() {
+        $scope.demarree = false;
         $scope.role = undefined;
         $scope.seed = "ma graine " + Math.floor(Math.random() * 1000);
         $scope.tableauIndices = [];
@@ -49,7 +50,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         console.log($scope.graineEspion);
         $scope.generateRandomFonction($scope.graineEspion);
         console.log("essais de random : ", Math.random(), Math.random(), Math.random());
-        $scope.tableauMots = getMots();
+        $scope.tableauMots = getMots($scope.dico);
         $scope.demarree = true;
         console.log("resultat : ", $scope.tableauIndices, $scope.tableauMots);
         for (var i = 0; i < 5; i++) {
@@ -68,7 +69,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         console.log($scope.graineEspion);
         $scope.generateRandomFonction(+$scope.graineEspion);
         console.log("essais de random : ", Math.random(), Math.random(), Math.random());
-        $scope.tableauMots = getMots();
+        $scope.tableauMots = getMots($scope.dico);
         $scope.demarree = true;
         console.log("resultat : ", $scope.tableauMots);
     }
