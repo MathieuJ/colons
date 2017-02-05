@@ -17,13 +17,16 @@
 
   <body ng-controller="CodenamesCtrl">
     <div ng-hide="role">
-      <h1>Salut les espions ! </h1>
+      <h1 ng-hide="role">Salut les espions ! </h1>
       Êtes-vous un maître espion ou un espion lambda ?
       <BR/>
       <button class="myButton" type="button" ng-click="setRole('M')">Maître espion !</button>
       <button class="myButton" type="button" ng-click="setRole('E')">Espion lambda</button>
       (mais plutôt classe, comme Joséphine Baker ou Albert Londres)
     </div>
+    
+    <button ng-show="role" ng-click="reset()">Recommencer</button>
+    <BR/>
     
     <div ng-show="role == 'M'">
         <h1>Bonjour, Maître espion !</h1>
@@ -63,9 +66,9 @@
                       ng-class="cell.style"
                       style="border : 1px solid black; text-align:center; padding : 10px; font-size:22px" 
                       ng-repeat="cell in ligne track by $index">
-                      <span class="alenvers">{{cell.mot}}<span>
+                      <span class="alenvers">{{cell.mot}}</span>
                         <BR/>
-                      <span>{{cell.mot}}<span>
+                      <span>{{cell.mot}}</span>
                   </td>
                 </tr>
               </tbody>
@@ -96,9 +99,9 @@
                       ng-class="cell.style"
                       style="border : 1px solid black; text-align:center; padding : 10px; font-size:22px" 
                       ng-repeat="cell in ligne track by $index">
-                    <span class="alenvers">{{cell.mot}}<span>
+                    <span class="alenvers">{{cell.mot}}</span>
                       <BR/>
-                    <span>{{cell.mot}}<span>
+                    <span>{{cell.mot}}</span>
                   </td>
                 </tr>
               </tbody>
@@ -110,8 +113,7 @@
     
     <a href="http://iello.fr/regles/Codenames_regles.pdf">Règles officielles</a>
     
-    <BR/>
-    <button ng-click="reset()">Recommencer</button>
+   
 
   </body>
 
