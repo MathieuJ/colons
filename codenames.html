@@ -68,7 +68,7 @@
                       ng-repeat="cell in ligne track by $index">
                       <div class="alenvers">{{cell.mot}}</div>
                     <HR/>
-                      <div>{{cell.mot}}</div>{{cell.style}} - {{cell.checked}}
+                      <div>{{cell.mot}}</div>
                   </td>
                 </tr>
               </tbody>
@@ -99,6 +99,7 @@
                       ng-class="cell.style"
                       ng-repeat="cell in ligne track by $index">
                     <div class="alenvers">{{cell.mot}}</div>
+                    <HR/>
                     <div>{{cell.mot}}</div>
                   </td>
                 </tr>
