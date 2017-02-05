@@ -63,12 +63,12 @@
               <tbody>
                 <tr ng-repeat="ligne in tableauMots track by $index">
                   <td ng-click="modifyStyle(cell)"
-                      ng-class="[cell.style, {checked: checked}]"
+                      ng-class="[cell.style, {checked: cell.checked}]"
                       
                       ng-repeat="cell in ligne track by $index">
                       <div class="alenvers">{{cell.mot}}</div>
                     <HR/>
-                      <div>{{cell.mot}}</div>{{cell.style}}
+                      <div>{{cell.mot}}</div>{{cell.style}} - {{cell.checked}}
                   </td>
                 </tr>
               </tbody>
