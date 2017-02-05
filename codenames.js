@@ -152,6 +152,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
     }
 
     $scope.modifyStyle = function(cell) {
+        console.log("role", $scope.role);
         if ($scope.role == 'M') {
             cell.checked = !cell.checked;
         } else {
