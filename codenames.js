@@ -95,7 +95,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "feutre - pointe - mine - gomme - dessin - coloriage - rayure - peinture - pinceau - " +
                 "couleur - craie - papier - feuille - cahier - carnet - carton - ciseaux - découpage - pliage - pli - colle - affaire - " +
                 "boîte - casier - caisse - trousse - cartable - jouet - jeu - pion - dé - domino - puzzle - cube - perle - " +
-                "forme :carré - rond - pâteàmodeler - tampon - livre - histoire - bibliothèque - image - album - titre - bandedessinée - " +
+                "carré - rond - pâteàmodeler - tampon - livre - histoire - bibliothèque - image - album - titre - bandedessinée - " +
                 "conte - dictionnaire - magazine - catalogue - page - ligne - mot - enveloppe - étiquette - " +
                 "alphabet - appareil - caméscope - cassette - cédé - cédérom - chaîne - chanson - chiffre - contraire - différence - " +
                 "doigt - écran - écriture - film - fois - idée - instrument - intrus - lettre - liste - magnétoscope - main - micro - " +
@@ -105,17 +105,17 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "fille - garçon - gardien - madame - maître - maîtresse - mensonge - ordre - personne - retard - sourire - travail - " +
                 "arrosoir - assiette - balle - bateau - boîte - bouchon - bouteille - bulles - canard - casserole - cuillère - cuvette - " +
                 "douche - blanc - vert - entonnoir - noir - rouge - bleu - gouttes - litre - moulin - pluie - poisson - pont - pot - roue - " +
-                "saladier - seau - tablier - tasse - trous - verre - anorak - arc - bagage - baguette - barbe - bonnet - " +
-                "botte - bouton - bretelle - cagoule - casque - casquette - ceinture - chapeau - chaussette - chausson - chaussure - " +
+                "saladier - seau - trou - verre - arc - bagage - baguette - barbe - bonnet - " +
+                "botte - bouton - bretelle - casque - ceinture - chapeau - chaussure - " +
                 "chemise - cigarette - col - collant - couronne - cravate - culotte - épée - fée - flèche - fusil - gant - " +
                 "habit - jean - jupe - lacet - laine - linge - lunettes - magicien - magie - maillot - manche - manteau - mouchoir - " +
                 "moufle - nœud - paire - pantalon - pied - poche - prince - pull-over - pyjama - reine - robe - roi - ruban - semelle - " +
-                "soldat - sorcière - tache - taille - talon - tissu - tricot - uniforme - valise - veste - vêtement - aiguille - ampoule - " +
+                "soldat - sorcière - tache - taille - talon - tissu - uniforme - valise - veste - vêtement - aiguille - ampoule - " +
                 "avion - bois - bout - bricolage - bruit - cabane - carton - clou - colle - crochet - élastique - ficelle - fil - " +
                 "marionnette - marteau - métal - mètre - morceau - moteur - objet - outil - peinture - pinceau - planche - plâtre - scie - " +
                 "tournevis - vis - voiture - accident - aéroport - auto - camion - engin - feu - frein - fusée - garage - gare - grue - " +
                 "hélicoptère - moto - panne - parking - pilote - pneu - quai - train - virage - vitesse - voyage - wagon - zigzag - " +
-                "acrobate - arrêt - arrière - barre - barreau - bord - bras - cerceau - chaises - cheville - chute - cœur - corde - " +
+                "acrobate - arrêt - arrière - barre - bord - bras - cerceau - chaises - cheville - chute - cœur - corde - " +
                 "corps - côté - cou - coude - cuisse - danger - doigts - dos - échasses - échelle - épaule - équipe - escabeau - fesse - " +
                 "filet - fond - genou - gymnastique - hanche - jambes - jeu - mains - milieu - montagne - escalade - muscle - numéro - " +
                 "ongle - parcours - pas - passerelle - pente - peur - pieds - plongeoir - poignet - poing - " +
