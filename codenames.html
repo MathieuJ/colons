@@ -46,7 +46,7 @@
         <div ng-show="demarree">
             Code à donner aux espions pour qu'ils génèrent leur grille : <p style="color : red;">{{graineEspion}}</p>
             <BR/>
-            Voici la grille que vous devez faire deviner
+            <!--Voici la grille que vous devez faire deviner
             <BR/>	
             <table class="tableauIndices">
               <tbody style="border : 1px solid black; padding : 10px; font-size:16px">
@@ -57,14 +57,14 @@
                   </td>
                 </tr>
               </tbody>
-            </table>	
-            Et la grille de mots : 
+            </table>	-->
+            Voici la grille de mots à faire deviner : 
             <table style="border-collapse: collapse">
               <tbody>
                 <tr ng-repeat="ligne in tableauMots track by $index">
                   <td ng-click="modifyStyle(cell)"
-                      ng-class="cell.style"
-                      style="border : 1px solid black; text-align:center; padding : 10px; font-size:22px" 
+                      ng-class="[cell.style, {checked: checked}]"
+                      
                       ng-repeat="cell in ligne track by $index">
                       <div class="alenvers">{{cell.mot}}</div>
                     <HR/>
@@ -97,7 +97,6 @@
                 <tr ng-repeat="ligne in tableauMots track by $index">
                   <td ng-click="modifyStyle(cell)"
                       ng-class="cell.style"
-                      style="border : 1px solid black; text-align:center; padding : 10px; font-size:22px" 
                       ng-repeat="cell in ligne track by $index">
                     <div class="alenvers">{{cell.mot}}</div>
                     <div>{{cell.mot}}</div>
