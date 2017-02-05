@@ -29,6 +29,19 @@
 	top:1px;
 }
 
+td {
+	border : 1px solid black; 
+	text-align:center; 
+	padding : 10px; 
+	font-size:22px
+}
+
+
+.checked {
+border : 5px solid black;
+	padding: 6px;
+}
+
 .alenvers {
 	-ms-transform: rotate(180deg); /* IE 9 */
     -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
@@ -44,16 +57,13 @@
         background-color : blue;
       }
       .marron {
-        color : white;
+        color : black;
         background-color : #DDDDDD;
       }
       .noir {
         color : white;
         background-color : black;
       }
-      .checked {
-      	border : 5px solid black;
-	}
       .tableauIndices {
          border-collapse: collapse;
       }
