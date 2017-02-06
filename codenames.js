@@ -95,7 +95,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "feutre - pointe - mine - gomme - dessin - coloriage - rayure - peinture - pinceau - " +
                 "couleur - craie - papier - feuille - cahier - carnet - carton - ciseaux - découpage - pliage - pli - colle - affaire - " +
                 "boîte - casier - caisse - trousse - cartable - jouet - jeu - pion - dé - domino - puzzle - cube - perle - " +
-                "carré - rond - pâteàmodeler - tampon - livre - histoire - bibliothèque - image - album - titre - bandedessinée - " +
+                "carré - rond - tampon - livre - histoire - bibliothèque - image - album - titre - bandedessinée - " +
                 "conte - dictionnaire - magazine - catalogue - page - ligne - mot - enveloppe - étiquette - " +
                 "alphabet - appareil - caméscope - cassette - cédé - cédérom - chaîne - chanson - chiffre - contraire - différence - " +
                 "doigt - écran - écriture - film - fois - idée - instrument - intrus - lettre - liste - magnétoscope - main - micro - " +
@@ -151,9 +151,9 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "bague - barrette - bijou - bracelet - brosse - cadre - canapé - chambre - cheveu - chiffon - cil - coffre - coffret - " +
                 "collier - couette - coussin - couverture - dent - dentifrice - drap - fauteuil - feràrepasser - frange - glace - lampe - " +
                 "lit - ménage - or - oreiller - parfum - peigne - pouf - poupée - poussette - poussière - shampoing - sourcil - trésor - " +
-                "tube - vase - adulte - album - amour - baiser - bavoir - biberon - bisou - caprice - cimetière - cousin - cousine - crèche - " +
-                "fils - frère - grand-parent - homme - jumeau - maman - mari - mariage - mère - papa - parent - père - petit-enfant - " +
-                "petit-fils - petite-fille - rasoir - sœur - ambulance - bosse - champignon - dentiste - docteur - fièvre - front - " +
+                "tube - vase - adulte - album - amour - baiser - biberon - bisou - caprice - cimetière - " +
+                "fils - frère - grand-parent - homme - jumeau - maman - mari - mariage - mère - papa - parent - père - " +
+                "rasoir - sœur - ambulance - bosse - champignon - dentiste - docteur - fièvre - front - " +
                 "gorge - infirmier - infirmière - jambe - larme - médecin - menton - mine - ordonnance - pansement - peau - piqûre - " +
                 "poison - sang - santé - squelette - trousse - araignée - brouette - chenille - coccinelle - fourmi - herbe - jonquille - " +
                 "lézard - pâquerette - rangée - râteau - rosé - souris - taupe - terrain - terre - terrier - tige - ver - portière - sac - " +
@@ -168,7 +168,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "voisin - volet - abricot - ail - aliment - ananas - banane - bifteck - café - carotte - cerise - chocolat - chou - citron - " +
                 "citrouille - clémentine - concombre - coquillage - corbeille - crabe - crevette - endive - farine - fraise - framboise - " +
                 "fromage - fruit - gâteau - haricot - huile - légume - marchand - melon - monnaie - navet - noisette - noix - nourriture - " +
-                "oignon - orange - panier - pâtes - pêche - persil - petitpois - poire - poireau - pomme - prix - prune - " +
+                "oignon - orange - panier - pâtes - pêche - persil - poire - poireau - pomme - prix - prune - " +
                 "queue - raisin - riz - salade - sucre - thé - tomate - viande - vin - baleine - bouée - île - jumelles - marin - mer - " +
                 "mouette - navire - pêcheur - plage - poisson - port - sardine - serviette - vague - voile";
         } else { 
