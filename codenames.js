@@ -95,12 +95,12 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "feutre - pointe - mine - gomme - dessin - coloriage - rayure - peinture - pinceau - " +
                 "couleur - craie - papier - feuille - cahier - carnet - carton - ciseaux - découpage - pliage - pli - colle - affaire - " +
                 "boîte - casier - caisse - trousse - cartable - jouet - jeu - pion - dé - domino - puzzle - cube - perle - " +
-                "carré - rond - tampon - livre - histoire - bibliothèque - image - album - titre - bandedessinée - " +
+                "carré - rond - tampon - livre - histoire - bibliothèque - image - album - titre - BD - " +
                 "conte - dictionnaire - magazine - catalogue - page - ligne - mot - enveloppe - étiquette - " +
-                "alphabet - appareil - caméscope - cassette - cédé - cédérom - chaîne - chanson - chiffre - contraire - différence - " +
+                "appareil - caméscope - cassette - cédé - cédérom - chaîne - chanson - chiffre - contraire - différence - " +
                 "doigt - écran - écriture - film - fois - idée - instrument - intrus - lettre - liste - magnétoscope - main - micro - " +
                 "modèle - musique - nom - nombre - orchestre - ordinateur - photo - point - poster - pouce - prénom - question - radio - " +
-                "sens - tambour - télécommande - téléphone - télévision - trait - trompette - voix - xylophone - zéro - ami - attention - " +
+                "sens - tambour - télécommande - téléphone - télévision - trait - trompette - voix - zéro - ami - attention - " +
                 "camarade - colère - copain - coquin - dame - directeur - directrice - droit - effort - élève - enfant - fatigue - faute - " +
                 "fille - garçon - gardien - madame - maître - maîtresse - mensonge - ordre - personne - retard - sourire - travail - " +
                 "arrosoir - assiette - balle - bateau - boîte - bouchon - bouteille - bulles - canard - casserole - cuillère - cuvette - " +
@@ -120,7 +120,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "filet - fond - genou - gymnastique - hanche - jambes - jeu - mains - milieu - montagne - escalade - muscle - numéro - " +
                 "ongle - parcours - pas - passerelle - pente - peur - pieds - plongeoir - poignet - poing - " +
                 "roulade - saut - serpent - sport - suivant - tête - tour - trampoline - tunnel - " +
-                "ventre - bagarre - balançoire - ballon - bande - bicyclette - bille - cadenas - château - " +
+                "ventre - bagarre - ballon - bande - bicyclette - bille - cadenas - château - " +
                 "coup - cour - course - échasse - flaque - paix - pardon - partie - pédale - pelle - pompe - préau - raquette - rayon - " +
                 "récréation - sable - sifflet - signe - tas - tricycle - tuyau - vélo - filet - allumette - anniversaire - appétit - " +
                 "beurre - coquille - crêpes - croûte - dessert - envie - faim - fève - four - galette - gâteau - goût - invitation - " +
@@ -129,15 +129,15 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "arête - femme - frite - gobelet - jambon - os - poulet - purée - radis - restaurant - sole - animal - bébés - bouche - " +
                 "cage - câlin - caresse - foin - graines - lapin - maison - nez - œil - oreille - patte - " +
                 "toit - yeux - légume - abeille - agneau - aile - âne - arbre - bain - barque - bassin - bébé - bec - bête - bœuf - " +
-                "bottedefoin - boue - bouquet - bourgeon - branche - caillou - campagne - car - champ - chariot - chat - cheminée - " +
+                "boue - bouquet - bourgeon - branche - caillou - campagne - car - champ - chariot - chat - cheminée - " +
                 "cheval - chèvre - chien - cochon - colline - coq - coquelicot - crapaud - cygne - départ - dindon - escargot - étang - " +
                 "ferme - fermier - feuille - flamme - fleur - fontaine - fumée - grain - graine - grenouille - griffe - guêpe - herbe - " +
                 "hérisson - insecte - jardin - mare - marguerite - miel - mouche - mouton - oie - oiseau - pierre - " +
                 "pigeon - plante - plume - poney - poule - poussin - prairie - rat - rivière - route - tortue - tracteur - tulipe - " +
                 "vache - vétérinaire - aigle - animaux - aquarium - bêtes - cerf - chouette - cigogne - crocodile - dauphin - éléphant - " +
-                "girafe - hibou - hippopotame - kangourou - lion - loup - ours - panda - panthère - perroquet - phoque - renard - requin - " +
+                "girafe - hibou - hippopotame - kangourou - lion - loup - ours - panda - perroquet - phoque - renard - requin - " +
                 "rhinocéros - singe - tigre - zèbre - zoo - épingle - bâton - bêtise - bonhomme - bottes - canne - cauchemar - cri - " +
-                "danse - déguisement - dinosaure - drapeau - enrang - fête - figure - géant - gens - grand-mère - grand-père - joie - " +
+                "danse - déguisement - dinosaure - drapeau - fête - figure - géant - gens - grand-mère - grand-père - joie - " +
                 "joue - journaux - maquillage - masque - monsieur - moustache - ogre - princesse - rue - trottoir - Noël - boule - " +
                 "cadeau - chance - cube - guirlande - humeur - papillon - spectacle - surprise - trou - visage - âge - " +
                 "an - année - après-midi - calendrier - début - dimanche - été - étoile - fin - heure - hiver - " +
