@@ -66,13 +66,15 @@
                       ng-class="[cell.style, {checked: cell.checked}]"
                       
                       ng-repeat="cell in ligne track by $index">
-                      <div class="alenvers">{{cell.mot}}</div>
-                    <HR/>
+                      <div ng-show="miroir" class="alenvers">{{cell.mot}}</div>
+                    <HR  ng-show="miroir"/>
                       <div>{{cell.mot}}</div>
                   </td>
                 </tr>
               </tbody>
             </table>
+            <BR/>
+            <input type="checkbox" ng-model="miroir" value="true">Mode miroir
         </div>
     </div>
     
@@ -98,8 +100,8 @@
                   <td ng-click="modifyStyle(cell)"
                       ng-class="cell.style"
                       ng-repeat="cell in ligne track by $index">
-                    <div class="alenvers">{{cell.mot}}</div>
-                    <HR/>
+                    <div ng-show="miroir" class="alenvers">{{cell.mot}}</div>
+                    <HR ng-show="miroir"/>
                     <div>{{cell.mot}}</div>
                   </td>
                 </tr>
@@ -107,6 +109,7 @@
             </table>
 
             (Cliquez sur les cases pour les faire changer de couleur)
+            <input type="checkbox" ng-model="miroir" value="true">Mode miroir
         </div>
     </div>
     
