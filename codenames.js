@@ -87,7 +87,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "yolo - fonctionnalité - ajax - url - algorithme - applet - archive - entrée - sortie - flux - browser - cache - cookie - " +
                 "console";
         } else if (dico == 1) {
-            mots = "angle - armoire - banc - bureau - cabinet - carreau - chaise - classe - clé - coin - couloir - dossier - eau - " +
+            mots = "france - espagne - japon - allemagne - angle - armoire - banc - bureau - cabinet - carreau - chaise - classe - clé - coin - couloir - dossier - eau - " +
                 "école - écriture - entrée - escalier - étagère - étude - extérieur - fenêtre - intérieur - lavabo - lecture - lit - " +
                 "marche - matelas - meuble - mousse - mur - peluche - placard - plafond - porte - portemanteau - poubelle - " +
                 "rentrée - rideau - robinet - salle - savon - serrure - serviette - siège - sieste - " +
