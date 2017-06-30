@@ -123,7 +123,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "ventre - bagarre - ballon - bande - bicyclette - bille - cadenas - château - " +
                 "coup - cour - course - échasse - flaque - paix - pardon - partie - pédale - pelle - pompe - préau - raquette - rayon - " +
                 "récréation - sable - sifflet - signe - tas - tricycle - tuyau - vélo - filet - allumette - anniversaire - appétit - " +
-                "beurre - coquille - crêpes - croûte - dessert - envie - faim - fève - four - galette - gâteau - goût - invitation - " +
+                "beurre - coquille - crêpes - croûte - dessert - envie - faim - four - galette - gâteau - goût - invitation - " +
                 "langue - lèvres - liquide - louche - mie - moitié - moule - odeur - œuf - part - pâte - pâtisserie - recette - rouleau - " +
                 "sel - soif - tarte - tranche - yaourt - glaçon - jus - kiwi - lame - mûre - noyau - paille - pamplemousse - râpe - " +
                 "arête - femme - frite - gobelet - jambon - os - poulet - purée - radis - restaurant - sole - animal - bébés - bouche - " +
@@ -156,17 +156,17 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "rasoir - sœur - ambulance - bosse - champignon - dentiste - docteur - fièvre - front - " +
                 "gorge - infirmier - infirmière - jambe - larme - médecin - menton - mine - ordonnance - pansement - peau - piqûre - " +
                 "poison - sang - santé - squelette - trousse - araignée - brouette - chenille - coccinelle - fourmi - herbe - jonquille - " +
-                "lézard - pâquerette - rangée - râteau - rosé - souris - taupe - terrain - terre - terrier - tige - ver - portière - sac - " +
-                "billet - caisse - farce - grimace - grotte - pays - regard - ticket - bûche - buisson - camp - chasseur - châtaigne - " +
-                "chemin - chêne - corbeau - écorce - écureuil - forêt - gourde - lac - loupe - lutin - marron - mûre - moustique - muguet - " +
+                "lézard - râteau - souris - taupe - terrain - terre - terrier - tige - ver - portière - sac - " +
+                "billet - caisse - farce - grimace - grotte - pays - ticket - camp - chasseur - " +
+                "chemin - chêne - corbeau - écorce - écureuil - forêt - gourde - lac - loupe - marron - mûre - moustique - muguet - " +
                 "nid - paysage - pin - rocher - sapin - sommet - tente - adresse - appartement - ascenseur - balcon - boucherie - boulanger - " +
                 "boulangerie - boutique - bus - caniveau - caravane - carrefour - cave - charcuterie - cinéma - cirque - " +
                 "cloche - clocher - clown - coiffeur - courrier - croix - église - embouteillage - endroit - enveloppe - " +
                 "essence - facteur - fleuriste - foire - hôpital - hôtel - immeuble - incendie - laisse - magasin - manège - médicament - " +
                 "moineau - monde - monument - ouvrier - palais - panneau - paquet - parc - passage - pharmacie - pharmacien - piscine - " +
-                "place - police - policier - pompier - poste - promenade - quartier - square - timbre - travaux - usine - village - ville - " +
+                "place - police - policier - pompier - poste - quartier - timbre - travaux - usine - village - ville - " +
                 "voisin - volet - abricot - ail - aliment - ananas - banane - bifteck - café - carotte - cerise - chocolat - chou - citron - " +
-                "citrouille - clémentine - concombre - coquillage - corbeille - crabe - crevette - endive - farine - fraise - framboise - " +
+                "citrouille - concombre - coquillage - corbeille - crabe - crevette - endive - farine - fraise - framboise - " +
                 "fromage - fruit - gâteau - haricot - huile - légume - marchand - melon - monnaie - navet - noisette - noix - nourriture - " +
                 "oignon - orange - panier - pâtes - pêche - persil - poire - poireau - pomme - prix - prune - " +
                 "queue - raisin - riz - salade - sucre - thé - tomate - viande - vin - baleine - bouée - île - jumelles - marin - mer - " +
