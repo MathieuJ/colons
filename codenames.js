@@ -93,15 +93,15 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "rentrée - rideau - robinet - salle - savon - serrure - serviette - siège - sieste - " +
                 "silence - sol - sommeil - sonnette - sortie - table - tableau - tabouret - tapis - tiroir - toilette - vitre - w.-c. - " +
                 "feutre - pointe - mine - gomme - dessin - coloriage - rayure - peinture - pinceau - " +
-                "couleur - craie - papier - feuille - cahier - carnet - carton - ciseaux - découpage - pliage - pli - colle - affaire - " +
-                "boîte - casier - caisse - trousse - cartable - jouet - jeu - pion - dé - domino - puzzle - cube - perle - " +
+                "couleur - papier - feuille -carton - ciseaux - découpage - pliage - pli - colle - affaire - " +
+                "boîte - casier - caisse - jouet - jeu - dé - cube - perle - " +
                 "carré - rond - tampon - livre - histoire - bibliothèque - image - album - titre - BD - " +
                 "conte - dictionnaire - magazine - catalogue - page - ligne - mot - enveloppe - étiquette - " +
-                "appareil - caméscope - cassette - cédé - cédérom - chaîne - chanson - chiffre - contraire - différence - " +
+                "appareil - caméscope - cassette - cédé - cédérom - chanson - chiffre - contraire - différence - " +
                 "doigt - écran - écriture - film - fois - idée - instrument - intrus - lettre - liste - magnétoscope - main - micro - " +
                 "modèle - musique - nom - nombre - orchestre - ordinateur - photo - point - poster - pouce - prénom - question - radio - " +
                 "sens - tambour - télécommande - téléphone - télévision - trait - trompette - voix - zéro - ami - attention - " +
-                "camarade - colère - copain - coquin - dame - directeur - directrice - droit - effort - élève - enfant - fatigue - faute - " +
+                "camarade - colère - copain - coquin - dame - directeur - droit - effort - élève - enfant - fatigue - faute - " +
                 "fille - garçon - gardien - madame - maître - maîtresse - mensonge - ordre - personne - retard - sourire - travail - " +
                 "arrosoir - assiette - balle - bateau - boîte - bouchon - bouteille - bulles - canard - casserole - cuillère - cuvette - " +
                 "douche - blanc - vert - entonnoir - noir - rouge - bleu - gouttes - litre - moulin - pluie - poisson - pont - pot - roue - " +
@@ -115,7 +115,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "marionnette - marteau - métal - mètre - morceau - moteur - objet - outil - peinture - pinceau - planche - plâtre - scie - " +
                 "tournevis - vis - voiture - accident - aéroport - auto - camion - engin - feu - frein - fusée - garage - gare - grue - " +
                 "hélicoptère - moto - panne - parking - pilote - pneu - quai - train - virage - vitesse - voyage - wagon - zigzag - " +
-                "acrobate - arrêt - arrière - barre - bord - bras - cerceau - chaises - cheville - chute - cœur - corde - " +
+                "acrobate - arrêt - arrière - barre - bord - bras - chaise - cheville - chute - cœur - corde - " +
                 "corps - côté - cou - coude - cuisse - danger - doigts - dos - échasses - échelle - épaule - équipe - escabeau - fesse - " +
                 "filet - fond - genou - gymnastique - hanche - jambes - jeu - mains - milieu - montagne - escalade - muscle - numéro - " +
                 "ongle - parcours - pas - passerelle - pente - peur - pieds - plongeoir - poignet - poing - " +
@@ -130,8 +130,8 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "cage - câlin - caresse - foin - graines - lapin - maison - nez - œil - oreille - patte - " +
                 "toit - yeux - légume - abeille - agneau - aile - âne - arbre - bain - barque - bassin - bébé - bec - bête - bœuf - " +
                 "boue - bouquet - bourgeon - branche - caillou - campagne - car - champ - chariot - chat - cheminée - " +
-                "cheval - chèvre - chien - cochon - colline - coq - coquelicot - crapaud - cygne - départ - dindon - escargot - étang - " +
-                "ferme - fermier - feuille - flamme - fleur - fontaine - fumée - grain - graine - grenouille - griffe - guêpe - herbe - " +
+                "cheval - chèvre - chien - cochon - colline - coq - coquelicot - crapaud - départ - dindon - escargot - étang - " +
+                "ferme - fermier - feuille - flamme - fleur - fontaine - fumée - grain - grenouille - herbe - " +
                 "hérisson - insecte - jardin - mare - marguerite - miel - mouche - mouton - oie - oiseau - pierre - " +
                 "pigeon - plante - plume - poney - poule - poussin - prairie - rat - rivière - route - tortue - tracteur - tulipe - " +
                 "vache - vétérinaire - aigle - animaux - aquarium - bêtes - cerf - chouette - cigogne - crocodile - dauphin - éléphant - " +
