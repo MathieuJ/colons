@@ -87,28 +87,28 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "yolo - fonctionnalité - ajax - url - algorithme - applet - archive - entrée - sortie - flux - browser - cache - cookie - " +
                 "console";
         } else if (dico == 1) {
-            mots = "france - espagne - japon - allemagne - angle - armoire - banc - bureau - cabinet - carreau - chaise - classe - clé - coin - couloir - dossier - eau - " +
-                "école - écriture - entrée - escalier - étagère - étude - extérieur - fenêtre - intérieur - lavabo - lecture - lit - " +
+            mots = "france - espagne - japon - allemagne - etats-unis - bretagne - sud - est - nord - ouest - angle - armoire - banc - bureau - cabinet - carreau - chaise - classe - clé - coin - couloir - dossier - eau - " +
+                "normandie - angleterre - chine - afrique - asie - paris - école - écriture - entrée - escalier - étagère - étude - extérieur - fenêtre - intérieur - lavabo - lecture - lit - " +
                 "marche - matelas - meuble - mousse - mur - peluche - placard - plafond - porte - portemanteau - poubelle - " +
                 "rentrée - rideau - robinet - salle - savon - serrure - serviette - siège - sieste - " +
                 "silence - sol - sommeil - sonnette - sortie - table - tableau - tabouret - tapis - tiroir - toilette - vitre - w.-c. - " +
                 "feutre - pointe - mine - gomme - dessin - coloriage - rayure - peinture - pinceau - " +
                 "couleur - papier - feuille -carton - ciseaux - découpage - pliage - pli - colle - affaire - " +
-                "boîte - casier - caisse - jouet - jeu - dé - cube - perle - " +
+                "boîte - caisse - jouet - jeu - dé - cube - perle - " +
                 "carré - rond - tampon - livre - histoire - bibliothèque - image - album - titre - BD - " +
                 "conte - dictionnaire - magazine - catalogue - page - ligne - mot - enveloppe - étiquette - " +
-                "appareil - caméscope - cassette - cédé - cédérom - chanson - chiffre - contraire - différence - " +
+                "appareil - cédé - cédérom - chanson - chiffre - contraire - différence - " +
                 "doigt - écran - écriture - film - fois - idée - instrument - intrus - lettre - liste - magnétoscope - main - micro - " +
                 "modèle - musique - nom - nombre - orchestre - ordinateur - photo - point - poster - pouce - prénom - question - radio - " +
                 "sens - tambour - télécommande - téléphone - télévision - trait - trompette - voix - zéro - ami - attention - " +
                 "camarade - colère - copain - coquin - dame - directeur - droit - effort - élève - enfant - fatigue - faute - " +
                 "fille - garçon - gardien - madame - maître - maîtresse - mensonge - ordre - personne - retard - sourire - travail - " +
                 "arrosoir - assiette - balle - bateau - boîte - bouchon - bouteille - bulles - canard - casserole - cuillère - cuvette - " +
-                "douche - blanc - vert - entonnoir - noir - rouge - bleu - gouttes - litre - moulin - pluie - poisson - pont - pot - roue - " +
+                "douche - blanc - vert - noir - rouge - bleu - gouttes - litre - moulin - pluie - poisson - pont - pot - roue - " +
                 "saladier - seau - trou - verre - arc - bagage - baguette - barbe - bonnet - " +
                 "botte - bouton - bretelle - casque - ceinture - chapeau - chaussure - " +
                 "chemise - cigarette - col - collant - couronne - cravate - culotte - épée - fée - flèche - fusil - gant - " +
-                "habit - jean - jupe - lacet - laine - linge - lunettes - magicien - magie - maillot - manche - manteau - mouchoir - " +
+                "habit - jean - jupe - lacet - linge - lunettes - magie - maillot - manche - manteau - " +
                 "moufle - nœud - paire - pantalon - pied - poche - prince - pull-over - pyjama - reine - robe - roi - ruban - semelle - " +
                 "soldat - sorcière - tache - taille - talon - tissu - uniforme - valise - veste - vêtement - aiguille - ampoule - " +
                 "avion - bois - bout - bricolage - bruit - cabane - carton - clou - colle - crochet - élastique - ficelle - fil - " +
@@ -119,7 +119,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "corps - côté - cou - coude - cuisse - danger - doigts - dos - échasses - échelle - épaule - équipe - escabeau - fesse - " +
                 "filet - fond - genou - gymnastique - hanche - jambes - jeu - mains - milieu - montagne - escalade - muscle - numéro - " +
                 "ongle - parcours - pas - passerelle - pente - peur - pieds - plongeoir - poignet - poing - " +
-                "roulade - saut - serpent - sport - suivant - tête - tour - trampoline - tunnel - " +
+                "saut - serpent - sport - suivant - tête - tour - trampoline - tunnel - " +
                 "ventre - bagarre - ballon - bande - bicyclette - bille - cadenas - château - " +
                 "coup - cour - course - échasse - flaque - paix - pardon - partie - pédale - pelle - pompe - préau - raquette - rayon - " +
                 "récréation - sable - sifflet - signe - tas - tricycle - tuyau - vélo - filet - allumette - anniversaire - appétit - " +
@@ -132,14 +132,14 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "boue - bouquet - bourgeon - branche - caillou - campagne - car - champ - chariot - chat - cheminée - " +
                 "cheval - chèvre - chien - cochon - colline - coq - coquelicot - crapaud - départ - dindon - escargot - étang - " +
                 "ferme - fermier - feuille - flamme - fleur - fontaine - fumée - grain - grenouille - herbe - " +
-                "hérisson - insecte - jardin - mare - marguerite - miel - mouche - mouton - oie - oiseau - pierre - " +
+                "hérisson - insecte - jardin - miel - mouche - mouton - oie - oiseau - pierre - " +
                 "pigeon - plante - plume - poney - poule - poussin - prairie - rat - rivière - route - tortue - tracteur - tulipe - " +
-                "vache - vétérinaire - aigle - animaux - aquarium - bêtes - cerf - chouette - cigogne - crocodile - dauphin - éléphant - " +
+                "vache - vétérinaire - aigle - animaux - aquarium - bêtes - cerf - chouette - crocodile - dauphin - éléphant - " +
                 "girafe - hibou - hippopotame - kangourou - lion - loup - ours - panda - perroquet - phoque - renard - requin - " +
                 "rhinocéros - singe - tigre - zèbre - zoo - épingle - bâton - bêtise - bonhomme - bottes - canne - cauchemar - cri - " +
                 "danse - déguisement - dinosaure - drapeau - fête - figure - géant - gens - grand-mère - grand-père - joie - " +
                 "joue - journaux - maquillage - masque - monsieur - moustache - ogre - princesse - rue - trottoir - Noël - boule - " +
-                "cadeau - chance - cube - guirlande - humeur - papillon - spectacle - surprise - trou - visage - âge - " +
+                "cadeau - chance - cube - humeur - papillon - spectacle - surprise - trou - visage - âge - " +
                 "an - année - après-midi - calendrier - début - dimanche - été - étoile - fin - heure - hiver - " +
                 "horloge - jeudi - jour - journée - lumière - lundi - lune - mardi - matin - mercredi - midi - minuit - minute - mois - " +
                 "moment - montre - nuit - ombre - pendule - retour - réveil - saison - samedi - semaine - soir - soleil - temps - univers - " +
@@ -148,27 +148,27 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "balai - biscuit - boisson - bol - bonbon - céréale - confiture - coquetier - couteau - couvercle - couvert - cuillère - " +
                 "cuisine - cuisinière - désordre - dînette - éponge - évier - four - fourchette - lait - lave-linge - lessive - machine - " +
                 "nappe - pain - pile - plat - plateau - poêle - réfrigérateur - repas - tartine - torchon - vaisselle - argent - aspirateur - " +
-                "bague - barrette - bijou - bracelet - brosse - cadre - canapé - chambre - cheveu - chiffon - cil - coffre - coffret - " +
+                "bague - barrette - bijou - bracelet - brosse - cadre - canapé - chambre - cheveu - chiffon - cil - coffre - " +
                 "collier - couette - coussin - couverture - dent - dentifrice - drap - fauteuil - feràrepasser - frange - glace - lampe - " +
                 "lit - ménage - or - oreiller - parfum - peigne - pouf - poupée - poussette - poussière - shampoing - sourcil - trésor - " +
                 "tube - vase - adulte - album - amour - baiser - biberon - bisou - caprice - cimetière - " +
                 "fils - frère - grand-parent - homme - jumeau - maman - mari - mariage - mère - papa - parent - père - " +
                 "rasoir - sœur - ambulance - bosse - champignon - dentiste - docteur - fièvre - front - " +
-                "gorge - infirmier - infirmière - jambe - larme - médecin - menton - mine - ordonnance - pansement - peau - piqûre - " +
-                "poison - sang - santé - squelette - trousse - araignée - brouette - chenille - coccinelle - fourmi - herbe - jonquille - " +
+                "gorge - infirmier - jambe - larme - médecin - mine - pansement - peau - piqûre - " +
+                "poison - sang - santé - squelette - trousse - araignée - brouette - chenille - fourmi - herbe - " +
                 "lézard - râteau - souris - taupe - terrain - terre - terrier - tige - ver - portière - sac - " +
                 "billet - caisse - farce - grimace - grotte - pays - ticket - camp - chasseur - " +
-                "chemin - chêne - corbeau - écorce - écureuil - forêt - gourde - lac - loupe - marron - mûre - moustique - muguet - " +
-                "nid - paysage - pin - rocher - sapin - sommet - tente - adresse - appartement - ascenseur - balcon - boucherie - boulanger - " +
+                "chemin - chêne - corbeau - écorce - écureuil - forêt - gourde - lac - loupe - marron - mûre - moustique - " +
+                "nid - paysage - pin - rocher - sapin - sommet - tente - adresse - appartement - ascenseur - balcon - boucherie - " +
                 "boulangerie - boutique - bus - caniveau - caravane - carrefour - cave - charcuterie - cinéma - cirque - " +
                 "cloche - clocher - clown - coiffeur - courrier - croix - église - embouteillage - endroit - enveloppe - " +
                 "essence - facteur - fleuriste - foire - hôpital - hôtel - immeuble - incendie - laisse - magasin - manège - médicament - " +
                 "moineau - monde - monument - ouvrier - palais - panneau - paquet - parc - passage - pharmacie - pharmacien - piscine - " +
                 "place - police - policier - pompier - poste - quartier - timbre - travaux - usine - village - ville - " +
-                "voisin - volet - abricot - ail - aliment - ananas - banane - bifteck - café - carotte - cerise - chocolat - chou - citron - " +
-                "citrouille - concombre - coquillage - corbeille - crabe - crevette - endive - farine - fraise - framboise - " +
+                "voisin - volet - abricot - ail - aliment - ananas - banane - bifteck - café - carotte - chocolat - chou - citron - " +
+                "citrouille - concombre - coquillage - corbeille - crabe - crevette - endive - farine - fraise - " +
                 "fromage - fruit - gâteau - haricot - huile - légume - marchand - melon - monnaie - navet - noisette - noix - nourriture - " +
-                "oignon - orange - panier - pâtes - pêche - persil - poire - poireau - pomme - prix - prune - " +
+                "oignon - orange - panier - pâtes - pêche - poire - poireau - pomme - prix - prune - " +
                 "queue - raisin - riz - salade - sucre - thé - tomate - viande - vin - baleine - bouée - île - jumelles - marin - mer - " +
                 "mouette - navire - pêcheur - plage - poisson - port - sardine - serviette - vague - voile";
         } else { 
