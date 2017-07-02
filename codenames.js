@@ -134,8 +134,8 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "ferme - fermier - feuille - flamme - fleur - fontaine - fumée - grain - grenouille - herbe - " +
                 "hérisson - insecte - jardin - miel - mouche - mouton - oie - oiseau - pierre - " +
                 "pigeon - plante - plume - poney - poule - poussin - prairie - rat - rivière - route - tortue - tracteur - tulipe - " +
-                "vache - vétérinaire - aigle - animaux - aquarium - bêtes - cerf - chouette - crocodile - dauphin - éléphant - " +
-                "girafe - hibou - hippopotame - kangourou - lion - loup - ours - panda - perroquet - phoque - renard - requin - " +
+                "vache - aigle - animaux - aquarium - bêtes - cerf - chouette - crocodile - dauphin - éléphant - " +
+                "lion - loup - ours - phoque - renard - requin - " +
                 "rhinocéros - singe - tigre - zèbre - zoo - épingle - bâton - bêtise - bonhomme - bottes - canne - cauchemar - cri - " +
                 "danse - déguisement - dinosaure - drapeau - fête - figure - géant - gens - grand-mère - grand-père - joie - " +
                 "joue - journaux - maquillage - masque - monsieur - moustache - ogre - princesse - rue - trottoir - Noël - boule - " +
@@ -144,8 +144,8 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "horloge - jeudi - jour - journée - lumière - lundi - lune - mardi - matin - mercredi - midi - minuit - minute - mois - " +
                 "moment - montre - nuit - ombre - pendule - retour - réveil - saison - samedi - semaine - soir - soleil - temps - univers - " +
                 "vacances - vendredi - air - arc-en-ciel - brouillard - ciel - éclair - flocon - goutte - hirondelle - luge - neige - " +
-                "nuage - orage - ouragan - parapluie - parasol - ski - tempête - thermomètre - tonnerre - traîneau - vent - assiette - " +
-                "balai - biscuit - boisson - bol - bonbon - céréale - confiture - coquetier - couteau - couvercle - couvert - cuillère - " +
+                "nuage - orage - ouragan - parapluie - parasol - ski - tempête - tonnerre - traîneau - vent - assiette - " +
+                "balai - biscuit - boisson - bol - bonbon - céréale - confiture - couteau - couvercle - couvert - cuillère - " +
                 "cuisine - cuisinière - désordre - dînette - éponge - évier - four - fourchette - lait - lave-linge - lessive - machine - " +
                 "nappe - pain - pile - plat - plateau - poêle - réfrigérateur - repas - tartine - torchon - vaisselle - argent - aspirateur - " +
                 "bague - barrette - bijou - bracelet - brosse - cadre - canapé - chambre - cheveu - chiffon - cil - coffre - " +
