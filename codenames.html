@@ -81,7 +81,7 @@
             <button ng-click="generateEspion()">Générer les tableaux</button>
     	</div>
     	<div ng-show="demarree">
-            <table style="border-collapse: collapse">
+            <table style="border-collapse: collapse" ng-show="miroir">
               <tbody>
                 <tr ng-repeat="ligne in tableauMots track by $index">
                   <td ng-click="modifyStyle(cell)"
@@ -92,6 +92,7 @@
                 </tr>
               </tbody>
             </table>
+            <HR ng-show="miroir" />
             <table style="border-collapse: collapse">
               <tbody>
                 <tr ng-repeat="ligne in tableauMots track by $index">
