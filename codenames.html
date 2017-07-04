@@ -13,8 +13,6 @@
     
   </head>
 
-
-
   <body ng-controller="CodenamesCtrl">
     <div ng-hide="role">
       <h1 ng-hide="role">Salut les espions ! </h1>
@@ -100,8 +98,17 @@
                   <td ng-click="modifyStyle(cell)"
                       ng-class="cell.style"
                       ng-repeat="cell in ligne track by $index">
-                    <div ng-show="miroir" class="alenvers">{{cell.mot}}</div>
-                    <HR ng-show="miroir"/>
+                    <div class="alenvers">{{cell.mot}}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table style="border-collapse: collapse">
+              <tbody>
+                <tr ng-repeat="ligne in tableauMots track by $index">
+                  <td ng-click="modifyStyle(cell)"
+                      ng-class="cell.style"
+                      ng-repeat="cell in ligne track by $index">
                     <div>{{cell.mot}}</div>
                   </td>
                 </tr>
