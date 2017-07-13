@@ -42,14 +42,10 @@ app.controller('CodenamesCtrl', function($scope, $location) {
     }
 
     $scope.generateMaitre = function() {
-        console.log($scope.graineMaitre, inthash($scope.graineMaitre));
         $scope.generateRandomFonction(inthash($scope.graineMaitre));
         $scope.tableauIndices = getIndices();
-        console.log("graine espion2 : ");
-        $scope.graineEspion = Math.floor(Math.random() * 100000);
-        console.log($scope.graineEspion);
+        $scope.graineEspion = Math.floor(Math.random() * 1000000);
         $scope.generateRandomFonction($scope.graineEspion);
-        console.log("essais de random : ", Math.random(), Math.random(), Math.random());
         $scope.tableauMots = getMots($scope.dico);
         $scope.demarree = true;
         console.log("resultat : ", $scope.tableauIndices, $scope.tableauMots);
@@ -72,6 +68,16 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         $scope.tableauMots = getMots($scope.dico);
         $scope.demarree = true;
         console.log("resultat : ", $scope.tableauMots);
+    }
+    
+    $scope.generateDuel = function(){
+        $scope.generateRandomFonction(+$scope.graineEspion);
+        
+        $scope.tableauIndices = getIndices();
+        console.log("essais de random : ", Math.random(), Math.random(), Math.random());
+        $scope.tableauMots = getMots($scope.dico);
+        $scope.demarree = true;
+        console.log("resultat : ", $scope.tableauMots)
     }
 
     function getMots(dico) {
@@ -197,6 +203,26 @@ app.controller('CodenamesCtrl', function($scope, $location) {
             tableau.push("R");
         }
         for (var i = 0; i < 8; i++) {
+            tableau.push("B");
+        }
+        for (var i = 0; i < 7; i++) {
+            tableau.push(" ");
+        }
+        tableau.push("X");
+
+        shuffle(tableau);
+        return decoupe(tableau, 5);
+    }
+
+    function getIndices2Joueurs() {
+        var tableau = [];
+        for (var i = 0; i < 6; i++) {
+            tableau.push("R");
+        }
+        for (var i = 0; i < 3; i++) {
+            tableau.push("RB");
+        }
+        for (var i = 0; i < 6; i++) {
             tableau.push("B");
         }
         for (var i = 0; i < 7; i++) {
