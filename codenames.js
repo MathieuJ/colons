@@ -64,7 +64,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
     $scope.generateEspion = function() {
         console.log($scope.graineEspion);
         $scope.generateRandomFonction(+$scope.graineEspion);
-        console.log("essais de random : ", Math.random(), Math.random(), Math.random());
+        
         $scope.tableauMots = getMots($scope.dico);
         $scope.demarree = true;
         console.log("resultat : ", $scope.tableauMots);
