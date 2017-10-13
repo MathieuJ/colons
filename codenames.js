@@ -26,7 +26,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         var m_z  = 98123456789 - seed;
         var mask = 0xffffffff;
 
-        console.log(seed);
+        console.log("depart", seed, m_w, m_z, mask);
         
         Math.random = function() {
           m_z = (36969 * (m_z & 65535) + (m_z >> 16)) & mask;
