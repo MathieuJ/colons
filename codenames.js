@@ -23,7 +23,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         };*/
         
         var m_w  = 987654321 + seed;
-        var m_z  = 98123456789 - seed;
+        var m_z  = 98123456789 - (+seed);
         var mask = 0xffffffff;
 
         console.log("depart", seed, m_w, m_z, mask);
