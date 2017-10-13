@@ -21,13 +21,13 @@ app.controller('CodenamesCtrl', function($scope, $location) {
             seed = Math.sin(seed) * 10000;
             return seed - Math.floor(seed);
         };*/
-        
+        seed = (+seed);
         var m_w  = 987654321 + seed;
-        var m_z  = 98123456789 - (+seed);
+        var m_z  = 98123456789 - seed;
         var mask = 0xffffffff;
 
         console.log("depart", seed, m_w, m_z, mask);
-        
+        $scope.debug = "depart " + seed + m_w + "_" + m_z + "_" + mask;
         Math.random = function() {
           m_z = (36969 * (m_z & 65535) + (m_z >> 16)) & mask;
           m_w = (18000 * (m_w & 65535) + (m_w >> 16)) & mask;
