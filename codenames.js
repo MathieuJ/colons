@@ -100,12 +100,13 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "console";
         } else if (dico == 1) {
             mots = "france - espagne - japon - allemagne - etats-unis - bretagne - sud - est - nord - ouest - angle - armoire - banc - bureau - cabinet - carreau - chaise - classe - clé - coin - couloir - dossier - eau - " +
-                "normandie - angleterre - chine - afrique - asie - paris - école - écriture - entrée - escalier - étagère - étude - extérieur - fenêtre - intérieur - lavabo - lecture - lit - " +
+                "lourd - gras - maigre - fin - léger - gros - épais - humide - beau - grand - mauvais - pauvre - riche - vieux - jeune - " + 
+                "normandie - angleterre - chine - afrique - asie - paris - école - écriture - entrée - escalier - étude - extérieur - fenêtre - intérieur - lavabo - lecture - lit - " +
                 "marche - matelas - meuble - mousse - mur - peluche - placard - plafond - porte - portemanteau - poubelle - " +
                 "rentrée - rideau - robinet - salle - savon - serrure - serviette - siège - sieste - " +
                 "silence - sol - sommeil - sonnette - sortie - table - tableau - tabouret - tapis - tiroir - toilette - vitre - w.-c. - " +
                 "feutre - pointe - mine - gomme - dessin - coloriage - rayure - peinture - pinceau - " +
-                "couleur - papier - feuille -carton - ciseaux - découpage - pliage - pli - colle - affaire - " +
+                "couleur - papier - feuille -carton - ciseaux - découpage - pli - colle - affaire - " +
                 "boîte - caisse - jouet - jeu - dé - cube - perle - " +
                 "carré - rond - tampon - livre - histoire - bibliothèque - image - album - titre - BD - " +
                 "conte - dictionnaire - magazine - catalogue - page - ligne - mot - enveloppe - étiquette - " +
@@ -148,7 +149,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "pigeon - plante - plume - poney - poule - poussin - prairie - rat - rivière - route - tortue - tracteur - tulipe - " +
                 "vache - aigle - animaux - aquarium - bêtes - cerf - chouette - crocodile - dauphin - éléphant - " +
                 "lion - loup - ours - phoque - renard - requin - " +
-                "rhinocéros - singe - tigre - zèbre - zoo - épingle - bâton - bêtise - bonhomme - bottes - canne - cauchemar - cri - " +
+                "singe - tigre - zèbre - zoo - épingle - bâton - bêtise - bonhomme - bottes - canne - cauchemar - cri - " +
                 "danse - déguisement - dinosaure - drapeau - fête - figure - géant - gens - grand-mère - grand-père - joie - " +
                 "joue - journaux - maquillage - masque - monsieur - moustache - ogre - princesse - rue - trottoir - Noël - boule - " +
                 "cadeau - chance - cube - humeur - papillon - spectacle - surprise - trou - visage - âge - " +
@@ -175,8 +176,8 @@ app.controller('CodenamesCtrl', function($scope, $location) {
                 "boulangerie - boutique - bus - caniveau - caravane - carrefour - cave - charcuterie - cinéma - cirque - " +
                 "cloche - clocher - clown - coiffeur - courrier - croix - église - embouteillage - endroit - enveloppe - " +
                 "essence - facteur - fleuriste - foire - hôpital - hôtel - immeuble - incendie - laisse - magasin - manège - médicament - " +
-                "moineau - monde - monument - ouvrier - palais - panneau - paquet - parc - passage - pharmacie - pharmacien - piscine - " +
-                "place - police - policier - pompier - poste - quartier - timbre - travaux - usine - village - ville - " +
+                "moineau - monde - monument - ouvrier - palais - panneau - paquet - parc - passage - pharmacie - piscine - " +
+                "place - police - pompier - poste - quartier - timbre - travaux - usine - village - ville - " +
                 "voisin - volet - abricot - ail - aliment - ananas - banane - bifteck - café - carotte - chocolat - chou - citron - " +
                 "citrouille - concombre - coquillage - corbeille - crabe - crevette - endive - farine - fraise - " +
                 "fromage - fruit - gâteau - haricot - huile - légume - marchand - melon - monnaie - navet - noisette - noix - nourriture - " +
