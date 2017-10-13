@@ -44,7 +44,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
     $scope.generateMaitre = function() {
         $scope.generateRandomFonction(inthash($scope.graineMaitre));
         $scope.tableauIndices = getIndices();
-        $scope.graineEspion = Math.floor(Math.random() * 10000);
+        $scope.graineEspion = Math.floor(Math.random() * 1000000);
         $scope.generateRandomFonction($scope.graineEspion);
         $scope.tableauMots = getMots($scope.dico);
         $scope.demarree = true;
