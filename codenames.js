@@ -48,7 +48,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
         $scope.generateRandomFonction(inthash($scope.graineMaitre));
         $scope.tableauIndices = getIndices();
         $scope.graineEspion = Math.floor(Math.random() * 1000000);
-        $scope.generateRandomFonction($scope.graineEspion);
+        $scope.generateRandomFonction(+$scope.graineEspion);
         console.log("espion:", $scope.graineEspion);
         console.log(Math.random());
         $scope.tableauMots = getMots($scope.dico);
@@ -67,7 +67,7 @@ app.controller('CodenamesCtrl', function($scope, $location) {
     }
     
     $scope.generateEspion = function() {
-        $scope.generateRandomFonction($scope.graineEspion);
+        $scope.generateRandomFonction(+$scope.graineEspion);
         console.log("espion: ", $scope.graineEspion);
         console.log(Math.random());
         
