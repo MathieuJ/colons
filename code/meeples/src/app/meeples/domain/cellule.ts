@@ -1,0 +1,131 @@
+import { Objet, Meeple } from './meeple';
+import { Batiment, TypeBatiment } from './batiment';
+import { Carte } from './partie';
+
+export enum CelluleType {
+  OCEAN,
+  MER,
+  SABLE,
+  TERRE,
+  PIERRE,
+  LAVE,
+  EAU,
+  FORET,
+  PLAINE
+}
+export enum ACTION {
+  TRAVAIL,
+  RECOLTE,
+  EXPLORATION,
+  CHASSE,
+  LOISIR
+}
+export class ActionMeeples {
+  constructor(public cellule: Cellule, public carte: Carte, public plan: TypeBatiment = undefined, public meeples: Meeple[] = []) {}
+}
+
+export class Cellule {
+  public contenu: Objet[] = [];
+  public batiment: Batiment;
+
+  public bgX: number;
+  public bgY: number;
+  public bgColor: string;
+  public visible = false;
+  public dormeur: Meeple = undefined;
+  // juste pour l'opti
+  public actionMeeples: ActionMeeples;
+  constructor(public x: number, public y: number, public celluleType: CelluleType) {
+    this.setCelluleType(celluleType);
+    this.contenu = [];
+  }
+
+  setCelluleType(celluleType: CelluleType) {
+    this.celluleType = celluleType;
+    switch (celluleType) {
+      case CelluleType.EAU:
+        this.bgX = 23;
+        this.bgY = 29;
+        this.bgColor = '#EEEEEE';
+        break;
+      case CelluleType.MER:
+        this.bgX = 23;
+        this.bgY = 29;
+        break;
+      case CelluleType.PIERRE:
+        this.bgX = 30;
+        this.bgY = 24;
+        break;
+      case CelluleType.SABLE:
+        this.bgX = 5;
+        this.bgY = 1;
+        break;
+      case CelluleType.TERRE:
+        this.bgX = 4;
+        this.bgY = 0;
+        break;
+      case CelluleType.FORET:
+        const a = Math.floor(Math.random() * 4);
+        if (a === 0) {
+          this.bgX = 19;
+          this.bgY = 19;
+        } else if (a === 1) {
+          this.bgX = 20;
+          this.bgY = 19;
+        } else if (a === 2) {
+          this.bgX = 21;
+          this.bgY = 19;
+        } else {
+          this.bgX = 22;
+          this.bgY = 19;
+        }
+        break;
+      case CelluleType.PLAINE:
+        this.bgX = 12;
+        this.bgY = 0;
+        break;
+    }
+  }
+  addObject(objet: Objet) {
+    this.contenu.push(objet);
+  }
+}
+
+export class Terrain {
+  cases: Cellule[][] = [];
+
+  constructor(public tailleX: number, public tailleY: number) {
+    this.cases = [];
+    for (let i = 0; i < tailleY; i++) {
+      const ligne = [];
+      this.cases.push(ligne);
+      for (let j = 0; j < tailleX; j++) {
+        ligne.push(new Cellule(j, i, CelluleType.TERRE));
+      }
+    }
+  }
+
+  getCellule(x, y): Cellule {
+    return this.cases[(y + this.tailleY) % this.tailleY][(x + this.tailleX) % this.tailleX];
+  }
+
+  setCellule(x: number, y: number, celluleType: CelluleType) {
+    this.getCellule(x, y).celluleType = celluleType;
+  }
+
+  getVoisin(cellule: Cellule, diffX: number, diffY: number) {
+    return this.getCellule(cellule.x + diffX, cellule.y + diffY);
+  }
+
+  setVisible(cellule: Cellule) {
+    cellule.visible = true;
+  }
+
+  setVisibleAvecVoisins(cellule: Cellule) {
+    this.setVisible(cellule);
+    this.setVisible(this.getVoisin(cellule, 1, 0));
+    this.setVisible(this.getVoisin(cellule, -1, 0));
+    this.setVisible(this.getVoisin(cellule, 0, 1));
+    this.setVisible(this.getVoisin(cellule, 0, -1));
+  }
+}
