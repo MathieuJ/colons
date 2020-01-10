@@ -60,7 +60,6 @@ export class Partie {
   private meepleSyllabes = ['ga', 'fur', 'gol', 'bo', 'ber', 'dil', 'ne', 'zu', 'ra', 'meu', 'mul', 'ta', 'ni'];
 
   constructor() {
-    this.log('Init');
     this.buildTerrain();
     const c = this.terrain.getCellule(7, 4);
     this.terrain.setVisibleAvecVoisins(this.terrain.getCellule(7 - 1, 4));

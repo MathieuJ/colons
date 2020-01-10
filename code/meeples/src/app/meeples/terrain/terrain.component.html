@@ -1,0 +1,19 @@
+<div class="terrain-container ">
+    <table class="carte">
+        <tr *ngFor="let ligne of terrain.cases">
+            <td *ngFor="let cellule of ligne">
+                <app-cellule [cellule]="cellule"></app-cellule>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!--<div class="terrain">
+    <div class="terrain-container">
+        <div class="carte">
+            <div *ngFor="let ligne of terrain.cases" class="ligne">
+                <app-cellule [cellule]="cellule" *ngFor="let cellule of ligne"></app-cellule>
+            </div>
+        </div>
+    </div>
+</div>-->

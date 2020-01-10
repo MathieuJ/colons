@@ -4,7 +4,7 @@ export function random(min: number, max: number) {
   }
 
   export function randomElement(array: any[]) {
-    return array[this.random(0, array.length - 1)];
+    return array[random(0, array.length - 1)];
   }
 
   export function  melange(array) {
