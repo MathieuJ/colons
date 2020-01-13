@@ -1,2 +1,44 @@
 <app-terrain [terrain]="partie.terrain"></app-terrain>
-<div>{{partie.logs}}</div>
+
+<div class="selection" *ngIf="selectedElement">
+    {{selectedElement.type}}
+    <div *ngIf="selectedElement.type === 'batiment'">
+        <div *ngIf="selectedElement.batiment.typeBatiment.nom === 'Robot'">
+            <h4>Robot</h4>
+            <button>Décollage</button>
+        </div>
+        <div *ngIf="selectedElement.batiment.typeBatiment.nom !== 'Robot'">
+            <h4>Batiment</h4>
+            {{selectedBatiment.typeBatiment.nom}}
+            <button> ???</button>
+        </div>
+    </div>
+
+    <div *ngIf="selectedElement.type == 'CELLULE'">
+        <h4>Cellule</h4>
+        {{selectedElement.cellule.x}} {{selectedElement.cellule.y}} {{selectedElement.cellule.typeCellule}}
+        <span *ngIf="selectedElement.cellule.actionMeeples">
+            <div *ngFor="let meeple of selectedElement.cellule.actionMeeples.meeples">
+                {{meeple.nom}} - Action: {{selectedElement.cellule.carte}} {{selectedElement.cellule.plan}}
+            </div>
+        </span>
+    </div>
+
+    <div *ngIf="selectedElement.type === 'meeple'">
+        <span
+            [ngStyle]="{'border': '2px solid ' + selectedElement.meeple.color1, 'padding':'1.5px 0', 'border-radius':'10px'}">
+            <span
+                [ngStyle]="{'border': '2px solid ' + selectedElement.meeple.color2, 'padding': '0 3px', 'border-radius':'8px'}">
+                {{selectedElement.meeple.nom}}
+            </span>
+        </span>
+        <span>sante: {{selectedElement.meeple.sante}}</span>
+        <span>esperance de vie : {{selectedElement.meeple.esperance}}</span>
+        <span>status: {{selectedElement.meeple.status}}</span>
+        <button (click)="setOrdre($event, 'couche')">Définir Dodo</button>
+    </div>
+</div>
+
+<div class="logs">
+    <div *ngFor="let msg of logs">{{msg}}</div>
+</div>

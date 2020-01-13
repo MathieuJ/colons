@@ -62,12 +62,10 @@ export class Partie {
   constructor() {
     this.buildTerrain();
     const c = this.terrain.getCellule(7, 4);
-    this.terrain.setVisibleAvecVoisins(this.terrain.getCellule(7 - 1, 4));
-    this.terrain.setVisibleAvecVoisins(this.terrain.getCellule(7 + 1, 4));
-    this.terrain.setVisibleAvecVoisins(this.terrain.getCellule(7, 4 - 1));
-    this.terrain.setVisibleAvecVoisins(this.terrain.getCellule(7, 4 + 1));
-
     this.addBatiment(c, TypesBatiments.ROBOT);
+    c.visible = true;
+    this.terrain.getVoisins(c, 2).forEach(c => c.visible = true);
+
     this.generateMeeples();
     this.initRobot();
     this.initReserve();
@@ -188,10 +186,13 @@ export class Partie {
     const meeple2 = this.generateMeeple(random(20, 40));
     const meeple3 = this.generateMeeple(random(20, 40));
     this.meeples.push(meeple1);
+    this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, 1, 0).meeplesPresents = [meeple1];
     this.setCouche(meeple1, this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, 1, 0));
     this.meeples.push(meeple2);
+    this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, -1, 0).meeplesPresents = [meeple2];
     this.setCouche(meeple2, this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, -1, 0));
     this.meeples.push(meeple3);
+    this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, 0, -1).meeplesPresents = [meeple3];
     this.setCouche(meeple3, this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, 0, -1));
   }
 

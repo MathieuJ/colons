@@ -38,9 +38,27 @@ export class HexaTerrain {
     return this.getCellule(cellule.x + diffX, cellule.y + diffY);
   }
 
+  getDistance(cellule1: HexaCellule, cellule2: HexaCellule) {
+    return Math.abs(cellule1.x - cellule2.x) + Math.abs(cellule1.y - cellule2.y);
+  }
+
+  getVoisins(cellule: HexaCellule, distanceMax: number): HexaCellule[] {
+    const voisins: HexaCellule[] = [];
+    for (let ligne of this.cases) {
+        for (let cell of ligne) {
+          let distance = this.getDistance(cell, cellule);
+          if (distance > 0 && distance <= distanceMax) {
+            voisins.push(cell);
+          }
+        }
+    }
+    return voisins;
+  }
+
   setVisible(cellule: HexaCellule) {
     cellule.visible = true;
   }
+
 
   setVisibleAvecVoisins(cellule: HexaCellule) {
     this.setVisible(cellule);

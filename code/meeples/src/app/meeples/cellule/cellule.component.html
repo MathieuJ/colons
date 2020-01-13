@@ -1,6 +1,9 @@
 <div (click)="select()">
     [{{cellule.x}} - {{cellule.y}}]
     <br>
-    {{cellule.contenu}}
-    {{cellule.dormeur?.nom}}
+    <span *ngIf="cellule.visible">
+        {{cellule.contenu}}
+        {{cellule.dormeur?.nom}}
+    </span>
+    <span *ngIf="!cellule.visible">XXXX</span>
 </div>

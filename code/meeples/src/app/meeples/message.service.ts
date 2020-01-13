@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Message } from './domain/message';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
-  private channel = new Subject<string>();
+  private channel = new Subject<Message>();
 
   constructor() {}
 
-  sendMessage(s: any) {
-    this.channel.next(s);
+  sendMessage(message: Message) {
+    this.channel.next(message);
   }
 
   getChannel() {

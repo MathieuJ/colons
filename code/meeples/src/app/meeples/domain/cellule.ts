@@ -28,6 +28,8 @@ export class Cellule {
   public contenu: Objet[] = [];
   public batiment: Batiment;
 
+  public meeplesPresents: Meeple[] = [];
+
   public bgX: number;
   public bgY: number;
   public bgColor: string;

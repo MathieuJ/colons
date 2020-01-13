@@ -45,6 +45,16 @@ export class Meeple {
   aTrait(trait: TRAIT): boolean {
     return this.traits.indexOf(trait) > -1;
   }
+
+  position: Cellule;
+  setPosition(cellule: Cellule) {
+    if (cellule != this.position) {
+      this.position.meeplesPresents.
+    }
+    this.position.meeplesPresents.p
+    this.position = cellule;
+    cellule.meeplesPresents.push(this);
+  }
 }
 
 export class Objet {
