@@ -42,6 +42,10 @@ export class Cellule {
     this.contenu = [];
   }
 
+  removeMeeplePresent(meeple: Meeple) {
+    this.meeplesPresents = this.meeplesPresents.filter(m => m != meeple);
+  }
+
   setCelluleType(celluleType: CelluleType) {
     this.celluleType = celluleType;
     switch (celluleType) {

@@ -26,12 +26,13 @@ export const traits = {
 };
 
 export class Meeple {
-  sante: number;
+  traits: TRAIT[] = [];
+  /*sante: number;
   esperance: number;
   satiete: number;
   parent1: Meeple;
   parent2: Meeple;
-  traits: TRAIT[] = [];
+  
   energie = 1;
   energieMax = 3;
   bonheur = 2;
@@ -39,7 +40,7 @@ export class Meeple {
   color2: string;
   status: string;
   couche: Cellule;
-  histoire: { sommeil?: number; bouffe?: number; eau?: number }[] = [];
+  histoire: { sommeil?: number; bouffe?: number; eau?: number }[] = [];*/
   constructor(public id: number, public nom: string, public naissance: number) {}
 
   aTrait(trait: TRAIT): boolean {
@@ -49,11 +50,10 @@ export class Meeple {
   position: Cellule;
   setPosition(cellule: Cellule) {
     if (cellule != this.position) {
-      this.position.meeplesPresents.
+      this.position.removeMeeplePresent(this);
+      cellule.meeplesPresents.push(this);  
+      this.position = cellule;
     }
-    this.position.meeplesPresents.p
-    this.position = cellule;
-    cellule.meeplesPresents.push(this);
   }
 }
 
