@@ -6,7 +6,9 @@
 <input type="checkbox" [(ngModel)]="mine" /> mine
 <br/>
 <input type="checkbox" [(ngModel)]="peche" /> peche
+<br/>
+<button (click)="launch()">Go</button>
 </div>
 <div *ngIf="partie">
-    <app-partie></app-partie>
+    <app-partie [partie]="partie"></app-partie>
 </div>

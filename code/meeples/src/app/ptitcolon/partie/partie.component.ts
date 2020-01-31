@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Partie } from 'src/app/meeples/domain/partie';
 
 @Component({
   selector: 'app-partie',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./partie.component.scss']
 })
 export class PartieComponent implements OnInit {
+  @Input()
+  partie: Partie;
 
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

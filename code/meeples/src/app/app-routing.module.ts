@@ -7,6 +7,10 @@ const routes: Routes = [
     path: 'start',
     loadChildren: './meeples/meeples.module#MeeplesModule'
   },
+  {
+    path: 'start2',
+    loadChildren: './ptitcolon/ptitcolon.module#PtitcolonModule'
+  },
 ];
 
 @NgModule({

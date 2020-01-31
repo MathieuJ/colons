@@ -1,4 +1,4 @@
-import { Objet, Meeple } from './meeple';
+import { Meeple } from './meeple';
 import { Batiment, TypeBatiment } from './batiment';
 import { Carte } from './partie';
 
@@ -25,7 +25,7 @@ export class ActionMeeples {
 }
 
 export class Cellule {
-  public contenu: Objet[] = [];
+  public contenu: any[] = [];
   public batiment: Batiment;
 
   public meeplesPresents: Meeple[] = [];
@@ -92,7 +92,7 @@ export class Cellule {
         break;
     }
   }
-  addObject(objet: Objet) {
+  addObject(objet: any) {
     this.contenu.push(objet);
   }
 }
