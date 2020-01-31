@@ -247,7 +247,7 @@ export class Partie {
 
   finTour() {
     this.meeples.forEach(m => {
-      m.histoire.unshift({});
+      m.ajouteHistoire();
     });
     this.doActions();
     // meeples eat

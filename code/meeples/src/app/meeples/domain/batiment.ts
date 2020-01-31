@@ -31,18 +31,18 @@ export class TypeBatiment {
   }
   
   export const TypesBatiments = {
-    ROBOT: new TypeBatiment('Robot', 'Votre robot', {}, 0).withSpriteCoords(49, 1, 2, 2),
-    FEU_DE_CAMP: new TypeBatiment('Feu de camp', 'Petit feu pour se chauffer et cuisiner', { PIERRE: 2, BOIS: 2 }, 1),
-    PUITS: new TypeBatiment('Puits', 'Trou dans la terre', {}, 2),
-    FOYER: new TypeBatiment('Foyer', 'Feu de camp amélioré', { PIERRE: 4, BOIS: 2 }, 1),
-    HUTTE: new TypeBatiment('Hutte', 'Abri pour dormir', { BOIS: 2, HERBE: 2 }, 1).withSpriteCoords(72, 11, 3, 4),
-    CABANE: new TypeBatiment('Cabane', 'Abri', { BOIS: 4, HERBE: 4 }, 3),
-    LOGE: new TypeBatiment('Loge', 'Abri', { PIERRE: 4, BOIS: 3 }, 5),
-    MINE_ARGILE: new TypeBatiment('Cabane', 'Abri', { BOIS: 1 }, 3),
-    CARRIERE_PIERRE: new TypeBatiment('Cabane', 'Abri', { BOIS: 4 }, 4),
-    ATELIER: new TypeBatiment('Aterlier', 'Abri', { BOIS: 4, HERBE: 4 }, 1),
-    MAISON: new TypeBatiment('Cabane', 'Abri', { BOIS: 4, HERBE: 4 }, 1),
-    SIDO: new TypeBatiment('Sido', 'Maison avec toit rouge et murs blancs', { BRIQUE: 9 }, 0, 0)
+    ROBOT: new TypeBatiment('Robot', 'Votre robot', new Cout(), 0).withSpriteCoords(49, 1, 2, 2),
+    FEU_DE_CAMP: new TypeBatiment('Feu de camp', 'Petit feu pour se chauffer et cuisiner', new Cout({ 'P': 4, 'B': 2 }), 1),
+    PUITS: new TypeBatiment('Puits', 'Trou dans la terre', new Cout(), 2),
+    FOYER: new TypeBatiment('Foyer', 'Feu de camp amélioré', new Cout({ 'P': 4, 'B': 2 }), 1),
+    HUTTE: new TypeBatiment('Hutte', 'Abri pour dormir', new Cout({ 'P': 4, 'B': 2 }), 1).withSpriteCoords(72, 11, 3, 4),
+    CABANE: new TypeBatiment('Cabane', 'Abri', new Cout({ 'P': 4, 'B': 2 }), 3),
+    LOGE: new TypeBatiment('Loge', 'Abri', new Cout({ 'P': 4, 'B': 2 }), 5),
+    MINE_ARGILE: new TypeBatiment('Cabane', 'Abri', new Cout({ 'P': 4, 'B': 2 }), 3),
+    CARRIERE_PIERRE: new TypeBatiment('Cabane', 'Abri', new Cout({ 'P': 4, 'B': 2 }), 4),
+    ATELIER: new TypeBatiment('Aterlier', 'Abri', new Cout({ 'P': 4, 'B': 2 }), 1),
+    MAISON: new TypeBatiment('Cabane', 'Abri', new Cout({ 'P': 4, 'B': 2 }), 1),
+    SIDO: new TypeBatiment('Sido', 'Maison avec toit rouge et murs blancs', new Cout({ 'P': 4, 'B': 2 }), 0, 0)
   };
   
   export class Batiment {

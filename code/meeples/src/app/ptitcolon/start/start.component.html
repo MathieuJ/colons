@@ -1,1 +1,12 @@
-<p>start works!</p>
+<div *ngIf="!partie">
+<input type="checkbox" [(ngModel)]="culture" /> Culture
+<br/>
+<input type="checkbox" [(ngModel)]="elevage" /> elevage
+<br/>
+<input type="checkbox" [(ngModel)]="mine" /> mine
+<br/>
+<input type="checkbox" [(ngModel)]="peche" /> peche
+</div>
+<div *ngIf="partie">
+    <app-partie></app-partie>
+</div>

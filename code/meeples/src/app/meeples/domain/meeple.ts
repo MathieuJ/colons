@@ -26,6 +26,7 @@ export const traits = {
 };
 
 export class Meeple {
+  
   traits: TRAIT[] = [];
   /*sante: number;
   esperance: number;
@@ -36,11 +37,14 @@ export class Meeple {
   energie = 1;
   energieMax = 3;
   bonheur = 2;
+  */
   color1: string;
   color2: string;
-  status: string;
+  /*status: string;
+  */
   couche: Cellule;
-  histoire: { sommeil?: number; bouffe?: number; eau?: number }[] = [];*/
+ 
+  histoire: { sommeil?: number; bouffe?: number; eau?: number }[] = [];
   constructor(public id: number, public nom: string, public naissance: number) {}
 
   aTrait(trait: TRAIT): boolean {
@@ -55,40 +59,8 @@ export class Meeple {
       this.position = cellule;
     }
   }
-}
 
-export class Objet {
-  flags?: string[];
-  constructor(public nom: string, public description: string) {}
+  ajouteHistoire() {
+    this.histoire.unshift({})
+  }
 }
-
-export enum OBJET {
-  VIANDE,
-  BOIS,
-  PIERRE,
-  SABLE,
-  LEGUME,
-  FRUIT,
-  ARGILE,
-  TERRE,
-  FER,
-  CUIVRE,
-  HERBE,
-  VIANDE_SECHEE,
-  BRIQUE
-}
-
-export const objets = {
-  VIANDE: new Objet('Viande', 'Nourriture'),
-  BOIS: new Objet('Bois', 'Bois de construction ou pour feu'),
-  PIERRE: new Objet('Pierre', 'Pierre pour construction'),
-  SABLE: new Objet('Sable', 'Sable'),
-  LEGUME: new Objet('Légume', 'Nourriture'),
-  FRUIT: new Objet('Fruit', 'Nourriture'),
-  ARGILE: new Objet('Argile', 'Matériau de construction ou artisanat'),
-  FER: new Objet('Fer', 'materiau de construction ou artisanat'),
-  CUIVRE: new Objet('CUIVRE', "matériau d'artisanat"),
-  HERBE: new Objet('Herbe', 'Nourriture ou soin'),
-  VIANDE_SECHEE: new Objet('Viande séchée', 'Nourriture qui se conserve'),
-  BRIQUE: new Objet('Brique', 'brique rouge ou blanche')
-};
