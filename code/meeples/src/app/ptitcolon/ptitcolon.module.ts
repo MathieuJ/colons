@@ -8,6 +8,8 @@ import { MineComponent } from './mine/mine.component';
 import { PecheComponent } from './peche/peche.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { BotComponent } from './bot/bot.component';
+import { CoutComponent } from './cout/cout.component';
 
 
 const ROUTES: Routes = [
@@ -18,7 +20,11 @@ const ROUTES: Routes = [
 ];
 
 @NgModule({
-  declarations: [StartComponent, PartieComponent, ElevageComponent, CultureComponent, MineComponent, PecheComponent],
+  declarations: [StartComponent, 
+    PartieComponent, 
+    ElevageComponent, 
+    CultureComponent, MineComponent, PecheComponent, BotComponent, 
+    CoutComponent],
   imports: [
     CommonModule,
     FormsModule, 

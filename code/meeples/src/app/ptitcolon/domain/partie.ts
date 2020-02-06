@@ -1,6 +1,18 @@
 export class Cout {
     constructor(public elements: { [key: string]: number } = {}) {
     }
+
+    toString() {
+        console.log("to string");
+        let s = '';
+        Object.keys(this.elements).forEach(e => {
+            for (let i = 0; i < this.elements[e]; i++) {
+                s = s + e;
+            }
+        });
+        return s;
+    }
+
     static from(s: string): Cout {
         const elements = {};
         s.split('').forEach(c => {
@@ -37,9 +49,11 @@ export class Cout {
 export abstract class Module {
     name: string;
     type: string;
+    bot: boolean = false;
 }
 export interface Bot {
     getLootTable();
+    getUpgradeTable();
 }
 
 export class Culture extends Module {
@@ -67,6 +81,7 @@ export const Materiaux = {
 export class BotCulture extends Module implements Bot {
     name = 'Bot Culture';
     type = 'bc';
+    bot = true;
     getUpgradeTable() {
         return [Cout.from('w'), Cout.from('wm'), Cout.from('mm')];
     }
@@ -82,6 +97,7 @@ export class Elevage extends Module {
 export class BotElevage extends Module implements Bot {
     name = 'Bot Elevage';
     type = 'be';
+    bot = true;
     getUpgradeTable() {
         return [Cout.from('w'), Cout.from('wm'), Cout.from('mm')];
     }
@@ -99,6 +115,7 @@ export class Mine extends Module {
 export class BotMine extends Module implements Bot {
     name = 'Bot Mine';
     type = 'bm';
+    bot = true;
     getUpgradeTable() {
         return [Cout.from('w'), Cout.from('wm'), Cout.from('mm')];
     }
@@ -116,6 +133,7 @@ export class Peche extends Module {
 export class BotPeche extends Module implements Bot {
     name = 'Bot Peche';
     type = 'bp';
+    bot = true;
     getUpgradeTable() {
         return [Cout.from('w'), Cout.from('wm'), Cout.from('mm')];
     }

@@ -1,1 +1,35 @@
-<p>partie works!</p>
+<div style="display: flex; flex-direction: row;">
+    <div>
+        <div *ngIf="!partie.culture.bot else cultureBot">
+            culture
+        </div>
+        <ng-template #cultureBot>
+            <app-bot [bot]="partie.culture"></app-bot>
+        </ng-template>
+    </div>
+    <div>
+        <div *ngIf="!partie.elevage.bot else elevageBot">
+            elevage
+        </div>
+        <ng-template #elevageBot>
+            <app-bot [bot]="partie.elevage"></app-bot>
+        </ng-template>
+    </div>
+    <div>
+        <div *ngIf="!partie.peche.bot else pecheBot">
+            Peche
+        </div>
+        <ng-template #pecheBot>
+            <app-bot [bot]="partie.peche"></app-bot>
+        </ng-template>
+    </div>
+    <div>
+        <div *ngIf="!partie.mine.bot else mineBot">
+            mine
+        </div>
+        <ng-template #mineBot>
+            <app-bot [bot]="partie.mine"></app-bot>
+        </ng-template>
+    </div>
+    {{counter}}
+</div>

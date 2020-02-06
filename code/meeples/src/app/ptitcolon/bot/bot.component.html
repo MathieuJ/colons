@@ -1,0 +1,8 @@
+<p>{{bot.name}}</p>
+<div *ngFor="let upgrade of bot.getUpgradeTable()">
+    <app-cout [cout]="upgrade"></app-cout>
+</div>
+<div *ngFor="let loot of bot.getLootTable()">
+    <app-cout [cout]="loot"></app-cout>
+</div>
+<button (click)="lance()">Lance</button>
