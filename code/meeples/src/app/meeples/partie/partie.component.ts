@@ -16,6 +16,7 @@ export class PartieComponent implements OnInit {
   @Input()
   partie: Partie;
   subs: Subscription;
+  subs2: Subscription;
 
   logs: string[];
 
@@ -30,31 +31,32 @@ export class PartieComponent implements OnInit {
 
   constructor(private ms: MessageService) {
     this.subs = this.ms.getChannel().subscribe(this.onMessage);
+    this.subs2 = this.ms.getChannelSelected().subscribe(this.onMessageSelected);
   }
 
   ngOnInit() {
   }
 
+  onMessageSelected(message: Message) {
+    switch(message.targetType) {
+      case TargetType.NONE:
+        this.selectedElement = undefined;
+        break;
+      case TargetType.MEEPLE:
+        this.selectedElement = { type: TargetType.MEEPLE, meeple: message.target };
+        break;
+      case TargetType.CELLULE:
+        this.selectedElement = { type: TargetType.CELLULE, cellule: message.target };
+        break;
+    }
+  }
+
   onMessage(message: Message) {
     switch (message.messageType) {
-      case MessageType.SELECT:
-        switch (message.targetType) {
-          case TargetType.NONE:
-            this.selectedElement = undefined;
-            break;
-          case TargetType.MEEPLE:
-            this.selectedElement = { type: TargetType.MEEPLE, meeple: message.target };
-            break;
-          case TargetType.CELLULE:
-            this.selectedElement = { type: TargetType.CELLULE, cellule: message.target };
-            break;
-        }
-        break;
       case MessageType.LOG:
         this.log(message.target);
         break;
       default:
-        this.log('unkown message :' + message);
         break;
     }
   }
