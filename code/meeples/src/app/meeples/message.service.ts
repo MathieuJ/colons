@@ -12,6 +12,7 @@ export class MessageService {
   constructor() {}
 
   sendMessage(message: Message) {
+    console.log("send mesg", message);
     switch (message.messageType) {
       case MessageType.SELECT:
         this.channelSelected.next(message);

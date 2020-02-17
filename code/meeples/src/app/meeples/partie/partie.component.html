@@ -1,7 +1,7 @@
 <app-terrain [terrain]="partie.terrain"></app-terrain>
 
 <div class="selection" *ngIf="selectedElement">
-    {{selectedElement.type}}
+    t {{selectedElement.type}}
     <div *ngIf="selectedElement.type === 'batiment'">
         <div *ngIf="selectedElement.batiment.typeBatiment.nom === 'Robot'">
             <h4>Robot</h4>
@@ -14,8 +14,8 @@
         </div>
     </div>
 
-    <div *ngIf="selectedElement.type == 'CELLULE'">
-        <h4>Cellule</h4>
+    <div *ngIf="selectedElement.type == _TargetType.CELLULE">
+        <h4>C</h4>
         {{selectedElement.cellule.x}} {{selectedElement.cellule.y}} {{selectedElement.cellule.typeCellule}}
         <span *ngIf="selectedElement.cellule.actionMeeples">
             <div *ngFor="let meeple of selectedElement.cellule.actionMeeples.meeples">
@@ -24,7 +24,7 @@
         </span>
     </div>
 
-    <div *ngIf="selectedElement.type === 'meeple'">
+    <div *ngIf="selectedElement.type === _TargetType.MEEPLE">
         <span
             [ngStyle]="{'border': '2px solid ' + selectedElement.meeple.color1, 'padding':'1.5px 0', 'border-radius':'10px'}">
             <span

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { Partie, Carte } from '../domain/partie';
 import { MessageService } from '../message.service';
 import { Subscription } from 'rxjs';
@@ -18,6 +18,8 @@ export class PartieComponent implements OnInit {
   subs: Subscription;
   subs2: Subscription;
 
+  _TargetType = TargetType;
+
   logs: string[];
 
   selectedElement: {
@@ -29,9 +31,12 @@ export class PartieComponent implements OnInit {
     plan?: TypeBatiment;
   } = undefined;
 
-  constructor(private ms: MessageService) {
-    this.subs = this.ms.getChannel().subscribe(this.onMessage);
-    this.subs2 = this.ms.getChannelSelected().subscribe(this.onMessageSelected);
+  truc = "ototo";
+  
+  constructor(private ms: MessageService,
+    private changeDetectorRef: ChangeDetectorRef,) {
+    this.subs = this.ms.getChannel().subscribe((m) => this.onMessage(m));
+    this.subs2 = this.ms.getChannelSelected().subscribe((m) => this.onMessageSelected(m));
   }
 
   ngOnInit() {
@@ -47,6 +52,9 @@ export class PartieComponent implements OnInit {
         break;
       case TargetType.CELLULE:
         this.selectedElement = { type: TargetType.CELLULE, cellule: message.target };
+        break;
+      default: 
+        this.selectedElement = { type : TargetType.MEEPLE, meeple: new Meeple(3, "oijiojf", 3)}
         break;
     }
   }

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Cellule } from '../domain/cellule';
 import { MessageService } from '../message.service';
 import { Message, MessageType, TargetType } from '../domain/message';
+import { Meeple } from '../domain/meeple';
 
 @Component({
   selector: 'app-cellule',
@@ -17,7 +18,12 @@ export class CelluleComponent implements OnInit {
   ngOnInit() {
   }
   select() {
-    console.log("select", this.cellule);
+    console.log("select C", this.cellule);
     this.ms.sendMessage(new Message(MessageType.SELECT, '', TargetType.CELLULE, this.cellule));
   } 
+  selectMeeple(event: Event, meeple: Meeple) {
+    event.stopPropagation();
+    console.log("select M", this.cellule);
+    this.ms.sendMessage(new Message(MessageType.SELECT, '', TargetType.MEEPLE, meeple));
+  }
 }
