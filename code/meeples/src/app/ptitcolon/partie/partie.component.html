@@ -1,5 +1,5 @@
 <div style="display: flex; flex-direction: row;">
-    <div>
+    <div class="module">
         <div *ngIf="!partie.culture.bot else cultureBot">
             culture
         </div>
@@ -7,7 +7,7 @@
             <app-bot [bot]="partie.culture"></app-bot>
         </ng-template>
     </div>
-    <div>
+    <div class="module">
         <div *ngIf="!partie.elevage.bot else elevageBot">
             elevage
         </div>
@@ -15,15 +15,15 @@
             <app-bot [bot]="partie.elevage"></app-bot>
         </ng-template>
     </div>
-    <div>
+    <div class="module">
         <div *ngIf="!partie.peche.bot else pecheBot">
-            Peche
+            <app-peche [peche]="partie.peche"></app-peche>
         </div>
         <ng-template #pecheBot>
             <app-bot [bot]="partie.peche"></app-bot>
         </ng-template>
     </div>
-    <div>
+    <div class="module">
         <div *ngIf="!partie.mine.bot else mineBot">
             mine
         </div>

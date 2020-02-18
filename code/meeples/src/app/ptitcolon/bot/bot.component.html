@@ -1,8 +1,10 @@
-<p>{{bot.name}}</p>
-<div *ngFor="let upgrade of bot.getUpgradeTable()">
-    <app-cout [cout]="upgrade"></app-cout>
-</div>
-<div *ngFor="let loot of bot.getLootTable()">
-    <app-cout [cout]="loot"></app-cout>
+<p>{{bot.name}} - lvl {{bot.level}}</p>
+<div *ngFor="let loot of bot.lootTable; let i = index">
+    {{index}}
+    <span [ngStyle]="{'border': i >= bot.level && i < bot.level + 7 ?   '1px solid red' : 'none'}"><app-cout [cout]="loot"></app-cout></span>
 </div>
 <button (click)="lance()">Lance</button>
+<div *ngFor="let upgrade of bot.upgradeTable">
+    <app-cout [cout]="upgrade"></app-cout>
+</div>
+<button (click)="upgrade()">Upgrade</button>

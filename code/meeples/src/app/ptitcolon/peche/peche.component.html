@@ -1,1 +1,9 @@
-<p>peche works!</p>
+<p> maison </p>
+<div *ngIf="peche">
+    <p> stock : {{peche.stock}}</p>
+    <p>des : {{peche.des | json}}</p>
+    <div *ngFor="let de of peche.des; let i = index">
+        {{de}} <input type="checkbox" [(ngModel)]="peche.relance[i]" />
+    </div>
+    <button (click)="peche.relanceDes()" [enabled]="peche.hasRelance()">Relance</button>
+</div>

@@ -8,12 +8,13 @@ import { Partie } from '../domain/partie';
 })
 export class StartComponent implements OnInit {
   state: 'INIT' | 'PLAY' | 'END';
-  culture: boolean = false;
-  elevage: boolean = false;
-  mine: boolean = false;
-  peche: boolean = false;
+  culture = false;
+  elevage = false;
+  mine = false;
+  peche = true;
 
   partie: Partie;
+  
   constructor() { 
 
   }

@@ -38,6 +38,7 @@ export class PartieComponent implements OnInit {
   }
 
   onMessageSelected(message: Message) {
+    console.log("on msg selected", message);
     switch(message.targetType) {
       case TargetType.NONE:
         this.selectedElement = undefined;
@@ -49,6 +50,7 @@ export class PartieComponent implements OnInit {
         this.selectedElement = { type: TargetType.CELLULE, cellule: message.target };
         break;
     }
+    console.log(this.selectedElement);
   }
 
   onMessage(message: Message) {

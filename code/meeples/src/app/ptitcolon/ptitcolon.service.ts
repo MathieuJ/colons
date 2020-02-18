@@ -12,6 +12,7 @@ export class PtitColonService {
   constructor() {}
 
   sendMessage(message: string) {
+    console.log("send mesg", message);
     this.handleMessage();
   }
 
@@ -21,7 +22,7 @@ export class PtitColonService {
 
   handleMessage() {
     this.counter++;
-    if (this.counter % 3 == 0) {
+    if (this.counter % 3 === 0) {
        this.channel.next("" + this.counter);
     }
   }

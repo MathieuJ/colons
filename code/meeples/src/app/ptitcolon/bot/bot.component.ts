@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import { Bot } from '../domain/partie';
+import { BotModule } from '../domain/partie';
 import { PtitColonService } from '../ptitcolon.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { PtitColonService } from '../ptitcolon.service';
 })
 export class BotComponent implements OnInit {
   @Input()
-  bot: Bot;
+  bot: BotModule;
   
   constructor(private ptitColonService: PtitColonService) { }
 
@@ -18,5 +18,8 @@ export class BotComponent implements OnInit {
   }
   lance() {
     this.ptitColonService.sendMessage("");
+  }
+  upgrade() {
+    this.bot.level++;
   }
 }

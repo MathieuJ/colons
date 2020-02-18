@@ -2,7 +2,7 @@
 
 <div class="selection" *ngIf="selectedElement">
     {{selectedElement.type}}
-    <div *ngIf="selectedElement.type === 'batiment'">
+    <div *ngIf="selectedElement.batiment">
         <div *ngIf="selectedElement.batiment.typeBatiment.nom === 'Robot'">
             <h4>Robot</h4>
             <button>Décollage</button>
@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div *ngIf="selectedElement.type == 'CELLULE'">
+    <div *ngIf="selectedElement.cellule">
         <h4>Cellule</h4>
         {{selectedElement.cellule.x}} {{selectedElement.cellule.y}} {{selectedElement.cellule.typeCellule}}
         <span *ngIf="selectedElement.cellule.actionMeeples">
@@ -24,7 +24,7 @@
         </span>
     </div>
 
-    <div *ngIf="selectedElement.type === 'meeple'">
+    <div *ngIf="selectedElement.meeple">
         <span
             [ngStyle]="{'border': '2px solid ' + selectedElement.meeple.color1, 'padding':'1.5px 0', 'border-radius':'10px'}">
             <span

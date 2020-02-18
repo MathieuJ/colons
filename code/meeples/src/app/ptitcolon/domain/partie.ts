@@ -1,4 +1,20 @@
+export function random(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
 export class Cout {
+    static from(s: string): Cout {
+        const elements = {};
+        s.split('').forEach(c => {
+            if (elements[c]) {
+                elements[c] += 1;
+            } else {
+                elements[c] = 1;
+            }
+        });
+        return new Cout(elements);
+    }
+
     constructor(public elements: { [key: string]: number } = {}) {
     }
 
@@ -13,17 +29,6 @@ export class Cout {
         return s;
     }
 
-    static from(s: string): Cout {
-        const elements = {};
-        s.split('').forEach(c => {
-            if (elements[c]) {
-                elements[c] += 1;
-            } else {
-                elements[c] = 1;
-            }
-        });
-        return new Cout(elements);
-    }
     add(cout: Cout) {
         Object.keys(cout.elements).forEach(e => {
             if (this.elements[e]) {
@@ -49,14 +54,20 @@ export class Cout {
 export abstract class Module {
     name: string;
     type: string;
-    bot: boolean = false;
+    bot = false;
 }
-export interface Bot {
-    getLootTable();
-    getUpgradeTable();
+export abstract class BotModule extends Module {
+    lootTable: Cout[];
+    upgradeTable: Cout[];
+    level = 1;
+    bot = true;
+}
+export abstract class PlayerModule {
+    stock: Cout[] = [];
+    bot = false;
 }
 
-export class Culture extends Module {
+export class Culture extends PlayerModule {
     name = 'Culture';
     type = 'c';
 }
@@ -75,80 +86,100 @@ export const Materiaux = {
     p: 'poisson',
     r: 'trésor',
     i: 'pierre',
-    f: 'fer'
+    f: 'fer',
+    _: 'rien'
 };
 
-export class BotCulture extends Module implements Bot {
+export class BotCulture extends BotModule {
     name = 'Bot Culture';
     type = 'bc';
     bot = true;
-    getUpgradeTable() {
-        return [Cout.from('w'), Cout.from('wm'), Cout.from('mm')];
-    }
-    getLootTable() {
-        return [Cout.from(''), Cout.from(''), Cout.from('g'), Cout.from('h'), Cout.from('m'), Cout.from('w'),
+    upgradeTable = [Cout.from('w'), Cout.from('wm'), Cout.from('mm')];
+    lootTable = [Cout.from(''), Cout.from(''), Cout.from('g'), Cout.from('h'), Cout.from('m'), Cout.from('w'),
         Cout.from('gh'), Cout.from('hm'), Cout.from('mw'), Cout.from('hw'), Cout.from('mw')];
-    }
 }
-export class Elevage extends Module {
+
+export class Elevage extends PlayerModule {
     name = 'Elevage';
     type = 'e';
 }
-export class BotElevage extends Module implements Bot {
+export class BotElevage extends BotModule {
     name = 'Bot Elevage';
     type = 'be';
     bot = true;
-    getUpgradeTable() {
-        return [Cout.from('w'), Cout.from('wm'), Cout.from('mm')];
-    }
-    getLootTable() {
-        return [Cout.from(''), Cout.from(''), Cout.from('g'), Cout.from('h'),
+    upgradeTable = [Cout.from('w'), Cout.from('wm'), Cout.from('mm')];
+    lootTable = [Cout.from(''), Cout.from(''), Cout.from('g'), Cout.from('h'),
         Cout.from('m'), Cout.from('w'), Cout.from('gh'), Cout.from('hm'),
         Cout.from('mw'), Cout.from('hw'), Cout.from('mw')];
-    }
 }
 
-export class Mine extends Module {
+export class Mine extends PlayerModule {
     name = 'Mine';
     type = 'm';
 }
-export class BotMine extends Module implements Bot {
+export class BotMine extends  BotModule {
     name = 'Bot Mine';
     type = 'bm';
     bot = true;
-    getUpgradeTable() {
-        return [Cout.from('w'), Cout.from('wm'), Cout.from('mm')];
-    }
-    getLootTable() {
-        return [Cout.from(''), Cout.from(''), Cout.from('g'), Cout.from('h'),
+    upgradeTable = [Cout.from('w'), Cout.from('wm'), Cout.from('mm')];
+    lootTable = [Cout.from(''), Cout.from(''), Cout.from('g'), Cout.from('h'),
         Cout.from('m'), Cout.from('w'), Cout.from('gh'), Cout.from('hm'),
         Cout.from('mw'), Cout.from('hw'), Cout.from('mw')];
-    }
 }
 
-export class Peche extends Module {
+export class Peche extends PlayerModule {
     name = 'Peche';
     type = 'p';
+    nbDes = 3;
+    des: number[] = [];
+    relance: boolean[] = [];
+    numRelance = 1;
+    nbRelances = 1;
+    lanceDes() {
+        this.des = [];
+        this.relance = [];
+        for (let i = 0; i < this.nbDes; i++) {
+            this.des.push(random(1, 6));
+            this.relance.push(false);
+        }
+    }
+    relanceDes() {
+        for (let i = 0; i < this.nbDes; i++) {
+            if (this.relance[i]) {
+                this.des[i] = random(1, 6);
+            }
+            this.relance[i] = false;
+        }
+    }
+    hasRelance() {
+        return this.numRelance < 2 + this.nbRelances;
+    }
+    toMatos(de: number) {
+        switch (de) {
+            case 1: return Cout.from("");
+            case 2: return Cout.from("p");
+            case 3: return Cout.from("pp");
+            case 4: return Cout.from("ppp");
+            case 5: return Cout.from("r");
+            case 6: return Cout.from("b");
+        }
+    }
 }
-export class BotPeche extends Module implements Bot {
+export class BotPeche extends BotModule {
     name = 'Bot Peche';
     type = 'bp';
     bot = true;
-    getUpgradeTable() {
-        return [Cout.from('w'), Cout.from('wm'), Cout.from('mm')];
-    }
-    getLootTable() {
-        return [Cout.from(''), Cout.from(''), Cout.from('p'), Cout.from('p'),
+    upgradeTable = [Cout.from('w'), Cout.from('wm'), Cout.from('mm')];
+    lootTable = [Cout.from(''), Cout.from(''), Cout.from('p'), Cout.from('p'),
         Cout.from('pp'), Cout.from('r'), Cout.from('pp'), Cout.from('pp'),
         Cout.from('pr'), Cout.from('ppp'), Cout.from('ppr')];
-    }
 }
 
 export class Partie {
-    culture: Culture;
-    elevage: Elevage;
-    mine: Mine;
-    peche: Peche;
+    culture: Module;
+    elevage: Module;
+    mine: Module;
+    peche: Module;
 
     constructor(
         culture: boolean = false,

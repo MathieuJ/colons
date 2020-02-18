@@ -1,6 +1,6 @@
 import { Element } from './elements';
 
-export class Cout{
+export class Cout {
 
     constructor(public elements: {[key: string]: number} = {}) {
 

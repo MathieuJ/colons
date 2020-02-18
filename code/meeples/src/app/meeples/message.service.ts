@@ -16,17 +16,17 @@ export class MessageService {
       case MessageType.SELECT:
         this.channelSelected.next(message);
         break;
-      default: 
+      default:
         this.channel.next(message);
-      break;
+        break;
     }
   }
 
   getChannel() {
-    return this.channel.asObservable()
+    return this.channel.asObservable();
   }
 
   getChannelSelected() {
-    return this.channelSelected.asObservable()
+    return this.channelSelected.asObservable();
   }
 }
