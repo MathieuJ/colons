@@ -5,5 +5,11 @@
         {{cellule.contenu}}
         {{cellule.dormeur?.nom}}
     </span>
+    <span *ngIf="cellule.meeplesPresents">
+        <span *ngFor="let meeple of cellule.meeplesPresents"
+            style="border: 1px solid lightgrey"
+            (click)="selectMeeple($event, meeple)"
+            >{{meeple.nom}}</span>
+    </span>
     <span *ngIf="!cellule.visible">XXXX</span>
 </div>
