@@ -26,7 +26,7 @@ export const traits = {
 };
 
 export class Meeple {
-  
+  selected = false;
   traits: TRAIT[] = [];
   /*sante: number;
   esperance: number;

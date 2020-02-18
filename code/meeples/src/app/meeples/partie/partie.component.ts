@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
-import { Partie, Carte } from '../domain/partie';
+import { Partie, Carte, SelectedElement } from '../domain/partie';
 import { MessageService } from '../message.service';
 import { Subscription } from 'rxjs';
 import { Batiment, TypeBatiment } from '../domain/batiment';
 import { HexaCellule } from '../domain/hexaTerrain';
 import { Meeple } from '../domain/meeple';
 import { Message, MessageType, TargetType } from '../domain/message';
+import { MeeplePartieService } from '../partie.service';
 
 @Component({
   selector: 'app-partie',
@@ -22,21 +23,18 @@ export class PartieComponent implements OnInit {
 
   logs: string[];
 
-  selectedElement: {
-    type: TargetType;
-    batiment?: Batiment;
-    cellule?: HexaCellule;
-    meeple?: Meeple;
-    carte?: Carte;
-    plan?: TypeBatiment;
-  } = undefined;
+  selectedElement: SelectedElement = undefined;
 
-  truc = "ototo";
+  getTitle() {
+    console.log("get");
+    return "title";
+  }
   
-  constructor(private ms: MessageService,
+  constructor(private ms: MessageService, private partieService: MeeplePartieService,
     private changeDetectorRef: ChangeDetectorRef,) {
     this.subs = this.ms.getChannel().subscribe((m) => this.onMessage(m));
     this.subs2 = this.ms.getChannelSelected().subscribe((m) => this.onMessageSelected(m));
+    this.selectedElement = this.partieService.selectedElement;
   }
 
   ngOnInit() {
@@ -44,21 +42,7 @@ export class PartieComponent implements OnInit {
 
   onMessageSelected(message: Message) {
     console.log("on msg selected", message);
-    switch(message.targetType) {
-      case TargetType.NONE:
-        this.selectedElement = undefined;
-        break;
-      case TargetType.MEEPLE:
-        this.selectedElement = { type: TargetType.MEEPLE, meeple: message.target };
-        break;
-      case TargetType.CELLULE:
-        this.selectedElement = { type: TargetType.CELLULE, cellule: message.target };
-        break;
-      default: 
-        this.selectedElement = { type : TargetType.MEEPLE, meeple: new Meeple(3, "oijiojf", 3)}
-        break;
-    }
-    console.log(this.selectedElement);
+    this.selectedElement = message.target;
   }
 
   onMessage(message: Message) {

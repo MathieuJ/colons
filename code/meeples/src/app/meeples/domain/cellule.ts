@@ -25,6 +25,7 @@ export class ActionMeeples {
 }
 
 export class Cellule {
+  public selected = false;
   public contenu: any[] = [];
   public batiment: Batiment;
 

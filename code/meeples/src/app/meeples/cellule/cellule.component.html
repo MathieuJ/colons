@@ -1,5 +1,5 @@
-<div (click)="select()">
-    [{{cellule.x}} - {{cellule.y}}]
+<div (click)="select()" class="cellule" [ngClass]="{'selected': cellule.selected}">
+    &nbsp;
     <br>
     <span *ngIf="cellule.visible">
         {{cellule.contenu}}
@@ -7,7 +7,8 @@
     </span>
     <span *ngIf="cellule.meeplesPresents">
         <span *ngFor="let meeple of cellule.meeplesPresents"
-            style="border: 1px solid lightgrey"
+            class="meeple"
+            [ngClass]="{'selected': meeple.selected}"
             (click)="selectMeeple($event, meeple)"
             >{{meeple.nom}}</span>
     </span>

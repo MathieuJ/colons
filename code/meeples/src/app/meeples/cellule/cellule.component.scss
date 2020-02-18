@@ -1,0 +1,13 @@
+.cellule {
+    background-color: lightgray;
+    &.selected{
+        border: 1px solid darkgray;
+    }
+}
+
+.meeple {
+    background-color: lightgray;
+    &.selected{
+        border: 1px solid darkgray;
+    }
+}
