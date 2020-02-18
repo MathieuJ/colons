@@ -3,6 +3,7 @@ import { Cellule } from '../domain/cellule';
 import { MessageService } from '../message.service';
 import { Message, MessageType, TargetType } from '../domain/message';
 import { Meeple } from '../domain/meeple';
+import { MeeplePartieService } from '../partie.service';
 
 @Component({
   selector: 'app-cellule',
@@ -13,17 +14,18 @@ export class CelluleComponent implements OnInit {
   @Input()
   cellule: Cellule;
 
-  constructor(private ms:MessageService) {}
+  constructor(private partieService: MeeplePartieService) {}
 
   ngOnInit() {
   }
   select() {
     console.log("select C", this.cellule);
-    this.ms.sendMessage(new Message(MessageType.SELECT, '', TargetType.CELLULE, this.cellule));
+
+    this.partieService.selectCellule(this.cellule);
   } 
   selectMeeple(event: Event, meeple: Meeple) {
     event.stopPropagation();
     console.log("select M", this.cellule);
-    this.ms.sendMessage(new Message(MessageType.SELECT, '', TargetType.MEEPLE, meeple));
+    this.partieService.selectCellule(this.cellule);
   }
 }
