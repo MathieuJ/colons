@@ -3,14 +3,14 @@
     <br>
     <span *ngIf="cellule.visible">
         {{cellule.contenu}}
-        {{cellule.dormeur?.nom}}
+        {{cellule.dormeur?.symbole}}
     </span>
     <span *ngIf="cellule.meeplesPresents">
         <span *ngFor="let meeple of cellule.meeplesPresents"
             class="meeple"
             [ngClass]="{'selected': meeple.selected}"
             (click)="selectMeeple($event, meeple)"
-            >{{meeple.nom}}</span>
+            >{{meeple.symbole}}</span>
     </span>
     <span *ngIf="!cellule.visible">XXXX</span>
 </div>

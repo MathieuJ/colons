@@ -45,7 +45,7 @@ export class Meeple {
   couche: Cellule;
  
   histoire: { sommeil?: number; bouffe?: number; eau?: number }[] = [];
-  constructor(public id: number, public nom: string, public naissance: number) {}
+  constructor(public id: number, public symbole: string, public nom: string, public naissance: number) {}
 
   aTrait(trait: TRAIT): boolean {
     return this.traits.indexOf(trait) > -1;

@@ -218,7 +218,7 @@ export class Partie {
   }
 
   generateMeeple(age) {
-    const meeple = new Meeple(this.generalId++, this.generateMeepleName(), this.dateDemarrage - age);
+    const meeple = new Meeple(this.generalId++, 'M' + this.generalId, this.generateMeepleName(), this.dateDemarrage - age);
     meeple.color1 = 'rgb(' + random(0, 255) + ',' + random(0, 255) + ',' + random(0, 255) + ')';
     meeple.color2 = 'rgb(' + random(0, 255) + ',' + random(0, 255) + ',' + random(0, 255) + ')';
     return meeple;
