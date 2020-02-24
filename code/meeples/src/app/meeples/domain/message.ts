@@ -12,7 +12,7 @@ export enum TargetType {
 export class Message {
     constructor(
         public messageType: MessageType,
-        //public name: string, 
-        //public targetType: TargetType, 
+        // public name: string, 
+        // public targetType: TargetType, 
         public target: any) {}
   }

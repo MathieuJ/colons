@@ -1,4 +1,6 @@
 .cellule {
+    width: 30px;
+    height: 20px;
     background-color: lightgray;
     &.selected{
         border: 1px solid darkgray;
@@ -6,6 +8,8 @@
 }
 
 .meeple {
+    border: 1px solid white;
+    cursor: col-resize;
     background-color: lightgray;
     &.selected{
         border: 1px solid darkgray;

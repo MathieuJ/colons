@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div *ngIf="selectedElement.type == _TargetType.CELLULE">
+    <div *ngIf="selectedElement.type == TargetType.CELLULE">
         <h4>C</h4>
         {{selectedElement.cellule.x}} {{selectedElement.cellule.y}} {{selectedElement.cellule.typeCellule}}
         <span *ngIf="selectedElement.cellule.actionMeeples">
@@ -26,18 +26,8 @@
         </span>
     </div>
 
-    <div *ngIf="selectedElement.type === _TargetType.MEEPLE">
-        <span
-            [ngStyle]="{'border': '2px solid ' + selectedElement.meeple.color1, 'padding':'1.5px 0', 'border-radius':'10px'}">
-            <span
-                [ngStyle]="{'border': '2px solid ' + selectedElement.meeple.color2, 'padding': '0 3px', 'border-radius':'8px'}">
-                {{selectedElement.meeple.nom}}
-            </span>
-        </span>
-        <span>sante: {{selectedElement.meeple.sante}}</span>
-        <span>esperance de vie : {{selectedElement.meeple.esperance}}</span>
-        <span>status: {{selectedElement.meeple.status}}</span>
-        <button (click)="setOrdre($event, 'couche')">Définir L</button>
+    <div *ngIf="selectedElement.type === TargetType.MEEPLE">
+        <app-meeple-infos [meeple]="selectedElement.meeple"></app-meeple-infos>
     </div>
 </div>
 

@@ -1,0 +1,11 @@
+<span
+[ngStyle]="{'border': '2px solid ' + meeple.color1, 'padding':'1.5px 0', 'border-radius':'10px'}">
+<span
+    [ngStyle]="{'border': '2px solid ' + meeple.color2, 'padding': '0 3px', 'border-radius':'8px'}">
+    {{meeple.nom}} ({{meeple.symbole}})
+</span>
+</span>
+<span>sante: {{meeple.sante}}</span>
+<span>esperance de vie : {{meeple.esperance}}</span>
+<span>status: {{meeple.status}}</span>
+<button (click)="setOrdre($event, 'couche')">Définir L</button>

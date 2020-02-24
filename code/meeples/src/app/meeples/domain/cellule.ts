@@ -1,5 +1,5 @@
 import { Meeple } from './meeple';
-import { Batiment, TypeBatiment } from './batiment';
+import { Batiment, ProtoBatiment } from './batiment';
 import { Carte } from './partie';
 
 export enum CelluleType {
@@ -18,11 +18,14 @@ export enum ACTION {
   RECOLTE,
   EXPLORATION,
   CHASSE,
-  LOISIR
+  LOISIR,
+  CONSTRUCTION
 }
 export class ActionMeeples {
-  constructor(public cellule: Cellule, public carte: Carte, public plan: TypeBatiment = undefined, public meeples: Meeple[] = []) {}
+  constructor(public cellule: Cellule, public carte: Carte, public plan: ProtoBatiment, public meeples: Meeple[] = []) {}
 }
+
+
 
 export class Cellule {
   public selected = false;

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { Partie, Carte, SelectedElement } from '../domain/partie';
 import { MessageService } from '../message.service';
 import { Subscription } from 'rxjs';
-import { Batiment, TypeBatiment } from '../domain/batiment';
+import { Batiment } from '../domain/batiment';
 import { HexaCellule } from '../domain/hexaTerrain';
 import { Meeple } from '../domain/meeple';
 import { Message, MessageType, TargetType } from '../domain/message';
@@ -19,9 +19,11 @@ export class PartieComponent implements OnInit {
   subs: Subscription;
   subs2: Subscription;
 
-  _TargetType = TargetType;
+  TargetType = TargetType;
 
   logs: string[];
+
+  actions: any[];
 
   selectedElement: SelectedElement = undefined;
 
@@ -29,9 +31,8 @@ export class PartieComponent implements OnInit {
     console.log("get");
     return "title";
   }
-  
-  constructor(private ms: MessageService, private partieService: MeeplePartieService,
-    private changeDetectorRef: ChangeDetectorRef,) {
+
+  constructor(private ms: MessageService, private partieService: MeeplePartieService) {
     this.subs = this.ms.getChannel().subscribe((m) => this.onMessage(m));
     this.subs2 = this.ms.getChannelSelected().subscribe((m) => this.onMessageSelected(m));
     this.selectedElement = this.partieService.selectedElement;

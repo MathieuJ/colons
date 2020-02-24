@@ -19,9 +19,11 @@ export class CelluleComponent implements OnInit {
   ngOnInit() {
   }
   select() {
+    console.log("select C");
     this.partieService.selectCellule(this.cellule);
   } 
   selectMeeple(event: Event, meeple: Meeple) {
+    console.log("select M");
     event.stopPropagation();
     this.partieService.selectMeeple(meeple);
   }

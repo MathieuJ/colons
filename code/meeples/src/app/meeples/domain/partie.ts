@@ -1,9 +1,10 @@
 import { Meeple } from './meeple';
 import { HexaTerrain, HexaCellule } from './hexaTerrain';
-import { TypeBatiment, Batiment, TypesBatiments } from './batiment';
+import { Batiment, ProtoBatiment, PROTOS_BATIMENTS } from './batiment';
 import { ActionMeeples, Cellule, CelluleType } from './cellule';
 import { random, melange, randomElement } from 'src/app/utils.functions';
 import { TargetType } from './message';
+import { Cout, MATERIAU } from 'src/app/meeples/domain/cout';
 
 
 export class Element {
@@ -16,7 +17,6 @@ export class SelectedElement {
     cellule?: Cellule;
     meeple?: Meeple;
     carte?: Carte;
-    plan?: TypeBatiment;
 }
 
 export class Carte extends Element {
@@ -62,7 +62,7 @@ export class Partie {
   public meeples: Meeple[] = [];
   public terrain: HexaTerrain;
   public batiments: Batiment[] = [];
-  public plans: TypeBatiment[] = [];
+  public plansDisponibles: ProtoBatiment[] = [];
   public actionsMeeples: ActionMeeples[] = [];
 
   public dateDemarrage = random(100, 200);
@@ -72,7 +72,7 @@ export class Partie {
   constructor() {
     this.buildTerrain();
     const c = this.terrain.getCellule(7, 4);
-    this.addBatiment(c, TypesBatiments.ROBOT);
+    this.addBatiment(c, PROTOS_BATIMENTS.ROBOT);
     c.visible = true;
     this.terrain.getVoisins(c, 2).forEach(c => c.visible = true);
 
@@ -84,16 +84,26 @@ export class Partie {
   }
 
   public initConstructionsPossibles() {
-    this.plans.push(TypesBatiments.HUTTE, TypesBatiments.FEU_DE_CAMP, TypesBatiments.MINE_ARGILE);
+    this.plansDisponibles.push(PROTOS_BATIMENTS.HUTTE, PROTOS_BATIMENTS.FEU_DE_CAMP, PROTOS_BATIMENTS.MINE_ARGILE);
   }
 
-  public addBatiment(cellule: HexaCellule, typeBatiment: TypeBatiment) {
-    const batiment = new Batiment(cellule, typeBatiment, []);
+  public addBatiment(cellule: HexaCellule, protoBatiment: ProtoBatiment) {
+    const batiment = new Batiment(cellule, protoBatiment, []);
     this.batiments.push(batiment);
     cellule.batiment = batiment;
   }
 
   public sendMeeple(meeple: Meeple, cellule: Cellule) {
+    // on deplace le meeple de cellule
+    const celluleOrigine = meeple.position;
+    if (celluleOrigine) {
+      console.log(celluleOrigine.meeplesPresents, meeple, celluleOrigine.meeplesPresents.filter(m => m.id !== meeple.id));
+      celluleOrigine.meeplesPresents = celluleOrigine.meeplesPresents.filter(m => m.id !== meeple.id);
+      console.log(celluleOrigine.meeplesPresents);
+    }
+    cellule.meeplesPresents.push(meeple);
+    meeple.position = cellule;
+
     // on vire le meeple de son potentiel autre boulot
     const currentMeepleAmIdx = this.actionsMeeples.findIndex(ams => ams.meeples.indexOf(meeple) > -1);
     if (currentMeepleAmIdx > -1) {
@@ -114,7 +124,7 @@ export class Partie {
     }
   }
 
-  addActionMeeples(cellule: Cellule, carte: Carte, plan?: TypeBatiment) {
+  /*addActionMeeples(cellule: Cellule, carte: Carte, plan?: TypeBatiment) {
     const oldAm = cellule.actionMeeples;
     if (oldAm) {
       this.actionsMeeples.splice(this.actionsMeeples.indexOf(oldAm), 1);
@@ -123,7 +133,7 @@ export class Partie {
     cellule.actionMeeples = newAm;
     this.actionsMeeples.push(newAm);
     this.log('ajoute un am ' + cellule + ' de ' + carte);
-  }
+  }*/
 
   public getActionMeeplesByCellule(cellule: Cellule, carte?: Carte): ActionMeeples {
     const a = this.actionsMeeples.filter(am => am.cellule === cellule && (!carte || am.carte === carte));
@@ -139,11 +149,7 @@ export class Partie {
   }
 
   private initReserve() {
-    this.reserve['eau'] = 10;
-    this.reserve['bouffe'] = 4;
-    this.reserve['bois'] = 3;
-    this.reserve['pierre'] = 1;
-    this.reserve['herbe'] = 1;
+    this.reserve = Cout.from('eeeeewwwph');
   }
 
   private initRobot() {
@@ -200,6 +206,7 @@ export class Partie {
     this.meeples.push(meeple1);
     this.sendMeeple(meeple1, this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, 1, 0));
     this.setCouche(meeple1, this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, 1, 0));
+
     this.meeples.push(meeple2);
     this.sendMeeple(meeple2, this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, -1, 0));
     this.setCouche(meeple2, this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, -1, 0));
@@ -290,9 +297,9 @@ export class Partie {
     this.meeples.forEach(m => {
       if (!m.couche.batiment) {
         m.histoire[0].sommeil = 0;
-      } else if (m.couche.batiment.typeBatiment === TypesBatiments.HUTTE) {
+      } else if (m.couche.batiment.proto === PROTOS_BATIMENTS.HUTTE) {
         m.histoire[0].sommeil = 1;
-      } else if (m.couche.batiment.typeBatiment === TypesBatiments.CABANE) {
+      } else if (m.couche.batiment.proto === PROTOS_BATIMENTS.CABANE) {
         m.histoire[0].sommeil = 2;
       }
     });
@@ -301,7 +308,7 @@ export class Partie {
 
   doMeepleEat() {
     const besoinBouffe = this.meeples.length * 2;
-    const reserveBouffe = this.reserve['bouffe'];
+    const reserveBouffe = this.reserve[MATERIAU.VIANDE];
     this.log(this.meeples.length + ' meeples mangent chacun 2 portions ça fait ' + besoinBouffe + ' portions');
     this.log('Il y a ' + reserveBouffe + ' unités de nourriture de 4 portions chacune.');
     if (besoinBouffe >= reserveBouffe / 4) {
@@ -328,7 +335,7 @@ export class Partie {
 
   doMeepleDrink() {
     const besoinEau = this.meeples.length;
-    const reserveEau = this.reserve['eau'];
+    const reserveEau = this.reserve[MATERIAU.EAU];
     if (besoinEau > reserveEau) {
       this.meeples.forEach(m => {
         m.histoire[0].eau = 0;
