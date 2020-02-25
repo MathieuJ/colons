@@ -1,7 +1,7 @@
 <div (click)="select()" class="cellule" [ngClass]="{'selected': cellule.selected, 
-    'invisible': !cellule.visible,
-    'ocean': cellule.celluleType === CEL
+    'invisible': !cellule.visible
     }">
+    {{cellule.celluleType.toString()}}
     <span *ngIf="cellule.visible">
         {{cellule.contenu}}
         {{cellule.dormeur?.symbole}}

@@ -14,17 +14,17 @@
     <div>{{meeple.position.celluleType}}</div>
     <div>Actions possibles</div>
     <div *ngFor="let action of actions">
-        <div *ngIf="action === ACTION.CONSTRUCTION">
-            <button (click)="doAction(action)">Construire un bâtiment</button>
+        <div *ngIf="action.type_action === ACTION.CONSTRUCTION">
+            <button (click)="doAction(action)">{{action.description}}</button>
         </div>
-        <div *ngIf="action === ACTION.EXPLORATION">
-            <button (click)="doAction(action)">Explorer les alentours</button>
+        <div *ngIf="action.type_action === ACTION.EXPLORATION">
+            <button (click)="doAction(action)">{{action.description}}</button>
         </div>
-        <div *ngIf="action === ACTION.RECOLTE">
-            <button (click)="doAction(action)">Récolter</button>
+        <div *ngIf="action.type_action === ACTION.RECOLTE">
+            <button (click)="doAction(action)">{{action.description}}</button>
         </div>
-        <div *ngIf="action === ACTION.TRAVAIL">
-            <button (click)="doAction(action)">Travailler dans le bâtiment</button>
+        <div *ngIf="action.type_action === ACTION.TRAVAIL">
+            <button (click)="doAction(action)">{{action.description}}</button>
         </div>
     </div>
 </div>

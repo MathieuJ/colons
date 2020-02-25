@@ -1,10 +1,9 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { Cellule, CelluleType } from '../domain/cellule';
 import { MessageService } from '../message.service';
 import { Message, MessageType, TargetType } from '../domain/message';
 import { Meeple } from '../domain/meeple';
 import { MeeplePartieService } from '../partie.service';
-import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-cellule',
@@ -24,6 +23,7 @@ export class CelluleComponent implements OnInit {
   }
   select() {
     console.log("select C");
+    
     this.partieService.selectCellule(this.cellule);
   } 
   selectMeeple(event: Event, meeple: Meeple) {

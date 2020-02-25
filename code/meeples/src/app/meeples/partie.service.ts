@@ -62,22 +62,22 @@ export class MeeplePartieService {
 
   getActionsPossibles(meeple: Meeple) {
     const cellule = meeple.position;
-    const actions = [];
+    const actions: { type_action: TYPE_ACTION, description: string }[] = [];
     if (cellule.batiment) {
       // switch (cellule.batiment.proto) {
-      actions.push(TYPE_ACTION.TRAVAIL);
+      actions.push({ type_action: TYPE_ACTION.TRAVAIL, description : 'bosser'});
       // }
     } else {
-      actions.push(TYPE_ACTION.CONSTRUCTION);
+      actions.push({ type_action: TYPE_ACTION.CONSTRUCTION, description : 'construire un bâtiment'});
     }
-    actions.push(TYPE_ACTION.RECOLTE);
-    actions.push(TYPE_ACTION.EXPLORATION);
+    actions.push({ type_action: TYPE_ACTION.RECOLTE, description : 'Récolter'});
+    actions.push({ type_action: TYPE_ACTION.EXPLORATION, description : 'Explorer les alentours'});
     switch (meeple.position.celluleType) {
       case CelluleType.FORET:
-        actions.push(TYPE_ACTION.RECOLTE);
+        actions.push({ type_action: TYPE_ACTION.RECOLTE, description : 'bosser'});
         break;
       case CelluleType.PLAINE:
-        actions.push(TYPE_ACTION.RECOLTE);
+        actions.push({ type_action: TYPE_ACTION.RECOLTE, description : 'bosser'});
         break;
 
     }
