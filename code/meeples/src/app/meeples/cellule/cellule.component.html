@@ -1,4 +1,7 @@
-<div (click)="select()" class="cellule" [ngClass]="{'selected': cellule.selected}">
+<div (click)="select()" class="cellule" [ngClass]="{'selected': cellule.selected, 
+    'invisible': !cellule.visible,
+    'ocean': cellule.celluleType === CEL
+    }">
     <span *ngIf="cellule.visible">
         {{cellule.contenu}}
         {{cellule.dormeur?.symbole}}

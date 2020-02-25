@@ -1,19 +1,30 @@
-<span
-[ngStyle]="{'border': '2px solid ' + meeple.color1, 'padding':'1.5px 0', 'border-radius':'10px'}">
-<span
-    [ngStyle]="{'border': '2px solid ' + meeple.color2, 'padding': '0 3px', 'border-radius':'8px'}">
-    {{meeple.nom}} ({{meeple.symbole}})
-</span>
+<span [ngStyle]="{'border': '2px solid ' + meeple.color1, 'padding':'1.5px 0', 'border-radius':'10px'}">
+    <span [ngStyle]="{'border': '2px solid ' + meeple.color2, 'padding': '0 3px', 'border-radius':'8px'}">
+        {{meeple.nom}} ({{meeple.symbole}})
+    </span>
 </span>
 <span>sante: {{meeple.sante}}</span>
 <span>esperance de vie : {{meeple.esperance}}</span>
 <span>status: {{meeple.status}}</span>
+<span>déplacements: {{meeple.deplacement}}/{{meeple.deplacementTotal}}</span>
+<span>pts d'action {{meeple.actionPoints}}</span>
 <button (click)="setOrdre($event, 'couche')">Définir L</button>
 
 <div>
     <div>{{meeple.position.celluleType}}</div>
     <div>Actions possibles</div>
     <div *ngFor="let action of actions">
-        <button (click)="doAction(action)">{{action|json}}</button>
+        <div *ngIf="action === ACTION.CONSTRUCTION">
+            <button (click)="doAction(action)">Construire un bâtiment</button>
+        </div>
+        <div *ngIf="action === ACTION.EXPLORATION">
+            <button (click)="doAction(action)">Explorer les alentours</button>
+        </div>
+        <div *ngIf="action === ACTION.RECOLTE">
+            <button (click)="doAction(action)">Récolter</button>
+        </div>
+        <div *ngIf="action === ACTION.TRAVAIL">
+            <button (click)="doAction(action)">Travailler dans le bâtiment</button>
+        </div>
     </div>
 </div>

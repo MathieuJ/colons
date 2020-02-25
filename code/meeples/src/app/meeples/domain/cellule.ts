@@ -13,7 +13,7 @@ export enum CelluleType {
   FORET,
   PLAINE
 }
-export enum ACTION {
+export enum TYPE_ACTION {
   TRAVAIL,
   RECOLTE,
   EXPLORATION,

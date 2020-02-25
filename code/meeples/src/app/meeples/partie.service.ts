@@ -5,19 +5,19 @@ import { Partie, Carte, SelectedElement } from 'src/app/meeples/domain/partie';
 import { Batiment } from 'src/app/meeples/domain/batiment';
 import { HexaCellule } from 'src/app/meeples/domain/hexaTerrain';
 import { Meeple } from './domain/meeple';
-import { Cellule, CelluleType, ACTION, ActionMeeples } from './domain/cellule';
+import { Cellule, CelluleType, TYPE_ACTION, ActionMeeples } from './domain/cellule';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MeeplePartieService {
   partie: Partie;
+  selectedElement: SelectedElement = { type: TargetType.NONE };
   
   executeAction(arg0: any, arg1: any): any {
-    throw new Error("Method not implemented.");
+    console.log("action", arg0, arg1);
   }
 
-  selectedElement: SelectedElement = { type: TargetType.NONE };
   
   constructor(private messageService: MessageService) {
     this.partie = new Partie();
@@ -65,17 +65,19 @@ export class MeeplePartieService {
     const actions = [];
     if (cellule.batiment) {
       // switch (cellule.batiment.proto) {
-      actions.push(ACTION.TRAVAIL);
+      actions.push(TYPE_ACTION.TRAVAIL);
       // }
+    } else {
+      actions.push(TYPE_ACTION.CONSTRUCTION);
     }
-    actions.push(ACTION.CONSTRUCTION);
-    actions.push(ACTION.RECOLTE);
+    actions.push(TYPE_ACTION.RECOLTE);
+    actions.push(TYPE_ACTION.EXPLORATION);
     switch (meeple.position.celluleType) {
       case CelluleType.FORET:
-        actions.push(ACTION.RECOLTE);
+        actions.push(TYPE_ACTION.RECOLTE);
         break;
       case CelluleType.PLAINE:
-        actions.push(ACTION.RECOLTE);
+        actions.push(TYPE_ACTION.RECOLTE);
         break;
 
     }

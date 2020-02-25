@@ -1,19 +1,23 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import { Cellule } from '../domain/cellule';
+import { Cellule, CelluleType } from '../domain/cellule';
 import { MessageService } from '../message.service';
 import { Message, MessageType, TargetType } from '../domain/message';
 import { Meeple } from '../domain/meeple';
 import { MeeplePartieService } from '../partie.service';
+import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-cellule',
   templateUrl: './cellule.component.html',
   styleUrls: ['./cellule.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CelluleComponent implements OnInit {
   @Input()
   cellule: Cellule;
 
+  CelluleType: CelluleType;
+  
   constructor(private partieService: MeeplePartieService) {}
 
   ngOnInit() {
