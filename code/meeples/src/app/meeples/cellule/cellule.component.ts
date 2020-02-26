@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 import { Cellule, CelluleType } from '../domain/cellule';
 import { MessageService } from '../message.service';
 import { Message, MessageType, TargetType } from '../domain/message';
@@ -9,17 +9,21 @@ import { MeeplePartieService } from '../partie.service';
   selector: 'app-cellule',
   templateUrl: './cellule.component.html',
   styleUrls: ['./cellule.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CelluleComponent implements OnInit {
+export class CelluleComponent implements OnInit, OnChanges {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("changes sur la cellule " + this.cellule.x + " " + this.cellule.y + " " + changes);
+  }
   @Input()
   cellule: Cellule;
 
   CelluleType: CelluleType;
-  
+
   constructor(private partieService: MeeplePartieService) {}
 
   ngOnInit() {
+    console.log("on init", this.cellule);
   }
   select() {
     console.log("select C");

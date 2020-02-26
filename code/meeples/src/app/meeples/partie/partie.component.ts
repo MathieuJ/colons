@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Partie, Carte, SelectedElement } from '../domain/partie';
 import { MessageService } from '../message.service';
 import { Subscription } from 'rxjs';
@@ -11,7 +11,8 @@ import { MeeplePartieService } from '../partie.service';
 @Component({
   selector: 'app-partie',
   templateUrl: './partie.component.html',
-  styleUrls: ['./partie.component.scss']
+  styleUrls: ['./partie.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PartieComponent implements OnInit {
   @Input()

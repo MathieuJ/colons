@@ -38,7 +38,7 @@ export class HexaTerrain {
     return this.getCellule(cellule.x + diffX, cellule.y + diffY);
   }
 
-  getDistance(cellule1: HexaCellule, cellule2: HexaCellule) {
+  getDistance(cellule1: Cellule, cellule2: Cellule) {
     return Math.abs(cellule1.x - cellule2.x) + Math.abs(cellule1.y - cellule2.y);
   }
 

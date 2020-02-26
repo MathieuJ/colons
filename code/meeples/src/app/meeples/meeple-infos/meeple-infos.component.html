@@ -3,27 +3,27 @@
         {{meeple.nom}} ({{meeple.symbole}})
     </span>
 </span>
-<span>sante: {{meeple.sante}}</span>
-<span>esperance de vie : {{meeple.esperance}}</span>
-<span>status: {{meeple.status}}</span>
-<span>déplacements: {{meeple.deplacement}}/{{meeple.deplacementTotal}}</span>
-<span>pts d'action {{meeple.actionPoints}}</span>
+<div>sante: {{meeple.sante}}</div>
+<div>esperance de vie : {{meeple.esperance}}</div>
+<div>status: {{meeple.status}}</div>
+<div>déplacements: {{meeple.deplacement}}/{{meeple.deplacementMax}}</div>
+<div>pts d'action {{meeple.actionPoints}}</div>
 <button (click)="setOrdre($event, 'couche')">Définir L</button>
 
 <div>
     <div>{{meeple.position.celluleType}}</div>
     <div>Actions possibles</div>
     <div *ngFor="let action of actions">
-        <div *ngIf="action.type_action === ACTION.CONSTRUCTION">
+        <div *ngIf="action.type_action === TYPE_ACTION.CONSTRUCTION">
             <button (click)="doAction(action)">{{action.description}}</button>
         </div>
-        <div *ngIf="action.type_action === ACTION.EXPLORATION">
+        <div *ngIf="action.type_action === TYPE_ACTION.EXPLORATION">
             <button (click)="doAction(action)">{{action.description}}</button>
         </div>
-        <div *ngIf="action.type_action === ACTION.RECOLTE">
+        <div *ngIf="action.type_action === TYPE_ACTION.RECOLTE">
             <button (click)="doAction(action)">{{action.description}}</button>
         </div>
-        <div *ngIf="action.type_action === ACTION.TRAVAIL">
+        <div *ngIf="action.type_action === TYPE_ACTION.TRAVAIL">
             <button (click)="doAction(action)">{{action.description}}</button>
         </div>
     </div>

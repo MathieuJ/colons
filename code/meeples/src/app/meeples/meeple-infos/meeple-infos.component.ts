@@ -16,7 +16,7 @@ export class MeepleInfosComponent implements OnInit, OnChanges {
   CelluleType = CelluleType;
 
   actions: any[];
-  TYPE_ACTION: TYPE_ACTION;
+  TYPE_ACTION = TYPE_ACTION;
 
   constructor(private partieService: MeeplePartieService) { }
 

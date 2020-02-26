@@ -41,10 +41,18 @@ export class MeeplePartieService {
 
   selectCellule(cellule: Cellule) {
     if (this.selectedElement.meeple) {
-      this.getPartie().sendMeeple(this.selectedElement.meeple, cellule);
-      this.messageService.sendMessage(new Message(MessageType.MOVE, cellule));
-      this.unselect();
-      this.messageService.sendMessage(new Message(MessageType.SELECT, this.selectedElement));
+      const m = this.selectedElement.meeple;
+      const p = m.position;
+      const d = this.partie.terrain.getDistance(cellule, p);
+      if (d > m.deplacementMax - m.deplacement) {
+        this.messageService.sendMessage(new Message(MessageType.LOG, 'trop loin'));
+      } else {
+        this.getPartie().sendMeeple(this.selectedElement.meeple, cellule);
+        m.deplacement += d;
+        this.messageService.sendMessage(new Message(MessageType.MOVE, cellule));
+        this.unselect();
+        this.messageService.sendMessage(new Message(MessageType.SELECT, this.selectedElement));
+      }
     } else {
       this.unselect();
       this.selectedElement = { type: TargetType.CELLULE, cellule };
@@ -54,10 +62,17 @@ export class MeeplePartieService {
   }
 
   selectMeeple(meeple: Meeple) {
-    this.unselect();
-    meeple.selected = true;
-    this.selectedElement = { type: TargetType.MEEPLE, meeple };
-    this.messageService.sendMessage(new Message(MessageType.SELECT, this.selectedElement));
+    if (this.selectedElement.meeple === meeple) {
+      this.unselect();
+      meeple.selected = false;
+      this.selectedElement = { type: TargetType.MEEPLE, meeple };
+      this.messageService.sendMessage(new Message(MessageType.SELECT, this.selectedElement));
+    } else {
+      this.unselect();
+      meeple.selected = true;
+      this.selectedElement = { type: TargetType.MEEPLE, meeple };
+      this.messageService.sendMessage(new Message(MessageType.SELECT, this.selectedElement));
+    }
   }
 
   getActionsPossibles(meeple: Meeple) {
