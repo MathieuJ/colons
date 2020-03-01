@@ -36,6 +36,7 @@ export class Cellule {
 
   public bgX: number;
   public bgY: number;
+  public cssTerrain = '';
   public bgColor: string;
   public visible = false;
   public dormeur: Meeple = undefined;
@@ -57,22 +58,30 @@ export class Cellule {
         this.bgX = 23;
         this.bgY = 29;
         this.bgColor = '#EEEEEE';
+        this.cssTerrain = 'eau';
         break;
       case CelluleType.MER:
         this.bgX = 23;
         this.bgY = 29;
+        this.cssTerrain = 'mer';
         break;
       case CelluleType.PIERRE:
         this.bgX = 30;
         this.bgY = 24;
+        this.cssTerrain = 'pierre';
+        
         break;
       case CelluleType.SABLE:
         this.bgX = 5;
         this.bgY = 1;
+        this.cssTerrain = 'sable';
+        
         break;
       case CelluleType.TERRE:
         this.bgX = 4;
         this.bgY = 0;
+        this.cssTerrain = 'terre';
+        
         break;
       case CelluleType.FORET:
         const a = Math.floor(Math.random() * 4);
@@ -89,10 +98,14 @@ export class Cellule {
           this.bgX = 22;
           this.bgY = 19;
         }
+        this.cssTerrain = 'foret';
+        
         break;
       case CelluleType.PLAINE:
         this.bgX = 12;
         this.bgY = 0;
+        this.cssTerrain = 'plaine';
+        
         break;
     }
   }
