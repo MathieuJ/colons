@@ -1,30 +1,39 @@
-<span [ngStyle]="{'border': '2px solid ' + meeple.color1, 'padding':'1.5px 0', 'border-radius':'10px'}">
-    <span [ngStyle]="{'border': '2px solid ' + meeple.color2, 'padding': '0 3px', 'border-radius':'8px'}">
-        {{meeple.nom}} ({{meeple.symbole}})
-    </span>
-</span>
-<div>sante: {{meeple.sante}}</div>
-<div>esperance de vie : {{meeple.esperance}}</div>
-<div>status: {{meeple.status}}</div>
-<div>déplacements: {{meeple.deplacement}}/{{meeple.deplacementMax}}</div>
-<div>pts d'action {{meeple.actionPoints}}</div>
-<button (click)="setOrdre($event, 'couche')">Définir L</button>
+<div class="meeple-infos">
+    <div class="sub-infos meeple">
+        <span [ngStyle]="{'border': '2px solid ' + meeple.color1, 'padding':'1.5px 0', 'border-radius':'10px'}">
+            <span [ngStyle]="{'border': '2px solid ' + meeple.color2, 'padding': '0 3px', 'border-radius':'8px'}">
+                {{meeple.nom}} ({{meeple.symbole}})
+            </span>
+        </span>
+        <div>sante: {{meeple.sante}}</div>
+        <div>esperance de vie : {{meeple.esperance}}</div>
+        <div>status: {{meeple.status}}</div>
+        <div>déplacements: {{meeple.deplacement}}/{{meeple.deplacementMax}}</div>
+        <div>pts d'action {{meeple.actionPoints}}</div>
+        <button (click)="setOrdre($event, 'couche')">Définir L</button>
+    </div>
 
-<div>
-    <div>{{meeple.position.celluleType}}</div>
-    <div>Actions possibles</div>
-    <div *ngFor="let action of actions">
-        <div *ngIf="action.type_action === TYPE_ACTION.CONSTRUCTION">
-            <button (click)="doAction(action)">{{action.description}}</button>
+    <div class="sub-infos cellule">
+        <div>{{meeple.position.celluleType}}</div>
+        <div *ngIf="actions">
+            <div>Actions possibles</div>
+            <div *ngFor="let action of actions">
+                <div *ngIf="action.typeAction === TYPE_ACTION.CONSTRUCTION">
+                    <button (click)="doAction(action)">{{action.description}} : {{action.batiment.nom}}</button>
+                </div>
+                <div *ngIf="action.typeAction === TYPE_ACTION.EXPLORATION">
+                    <button (click)="doAction(action)">{{action.description}}</button>
+                </div>
+                <div *ngIf="action.typeAction === TYPE_ACTION.RECOLTE">
+                    <button (click)="doAction(action)">{{action.description}}</button>
+                </div>
+                <div *ngIf="action.typeAction === TYPE_ACTION.TRAVAIL">
+                    <button (click)="doAction(action)">{{action.description}}</button>
+                </div>
+            </div>
         </div>
-        <div *ngIf="action.type_action === TYPE_ACTION.EXPLORATION">
-            <button (click)="doAction(action)">{{action.description}}</button>
-        </div>
-        <div *ngIf="action.type_action === TYPE_ACTION.RECOLTE">
-            <button (click)="doAction(action)">{{action.description}}</button>
-        </div>
-        <div *ngIf="action.type_action === TYPE_ACTION.TRAVAIL">
-            <button (click)="doAction(action)">{{action.description}}</button>
+        <div *ngIf="meeple.action">
+            {{meeple.action.description}}
         </div>
     </div>
 </div>

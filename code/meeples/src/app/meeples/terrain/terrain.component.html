@@ -1,6 +1,6 @@
 <div class="terrain-container ">
     <table class="carte">
-        <tr *ngFor="let ligne of terrain.cases">
+        <tr *ngFor="let ligne of terrain.cases" class="ligne">
             <td *ngFor="let cellule of ligne">
                 <app-cellule [cellule]="cellule"></app-cellule>
             </td>

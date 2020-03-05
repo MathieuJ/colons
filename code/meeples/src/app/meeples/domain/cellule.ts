@@ -13,22 +13,14 @@ export enum CelluleType {
   FORET,
   PLAINE
 }
-export enum TYPE_ACTION {
-  TRAVAIL,
-  RECOLTE,
-  EXPLORATION,
-  CHASSE,
-  LOISIR,
-  CONSTRUCTION
-}
+/*
 export class ActionMeeples {
   constructor(public cellule: Cellule, public carte: Carte, public plan: ProtoBatiment, public meeples: Meeple[] = []) {}
-}
-
-
+}*/
 
 export class Cellule {
   public selected = false;
+  public accessible = false;
   public contenu: any[] = [];
   public batiment: Batiment;
 
@@ -41,7 +33,7 @@ export class Cellule {
   public visible = false;
   public dormeur: Meeple = undefined;
   // juste pour l'opti
-  public actionMeeples: ActionMeeples;
+  //,public actionMeeples: ActionMeeples;
   constructor(public x: number, public y: number, public celluleType: CelluleType) {
     this.setCelluleType(celluleType);
     this.contenu = [];
@@ -69,19 +61,19 @@ export class Cellule {
         this.bgX = 30;
         this.bgY = 24;
         this.cssTerrain = 'pierre';
-        
+
         break;
       case CelluleType.SABLE:
         this.bgX = 5;
         this.bgY = 1;
         this.cssTerrain = 'sable';
-        
+
         break;
       case CelluleType.TERRE:
         this.bgX = 4;
         this.bgY = 0;
         this.cssTerrain = 'terre';
-        
+
         break;
       case CelluleType.FORET:
         const a = Math.floor(Math.random() * 4);
@@ -99,13 +91,13 @@ export class Cellule {
           this.bgY = 19;
         }
         this.cssTerrain = 'foret';
-        
+
         break;
       case CelluleType.PLAINE:
         this.bgX = 12;
         this.bgY = 0;
         this.cssTerrain = 'plaine';
-        
+
         break;
     }
   }

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { Meeple } from 'src/app/meeples/domain/meeple';
-import { CelluleType, TYPE_ACTION } from 'src/app/meeples/domain/cellule';
+import { CelluleType } from 'src/app/meeples/domain/cellule';
 import { MeeplePartieService } from 'src/app/meeples/partie.service';
+import { Action, TYPE_ACTION } from 'src/app/meeples/domain/action';
 
 @Component({
   selector: 'app-meeple-infos',
@@ -10,7 +11,7 @@ import { MeeplePartieService } from 'src/app/meeples/partie.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MeepleInfosComponent implements OnInit, OnChanges {
-  
+
   @Input()
   meeple: Meeple;
   CelluleType = CelluleType;
@@ -26,10 +27,12 @@ export class MeepleInfosComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log("changes de meeple");
     console.log(changes);
-    this.actions = this.partieService.getActionsPossibles(this.meeple);
+    if (this.meeple.action) {
+      this.actions = this.partieService.getActionsPossibles(this.meeple);
+    }
 
   }
-  doAction(action) {
+  doAction(action: Action) {
     console.log("action");
     this.partieService.executeAction(this.meeple, action);
   }

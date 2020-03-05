@@ -6,9 +6,9 @@ export class HexaCellule extends Cellule {
   hz: number;
   constructor(x: number, y: number, type: CelluleType) {
     super(x, y, type);
-    this.hx = x;
-    this.hy = Math.floor(x - y / 2);
-    this.hz = -this.hx - this.hy;
+    this.hx = x - 5 - Math.floor((y-4)/2);
+    this.hz = (y-4); //Math.floor((x-5) - (y-4) / 2); //-this.hx - this.hy;
+    this.hy = -this.hx -this.hz;
   }
   /*public static  FromOffsetCoordinates (int x, int z) {
 		return new HexCoordinates(x - z / 2, z);
@@ -40,6 +40,26 @@ export class HexaTerrain {
 
   getDistance(cellule1: Cellule, cellule2: Cellule) {
     return Math.abs(cellule1.x - cellule2.x) + Math.abs(cellule1.y - cellule2.y);
+  }
+
+  getHexDistance(cellule1: HexaCellule, cellule2: HexaCellule) {
+    return (Math.abs(cellule1.hx - cellule2.hx) + 
+    Math.abs(cellule1.hy - cellule2.hy) + 
+    Math.abs(cellule1.hz - cellule2.hz)) / 2; 
+  }
+
+  getHexVoisins(cellule: HexaCellule, distanceMax: number): HexaCellule[] {
+    const voisins: HexaCellule[] = [];
+    for (const ligne of this.cases) {
+        for (const cell of ligne) {
+          const distance = this.getHexDistance(cell, cellule);
+          if (distance > 0 && distance <= distanceMax) {
+            voisins.push(cell);
+          }
+        }
+    }
+    console.log("voinsins", voisins);
+    return voisins;
   }
 
   getVoisins(cellule: HexaCellule, distanceMax: number): HexaCellule[] {

@@ -1,5 +1,6 @@
 import { Cout } from './cout';
 import { Cellule } from './cellule';
+import { HexaCellule } from 'src/app/meeples/domain/hexaTerrain';
 
 export class BatimentSprite {
     public sizeY: any;
@@ -43,7 +44,7 @@ export class ProtoBatiment {
 
 export const PROTOS_BATIMENTS = {
     ROBOT: new ProtoBatiment('Robot', 'Votre robot', new Cout()).withSpriteCoords(49, 1, 2, 2),
-    FEU_DE_CAMP: new ProtoBatiment('Feu de camp', 'Petit feu pour se chauffer et cuisiner', new Cout({ P: 4, B: 2 })),
+    FEU_DE_CAMP: new ProtoBatiment('Feu de camp', 'Petit feu pour se chauffer et cuisiner', new Cout({ B: 1 })),
     PUITS: new ProtoBatiment('Puits', 'Trou dans la terre', new Cout()),
     FOYER: new ProtoBatiment('Foyer', 'Feu de camp amélioré', new Cout({ P: 4, B: 2 })),
     HUTTE: new ProtoBatiment('Hutte', 'Abri pour dormir', new Cout({ P: 4, B: 2 })).withSpriteCoords(72, 11, 3, 4),
@@ -58,6 +59,6 @@ export const PROTOS_BATIMENTS = {
 
 
 export class Batiment {
-    constructor(public cellule: Cellule, public proto: ProtoBatiment, infos: any[]) {}
+    constructor(public cellule: HexaCellule, public proto: ProtoBatiment, infos: any[]) {}
   }
 

@@ -1,0 +1,16 @@
+.meeple-infos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .sub-infos {
+        border: 1px solid gold;
+        padding: 10px;
+    }
+    .cellule {
+        
+width: 40%;
+    }
+    .meeple {
+width: 40%;
+    }
+}

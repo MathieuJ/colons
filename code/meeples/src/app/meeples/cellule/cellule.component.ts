@@ -4,6 +4,7 @@ import { MessageService } from '../message.service';
 import { Message, MessageType, TargetType } from '../domain/message';
 import { Meeple } from '../domain/meeple';
 import { MeeplePartieService } from '../partie.service';
+import { HexaCellule } from 'src/app/meeples/domain/hexaTerrain';
 
 @Component({
   selector: 'app-cellule',
@@ -11,14 +12,14 @@ import { MeeplePartieService } from '../partie.service';
   styleUrls: ['./cellule.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CelluleComponent implements OnInit, OnChanges {
-  ngOnChanges(changes: SimpleChanges): void {
+export class CelluleComponent implements OnInit {
+  /*ngOnChanges(changes: SimpleChanges): void {
     console.log("changes sur la cellule " + this.cellule.x + " " + this.cellule.y + " " + changes);
-  }
+  }*/
   @Input()
-  cellule: Cellule;
+  cellule: HexaCellule;
 
-  CelluleType: CelluleType;
+  CelluleType = CelluleType;
 
   constructor(private partieService: MeeplePartieService) {}
 
@@ -27,9 +28,8 @@ export class CelluleComponent implements OnInit, OnChanges {
   }
   select() {
     console.log("select C");
-    
     this.partieService.selectCellule(this.cellule);
-  } 
+  }
   selectMeeple(event: Event, meeple: Meeple) {
     console.log("select M");
     event.stopPropagation();

@@ -22,7 +22,7 @@ export class PartieComponent implements OnInit {
 
   TargetType = TargetType;
 
-  logs: string[];
+  logs: string[] = [];
 
   actions: any[];
 

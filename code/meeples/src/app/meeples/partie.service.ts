@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { MessageService } from 'src/app/meeples/message.service';
 import { Message, MessageType, TargetType } from 'src/app/meeples/domain/message';
 import { Partie, Carte, SelectedElement } from 'src/app/meeples/domain/partie';
-import { Batiment } from 'src/app/meeples/domain/batiment';
+import { Batiment, ProtoBatiment, PROTOS_BATIMENTS } from 'src/app/meeples/domain/batiment';
 import { HexaCellule } from 'src/app/meeples/domain/hexaTerrain';
 import { Meeple } from './domain/meeple';
-import { Cellule, CelluleType, TYPE_ACTION, ActionMeeples } from './domain/cellule';
+import { Cellule, CelluleType } from './domain/cellule';
+import { Action, TYPE_ACTION, ProtoAction } from 'src/app/meeples/domain/action';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,14 @@ import { Cellule, CelluleType, TYPE_ACTION, ActionMeeples } from './domain/cellu
 export class MeeplePartieService {
   partie: Partie;
   selectedElement: SelectedElement = { type: TargetType.NONE };
-  
-  executeAction(arg0: any, arg1: any): any {
-    console.log("action", arg0, arg1);
+
+  executeAction(meeple: Meeple, action: Action): any {
+    console.log("action", meeple, action);
+    meeple.deplacement = meeple.deplacementMax;
+    meeple.action = action;
   }
 
-  
+
   constructor(private messageService: MessageService) {
     this.partie = new Partie();
   }
@@ -28,7 +31,7 @@ export class MeeplePartieService {
   }
 
   unselect() {
-    this.selectedElement.type = TargetType.NONE;
+    this.partie.terrain.cases.map(l => l.map(c => c.accessible = false));
     if (this.selectedElement.meeple) {
       this.selectedElement.meeple.selected = false;
       this.selectedElement.meeple = undefined;
@@ -37,13 +40,15 @@ export class MeeplePartieService {
       this.selectedElement.cellule.selected = false;
       this.selectedElement.cellule = undefined;
     }
+    this.selectedElement.type = TargetType.NONE;
   }
 
-  selectCellule(cellule: Cellule) {
-    if (this.selectedElement.meeple) {
+  selectCellule(cellule: HexaCellule) {
+    console.log("elect", this.selectedElement);
+    if (this.selectedElement.meeple && cellule.visible) {
       const m = this.selectedElement.meeple;
       const p = m.position;
-      const d = this.partie.terrain.getDistance(cellule, p);
+      const d = this.partie.terrain.getHexDistance(cellule, p);
       if (d > m.deplacementMax - m.deplacement) {
         this.messageService.sendMessage(new Message(MessageType.LOG, 'trop loin'));
       } else {
@@ -65,34 +70,45 @@ export class MeeplePartieService {
     if (this.selectedElement.meeple === meeple) {
       this.unselect();
       meeple.selected = false;
-      this.selectedElement = { type: TargetType.MEEPLE, meeple };
       this.messageService.sendMessage(new Message(MessageType.SELECT, this.selectedElement));
     } else {
       this.unselect();
       meeple.selected = true;
-      this.selectedElement = { type: TargetType.MEEPLE, meeple };
+      this.selectedElement.meeple = meeple;
+      this.selectedElement.type = TargetType.MEEPLE;
+      this.showAccessibles(meeple.position, meeple.deplacementMax - meeple.deplacement);
       this.messageService.sendMessage(new Message(MessageType.SELECT, this.selectedElement));
     }
   }
 
-  getActionsPossibles(meeple: Meeple) {
+  showAccessibles(cellule, distance) {
+    this.partie.terrain.getHexVoisins(cellule, distance).map(c => {
+      if (c.visible) {
+        c.accessible = true;
+      }
+    }
+    );
+  }
+
+  getActionsPossibles(meeple: Meeple): ProtoAction[] {
     const cellule = meeple.position;
-    const actions: { type_action: TYPE_ACTION, description: string }[] = [];
+    const actions: ProtoAction[] = [];
     if (cellule.batiment) {
       // switch (cellule.batiment.proto) {
-      actions.push({ type_action: TYPE_ACTION.TRAVAIL, description : 'bosser'});
+      actions.push(new ProtoAction(TYPE_ACTION.TRAVAIL, 'bosser'));
       // }
     } else {
-      actions.push({ type_action: TYPE_ACTION.CONSTRUCTION, description : 'construire un bâtiment'});
+      actions.push(new ProtoAction(TYPE_ACTION.CONSTRUCTION, 'construire un bâtiment', PROTOS_BATIMENTS.FEU_DE_CAMP));
+      // actions.push(new ProtoAction(TYPE_ACTION.CONSTRUCTION, 'construire un bâtiment', PROTOS_BATIMENTS.FOYER));
     }
-    actions.push({ type_action: TYPE_ACTION.RECOLTE, description : 'Récolter'});
-    actions.push({ type_action: TYPE_ACTION.EXPLORATION, description : 'Explorer les alentours'});
+    actions.push(new ProtoAction(TYPE_ACTION.RECOLTE, 'Récolter'));
+    actions.push(new ProtoAction(TYPE_ACTION.EXPLORATION, 'Explorer les alentours'));
     switch (meeple.position.celluleType) {
       case CelluleType.FORET:
-        actions.push({ type_action: TYPE_ACTION.RECOLTE, description : 'bosser'});
+        actions.push(new ProtoAction(TYPE_ACTION.RECOLTE, 'bosser'));
         break;
       case CelluleType.PLAINE:
-        actions.push({ type_action: TYPE_ACTION.RECOLTE, description : 'bosser'});
+        actions.push(new ProtoAction(TYPE_ACTION.RECOLTE, 'bosser'));
         break;
 
     }

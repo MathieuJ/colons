@@ -1,12 +1,15 @@
+$selected-color:rgb(255, 249, 199);
+$accessible-color:rgb(74, 255, 74);
 .cellule {
     width: 50px;
     height: 40px;
     background-color: lightgray;
-    &.invisible {
-        background-color: darkgray;
-    }
+    border: 1px solid lightgray;
     &.selected{
-        border: 1px solid darkgray;
+        border: 1px solid $selected-color;
+    }
+    &.accessible {
+        border: 1px solid $accessible-color;
     }
     &.eau {
         background-color: rgb(198, 251, 255);
@@ -24,13 +27,20 @@
     &.pierre {
         background-color: rgb(141, 141, 137);
     }
+    &.invisible {
+        background-color: darkgray;
+    }
 }
 
 .meeple {
     border: 1px solid white;
     cursor: col-resize;
-    background-color: lightgray;
+    background-color: rgb(237, 255, 225);
+    &.deplacable {
+        background-color: $accessible-color;
+    }
+    
     &.selected{
-        border: 1px solid darkgray;
+        border: 1px solid $selected-color;
     }
 }

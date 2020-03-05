@@ -1,4 +1,4 @@
-$midtaille: 0px; // 15px; todo remettre à 15
+$midtaille: 25px; // 15px; todo remettre à 15
 $taille: 30px;
 
 .terrain-container {
@@ -8,7 +8,7 @@ $taille: 30px;
   .carte {
     //position: relative;
     font-size: 8px;
-    //display: inline-grid;
+    display: inline-grid;
     .ligne {
       //display: flex;
       //flex-direction: row;

@@ -1,7 +1,9 @@
 import { Cellule } from './cellule';
+import { HexaCellule } from 'src/app/meeples/domain/hexaTerrain';
+import { Action } from 'src/app/meeples/domain/action';
 
 export class Trait {
-  constructor(public nom: string, public description: string) {}
+  constructor(public nom: string, public description: string) { }
 }
 
 export enum TRAIT {
@@ -28,11 +30,14 @@ export const traits = {
 export class Meeple {
   selected = false;
   traits: TRAIT[] = [];
-  position: Cellule;
-  
+  position: HexaCellule;
+
   deplacement: number;
   deplacementMax: number;
   actions: number;
+  action: Action;
+  energie = 2;
+  energieRestante = 2;
   /*sante: number;
   esperance: number;
   satiete: number;
@@ -48,7 +53,7 @@ export class Meeple {
   /*status: string;
   */
   couche: Cellule;
- 
+
   histoire: { sommeil?: number; bouffe?: number; eau?: number }[] = [];
   constructor(public id: number, public symbole: string, public nom: string, public naissance: number) {
     this.actions = 2;
@@ -60,15 +65,15 @@ export class Meeple {
     return this.traits.indexOf(trait) > -1;
   }
 
-  setPosition(cellule: Cellule) {
-    if (cellule != this.position) {
+  setPosition(cellule: HexaCellule) {
+    if (cellule !== this.position) {
       this.position.removeMeeplePresent(this);
-      cellule.meeplesPresents.push(this);  
+      cellule.meeplesPresents.push(this);
       this.position = cellule;
     }
   }
 
   ajouteHistoire() {
-    this.histoire.unshift({})
+    this.histoire.unshift({});
   }
 }

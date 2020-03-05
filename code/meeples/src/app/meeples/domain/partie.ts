@@ -1,22 +1,22 @@
 import { Meeple } from './meeple';
 import { HexaTerrain, HexaCellule } from './hexaTerrain';
 import { Batiment, ProtoBatiment, PROTOS_BATIMENTS } from './batiment';
-import { ActionMeeples, Cellule, CelluleType } from './cellule';
+import { Cellule, CelluleType } from './cellule';
 import { random, melange, randomElement } from 'src/app/utils.functions';
 import { TargetType } from './message';
 import { Cout, MATERIAU } from 'src/app/meeples/domain/cout';
 
 
 export class Element {
-  constructor(public nom: string, public description: string) {}
+  constructor(public nom: string, public description: string) { }
 }
 
 export class SelectedElement {
-    type: TargetType;
-    batiment?: Batiment;
-    cellule?: Cellule;
-    meeple?: Meeple;
-    carte?: Carte;
+  type: TargetType;
+  batiment?: Batiment;
+  cellule?: HexaCellule;
+  meeple?: Meeple;
+  carte?: Carte;
 }
 
 export class Carte extends Element {
@@ -57,13 +57,13 @@ export class Partie {
   public logs: string[] = [];
   public cartesPaquet: Carte[];
   public reserve: {} = {};
-  public cartesMain: Carte[];
+  public cartesMain: Carte[] = [];
   public cartesDefausse: Carte[];
   public meeples: Meeple[] = [];
   public terrain: HexaTerrain;
   public batiments: Batiment[] = [];
   public plansDisponibles: ProtoBatiment[] = [];
-  public actionsMeeples: ActionMeeples[] = [];
+  // public actionsMeeples: ActionMeeples[] = [];
 
   public dateDemarrage = random(100, 200);
   public generalId = 1;
@@ -93,7 +93,7 @@ export class Partie {
     cellule.batiment = batiment;
   }
 
-  public sendMeeple(meeple: Meeple, cellule: Cellule) {
+  public sendMeeple(meeple: Meeple, cellule: HexaCellule) {
     // on deplace le meeple de cellule
     const celluleOrigine = meeple.position;
     if (celluleOrigine) {
@@ -105,14 +105,14 @@ export class Partie {
     meeple.position = cellule;
 
     // on vire le meeple de son potentiel autre boulot
-    const currentMeepleAmIdx = this.actionsMeeples.findIndex(ams => ams.meeples.indexOf(meeple) > -1);
+    /*const currentMeepleAmIdx = this.actionsMeeples.findIndex(ams => ams.meeples.indexOf(meeple) > -1);
     if (currentMeepleAmIdx > -1) {
       const meepleIdx = this.actionsMeeples[currentMeepleAmIdx].meeples.indexOf(meeple);
       delete this.actionsMeeples[currentMeepleAmIdx].meeples[meepleIdx];
     } else {
       console.log("meeple not found");
-    }
-    if (cellule.actionMeeples) {
+    }*/
+    /*if (cellule.actionMeeples) {
       const am = cellule.actionMeeples;
       if (am.meeples.indexOf(meeple) > -1) {
         this.log('Ce meeple bosse déjà sur cette case !');
@@ -121,7 +121,7 @@ export class Partie {
       }
     } else {
       this.log("Pas d'action sur cette case");
-    }
+    }*/
   }
 
   /*addActionMeeples(cellule: Cellule, carte: Carte, plan?: TypeBatiment) {
@@ -135,14 +135,14 @@ export class Partie {
     this.log('ajoute un am ' + cellule + ' de ' + carte);
   }*/
 
-  public getActionMeeplesByCellule(cellule: Cellule, carte?: Carte): ActionMeeples {
+  /* public getActionMeeplesByCellule(cellule: Cellule, carte?: Carte): ActionMeeples {
     const a = this.actionsMeeples.filter(am => am.cellule === cellule && (!carte || am.carte === carte));
     return a.length > 0 ? a[0] : undefined;
   }
 
   public getActionMeeplesByMeeple(meeple: Meeple) {
     return this.actionsMeeples.filter(am => am.meeples.find(m => m === meeple));
-  }
+  }*/
 
   public log(msg: string) {
     this.logs.push(msg);
@@ -204,15 +204,15 @@ export class Partie {
     const meeple2 = this.generateMeeple(random(20, 40));
     const meeple3 = this.generateMeeple(random(20, 40));
     this.meeples.push(meeple1);
-    this.sendMeeple(meeple1, this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, 1, 0));
-    this.setCouche(meeple1, this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, 1, 0));
+    this.sendMeeple(meeple1, this.terrain.getVoisin(this.batiments[0].cellule, 1, 0));
+    this.setCouche(meeple1, this.terrain.getVoisin(this.batiments[0].cellule, 1, 0));
 
     this.meeples.push(meeple2);
-    this.sendMeeple(meeple2, this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, -1, 0));
-    this.setCouche(meeple2, this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, -1, 0));
+    this.sendMeeple(meeple2, this.terrain.getVoisin(this.batiments[0].cellule, -1, 0));
+    this.setCouche(meeple2, this.terrain.getVoisin(this.batiments[0].cellule, -1, 0));
     this.meeples.push(meeple3);
-    this.sendMeeple(meeple3, this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, 0, -1));
-    this.setCouche(meeple3, this.terrain.getVoisin(<HexaCellule>this.batiments[0].cellule, 0, -1));
+    this.sendMeeple(meeple3, this.terrain.getVoisin(this.batiments[0].cellule, 0, -1));
+    this.setCouche(meeple3, this.terrain.getVoisin(this.batiments[0].cellule, 0, -1));
   }
 
   public setCouche(meeple: Meeple, cellule: Cellule) {
@@ -258,7 +258,7 @@ export class Partie {
     terrain.getCellule(7, 1).setCelluleType(CelluleType.EAU);
     terrain.getCellule(8, 1).setCelluleType(CelluleType.EAU);
     terrain.getCellule(8, 2).setCelluleType(CelluleType.EAU);
-    for (let i = 9; i < 12; i++) { 
+    for (let i = 9; i < 12; i++) {
       terrain.getCellule(i, 2).setCelluleType(CelluleType.EAU);
     }
     this.terrain = terrain;
@@ -278,9 +278,9 @@ export class Partie {
   }
 
   doActions() {
-    this.actionsMeeples.forEach(am => {
-      switch (am.carte.code) {
-        case 'cstr':
+    this.meeples.forEach(m => {
+      switch (m.action.typeAction) {
+        /*case :
           const plan = am.plan;
           // this.retireReserve(plan);
           // if ()
@@ -288,7 +288,7 @@ export class Partie {
         case 'hunt':
           break;
         case 'expl':
-          break;
+          break;*/
       }
     });
   }
