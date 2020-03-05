@@ -7,6 +7,7 @@ import { PartieComponent } from './partie/partie.component';
 import { MeepleComponent } from './meeple/meeple.component';
 import { MeepleInfosComponent } from './meeple-infos/meeple-infos.component';
 import { NgModule } from '@angular/core';
+import { BatimentComponent } from './batiment/batiment.component';
 
 const ROUTES: Routes = [
   {
@@ -16,7 +17,7 @@ const ROUTES: Routes = [
 ];
 
 @NgModule({
-  declarations: [StartComponent, TerrainComponent, CelluleComponent, PartieComponent, MeepleComponent, MeepleInfosComponent],
+  declarations: [StartComponent, TerrainComponent, CelluleComponent, PartieComponent, MeepleComponent, MeepleInfosComponent, BatimentComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(ROUTES)

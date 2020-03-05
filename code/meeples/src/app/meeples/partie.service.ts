@@ -3,7 +3,7 @@ import { MessageService } from 'src/app/meeples/message.service';
 import { Message, MessageType, TYPE_TARGET } from 'src/app/meeples/domain/message';
 import { Partie, Carte, SelectedElement } from 'src/app/meeples/domain/partie';
 import { Batiment, ProtoBatiment, PROTOS_BATIMENTS } from 'src/app/meeples/domain/batiment';
-import { HexaCellule } from 'src/app/meeples/domain/hexaTerrain';
+import { HexaCellule, HexaTerrain } from 'src/app/meeples/domain/hexaTerrain';
 import { Meeple } from './domain/meeple';
 import { Cellule, TYPE_CELLULE } from './domain/cellule';
 import { Action, TYPE_ACTION, ProtoAction } from 'src/app/meeples/domain/action';
@@ -24,6 +24,20 @@ export class MeeplePartieService {
 
   constructor(private messageService: MessageService) {
     this.partie = new Partie();
+    this.initPartie();
+  }
+
+  initPartie() {
+    this.partie.terrain = this.buildTerrain();
+    const c = this.partie.terrain.getCellule(7, 4);
+    this.partie.addBatiment(c, PROTOS_BATIMENTS.ROBOT);
+    c.visible = true;
+    this.partie.terrain.getHexVoisins(c, 2).forEach(c => c.visible = true);
+
+    this.partie.generateMeeples();
+    this.partie.initReserve();
+    this.partie.plansDisponibles.push(PROTOS_BATIMENTS.HUTTE, PROTOS_BATIMENTS.FEU_DE_CAMP, PROTOS_BATIMENTS.MINE_ARGILE);
+    this.partie.log('Init fini');
   }
 
   getPartie() {
@@ -95,10 +109,13 @@ export class MeeplePartieService {
     const actions: ProtoAction[] = [];
     if (cellule.batiment) {
       // switch (cellule.batiment.proto) {
-      actions.push(new ProtoAction(TYPE_ACTION.TRAVAIL, 'bosser'));
+      actions.push(new ProtoAction(TYPE_ACTION.TRAVAIL, 'Travailler dans le bâtiment'));
       // }
     } else {
-      actions.push(new ProtoAction(TYPE_ACTION.CONSTRUCTION, 'construire un bâtiment', PROTOS_BATIMENTS.FEU_DE_CAMP));
+      this.partie.plansDisponibles.forEach(pd => {
+        actions.push(new ProtoAction(TYPE_ACTION.CONSTRUCTION, 'Construire', pd));
+      });
+      
       // actions.push(new ProtoAction(TYPE_ACTION.CONSTRUCTION, 'construire un bâtiment', PROTOS_BATIMENTS.FOYER));
     }
     actions.push(new ProtoAction(TYPE_ACTION.RECOLTE, 'Récolter'));
@@ -113,5 +130,29 @@ export class MeeplePartieService {
 
     }
     return actions;
+  }
+
+  public buildTerrain(): HexaTerrain {
+    const terrain = new HexaTerrain(12, 8);
+    for (let x = 0; x < 12; x++) {
+      for (let y = 0; y < 8; y++) {
+        if (x < 2 || (x < 3 && y > 2) || (x < 4 && y > 3)) {
+          terrain.getCellule(x, y).setTYPE_CELLULE(TYPE_CELLULE.FORET);
+        }
+        if (x > 10 || (x > 9 && y < 6) || (x > 8 && y < 4)) {
+          terrain.getCellule(x, y).setTYPE_CELLULE(TYPE_CELLULE.PIERRE);
+        }
+      }
+    }
+    terrain.getCellule(5, 0).setTYPE_CELLULE(TYPE_CELLULE.EAU);
+    terrain.getCellule(6, 0).setTYPE_CELLULE(TYPE_CELLULE.EAU);
+    terrain.getCellule(6, 1).setTYPE_CELLULE(TYPE_CELLULE.EAU);
+    terrain.getCellule(7, 1).setTYPE_CELLULE(TYPE_CELLULE.EAU);
+    terrain.getCellule(8, 1).setTYPE_CELLULE(TYPE_CELLULE.EAU);
+    terrain.getCellule(8, 2).setTYPE_CELLULE(TYPE_CELLULE.EAU);
+    for (let i = 9; i < 12; i++) {
+      terrain.getCellule(i, 2).setTYPE_CELLULE(TYPE_CELLULE.EAU);
+    }
+    return terrain;
   }
 }

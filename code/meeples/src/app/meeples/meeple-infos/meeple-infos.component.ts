@@ -27,7 +27,7 @@ export class MeepleInfosComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log("changes de meeple");
     console.log(changes);
-    if (this.meeple.action) {
+    if (!this.meeple.action) {
       this.actions = this.partieService.getActionsPossibles(this.meeple);
     }
 

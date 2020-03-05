@@ -66,25 +66,11 @@ export class Partie {
   // public actionsMeeples: ActionMeeples[] = [];
 
   public dateDemarrage = random(100, 200);
+  public date = 1;
   public generalId = 1;
   private meepleSyllabes = ['ga', 'fur', 'gol', 'bo', 'ber', 'dil', 'ne', 'zu', 'ra', 'meu', 'mul', 'ta', 'ni'];
 
   constructor() {
-    this.buildTerrain();
-    const c = this.terrain.getCellule(7, 4);
-    this.addBatiment(c, PROTOS_BATIMENTS.ROBOT);
-    c.visible = true;
-    this.terrain.getVoisins(c, 2).forEach(c => c.visible = true);
-
-    this.generateMeeples();
-    this.initRobot();
-    this.initReserve();
-    this.initConstructionsPossibles();
-    this.log('Init fini');
-  }
-
-  public initConstructionsPossibles() {
-    this.plansDisponibles.push(PROTOS_BATIMENTS.HUTTE, PROTOS_BATIMENTS.FEU_DE_CAMP, PROTOS_BATIMENTS.MINE_ARGILE);
   }
 
   public addBatiment(cellule: HexaCellule, protoBatiment: ProtoBatiment) {
@@ -148,7 +134,7 @@ export class Partie {
     this.logs.push(msg);
   }
 
-  private initReserve() {
+  public initReserve() {
     this.reserve = Cout.from('eeeeewwwph');
   }
 
@@ -199,7 +185,7 @@ export class Partie {
     }
   }
 
-  private generateMeeples() {
+  public generateMeeples() {
     const meeple1 = this.generateMeeple(random(20, 40));
     const meeple2 = this.generateMeeple(random(20, 40));
     const meeple3 = this.generateMeeple(random(20, 40));
@@ -240,29 +226,7 @@ export class Partie {
     return nom.substring(0, 10);
   }
 
-  private buildTerrain() {
-    const terrain = new HexaTerrain(12, 8);
-    for (let x = 0; x < 12; x++) {
-      for (let y = 0; y < 8; y++) {
-        if (x < 2 || (x < 3 && y > 2) || (x < 4 && y > 3)) {
-          terrain.getCellule(x, y).setTYPE_CELLULE(TYPE_CELLULE.FORET);
-        }
-        if (x > 10 || (x > 9 && y < 6) || (x > 8 && y < 4)) {
-          terrain.getCellule(x, y).setTYPE_CELLULE(TYPE_CELLULE.PIERRE);
-        }
-      }
-    }
-    terrain.getCellule(5, 0).setTYPE_CELLULE(TYPE_CELLULE.EAU);
-    terrain.getCellule(6, 0).setTYPE_CELLULE(TYPE_CELLULE.EAU);
-    terrain.getCellule(6, 1).setTYPE_CELLULE(TYPE_CELLULE.EAU);
-    terrain.getCellule(7, 1).setTYPE_CELLULE(TYPE_CELLULE.EAU);
-    terrain.getCellule(8, 1).setTYPE_CELLULE(TYPE_CELLULE.EAU);
-    terrain.getCellule(8, 2).setTYPE_CELLULE(TYPE_CELLULE.EAU);
-    for (let i = 9; i < 12; i++) {
-      terrain.getCellule(i, 2).setTYPE_CELLULE(TYPE_CELLULE.EAU);
-    }
-    this.terrain = terrain;
-  }
+  
 
   finTour() {
     this.meeples.forEach(m => {

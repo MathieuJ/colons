@@ -1,4 +1,6 @@
-{{getTitle()}}
+<div class="partie-infos">
+    Jour {{partie.date}} - 
+</div>
 
 <app-terrain [terrain]="partie.terrain"></app-terrain>
 
@@ -28,6 +30,10 @@
 
     <div *ngIf="selectedElement.type === TYPE_TARGET.MEEPLE">
         <app-meeple-infos [meeple]="selectedElement.meeple"></app-meeple-infos>
+    </div>
+
+    <div>
+        <button (click)="endStep">Fin de l'étape</button>
     </div>
 </div>
 
