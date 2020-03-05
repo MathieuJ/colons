@@ -1,16 +1,16 @@
 <div (click)="select()" class="cellule" 
     [ngClass]="{'selected': cellule.selected,
-        'eau': cellule.celluleType === CelluleType.EAU, 
-        'mer': cellule.celluleType === CelluleType.MER, 
-        'foret': cellule.celluleType === CelluleType.FORET, 
-        'plaine': cellule.celluleType === CelluleType.PLAINE, 
+        'eau': cellule.celluleType === TYPE_CELLULE.EAU, 
+        'mer': cellule.celluleType === TYPE_CELLULE.MER, 
+        'foret': cellule.celluleType === TYPE_CELLULE.FORET, 
+        'plaine': cellule.celluleType === TYPE_CELLULE.PLAINE, 
         'invisible': !cellule.visible, 
     'accessible': cellule.accessible}">
         XY {{cellule.x - 5}} {{cellule.y - 4}}
         <br>
         hxyz {{cellule.hx}} {{cellule.hy}} {{cellule.hz}}
         <br/>
-    {{cellule.celluleType}}  {{CelluleType.FORET}}
+    {{cellule.celluleType}}  {{TYPE_CELLULE.FORET}}
     <span *ngIf="cellule.visible">
         {{cellule.contenu}}
         {{cellule.dormeur?.symbole}}

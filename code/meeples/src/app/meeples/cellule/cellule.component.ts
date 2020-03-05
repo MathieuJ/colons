@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
-import { Cellule, CelluleType } from '../domain/cellule';
+import { Cellule, TYPE_CELLULE } from '../domain/cellule';
 import { MessageService } from '../message.service';
-import { Message, MessageType, TargetType } from '../domain/message';
+import { Message, MessageType, TYPE_TARGET } from '../domain/message';
 import { Meeple } from '../domain/meeple';
 import { MeeplePartieService } from '../partie.service';
 import { HexaCellule } from 'src/app/meeples/domain/hexaTerrain';
@@ -19,7 +19,7 @@ export class CelluleComponent implements OnInit {
   @Input()
   cellule: HexaCellule;
 
-  CelluleType = CelluleType;
+  TYPE_CELLULE = TYPE_CELLULE;
 
   constructor(private partieService: MeeplePartieService) {}
 

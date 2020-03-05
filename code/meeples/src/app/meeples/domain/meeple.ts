@@ -37,9 +37,9 @@ export class Meeple {
   actions: number;
   action: Action;
   energie = 2;
-  energieRestante = 2;
-  /*sante: number;
-  esperance: number;
+  energieMax = 2;
+  sante: number = 3;
+  /*esperance: number;
   satiete: number;
   parent1: Meeple;
   parent2: Meeple;

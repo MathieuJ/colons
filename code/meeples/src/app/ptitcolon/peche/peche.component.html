@@ -5,5 +5,5 @@
     <div *ngFor="let de of peche.des; let i = index">
         {{de}} <input type="checkbox" [(ngModel)]="peche.relance[i]" />
     </div>
-    <button (click)="peche.relanceDes()" [enabled]="peche.hasRelance()">Relance</button>
+    <button (click)="peche.relanceDes()" [disabled]="!peche.hasRelance()">Relance</button>
 </div>

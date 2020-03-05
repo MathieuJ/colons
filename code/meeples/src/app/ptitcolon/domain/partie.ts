@@ -176,10 +176,10 @@ export class BotPeche extends BotModule {
 }
 
 export class Partie {
-    culture: Module;
-    elevage: Module;
-    mine: Module;
-    peche: Module;
+    public culture: Module;
+    public elevage: Module;
+    public mine: Module;
+    public peche: Module;
 
     constructor(
         culture: boolean = false,

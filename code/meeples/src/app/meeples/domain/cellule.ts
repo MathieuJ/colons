@@ -2,7 +2,7 @@ import { Meeple } from './meeple';
 import { Batiment, ProtoBatiment } from './batiment';
 import { Carte } from './partie';
 
-export enum CelluleType {
+export enum TYPE_CELLULE {
   OCEAN,
   MER,
   SABLE,
@@ -34,8 +34,8 @@ export class Cellule {
   public dormeur: Meeple = undefined;
   // juste pour l'opti
   //,public actionMeeples: ActionMeeples;
-  constructor(public x: number, public y: number, public celluleType: CelluleType) {
-    this.setCelluleType(celluleType);
+  constructor(public x: number, public y: number, public celluleType: TYPE_CELLULE) {
+    this.setTYPE_CELLULE(celluleType);
     this.contenu = [];
   }
 
@@ -43,39 +43,39 @@ export class Cellule {
     this.meeplesPresents = this.meeplesPresents.filter(m => m != meeple);
   }
 
-  setCelluleType(celluleType: CelluleType) {
+  setTYPE_CELLULE(celluleType: TYPE_CELLULE) {
     this.celluleType = celluleType;
     switch (celluleType) {
-      case CelluleType.EAU:
+      case TYPE_CELLULE.EAU:
         this.bgX = 23;
         this.bgY = 29;
         this.bgColor = '#EEEEEE';
         this.cssTerrain = 'eau';
         break;
-      case CelluleType.MER:
+      case TYPE_CELLULE.MER:
         this.bgX = 23;
         this.bgY = 29;
         this.cssTerrain = 'mer';
         break;
-      case CelluleType.PIERRE:
+      case TYPE_CELLULE.PIERRE:
         this.bgX = 30;
         this.bgY = 24;
         this.cssTerrain = 'pierre';
 
         break;
-      case CelluleType.SABLE:
+      case TYPE_CELLULE.SABLE:
         this.bgX = 5;
         this.bgY = 1;
         this.cssTerrain = 'sable';
 
         break;
-      case CelluleType.TERRE:
+      case TYPE_CELLULE.TERRE:
         this.bgX = 4;
         this.bgY = 0;
         this.cssTerrain = 'terre';
 
         break;
-      case CelluleType.FORET:
+      case TYPE_CELLULE.FORET:
         const a = Math.floor(Math.random() * 4);
         if (a === 0) {
           this.bgX = 19;
@@ -93,7 +93,7 @@ export class Cellule {
         this.cssTerrain = 'foret';
 
         break;
-      case CelluleType.PLAINE:
+      case TYPE_CELLULE.PLAINE:
         this.bgX = 12;
         this.bgY = 0;
         this.cssTerrain = 'plaine';
@@ -115,7 +115,7 @@ export class Terrain {
       const ligne = [];
       this.cases.push(ligne);
       for (let j = 0; j < tailleX; j++) {
-        ligne.push(new Cellule(j, i, CelluleType.TERRE));
+        ligne.push(new Cellule(j, i, TYPE_CELLULE.TERRE));
       }
     }
   }
@@ -124,7 +124,7 @@ export class Terrain {
     return this.cases[(y + this.tailleY) % this.tailleY][(x + this.tailleX) % this.tailleX];
   }
 
-  setCellule(x: number, y: number, celluleType: CelluleType) {
+  setCellule(x: number, y: number, celluleType: TYPE_CELLULE) {
     this.getCellule(x, y).celluleType = celluleType;
   }
 

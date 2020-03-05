@@ -5,7 +5,7 @@ export enum MessageType {
   MOVE
 } 
 
-export enum TargetType {
+export enum TYPE_TARGET {
     NONE, MEEPLE, CELLULE, 
 }
 
@@ -13,6 +13,6 @@ export class Message {
     constructor(
         public messageType: MessageType,
         // public name: string, 
-        // public targetType: TargetType, 
+        // public targetType: TYPE_TARGET, 
         public target: any) {}
   }

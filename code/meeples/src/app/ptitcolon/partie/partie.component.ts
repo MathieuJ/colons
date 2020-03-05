@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import { Partie } from 'src/app/meeples/domain/partie';
 import { PtitColonService } from '../ptitcolon.service';
+import { Partie } from '../domain/partie';
 
 @Component({
   selector: 'app-partie',

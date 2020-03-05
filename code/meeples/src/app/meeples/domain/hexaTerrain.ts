@@ -1,10 +1,10 @@
-import { Cellule, CelluleType } from './cellule';
+import { Cellule, TYPE_CELLULE } from './cellule';
 
 export class HexaCellule extends Cellule {
   hx: number;
   hy: number;
   hz: number;
-  constructor(x: number, y: number, type: CelluleType) {
+  constructor(x: number, y: number, type: TYPE_CELLULE) {
     super(x, y, type);
     this.hx = x - 5 - Math.floor((y-4)/2);
     this.hz = (y-4); //Math.floor((x-5) - (y-4) / 2); //-this.hx - this.hy;
@@ -23,14 +23,14 @@ export class HexaTerrain {
       const ligne = [];
       this.cases.push(ligne);
       for (let j = 0; j < tailleX; j++) {
-        ligne.push(new HexaCellule(j, i, CelluleType.TERRE));
+        ligne.push(new HexaCellule(j, i, TYPE_CELLULE.TERRE));
       }
     }
   }
   getCellule(x, y): HexaCellule {
     return this.cases[(y + this.tailleY) % this.tailleY][(x + this.tailleX) % this.tailleX];
   }
-  setCellule(x: number, y: number, celluleType: CelluleType) {
+  setCellule(x: number, y: number, celluleType: TYPE_CELLULE) {
     this.getCellule(x, y).celluleType = celluleType;
   }
 

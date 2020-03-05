@@ -1,9 +1,9 @@
 import { Meeple } from './meeple';
 import { HexaTerrain, HexaCellule } from './hexaTerrain';
 import { Batiment, ProtoBatiment, PROTOS_BATIMENTS } from './batiment';
-import { Cellule, CelluleType } from './cellule';
+import { Cellule, TYPE_CELLULE } from './cellule';
 import { random, melange, randomElement } from 'src/app/utils.functions';
-import { TargetType } from './message';
+import { TYPE_TARGET } from './message';
 import { Cout, MATERIAU } from 'src/app/meeples/domain/cout';
 
 
@@ -12,7 +12,7 @@ export class Element {
 }
 
 export class SelectedElement {
-  type: TargetType;
+  type: TYPE_TARGET;
   batiment?: Batiment;
   cellule?: HexaCellule;
   meeple?: Meeple;
@@ -245,21 +245,21 @@ export class Partie {
     for (let x = 0; x < 12; x++) {
       for (let y = 0; y < 8; y++) {
         if (x < 2 || (x < 3 && y > 2) || (x < 4 && y > 3)) {
-          terrain.getCellule(x, y).setCelluleType(CelluleType.FORET);
+          terrain.getCellule(x, y).setTYPE_CELLULE(TYPE_CELLULE.FORET);
         }
         if (x > 10 || (x > 9 && y < 6) || (x > 8 && y < 4)) {
-          terrain.getCellule(x, y).setCelluleType(CelluleType.PIERRE);
+          terrain.getCellule(x, y).setTYPE_CELLULE(TYPE_CELLULE.PIERRE);
         }
       }
     }
-    terrain.getCellule(5, 0).setCelluleType(CelluleType.EAU);
-    terrain.getCellule(6, 0).setCelluleType(CelluleType.EAU);
-    terrain.getCellule(6, 1).setCelluleType(CelluleType.EAU);
-    terrain.getCellule(7, 1).setCelluleType(CelluleType.EAU);
-    terrain.getCellule(8, 1).setCelluleType(CelluleType.EAU);
-    terrain.getCellule(8, 2).setCelluleType(CelluleType.EAU);
+    terrain.getCellule(5, 0).setTYPE_CELLULE(TYPE_CELLULE.EAU);
+    terrain.getCellule(6, 0).setTYPE_CELLULE(TYPE_CELLULE.EAU);
+    terrain.getCellule(6, 1).setTYPE_CELLULE(TYPE_CELLULE.EAU);
+    terrain.getCellule(7, 1).setTYPE_CELLULE(TYPE_CELLULE.EAU);
+    terrain.getCellule(8, 1).setTYPE_CELLULE(TYPE_CELLULE.EAU);
+    terrain.getCellule(8, 2).setTYPE_CELLULE(TYPE_CELLULE.EAU);
     for (let i = 9; i < 12; i++) {
-      terrain.getCellule(i, 2).setCelluleType(CelluleType.EAU);
+      terrain.getCellule(i, 2).setTYPE_CELLULE(TYPE_CELLULE.EAU);
     }
     this.terrain = terrain;
   }

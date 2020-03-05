@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Meeple } from '../domain/meeple';
 
 @Component({
   selector: 'app-meeple',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./meeple.component.scss']
 })
 export class MeepleComponent implements OnInit {
-
+  @Input() 
+  meeple: Meeple;
+  
   constructor() { }
 
   ngOnInit() {

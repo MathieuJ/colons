@@ -4,7 +4,7 @@
 
 <div class="selection" *ngIf="selectedElement">
     {{selectedElement.type}}
-    <div *ngIf="selectedElement.batiment">
+    <!--div *ngIf="selectedElement.batiment">
         <div *ngIf="selectedElement.batiment.typeBatiment.nom === 'Robot'">
             <h4>Robot</h4>
             <button>Décollage</button>
@@ -14,19 +14,19 @@
             {{selectedBatiment.typeBatiment.nom}}
             <button> ???</button>
         </div>
-    </div>
+    </div-->
 
-    <div *ngIf="selectedElement.type == TargetType.CELLULE">
-        <h4>C</h4>
-        {{selectedElement.cellule.x}} {{selectedElement.cellule.y}} {{selectedElement.cellule.typeCellule}}
-        <span *ngIf="selectedElement.cellule.actionMeeples">
+    <div *ngIf="selectedElement.type == TYPE_TARGET.CELLULE">
+        <h4>Cellule</h4>
+        {{selectedElement.cellule.x}} {{selectedElement.cellule.y}} {{selectedElement.cellule.celluleType}}
+        <!--span *ngIf="selectedElement.cellule.actionMeeples">
             <div *ngFor="let meeple of selectedElement.cellule.actionMeeples.meeples">
                 {{meeple.nom}} - Action: {{selectedElement.cellule.carte}} {{selectedElement.cellule.plan}}
             </div>
-        </span>
+        </span-->
     </div>
 
-    <div *ngIf="selectedElement.type === TargetType.MEEPLE">
+    <div *ngIf="selectedElement.type === TYPE_TARGET.MEEPLE">
         <app-meeple-infos [meeple]="selectedElement.meeple"></app-meeple-infos>
     </div>
 </div>

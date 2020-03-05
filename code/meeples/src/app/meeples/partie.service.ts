@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from 'src/app/meeples/message.service';
-import { Message, MessageType, TargetType } from 'src/app/meeples/domain/message';
+import { Message, MessageType, TYPE_TARGET } from 'src/app/meeples/domain/message';
 import { Partie, Carte, SelectedElement } from 'src/app/meeples/domain/partie';
 import { Batiment, ProtoBatiment, PROTOS_BATIMENTS } from 'src/app/meeples/domain/batiment';
 import { HexaCellule } from 'src/app/meeples/domain/hexaTerrain';
 import { Meeple } from './domain/meeple';
-import { Cellule, CelluleType } from './domain/cellule';
+import { Cellule, TYPE_CELLULE } from './domain/cellule';
 import { Action, TYPE_ACTION, ProtoAction } from 'src/app/meeples/domain/action';
 
 @Injectable({
@@ -13,7 +13,7 @@ import { Action, TYPE_ACTION, ProtoAction } from 'src/app/meeples/domain/action'
 })
 export class MeeplePartieService {
   partie: Partie;
-  selectedElement: SelectedElement = { type: TargetType.NONE };
+  selectedElement: SelectedElement = { type: TYPE_TARGET.NONE };
 
   executeAction(meeple: Meeple, action: Action): any {
     console.log("action", meeple, action);
@@ -40,7 +40,7 @@ export class MeeplePartieService {
       this.selectedElement.cellule.selected = false;
       this.selectedElement.cellule = undefined;
     }
-    this.selectedElement.type = TargetType.NONE;
+    this.selectedElement.type = TYPE_TARGET.NONE;
   }
 
   selectCellule(cellule: HexaCellule) {
@@ -60,7 +60,7 @@ export class MeeplePartieService {
       }
     } else {
       this.unselect();
-      this.selectedElement = { type: TargetType.CELLULE, cellule };
+      this.selectedElement = { type: TYPE_TARGET.CELLULE, cellule };
       cellule.selected = true;
       this.messageService.sendMessage(new Message(MessageType.SELECT, this.selectedElement));
     }
@@ -75,7 +75,7 @@ export class MeeplePartieService {
       this.unselect();
       meeple.selected = true;
       this.selectedElement.meeple = meeple;
-      this.selectedElement.type = TargetType.MEEPLE;
+      this.selectedElement.type = TYPE_TARGET.MEEPLE;
       this.showAccessibles(meeple.position, meeple.deplacementMax - meeple.deplacement);
       this.messageService.sendMessage(new Message(MessageType.SELECT, this.selectedElement));
     }
@@ -104,10 +104,10 @@ export class MeeplePartieService {
     actions.push(new ProtoAction(TYPE_ACTION.RECOLTE, 'Récolter'));
     actions.push(new ProtoAction(TYPE_ACTION.EXPLORATION, 'Explorer les alentours'));
     switch (meeple.position.celluleType) {
-      case CelluleType.FORET:
+      case TYPE_CELLULE.FORET:
         actions.push(new ProtoAction(TYPE_ACTION.RECOLTE, 'bosser'));
         break;
-      case CelluleType.PLAINE:
+      case TYPE_CELLULE.PLAINE:
         actions.push(new ProtoAction(TYPE_ACTION.RECOLTE, 'bosser'));
         break;
 

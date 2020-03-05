@@ -14,6 +14,7 @@ export enum TYPE_ACTION {
 export class Action {
     constructor(public meeple: Meeple,
                 public typeAction: TYPE_ACTION,
+                public description: string,
                 public batiment: ProtoBatiment
     ) {}
   }

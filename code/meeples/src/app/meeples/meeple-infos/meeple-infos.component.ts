@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { Meeple } from 'src/app/meeples/domain/meeple';
-import { CelluleType } from 'src/app/meeples/domain/cellule';
+import { TYPE_CELLULE } from 'src/app/meeples/domain/cellule';
 import { MeeplePartieService } from 'src/app/meeples/partie.service';
 import { Action, TYPE_ACTION } from 'src/app/meeples/domain/action';
 
@@ -14,7 +14,7 @@ export class MeepleInfosComponent implements OnInit, OnChanges {
 
   @Input()
   meeple: Meeple;
-  CelluleType = CelluleType;
+  TYPE_CELLULE = TYPE_CELLULE;
 
   actions: any[];
   TYPE_ACTION = TYPE_ACTION;

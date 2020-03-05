@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { Batiment } from '../domain/batiment';
 import { HexaCellule } from '../domain/hexaTerrain';
 import { Meeple } from '../domain/meeple';
-import { Message, MessageType, TargetType } from '../domain/message';
+import { Message, MessageType, TYPE_TARGET } from '../domain/message';
 import { MeeplePartieService } from '../partie.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class PartieComponent implements OnInit {
   subs: Subscription;
   subs2: Subscription;
 
-  TargetType = TargetType;
+  TYPE_TARGET = TYPE_TARGET;
 
   logs: string[] = [];
 
