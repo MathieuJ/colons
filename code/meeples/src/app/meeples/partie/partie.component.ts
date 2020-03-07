@@ -60,4 +60,8 @@ export class PartieComponent implements OnInit {
   public log(msg: string) {
     this.logs.push(msg);
   }
+
+  endStep() {
+    this.partieService.endStep();
+  }
 }

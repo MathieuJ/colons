@@ -4,13 +4,14 @@
         'mer': cellule.celluleType === TYPE_CELLULE.MER, 
         'foret': cellule.celluleType === TYPE_CELLULE.FORET, 
         'plaine': cellule.celluleType === TYPE_CELLULE.PLAINE, 
+        'terre': cellule.celluleType === TYPE_CELLULE.TERRE, 
         'invisible': !cellule.visible, 
     'accessible': cellule.accessible}">
-        XY {{cellule.x - 5}} {{cellule.y - 4}}
+        <!--XY {{cellule.x - 5}} {{cellule.y - 4}}
         <br>
         hxyz {{cellule.hx}} {{cellule.hy}} {{cellule.hz}}
         <br/>
-    {{cellule.celluleType}}  {{TYPE_CELLULE.FORET}}
+    {{cellule.celluleType}}-->
     <span *ngIf="cellule.visible">
         {{cellule.contenu}}
         {{cellule.dormeur?.symbole}}
@@ -18,9 +19,13 @@
     <span *ngIf="cellule.meeplesPresents">
         <span *ngFor="let meeple of cellule.meeplesPresents"
             class="meeple"
-            [ngClass]="{'selected': meeple.selected, 'deplacable': meeple.deplacement < meeple.deplacementMax}"
+            [ngClass]="{'selected': meeple.selected, 'deplacable': meeple.deplacement < meeple.deplacementMax,
+        'fini': meeple.action }"
             (click)="selectMeeple($event, meeple)"
             >{{meeple.symbole}}?</span>
     </span>
+    <div *ngIf="cellule.batiment" class="batiment">
+        {{cellule.batiment.proto.nom}}
+    </div>
     <span *ngIf="!cellule.visible">XXXX</span>
 </div>

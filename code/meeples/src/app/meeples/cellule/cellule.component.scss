@@ -39,8 +39,17 @@ $accessible-color:rgb(74, 255, 74);
     &.deplacable {
         background-color: $accessible-color;
     }
+    &.fini {
+        background-color: black;
+        color: white;
+    }
     
     &.selected{
         border: 1px solid $selected-color;
     }
+}
+.batiment {
+    color: white;
+    background-color: rgb(192, 103, 67);
+    padding: 2px;
 }

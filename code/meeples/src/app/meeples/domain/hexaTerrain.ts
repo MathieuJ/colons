@@ -23,7 +23,7 @@ export class HexaTerrain {
       const ligne = [];
       this.cases.push(ligne);
       for (let j = 0; j < tailleX; j++) {
-        ligne.push(new HexaCellule(j, i, TYPE_CELLULE.TERRE));
+        ligne.push(new HexaCellule(j, i, TYPE_CELLULE.PLAINE));
       }
     }
   }

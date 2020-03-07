@@ -11,7 +11,7 @@ export const Materiaux = {
     o: 'poisson',
     r: 'pierre',
     h: 'herbe',
-    c: 'corde'
+    c: 'corde',
     /*m: 'maïs',    g: 'graines',    l: 'laine',    t: 'tissu',
     b: 'blé',    a: 'arbre',w: 'bois',    c: 'cheval',s: 'mouton',    h: 'herbe',    r: 'trésor',
         f: 'fer',
@@ -20,7 +20,7 @@ export const Materiaux = {
 
 export const MATERIAU = {
     BOIS: 'w', TISSU: 't', EAU: 'e', ARGILE: 'a', MINERAI_FER: 'i', FER: 'f', PLANCHE: 'p', VIANDE: 'v',
-    POISSON: 'o', PIERRE: 'r', CORDE: 'c', HERBE: 'h'
+    POISSON: 'o', PIERRE: 'r', CORDE: 'c', HERBE: 'h',
 };
 
 export class Cout {

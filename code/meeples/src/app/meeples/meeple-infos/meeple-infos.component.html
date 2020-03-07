@@ -14,12 +14,12 @@
     </div>
 
     <div class="sub-infos cellule">
-        <div>{{meeple.position.celluleType}}</div>
-        <div *ngIf="actions">
+        <div>{{meeple.position.cssTerrain}}</div>
+        <div *ngIf="actions && !meeple.action">
             <div>Actions possibles</div>
             <div *ngFor="let action of actions">
                 <div *ngIf="action.typeAction === TYPE_ACTION.CONSTRUCTION">
-                    <button (click)="doAction(action)">{{action.description}} : {{action.batiment.nom}}</button>
+                    <button (click)="doAction(action)">{{action.description}} : {{action.batiment?.nom}}</button>
                 </div>
                 <div *ngIf="action.typeAction === TYPE_ACTION.EXPLORATION">
                     <button (click)="doAction(action)">{{action.description}}</button>

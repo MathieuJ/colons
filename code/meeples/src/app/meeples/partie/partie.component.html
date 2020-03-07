@@ -5,7 +5,6 @@
 <app-terrain [terrain]="partie.terrain"></app-terrain>
 
 <div class="selection" *ngIf="selectedElement">
-    {{selectedElement.type}}
     <!--div *ngIf="selectedElement.batiment">
         <div *ngIf="selectedElement.batiment.typeBatiment.nom === 'Robot'">
             <h4>Robot</h4>
@@ -20,7 +19,13 @@
 
     <div *ngIf="selectedElement.type == TYPE_TARGET.CELLULE">
         <h4>Cellule</h4>
-        {{selectedElement.cellule.x}} {{selectedElement.cellule.y}} {{selectedElement.cellule.celluleType}}
+        {{selectedElement.cellule.cssTerrain}}
+        <div *ngIf="selectedElement.cellule.batiment">
+            <h4>Batiment: </h4>
+            {{selectedElement.cellule.batiment.proto.nom}}
+            <br/>
+            {{selectedElement.cellule.batiment.proto.description}}
+        </div>
         <!--span *ngIf="selectedElement.cellule.actionMeeples">
             <div *ngFor="let meeple of selectedElement.cellule.actionMeeples.meeples">
                 {{meeple.nom}} - Action: {{selectedElement.cellule.carte}} {{selectedElement.cellule.plan}}
@@ -33,10 +38,22 @@
     </div>
 
     <div>
-        <button (click)="endStep">Fin de l'étape</button>
+        <button (click)="endStep()">Fin de l'étape</button>
     </div>
 </div>
 
 <div class="logs">
     <div *ngFor="let msg of logs">{{msg}}</div>
+</div>
+
+<div class="">
+    Futures évolutinos:
+    <br/>
+    plusieurs types de civilisations: les mechs qui ont besoin d'énergie mais pas de nourriture
+    <br/>
+    les homoncules qui ne font qu'une activité jusqu'à leur mort
+    <br/>
+    les chépéquoi qui sont très efficaces mais ne supportent pas la violence ni l'inaction
+    <br/>
+    jouer un marchand qui va de colons en colons marchander
 </div>

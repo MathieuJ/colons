@@ -6,7 +6,8 @@ import { Batiment, ProtoBatiment, PROTOS_BATIMENTS } from 'src/app/meeples/domai
 import { HexaCellule, HexaTerrain } from 'src/app/meeples/domain/hexaTerrain';
 import { Meeple } from './domain/meeple';
 import { Cellule, TYPE_CELLULE } from './domain/cellule';
-import { Action, TYPE_ACTION, ProtoAction } from 'src/app/meeples/domain/action';
+import { Action, TYPE_ACTION, ProtoAction, PROTOACTIONS } from 'src/app/meeples/domain/action';
+import { Cout } from 'src/app/meeples/domain/cout';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class MeeplePartieService {
     console.log("action", meeple, action);
     meeple.deplacement = meeple.deplacementMax;
     meeple.action = action;
+    this.unselectMeeple(meeple);
   }
 
 
@@ -44,6 +46,25 @@ export class MeeplePartieService {
     return this.partie;
   }
 
+  endStep() {
+    const test = [];
+    test.push('a');
+    this.partie.meeples.forEach(meeple => {
+      meeple.deplacement = 0;
+      if (meeple.action) {
+        console.log("meeple action ", meeple.action);
+        if (meeple.action.typeAction === TYPE_ACTION.EXPLORATION) {
+          this.partie.terrain.getHexVoisins(meeple.position, 2).map(v => v.visible = true);
+        }
+        if (meeple.action.typeAction === TYPE_ACTION.RECOLTE) {
+        }
+        if (meeple.action.typeAction === TYPE_ACTION.CONSTRUCTION) {
+          meeple.position.batiment = new Batiment(meeple.position, meeple.action.batiment, []);
+        }
+      }
+      meeple.action = undefined;
+    });
+  }
   unselect() {
     this.partie.terrain.cases.map(l => l.map(c => c.accessible = false));
     if (this.selectedElement.meeple) {
@@ -80,11 +101,15 @@ export class MeeplePartieService {
     }
   }
 
+  unselectMeeple(meeple: Meeple) {
+    this.unselect();
+    meeple.selected = false;
+    this.messageService.sendMessage(new Message(MessageType.SELECT, this.selectedElement));
+  }
+
   selectMeeple(meeple: Meeple) {
     if (this.selectedElement.meeple === meeple) {
-      this.unselect();
-      meeple.selected = false;
-      this.messageService.sendMessage(new Message(MessageType.SELECT, this.selectedElement));
+      this.unselectMeeple(meeple);
     } else {
       this.unselect();
       meeple.selected = true;
@@ -109,26 +134,29 @@ export class MeeplePartieService {
     const actions: ProtoAction[] = [];
     if (cellule.batiment) {
       // switch (cellule.batiment.proto) {
-      actions.push(new ProtoAction(TYPE_ACTION.TRAVAIL, 'Travailler dans le bâtiment'));
+      actions.push(PROTOACTIONS.TRAVAIL);
+      actions.push(PROTOACTIONS.REPARATION);
       // }
     } else {
       this.partie.plansDisponibles.forEach(pd => {
-        actions.push(new ProtoAction(TYPE_ACTION.CONSTRUCTION, 'Construire', pd));
+        actions.push(new ProtoAction(TYPE_ACTION.CONSTRUCTION, 'Construire', null, Cout.from(''), 1, null, pd));
       });
-      
-      // actions.push(new ProtoAction(TYPE_ACTION.CONSTRUCTION, 'construire un bâtiment', PROTOS_BATIMENTS.FOYER));
     }
-    actions.push(new ProtoAction(TYPE_ACTION.RECOLTE, 'Récolter'));
-    actions.push(new ProtoAction(TYPE_ACTION.EXPLORATION, 'Explorer les alentours'));
+    actions.push(PROTOACTIONS.EXPLORATION_1);
     switch (meeple.position.celluleType) {
       case TYPE_CELLULE.FORET:
-        actions.push(new ProtoAction(TYPE_ACTION.RECOLTE, 'bosser'));
-        break;
+      actions.push(PROTOACTIONS.CHASSE_F_1);
+      actions.push(PROTOACTIONS.RECOLTE_F_1);
+      break;
       case TYPE_CELLULE.PLAINE:
-        actions.push(new ProtoAction(TYPE_ACTION.RECOLTE, 'bosser'));
+        actions.push(PROTOACTIONS.CHASSE_P_1);
+        actions.push(PROTOACTIONS.CHASSE_P_2);
+        actions.push(PROTOACTIONS.RECOLTE_P_1);
+        actions.push(PROTOACTIONS.RECOLTE_P_2);
         break;
-
-    }
+case TYPE_CELLULE.EAU:
+actions.push(PROTOACTIONS.PECHE_E_1);
+}
     return actions;
   }
 
