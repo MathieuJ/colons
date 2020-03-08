@@ -1,16 +1,12 @@
 $selected-color:rgb(255, 249, 199);
 $accessible-color:rgb(74, 255, 74);
-.cellule {
+
+.cellule-container {
+    position: relative;
     width: 50px;
     height: 40px;
-    background-color: lightgray;
+    
     border: 1px solid lightgray;
-    &.selected{
-        border: 1px solid $selected-color;
-    }
-    &.accessible {
-        border: 1px solid $accessible-color;
-    }
     &.eau {
         background-color: rgb(198, 251, 255);
     }
@@ -27,6 +23,27 @@ $accessible-color:rgb(74, 255, 74);
     &.pierre {
         background-color: rgb(141, 141, 137);
     }
+    
+    &.selected{
+        border: 1px solid $selected-color;
+    }
+    &.accessible {
+        border: 1px solid $accessible-color;
+    }
+     
+    .arriere-plan {
+        position: absolute;
+        width: 50px;
+        height: 40px;
+        background: url(/assets/tileset.png) bottom;
+        background-size: 16px 16px;
+        
+  clip: rect(0px, 16px, 0px, 16px); 
+    }
+.cellule {
+    position: absolute;
+    width: 50px;
+    height: 40px;
     &.invisible {
         background-color: darkgray;
     }
@@ -47,9 +64,10 @@ $accessible-color:rgb(74, 255, 74);
     &.selected{
         border: 1px solid $selected-color;
     }
-}
-.batiment {
-    color: white;
-    background-color: rgb(192, 103, 67);
-    padding: 2px;
+    }
+    .batiment {
+        color: white;
+        background-color: rgb(192, 103, 67);
+        padding: 2px;
+    }
 }
