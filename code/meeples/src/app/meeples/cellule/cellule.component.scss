@@ -1,28 +1,16 @@
 $selected-color:rgb(255, 249, 199);
 $accessible-color:rgb(74, 255, 74);
 
+$w : 64px;
+$h: 40px;
+$s: 16px; // sprite size
+
 .cellule-container {
     position: relative;
-    width: 50px;
-    height: 40px;
+    width: $w;
+    height: $h;
     
     border: 1px solid lightgray;
-    &.eau {
-        background-color: rgb(198, 251, 255);
-    }
-    &.mer {
-        background-color: rgb(185, 202, 255);
-    }
-    &.foret {
-        background-color: rgb(178, 194, 170);
-    }
-    &.plaine {
-        background-color: rgb(218, 218, 182);
-    }
-    
-    &.pierre {
-        background-color: rgb(141, 141, 137);
-    }
     
     &.selected{
         border: 1px solid $selected-color;
@@ -33,20 +21,42 @@ $accessible-color:rgb(74, 255, 74);
      
     .arriere-plan {
         position: absolute;
-        width: 50px;
-        height: 40px;
-        background: url(/assets/tileset.png) bottom;
-        background-size: 16px 16px;
+        width: $w;
+        height: $h;
+        background: url(/assets/tileset.png);
+        // width 
+        background-size: 512px;
+        &.eau {
+            background-position-x: -6*$s;
+            background-position-y: -2*$s;
+        }
+        &.mer {
+            background-color: rgb(185, 202, 255);
+        }
+        &.foret {
+            background-position-x: -1*$s;
+            background-position-y: -30*$s;
+            background-size: 128px;
+        }
+        &.plaine {
+            // default
+            background-position-x: 0;
+            background-position-y: 0;
+        }
         
-  clip: rect(0px, 16px, 0px, 16px); 
+        &.pierre {
+            background-position-x: -3*$s;
+            background-position-y: -25*$s;
+        }
+        &.invisible {
+            //background: none;
+            background-color: darkgray;
+        }
     }
 .cellule {
     position: absolute;
-    width: 50px;
-    height: 40px;
-    &.invisible {
-        background-color: darkgray;
-    }
+    width: $w;
+    height: $h;
 }
 
 .meeple {

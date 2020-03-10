@@ -67,7 +67,7 @@ export class Partie {
 
   public dateDemarrage = random(100, 200);
   public date = 1;
-  public generalId = 1;
+  public generalId = 0;
   private meepleSyllabes = ['ga', 'fur', 'gol', 'bo', 'ber', 'dil', 'ne', 'zu', 'ra', 'meu', 'mul', 'ta', 'ni'];
 
   constructor() {

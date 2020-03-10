@@ -1,13 +1,16 @@
-<div class="cellule-container">
+<div class="cellule-container"
+[ngClass]="{'accessible' : cellule.accessible}"
+>
     <div class="arriere-plan" [ngClass]="{'selected': cellule.selected,
         'eau': cellule.celluleType === TYPE_CELLULE.EAU, 
         'mer': cellule.celluleType === TYPE_CELLULE.MER, 
         'foret': cellule.celluleType === TYPE_CELLULE.FORET, 
         'plaine': cellule.celluleType === TYPE_CELLULE.PLAINE, 
-        'terre': cellule.celluleType === TYPE_CELLULE.TERRE}"></div>
+        'terre': cellule.celluleType === TYPE_CELLULE.TERRE, 
+        'pierre': cellule.celluleType === TYPE_CELLULE.PIERRE, 
+        'invisible': !cellule.visible}"></div>
     <div (click)=" select()" class="cellule" 
-    [ngClass]="{'accessible' : cellule.accessible, 
-    'invisible': !cellule.visible}">
+    >
         <!--XY {{cellule.x - 5}} {{cellule.y - 4}}
         <br>
         hxyz {{cellule.hx}} {{cellule.hy}} {{cellule.hz}}
