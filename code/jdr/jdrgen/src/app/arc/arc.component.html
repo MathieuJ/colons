@@ -1,0 +1,12 @@
+Mission : {{arc.mission.toLabel()}} <BR/>
+<div *ngIf="arc.sousArcs.length > 0">
+  Pour cela il faut :
+  <ul>
+    <li *ngFor="let ssarc of arc.sousArcs">
+      <app-arc [arc]="ssarc"></app-arc>
+    </li>
+  </ul>
+</div>
+<span *ngIf="arc.mission.combat">
+Et à la fin ils se battent contre {{arc.ennemisLabel()}}
+</span>
