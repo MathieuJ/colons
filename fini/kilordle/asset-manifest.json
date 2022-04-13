@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mathieuj.github.io/colons/fini/kilordle/static/css/main.eba143d2.css",
+    "main.js": "/mathieuj.github.io/colons/fini/kilordle/static/js/main.b86fe7ad.js",
+    "static/js/787.c697ee3f.chunk.js": "/mathieuj.github.io/colons/fini/kilordle/static/js/787.c697ee3f.chunk.js",
+    "index.html": "/mathieuj.github.io/colons/fini/kilordle/index.html",
+    "main.eba143d2.css.map": "/mathieuj.github.io/colons/fini/kilordle/static/css/main.eba143d2.css.map",
+    "main.b86fe7ad.js.map": "/mathieuj.github.io/colons/fini/kilordle/static/js/main.b86fe7ad.js.map",
+    "787.c697ee3f.chunk.js.map": "/mathieuj.github.io/colons/fini/kilordle/static/js/787.c697ee3f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eba143d2.css",
+    "static/js/main.b86fe7ad.js"
+  ]
+}

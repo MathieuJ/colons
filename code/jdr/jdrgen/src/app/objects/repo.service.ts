@@ -54,6 +54,10 @@ export enum MISSION_TYPE {
   ARC,
 }
 
+export const MultiMissionType = [
+
+];
+
 export class MissionType {
   public nomCible: string;
   private syllabes = ["to", "fi", "ra", "um", "go", "sli", "oual", "bi", "dou", "su", "ko", "reu"];
@@ -143,15 +147,22 @@ export class MissionType {
   }
 }
 
+export class Campagne {
+  public arcs: Arc[];
+  constructor(public environment: Environment) {
+    this.arcs = [];
+  }
+}
+
 export class Arc {
-  public sousArcs: Arc[];
+  public OuArcs: Arc[] = [];
+  public EtArcs: Arc[] = [];
   public mission: MissionType;
   public ennemis: Enemy[] = [];
+  public suivant: Arc | undefined;
 
-  constructor(sousArcs: Arc[], mission: MissionType, ennemis: Enemy[]) {
-    this.sousArcs = sousArcs;
+  constructor(mission: MissionType) {
     this.mission = mission;
-    this.ennemis = ennemis;
   }
 
   ennemisLabel() {
@@ -228,12 +239,12 @@ export class RepoService {
 
     const arcHistoire = new Arc([
         new Arc([
-            new Arc([], this.createRandomMission(env), this.createGroupe(env, 1)),
-            new Arc([], this.createRandomMission(env), this.createGroupe(env, 1))],
-          this.createRandomMission(env), this.createGroupe(env, 1)),
+            new Arc(this.createRandomMission(env)),
+            new Arc(this.createRandomMission(env))],
+          this.createRandomMission(env)),
         new Arc([
-            new Arc([], this.createRandomMission(env), this.createGroupe(env, 2)),
-            new Arc([], this.createRandomMission(env), this.createGroupe(env, 2))
+            new Arc(this.createRandomMission(env)),
+            new Arc(this.createRandomMission(env))
           ],
           this.createRandomMission(env), this.createGroupe(env, 1)),
         new Arc([
