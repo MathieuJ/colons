@@ -2,7 +2,7 @@
   "name": "kilordle",
   "version": "0.1.0",
   "private": true,
-  "homepage": "mathieuj.github.io/colons/fini/kilordle",
+  "homepage": "https://mathieuj.github.io/colons/fini/kilordle",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
