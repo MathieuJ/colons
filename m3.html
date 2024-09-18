@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Match 3 Game</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #333;
+      margin: 0;
+    }
+    #game-board {
+      display: grid;
+      grid-template-columns: repeat(8, 50px);
+      grid-template-rows: repeat(8, 50px);
+      gap: 5px;
+    }
+    .tile {
+      width: 50px;
+      height: 50px;
+      background-color: #FF5733;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 18px;
+      user-select: none;
+    }
+    .red { background-color: #e74c3c; }
+    .green { background-color: #2ecc71; }
+    .blue { background-color: #3498db; }
+    .yellow { background-color: #f1c40f; }
+    .purple { background-color: #9b59b6; }
+  </style>
+</head>
+<body>
+  <div id="game-board"></div>
+
+  <script>
+    const rows = 8;
+    const cols = 8;
+    const colors = ['red', 'green', 'blue', 'yellow', 'purple'];
+    let board = [];
+    let selectedTile = null;
+    let startX = 0, startY = 0;
+
+    // Initialize game board
+    function createBoard() {
+      const boardElement = document.getElementById('game-board');
+      boardElement.innerHTML = '';
+      board = [];
+
+      for (let row = 0; row < rows; row++) {
+        let rowArray = [];
+        for (let col = 0; col < cols; col++) {
+          const tile = document.createElement('div');
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          tile.classList.add('tile', color);
+          tile.dataset.row = row;
+          tile.dataset.col = col;
+          tile.dataset.color = color;
+          boardElement.appendChild(tile);
+          rowArray.push(tile);
+        }
+        board.push(rowArray);
+      }
+    }
+
+    // Check for matches
+    function checkForMatches() {
+      let matched = [];
+
+      // Check rows for matches
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols - 2; col++) {
+          let tile1 = board[row][col];
+          let tile2 = board[row][col + 1];
+          let tile3 = board[row][col + 2];
+          if (tile1.dataset.color === tile2.dataset.color && tile1.dataset.color === tile3.dataset.color) {
+            matched.push(tile1, tile2, tile3);
+          }
+        }
+      }
+
+      // Check columns for matches
+      for (let col = 0; col < cols; col++) {
+        for (let row = 0; row < rows - 2; row++) {
+          let tile1 = board[row][col];
+          let tile2 = board[row + 1][col];
+          let tile3 = board[row + 2][col];
+          if (tile1.dataset.color === tile2.dataset.color && tile1.dataset.color === tile3.dataset.color) {
+            matched.push(tile1, tile2, tile3);
+          }
+        }
+      }
+
+      return matched;
+    }
+
+    // Swap two tiles
+    function swapTiles(tile1, tile2) {
+      const tempColor = tile1.dataset.color;
+      tile1.dataset.color = tile2.dataset.color;
+      tile2.dataset.color = tempColor;
+
+      tile1.className = `tile ${tile1.dataset.color}`;
+      tile2.className = `tile ${tile2.dataset.color}`;
+    }
+
+    // Handle tile touches
+    function onTouchStart(event) {
+      const tile = event.target;
+      startX = event.touches[0].clientX;
+      startY = event.touches[0].clientY;
+      selectedTile = tile;
+    }
+
+    function onTouchEnd(event) {
+      if (!selectedTile) return;
+
+      const endX = event.changedTouches[0].clientX;
+      const endY = event.changedTouches[0].clientY;
+      const deltaX = endX - startX;
+      const deltaY = endY - startY;
+
+      let targetTile = null;
+
+      // Determine the direction of the swipe
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Swipe left or right
+        if (deltaX > 0 && selectedTile.dataset.col < cols - 1) {
+          targetTile = board[selectedTile.dataset.row][parseInt(selectedTile.dataset.col) + 1];
+        } else if (deltaX < 0 && selectedTile.dataset.col > 0) {
+          targetTile = board[selectedTile.dataset.row][parseInt(selectedTile.dataset.col) - 1];
+        }
+      } else {
+        // Swipe up or down
+        if (deltaY > 0 && selectedTile.dataset.row < rows - 1) {
+          targetTile = board[parseInt(selectedTile.dataset.row) + 1][selectedTile.dataset.col];
+        } else if (deltaY < 0 && selectedTile.dataset.row > 0) {
+          targetTile = board[parseInt(selectedTile.dataset.row) - 1][selectedTile.dataset.col];
+        }
+      }
+
+      if (targetTile) {
+        swapTiles(selectedTile, targetTile);
+        const matches = checkForMatches();
+        if (matches.length > 0) {
+          for (const tile of matches) {
+            tile.className = 'tile'; // clear matched tiles
+            tile.dataset.color = '';
+          }
+        } else {
+          // Swap back if no matches are found
+          swapTiles(selectedTile, targetTile);
+        }
+      }
+
+      selectedTile = null;
+    }
+
+    // Attach touch events to tiles
+    function attachTouchEvents() {
+      const tiles = document.querySelectorAll('.tile');
+      tiles.forEach(tile => {
+        tile.addEventListener('touchstart', onTouchStart);
+        tile.addEventListener('touchend', onTouchEnd);
+      });
+    }
+
+    // Start the game
+    function startGame() {
+      createBoard();
+      attachTouchEvents();
+    }
+
+    startGame();
+  </script>
+</body>
+</html>
