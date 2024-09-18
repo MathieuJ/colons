@@ -20,8 +20,8 @@
       gap: 5px;
     }
     .tile {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       background-color: #FF5733;
       display: flex;
       justify-content: center;
@@ -29,6 +29,10 @@
       color: white;
       font-size: 18px;
       user-select: none;
+      border: 1px solid black:
+    }
+    .selected {
+      border-color: white;
     }
     .red { background-color: #e74c3c; }
     .green { background-color: #2ecc71; }
@@ -39,11 +43,15 @@
 </head>
 <body>
   <div id="game-board"></div>
-
+  <div><span class="tile red"></span> brick</div>
+  <div><span class="tile green"></span> herb</div>
+  <div><span class="tile blue"></span> stone</div>
+  <div><span class="tile brown"></span> wood</div>
+  <div><span class="tile yellow"></span>wheat</div>
   <script>
-    const rows = 8;
-    const cols = 8;
-    const colors = ['red', 'green', 'blue', 'yellow', 'purple'];
+    const rows = 7;
+    const cols = 7;
+    const colors = ['red', 'green', 'blue', 'yellow', 'brown'];
     let board = [];
     let selectedTile = null;
     let startX = 0, startY = 0;
@@ -117,9 +125,11 @@
       startX = event.touches[0].clientX;
       startY = event.touches[0].clientY;
       selectedTile = tile;
+      tile.classlist.add('selected');
     }
 
     function onTouchEnd(event) {
+      selectedTile.classlist.remove('selected');
       if (!selectedTile) return;
 
       const endX = event.changedTouches[0].clientX;
